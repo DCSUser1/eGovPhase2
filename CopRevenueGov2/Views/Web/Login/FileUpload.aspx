@@ -10,6 +10,7 @@
 
         $(document).ready(function () {
             $('#fileToUpload').val('');
+            $('#lblMessageW2').text('');
             //==================For Validation Start============================
             //Get file size
             function GetFileSize(fileid) {
@@ -56,7 +57,7 @@
 
             $(function () {
                 $("#btnSubmit").click(function () {
-                    
+                    $('#lblMessageW2').text('');
                     if ($('#fileToUpload').val() == "") {
                         $("#spanfile").html("Please upload file");
                         return false;
@@ -65,28 +66,28 @@
                         debugger;
                         checkfile();
                         if (flag == true && $("#spanfile").text() == '') {
-                           
+
                             //=========Parameter Declaration=====================                          
                             var fileUpload = $("#fileToUpload").get(0);
                             var files = fileUpload.files;
-                           
+
                             //======Create FormData object======================  
                             var fileData = new FormData();
 
                             //=========Looping over all files and add it to FormData object================  
-                            for (var i = 0; i < files.length; i++) {                                
+                            for (var i = 0; i < files.length; i++) {
                                 fileData.append(files[i].name, files[i]);
-                               // alert(files[i].name);
+                                // alert(files[i].name);
                             }
-                          
+
                             var url = '../Login/Upload';
                             var proceed = true;
                             var progress_bar_id = '#progress-wrp';
-                           
+
                             $.ajax({
                                 url: url,
                                 type: 'post',
-                                timeout:2400000,
+                                timeout: 2400000,
                                 contentType: false,
                                 processData: false,
                                 data: fileData,
@@ -100,14 +101,14 @@
                                             var position = event.loaded || event.position;
                                             var total = event.total;
                                             if (event.lengthComputable) {
-                                                percent = Math.ceil(position / total * 100);                                                
+                                                percent = Math.ceil(position / total * 100);
                                             }
-                                            if (percent == 100) {                                            
-                                                 
+                                            if (percent == 100) {
+
                                                 $("#progress-wrp").hide();
                                                 $("#progressw2").show();
                                                 $("#fileprocessedMsg").show();
-                                                
+
                                             }
                                             //update progressbar
                                             $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
@@ -121,14 +122,15 @@
                                     $("#fileprocessedMsg").hide();
                                     $("#progressw2").hide();
                                     $("#progress-wrp").hide();
-                                    alert(result);
+                                    $('#lblMessageW2').text('File uploaded successfully! Click Upload button to submit another file or Close X to exit.');
                                     //move();
                                     $('#fileToUpload').val('');
                                     $(progress_bar_id + " .progress-bar").css("width", "0%");
                                     $(progress_bar_id + " .status").text("0%");
                                     $("#progress-wrp").show();
-                                },                             
-                                
+                                    $('#divUploadW2BeforeLogin').hide();
+                                },
+
                                 error: function (err) {
                                     $("#progress-wrp").show();
                                     $("#progressw2").hide();
@@ -143,8 +145,9 @@
                 });
             });
             function checkfile() {
-                           
-                    var file = getNameFromPath($("#fileToUpload").val());
+                $('#lblMessageW2').text('');
+                $('#divUploadW2BeforeLogin').show();
+                var file = getNameFromPath($("#fileToUpload").val());
                 if (file != null) {
                     var extension = file.substr((file.lastIndexOf('.') + 1));
                     switch (extension) {
@@ -168,8 +171,8 @@
                     $("#spanfile").text("You can upload only txt,docx,xlsx,pdf extension file");
                     return false;
                 }
-                else {                   
-                    if ($("#fileToUpload").val()!= '') {
+                else {
+                    if ($("#fileToUpload").val() != '') {
                         var size = GetFileSize('fileToUpload');
                         if (size > 10000) {
                             $("#spanfile").text("You can upload file up to 1 GB");
@@ -191,7 +194,7 @@
             //================For Validation End=====================
         });
 
-        
+
     </script>
     <style type="text/css">
         .form-wrap{
@@ -289,12 +292,14 @@
                             <td width="70%" style="text-align:center;"><p style=" font: bold 17px/25px Verdana;">Electronically file your W-2 forms</p></td>
                             <td colspan="2" width="25%"></td>
                         </tr>
+
+                      
                        
                         <tr>
                             <td width="5%"></td>
                             <td width="70%" class="text-left">
                                 <input type="file" id="fileToUpload" name="file" style="margin: 20px auto;" />
-                                <span class="field-validation-error" id="spanfile"></span>
+                                <span class="field-validation-error" style="font-size:large" id="spanfile"></span>
                                 <label id="lblUO1_14"></label>
                             </td>
                             <td colspan="2" align="center" width="25%">
@@ -334,21 +339,22 @@
                             <td colspan="2" width="20%" class="text-left"> <input type="text" class="form-control input-sm " id="txt_BPT_WSEZ1" maxlength="10" style="WIDTH: 20%; display:none"></td>
                             
                         </tr>
-                        <tr>
-                           <td>
-                              
-                           </td>
+                         <tr>
+                            <td width="5%"></td>
+                            <td width="94%" style="text-align:center;color:green;"><label id="lblMessageW2" style="font-size:16px"></label></td>
+                            <td colspan="2" width="1%"></td>
                         </tr>
+                       
 
                     </tbody>
                 </table>
-                
+                <div id="divUploadW2BeforeLogin">
                  <div class="progress-wrp" id="progress-wrp"><div class="progress-bar"></div ><div class="status">0%</div></div>
                 <div id="fileprocessedMsg" style="display:none">The file has been processed successfully.Please wait while server processing the file</div><br />
                 <span id="progressw2" style="display:none;margin-left:76px">
                <img id="id1" alt="" src="../../Content/images/gif-load.gif">
                 </span>
-               
+               </div>
                 <div class="clear"></div>
             </div>
         </div>

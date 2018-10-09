@@ -611,7 +611,7 @@ width:60%;
 }
 
 .profile-page-width {
-width:92%;
+width:98%;
 margin:0 auto;
 padding:0;
 }/*
@@ -628,4 +628,8 @@ padding:0;
 div.here_input .inpError {
 background:white;
 
+}
+.smaller-container {
+    margin: 0 auto;
+    width: 65%;
 }

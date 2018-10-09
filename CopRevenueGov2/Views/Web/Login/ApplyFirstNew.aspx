@@ -9,7 +9,7 @@
     function DisplayApplyFirst() {
         $('#trError').css('display', 'none');
         parent.sNew = true;
-        
+
         $('#divApplyFirst').css('display', 'block');
         $('#LogApplyFirst').css('display', 'block');
         $('#AppHeaderApply').html(txtHeader + '<span > | application for a ' +
@@ -31,7 +31,7 @@
             }
         });
     });
-   
+
     function loadAppFirstError() {
         var ddTaxIDType = document.getElementById('ddTaxIDType');
         var txtId1Number = document.getElementById('txtId1Number');
@@ -39,7 +39,7 @@
         arrAppFirst[i++] = [ddTaxIDType, '$(\'#ddTaxIDType option:selected\').text() == "Select"', 'Select Tax type'];
         arrAppFirst[i++] = [txtId1Number, '$(\'#txtId1Number\').val() == ""', 'ID number required'];
         arrAppFirst[i++] = [txtId1Number, '$(\'#txtId1Number\').val().length != 9', 'ID number is invalid'];
-       
+
     }
     var dobj = parent.$g.getXmlDocObj();
 
@@ -70,50 +70,73 @@
     });
 
     function DoApplyFirst() {
-        
-       
+
+
         ValidateAppFirst();
-       
+
         var ddTaxIDType = document.getElementById('ddTaxIDType');
-       
+
         var app = $("#AppError_Af").text();
         //alert(app);
         $('#trError').css('display', 'none');
         //ValidateAppFirst();
         if (app == '') {
-            
+
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, "1", "ENTITY_INFO FUNCTION_CODE", '', 0);
 
-           
+
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $("#ddTaxIDType option:selected").attr("CODE"), "ENTITY_INFO TYPE", '', 0);
-           
-            
+
+
 
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $("#txtId1Number").val(), "ENTITY_INFO ENTITY_ID", '', 0);
-          
 
-          
+            var ReqXML = parent.$g.xmlAccount;
+
+            $.ajax({
+                type: 'POST',
+                url: '../Returns/Log',
+                data: '{ "OriginationFom" : "ApplyFirst","ServiceName" : "TT010E00","RequestXML" : "' + btoa(ReqXML.toString()) + '"}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (msg) {
+
+                }
+            });
+
             ispCallXMLForm(parent.$g.xmlAccount, dobj, "AccountInfo", "");//Sanghamitra
-          
 
-           
+
+
 
             parent.$g.xmlAccount.loadXML(dobj.xml);
+
+            var ResXML = parent.$g.xmlAccount;
+
+            $.ajax({
+                type: 'POST',
+                url: '../Returns/Log',
+                data: '{ "OriginationFom" : "ApplyFirst","ServiceName" : "TT010E00","ResponseXML" : "' + btoa(ResXML.toString()) + '"}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (msg) {
+
+                }
+            });
 
             var error_code = parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, "ERROR_INFO ERROR", "", 0);
 
             if (error_code == "0" || error_code == "") {
-                
+
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, "A", "ENTITY_INFO FUNCTION_CODE", '', 0);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $("#ddTaxIDType option:selected").attr("CODE"), "ENTITY_INFO TYPE", '', 0);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtId1Number').val(), "ENTITY_INFO ENTITY_ID", '', 0);
 
                 parent.sNew = true;
-              
+
                 parent.setFrameUrl('Acct/ApplyMain');
             }
-            else
-            {
+            else {
                 if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, "ERROR_INFO ERROR", "", 0) == "1" &&
                         parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, "ERROR_INFO MESSAGE", "", 0).search('ENTITY EXISTS') != -1) {
                     $('#trError').css('display', 'block');
@@ -124,29 +147,28 @@
                 }
             }
         }
-        else
-        {
+        else {
             //$('#ddTaxIDType').focus();
         }
 
     }
 
     function ValidateAppFirst() {
-       
+
         var errMsg = ispSetInputErr(arrAppFirst)
-      
+
         $(AppError_Af).text(errMsg);
         resolvedIframeheight();
     }		//ValidateAppFirst
 
     function GotoForm(id) {
-       
+
         $('#trError').css('display', 'none');
         if (id == 'LogPinApply') {
             DisplayPinApply();
         }
         else if (id == 'LogLogin') {
-           
+
             DisplayLogin();
         }		//if
     }		//GotoForm
@@ -156,9 +178,9 @@
 
 <div class="container-fluid no-padding">
     <div id="divApplyFirst" class="block3" style="display: none;">
-        <div class="container-fluid">
+        <div class="smaller-container">
             <div class="row row-no-margin">
-                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3" name="LogApplyFirst" style="display: none;" id="LogApplyFirst">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2" name="LogApplyFirst" style="display: none;" id="LogApplyFirst">
                     <div class="blue_base_box">
                         <h2 id="AppHeaderApply"></h2>
 
@@ -170,7 +192,7 @@
                             <div class="contentsection">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <h4>Please enter your Employer Indentification Number (EIN) or Social Security Number (SSN).</h4>
+                                        <h4>Please select SSN or EIN then enter your Employer Identification Number (EIN) or Social Security Number (SSN).</h4>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -206,7 +228,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <div class="col-sm-offset-0 col-sm-9">
+                                                <div class="col-sm-offset-1 col-sm-9">
                                                     <div <%--class="topof_login_msgbox"--%>>
 
                                                         <p>Individuals: You MUST enter your Social Security Number. </p>

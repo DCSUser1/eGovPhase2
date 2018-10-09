@@ -26,17 +26,16 @@ namespace CopRevenueGov2.TOBACCO_RTTIE028_SrvRef {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="TIPSACCDSOAP11Binding", Namespace="http://namespace.softwareag.com/entirex/xml/mapping")]
-    public partial class RT01E028 : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    [System.Web.Services.WebServiceBindingAttribute(Name="TIPSACCTSOAP11Binding", Namespace="http://namespace.softwareag.com/entirex/xml/mapping")]
+    public partial class TT028E00 : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback CallRT01E028OperationCompleted;
+        private System.Threading.SendOrPostCallback CallTT028E00OperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public RT01E028() {
-            //this.Url = global::CopRevenueGov2.Properties.Settings.Default.CopRevenueGov2_TOBACCO_RTTIE028_SrvRef_RT01E028;
-            this.Url = "http://istest.city.phila.local:10010/wsstack/services/RT01E028.TIPSACCDSOAP11Port/";
+        public TT028E00() {
+            this.Url = "http://192.168.204.70:10010/wsstack/services/TT028E00.TIPSACCTSOAP11Port/";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -71,41 +70,41 @@ namespace CopRevenueGov2.TOBACCO_RTTIE028_SrvRef {
         }
         
         /// <remarks/>
-        public event CallRT01E028CompletedEventHandler CallRT01E028Completed;
+        public event CallTT028E00CompletedEventHandler CallTT028E00Completed;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("RT01E028", RequestElementName="RT01E028", RequestNamespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E028", ResponseElementName="RT01E028Response", ResponseNamespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E028", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("TT028E00", RequestElementName="TT028E00", RequestNamespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT028E00", ResponseElementName="TT028E00Response", ResponseNamespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT028E00", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("_SMA", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RT01E028Response_SMA CallRT01E028([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT01E028_SMA _SMA, [System.Xml.Serialization.XmlElementAttribute("_E-TOB", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT01E028_ETOB _ETOB, [System.Xml.Serialization.XmlElementAttribute("_E-AMT", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT01E028_EAMT _EAMT, [System.Xml.Serialization.XmlElementAttribute("_E-TOB", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT01E028Response_ETOB _ETOB1, [System.Xml.Serialization.XmlElementAttribute("_E-AMT", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT01E028Response_EAMT _EAMT1) {
-            object[] results = this.Invoke("CallRT01E028", new object[] {
+        public TT028E00Response_SMA CallTT028E00([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT028E00_SMA _SMA, [System.Xml.Serialization.XmlElementAttribute("_E-TOB", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT028E00_ETOB _ETOB, [System.Xml.Serialization.XmlElementAttribute("_E-AMT", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT028E00_EAMT _EAMT, [System.Xml.Serialization.XmlElementAttribute("_E-TOB", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT028E00Response_ETOB _ETOB1, [System.Xml.Serialization.XmlElementAttribute("_E-AMT", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT028E00Response_EAMT _EAMT1) {
+            object[] results = this.Invoke("CallTT028E00", new object[] {
                         _SMA,
                         _ETOB,
                         _EAMT});
-            _ETOB1 = ((RT01E028Response_ETOB)(results[1]));
-            _EAMT1 = ((RT01E028Response_EAMT)(results[2]));
-            return ((RT01E028Response_SMA)(results[0]));
+            _ETOB1 = ((TT028E00Response_ETOB)(results[1]));
+            _EAMT1 = ((TT028E00Response_EAMT)(results[2]));
+            return ((TT028E00Response_SMA)(results[0]));
         }
         
         /// <remarks/>
-        public void CallRT01E028Async(RT01E028_SMA _SMA, RT01E028_ETOB _ETOB, RT01E028_EAMT _EAMT) {
-            this.CallRT01E028Async(_SMA, _ETOB, _EAMT, null);
+        public void CallTT028E00Async(TT028E00_SMA _SMA, TT028E00_ETOB _ETOB, TT028E00_EAMT _EAMT) {
+            this.CallTT028E00Async(_SMA, _ETOB, _EAMT, null);
         }
         
         /// <remarks/>
-        public void CallRT01E028Async(RT01E028_SMA _SMA, RT01E028_ETOB _ETOB, RT01E028_EAMT _EAMT, object userState) {
-            if ((this.CallRT01E028OperationCompleted == null)) {
-                this.CallRT01E028OperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallRT01E028OperationCompleted);
+        public void CallTT028E00Async(TT028E00_SMA _SMA, TT028E00_ETOB _ETOB, TT028E00_EAMT _EAMT, object userState) {
+            if ((this.CallTT028E00OperationCompleted == null)) {
+                this.CallTT028E00OperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallTT028E00OperationCompleted);
             }
-            this.InvokeAsync("CallRT01E028", new object[] {
+            this.InvokeAsync("CallTT028E00", new object[] {
                         _SMA,
                         _ETOB,
-                        _EAMT}, this.CallRT01E028OperationCompleted, userState);
+                        _EAMT}, this.CallTT028E00OperationCompleted, userState);
         }
         
-        private void OnCallRT01E028OperationCompleted(object arg) {
-            if ((this.CallRT01E028Completed != null)) {
+        private void OnCallTT028E00OperationCompleted(object arg) {
+            if ((this.CallTT028E00Completed != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.CallRT01E028Completed(this, new CallRT01E028CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.CallTT028E00Completed(this, new CallTT028E00CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -133,8 +132,8 @@ namespace CopRevenueGov2.TOBACCO_RTTIE028_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E028")]
-    public partial class RT01E028_SMA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT028E00")]
+    public partial class TT028E00_SMA {
         
         private string _PROGRAMField;
         
@@ -220,8 +219,8 @@ namespace CopRevenueGov2.TOBACCO_RTTIE028_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E028")]
-    public partial class RT01E028_ETOB {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT028E00")]
+    public partial class TT028E00_ETOB {
         
         private string aCCOUNTIDField;
         
@@ -476,8 +475,8 @@ namespace CopRevenueGov2.TOBACCO_RTTIE028_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E028")]
-    public partial class RT01E028_EAMT {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT028E00")]
+    public partial class TT028E00_EAMT {
         
         private string iTEMTOTALXField;
         
@@ -732,8 +731,8 @@ namespace CopRevenueGov2.TOBACCO_RTTIE028_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E028")]
-    public partial class RT01E028Response_SMA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT028E00")]
+    public partial class TT028E00Response_SMA {
         
         private string _PROGRAMField;
         
@@ -819,8 +818,8 @@ namespace CopRevenueGov2.TOBACCO_RTTIE028_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E028")]
-    public partial class RT01E028Response_ETOB {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT028E00")]
+    public partial class TT028E00Response_ETOB {
         
         private string aCCOUNTIDField;
         
@@ -1075,8 +1074,8 @@ namespace CopRevenueGov2.TOBACCO_RTTIE028_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E028")]
-    public partial class RT01E028Response_EAMT {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT028E00")]
+    public partial class TT028E00Response_EAMT {
         
         private string iTEMTOTALXField;
         
@@ -1328,42 +1327,42 @@ namespace CopRevenueGov2.TOBACCO_RTTIE028_SrvRef {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    public delegate void CallRT01E028CompletedEventHandler(object sender, CallRT01E028CompletedEventArgs e);
+    public delegate void CallTT028E00CompletedEventHandler(object sender, CallTT028E00CompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class CallRT01E028CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class CallTT028E00CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal CallRT01E028CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal CallTT028E00CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public RT01E028Response_SMA Result {
+        public TT028E00Response_SMA Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT01E028Response_SMA)(this.results[0]));
+                return ((TT028E00Response_SMA)(this.results[0]));
             }
         }
         
         /// <remarks/>
-        public RT01E028Response_ETOB _ETOB1 {
+        public TT028E00Response_ETOB _ETOB1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT01E028Response_ETOB)(this.results[1]));
+                return ((TT028E00Response_ETOB)(this.results[1]));
             }
         }
         
         /// <remarks/>
-        public RT01E028Response_EAMT _EAMT1 {
+        public TT028E00Response_EAMT _EAMT1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT01E028Response_EAMT)(this.results[2]));
+                return ((TT028E00Response_EAMT)(this.results[2]));
             }
         }
     }

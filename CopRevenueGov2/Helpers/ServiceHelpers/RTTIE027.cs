@@ -12,10 +12,10 @@ namespace CopRevenueGov2.Helpers
 {
     public class RTTIE027 : CopRestServiceBase, ICopSoapService
     {
-        
+
         public static void Init()
         {
-            
+
         }
 
         public static string CallService(string Request)
@@ -74,7 +74,7 @@ namespace CopRevenueGov2.Helpers
             switch (e.WAGE_INFO.RETURN_STATUS)
             {
                 case "INQ": // fill
-                   e = __RTTIE027_F_I(e);                    
+                    e = __RTTIE027_F_I(e);
                     break;
                 case null: // submit
                     e = __RTTIE027_F_U(e);
@@ -82,35 +82,36 @@ namespace CopRevenueGov2.Helpers
 
                 default:
                     e.WAGE_INFO.RETURN_STATUS = "INQ";
-                    e = __RTTIE027_F_I(e);                   
+                    e = __RTTIE027_F_I(e);
                     break;
             }
             return e;
         }
-        
+
         private static COPXmlFactory.RTTIE027.WAGERETURN __RTTIE027_F_I(COPXmlFactory.RTTIE027.WAGERETURN e)
-        {          
+        {
 
-            WAGE_RTTIE027_SrvRef.RT01E027_EWAG _EWAG = new WAGE_RTTIE027_SrvRef.RT01E027_EWAG();
-            WAGE_RTTIE027_SrvRef.RT01E027 serv_req = new WAGE_RTTIE027_SrvRef.RT01E027();
-            WAGE_RTTIE027_SrvRef.RT01E027Response_SMA _SMAResponse = new WAGE_RTTIE027_SrvRef.RT01E027Response_SMA();
-            WAGE_RTTIE027_SrvRef.RT01E027Response_EAMT _EAMTResponse = new WAGE_RTTIE027_SrvRef.RT01E027Response_EAMT();
-            WAGE_RTTIE027_SrvRef.RT01E027Response_EWAG _EWAGResponse = new WAGE_RTTIE027_SrvRef.RT01E027Response_EWAG();
-            WAGE_RTTIE027_SrvRef.RT01E027Response_SERR _SERRResponse = new WAGE_RTTIE027_SrvRef.RT01E027Response_SERR();
+            WAGE_RTTIE027_SrvRef.TT027E00_EWAG _EWAG = new WAGE_RTTIE027_SrvRef.TT027E00_EWAG();
+            WAGE_RTTIE027_SrvRef.TT027E00_SERR _SERR = new WAGE_RTTIE027_SrvRef.TT027E00_SERR();
+            WAGE_RTTIE027_SrvRef.TT027E00 serv_req = new WAGE_RTTIE027_SrvRef.TT027E00();
+            WAGE_RTTIE027_SrvRef.TT027E00Response_SMA _SMAResponse = new WAGE_RTTIE027_SrvRef.TT027E00Response_SMA();
+            WAGE_RTTIE027_SrvRef.TT027E00Response_EAMT _EAMTResponse = new WAGE_RTTIE027_SrvRef.TT027E00Response_EAMT();
+            WAGE_RTTIE027_SrvRef.TT027E00Response_EWAG _EWAGResponse = new WAGE_RTTIE027_SrvRef.TT027E00Response_EWAG();
+            WAGE_RTTIE027_SrvRef.TT027E00Response_SERR _SERRResponse = new WAGE_RTTIE027_SrvRef.TT027E00Response_SERR();
 
-            
+
 
             _EWAG.ACCOUNTID = e.WAGE_INFO.ACCOUNT_ID;
             _EWAG.PERIODX = CopMvcUtil.ConvDateDecimalString(e.WAGE_INFO.PERIOD);
             _EWAG.RETURNSTATUS = e.WAGE_INFO.RETURN_STATUS;
 
 
-            _SMAResponse = serv_req.CallRT01E027
-                                            (new WAGE_RTTIE027_SrvRef.RT01E027_SMA(), _EWAG,
-                                              new WAGE_RTTIE027_SrvRef.RT01E027_EAMT(),
+            _SMAResponse = serv_req.CallTT027E00
+                                            (new WAGE_RTTIE027_SrvRef.TT027E00_SMA(), _EWAG,
+                                              new WAGE_RTTIE027_SrvRef.TT027E00_EAMT(), _SERR,
                                               out _EWAGResponse,
                                               out _EAMTResponse,
-                                              out _SERRResponse                                              
+                                              out _SERRResponse
                                             );
 
 
@@ -122,13 +123,13 @@ namespace CopRevenueGov2.Helpers
 
         }
 
-        private static COPXmlFactory.RTTIE027.WAGERETURN _Fill(WAGE_RTTIE027_SrvRef.RT01E027Response_SMA _SMA,WAGE_RTTIE027_SrvRef.RT01E027Response_EWAG _EWAG,WAGE_RTTIE027_SrvRef.RT01E027Response_EAMT _EAMT,WAGE_RTTIE027_SrvRef.RT01E027Response_SERR _SERR)
+        private static COPXmlFactory.RTTIE027.WAGERETURN _Fill(WAGE_RTTIE027_SrvRef.TT027E00Response_SMA _SMA, WAGE_RTTIE027_SrvRef.TT027E00Response_EWAG _EWAG, WAGE_RTTIE027_SrvRef.TT027E00Response_EAMT _EAMT, WAGE_RTTIE027_SrvRef.TT027E00Response_SERR _SERR)
         {
             COPXmlFactory.RTTIE027.WAGERETURN fobj = RevenueGovXMLFactory.GetWageReturn();
 
             //LOAD ERRORS INTO OBJECT
             fobj.ERROR_INFO = new ERROR_INFO();
-            if (fobj.ERROR_INFO.LENGTH != null)
+            if (_SMA != null)
             {
                 fobj.ERROR_INFO.PROGRAM = _SMA._PROGRAM;
                 fobj.ERROR_INFO.LINE = _SMA.ERRORLINE.ToString();
@@ -139,89 +140,90 @@ namespace CopRevenueGov2.Helpers
 
             //LOAD WAGE_INFO 
             fobj.WAGE_INFO = new WAGE_INFO();
-           
-                fobj.WAGE_INFO.ACCOUNT_ID = _EWAG.ACCOUNTID;
-                fobj.WAGE_INFO.PERIOD = CopMvcUtil.ConvDate(_EWAG.PERIODX);
-                fobj.WAGE_INFO.VERSION = _EWAG.VERSIONX;
-                fobj.WAGE_INFO.SEQUENCE = _EWAG.SEQUENCENUM;
-                fobj.WAGE_INFO.RETURN_STATUS = _EWAG.RETURNSTATUS;
-                fobj.WAGE_INFO.LAST_UPD_DATE = CopMvcUtil.ConvDate(_EWAG.LASTUPDATEDATEX);
-                fobj.WAGE_INFO.DOCUMENT_CONTROL = _EWAG.DOCUMENTCONTROLX;
-                fobj.WAGE_INFO.ADJ_REFNO_CONTROL = _EWAG.ADJREFNO;
-                //fobj.WAGE_INFO.ENTITY_ID=e._EWA
 
-                fobj.WAGE_INFO.NO_OF_NONRESIDENTS = CopMvcUtil.ConvDigitToInt(_EWAG.NUMBEROFNONRESIDENTSX);
+            fobj.WAGE_INFO.ACCOUNT_ID = _EWAG.ACCOUNTID;
+            fobj.WAGE_INFO.PERIOD = CopMvcUtil.ConvDate(_EWAG.PERIODX);
+            fobj.WAGE_INFO.VERSION = _EWAG.VERSIONX;
+            fobj.WAGE_INFO.SEQUENCE = _EWAG.SEQUENCENUM;
+            fobj.WAGE_INFO.RETURN_STATUS = _EWAG.RETURNSTATUS;
+            fobj.WAGE_INFO.LAST_UPD_DATE = CopMvcUtil.ConvDate(_EWAG.LASTUPDATEDATEX);
+            fobj.WAGE_INFO.DOCUMENT_CONTROL = _EWAG.DOCUMENTCONTROLX;
+            fobj.WAGE_INFO.ADJ_REFNO_CONTROL = _EWAG.ADJREFNO;
+            //fobj.WAGE_INFO.ENTITY_ID=e._EWA
 
-                fobj.WAGE_INFO.NO_OF_RESIDENTS = CopMvcUtil.ConvDigitToInt(_EWAG.NUMBEROFRESIDENTSX);
-                fobj.WAGE_INFO.PHILA_EMPLOYEES = CopMvcUtil.ConvDigitToInt(_EWAG.PHILAEMPLOYEESX);
-                fobj.WAGE_INFO.TOTAL_EMPLOYEES = CopMvcUtil.ConvDigitToInt(_EWAG.TOTALEMPLOYEESX);
+            fobj.WAGE_INFO.NO_OF_NONRESIDENTS = CopMvcUtil.ConvDigitToInt(_EWAG.NUMBEROFNONRESIDENTSX);
 
-                fobj.WAGE_INFO.RESTAX_A = CopMvcUtil.ConvDigitToDouble9(_EWAG.RESRATEA);
-                fobj.WAGE_INFO.RESTAX_B = CopMvcUtil.ConvDigitToDouble9(_EWAG.RESRATEB);
-                fobj.WAGE_INFO.NONRESTAX_A = CopMvcUtil.ConvDigitToDouble9(_EWAG.NONRATEA);
-                fobj.WAGE_INFO.NONRESTAX_B = CopMvcUtil.ConvDigitToDouble9(_EWAG.NONRATEB);
-                fobj.WAGE_INFO.FREQUENCY = _EWAG.FREQUENCY;
+            fobj.WAGE_INFO.NO_OF_RESIDENTS = CopMvcUtil.ConvDigitToInt(_EWAG.NUMBEROFRESIDENTSX);
+            fobj.WAGE_INFO.PHILA_EMPLOYEES = CopMvcUtil.ConvDigitToInt(_EWAG.PHILAEMPLOYEESX);
+            fobj.WAGE_INFO.TOTAL_EMPLOYEES = CopMvcUtil.ConvDigitToInt(_EWAG.TOTALEMPLOYEESX);
 
-                fobj.WAGE_INFO.DUE_DATE = CopMvcUtil.ConvDate(_EWAG.DUEDATE);
+            fobj.WAGE_INFO.RESTAX_A = CopMvcUtil.ConvDigitToDouble9(_EWAG.RESRATEA);
+            fobj.WAGE_INFO.RESTAX_B = CopMvcUtil.ConvDigitToDouble9(_EWAG.RESRATEB);
+            fobj.WAGE_INFO.NONRESTAX_A = CopMvcUtil.ConvDigitToDouble9(_EWAG.NONRATEA);
+            fobj.WAGE_INFO.NONRESTAX_B = CopMvcUtil.ConvDigitToDouble9(_EWAG.NONRATEB);
+            fobj.WAGE_INFO.FREQUENCY = _EWAG.FREQUENCY;
 
-                fobj.WAGE_INFO.PREPARER_NAME = _EWAG.PREPARERNAME;
-                fobj.WAGE_INFO.PREPARER_PHONE = Convert.ToString(_EWAG.PREPARERPHONE);
-                fobj.WAGE_INFO.PREPARER_PHONE_EXT = _EWAG.PREPARERPHONEEXT;
-                fobj.WAGE_INFO.PREPARER_IP_ADDRESS = _EWAG.PREPARERIPADDRESS;
-                fobj.WAGE_INFO.PREPARER_EMAIL_ADDRESS = _EWAG.PREPAREREMAILADDRESS;
-                fobj.WAGE_INFO.PREPARER_WHO = _EWAG.PREPARERTYPE;
-            
+            fobj.WAGE_INFO.DUE_DATE = CopMvcUtil.ConvDate(_EWAG.DUEDATE);
+
+            fobj.WAGE_INFO.PREPARER_NAME = _EWAG.PREPARERNAME;
+            fobj.WAGE_INFO.PREPARER_PHONE = Convert.ToString(_EWAG.PREPARERPHONE);
+            fobj.WAGE_INFO.PREPARER_PHONE_EXT = _EWAG.PREPARERPHONEEXT;
+            fobj.WAGE_INFO.PREPARER_IP_ADDRESS = _EWAG.PREPARERIPADDRESS;
+            fobj.WAGE_INFO.PREPARER_EMAIL_ADDRESS = _EWAG.PREPAREREMAILADDRESS;
+            fobj.WAGE_INFO.PREPARER_WHO = _EWAG.PREPARERTYPE;
+
 
             //LOAD AMT_INFO 
             fobj.AMT_INFO = new AMT_INFO();
-           
-                fobj.AMT_INFO.GROSS_COMP = CopMvcUtil.ConvDigitToCurrency(_EAMT.GROSSCOMPENSATIONX).ToString();
-                fobj.AMT_INFO.TIPS_WAGES = CopMvcUtil.ConvDigitToCurrency(_EAMT.TIPSWAGESX).ToString();
-                fobj.AMT_INFO.NON_TAXABLE_COMP = CopMvcUtil.ConvDigitToCurrency(_EAMT.NONTAXABLECOMPX).ToString();
-                fobj.AMT_INFO.NET_COMP = CopMvcUtil.ConvDigitToCurrency(_EAMT.NETCOMPENSATIONX).ToString();
-                fobj.AMT_INFO.RESIDENT_PAYROLL_A = CopMvcUtil.ConvDigitToCurrency(_EAMT.RESIDENTPAYROLLAX);
-                fobj.AMT_INFO.RESIDENT_TAX_DUE_A = CopMvcUtil.ConvDigitToCurrency(_EAMT.RESIDENTTAXDUEAX).ToString();
-                fobj.AMT_INFO.RESIDENT_PAYROLL_B = CopMvcUtil.ConvDigitToCurrency(_EAMT.RESIDENTPAYROLLBX).ToString();
-                fobj.AMT_INFO.RESIDENT_TAX_DUE_B = CopMvcUtil.ConvDigitToCurrency(_EAMT.RESIDENTTAXDUEBX).ToString();
-                fobj.AMT_INFO.NON_RES_PAYROLL_A = CopMvcUtil.ConvDigitToCurrency(_EAMT.NONRESPAYROLLAX);
-                fobj.AMT_INFO.NON_RES_TAX_DUE_A = CopMvcUtil.ConvDigitToCurrency(_EAMT.NONRESTAXDUEAX).ToString();
-                fobj.AMT_INFO.NON_RES_PAYROLL_B = CopMvcUtil.ConvDigitToCurrency(_EAMT.NONRESPAYROLLBX).ToString();
-                fobj.AMT_INFO.NON_RES_TAX_DUE_B = CopMvcUtil.ConvDigitToCurrency(_EAMT.NONRESTAXDUEBX).ToString();
-                fobj.AMT_INFO.TOTAL_GROSS_TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.TOTALGROSSTAXDUEX);
-                fobj.AMT_INFO.TAX_PAID = CopMvcUtil.ConvDigitToCurrency(_EAMT.TAXPAIDX);
-                fobj.AMT_INFO.TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.TAXDUEX);
-                fobj.AMT_INFO.TAX_OVERPAID = CopMvcUtil.ConvDigitToCurrency(_EAMT.TAXOVERPAIDX);
-                fobj.AMT_INFO.POSTING_DATE = CopMvcUtil.ConvDate(_EAMT.POSTINGDATEX);
-                fobj.AMT_INFO.FILING_DATE = CopMvcUtil.ConvDate(_EAMT.FILINGDATEX);
-                fobj.AMT_INFO.USER_ID = _EAMT.USERID;
 
-            
+            fobj.AMT_INFO.GROSS_COMP = CopMvcUtil.ConvDigitToCurrency(_EAMT.GROSSCOMPENSATIONX).ToString();
+            fobj.AMT_INFO.TIPS_WAGES = CopMvcUtil.ConvDigitToCurrency(_EAMT.TIPSWAGESX).ToString();
+            fobj.AMT_INFO.NON_TAXABLE_COMP = CopMvcUtil.ConvDigitToCurrency(_EAMT.NONTAXABLECOMPX).ToString();
+            fobj.AMT_INFO.NET_COMP = CopMvcUtil.ConvDigitToCurrency(_EAMT.NETCOMPENSATIONX).ToString();
+            fobj.AMT_INFO.RESIDENT_PAYROLL_A = CopMvcUtil.ConvDigitToCurrency(_EAMT.RESIDENTPAYROLLAX);
+            fobj.AMT_INFO.RESIDENT_TAX_DUE_A = CopMvcUtil.ConvDigitToCurrency(_EAMT.RESIDENTTAXDUEAX).ToString();
+            fobj.AMT_INFO.RESIDENT_PAYROLL_B = CopMvcUtil.ConvDigitToCurrency(_EAMT.RESIDENTPAYROLLBX).ToString();
+            fobj.AMT_INFO.RESIDENT_TAX_DUE_B = CopMvcUtil.ConvDigitToCurrency(_EAMT.RESIDENTTAXDUEBX).ToString();
+            fobj.AMT_INFO.NON_RES_PAYROLL_A = CopMvcUtil.ConvDigitToCurrency(_EAMT.NONRESPAYROLLAX);
+            fobj.AMT_INFO.NON_RES_TAX_DUE_A = CopMvcUtil.ConvDigitToCurrency(_EAMT.NONRESTAXDUEAX).ToString();
+            fobj.AMT_INFO.NON_RES_PAYROLL_B = CopMvcUtil.ConvDigitToCurrency(_EAMT.NONRESPAYROLLBX).ToString();
+            fobj.AMT_INFO.NON_RES_TAX_DUE_B = CopMvcUtil.ConvDigitToCurrency(_EAMT.NONRESTAXDUEBX).ToString();
+            fobj.AMT_INFO.TOTAL_GROSS_TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.TOTALGROSSTAXDUEX);
+            fobj.AMT_INFO.TAX_PAID = CopMvcUtil.ConvDigitToCurrency(_EAMT.TAXPAIDX);
+            fobj.AMT_INFO.TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.TAXDUEX);
+            fobj.AMT_INFO.TAX_OVERPAID = CopMvcUtil.ConvDigitToCurrency(_EAMT.TAXOVERPAIDX);
+            fobj.AMT_INFO.POSTING_DATE = CopMvcUtil.ConvDate(_EAMT.POSTINGDATEX);
+            fobj.AMT_INFO.FILING_DATE = CopMvcUtil.ConvDate(_EAMT.FILINGDATEX);
+            fobj.AMT_INFO.USER_ID = _EAMT.USERID;
+
+
 
             return fobj;
 
         }
 
         private static COPXmlFactory.RTTIE027.WAGERETURN __RTTIE027_F_U(COPXmlFactory.RTTIE027.WAGERETURN e)
-        {     
+        {
 
-          WAGE_RTTIE027_SrvRef.RT01E027 serv_req = new WAGE_RTTIE027_SrvRef.RT01E027();
-          WAGE_RTTIE027_SrvRef.RT01E027_EWAG _EWAG = new WAGE_RTTIE027_SrvRef.RT01E027_EWAG();
-          WAGE_RTTIE027_SrvRef.RT01E027_EAMT _EAMT = new WAGE_RTTIE027_SrvRef.RT01E027_EAMT();
-          WAGE_RTTIE027_SrvRef.RT01E027_SMA _SMA = new WAGE_RTTIE027_SrvRef.RT01E027_SMA();
-          
-          
+            WAGE_RTTIE027_SrvRef.TT027E00 serv_req = new WAGE_RTTIE027_SrvRef.TT027E00();
+            WAGE_RTTIE027_SrvRef.TT027E00_EWAG _EWAG = new WAGE_RTTIE027_SrvRef.TT027E00_EWAG();
+            WAGE_RTTIE027_SrvRef.TT027E00_EAMT _EAMT = new WAGE_RTTIE027_SrvRef.TT027E00_EAMT();
+            WAGE_RTTIE027_SrvRef.TT027E00_SMA _SMA = new WAGE_RTTIE027_SrvRef.TT027E00_SMA();
+            WAGE_RTTIE027_SrvRef.TT027E00_SERR _SERR = new WAGE_RTTIE027_SrvRef.TT027E00_SERR();
 
-          WAGE_RTTIE027_SrvRef.RT01E027Response_SMA _SMAResponse = new WAGE_RTTIE027_SrvRef.RT01E027Response_SMA();
-          WAGE_RTTIE027_SrvRef.RT01E027Response_EAMT _EAMTResponse = new WAGE_RTTIE027_SrvRef.RT01E027Response_EAMT();
-          WAGE_RTTIE027_SrvRef.RT01E027Response_EWAG _EWAGResponse = new WAGE_RTTIE027_SrvRef.RT01E027Response_EWAG();
-          WAGE_RTTIE027_SrvRef.RT01E027Response_SERR _SERRResponse = new WAGE_RTTIE027_SrvRef.RT01E027Response_SERR();
 
-           
+
+            WAGE_RTTIE027_SrvRef.TT027E00Response_SMA _SMAResponse = new WAGE_RTTIE027_SrvRef.TT027E00Response_SMA();
+            WAGE_RTTIE027_SrvRef.TT027E00Response_EAMT _EAMTResponse = new WAGE_RTTIE027_SrvRef.TT027E00Response_EAMT();
+            WAGE_RTTIE027_SrvRef.TT027E00Response_EWAG _EWAGResponse = new WAGE_RTTIE027_SrvRef.TT027E00Response_EWAG();
+            WAGE_RTTIE027_SrvRef.TT027E00Response_SERR _SERRResponse = new WAGE_RTTIE027_SrvRef.TT027E00Response_SERR();
+
+
             _EWAG.ACCOUNTID = e.WAGE_INFO.ACCOUNT_ID;
             _EWAG.VERSIONX = e.WAGE_INFO.VERSION;
             _EWAG.PERIODX = CopMvcUtil.ConvDateDecimalString(e.WAGE_INFO.PERIOD);
             _EWAG.DOCUMENTCONTROLX = e.WAGE_INFO.DOCUMENT_CONTROL;
-            _EWAG.ADJREFNO =e.WAGE_INFO.ADJ_REFNO_CONTROL;            
+            _EWAG.ADJREFNO = e.WAGE_INFO.ADJ_REFNO_CONTROL;
 
             _EWAG.RETURNSTATUS = e.WAGE_INFO.RETURN_STATUS;
             _EWAG.SEQUENCENUM = e.WAGE_INFO.SEQUENCE;
@@ -248,12 +250,12 @@ namespace CopRevenueGov2.Helpers
             _EWAG.PREPARERTYPE = e.WAGE_INFO.PREPARER_WHO; ;
             _EWAG.PREPARERPHONESpecified = true;
 
-            
+
             _EAMT.GROSSCOMPENSATIONX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.GROSS_COMP);
-            
+
             _EAMT.NONTAXABLECOMPX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.NON_TAXABLE_COMP);
             _EAMT.TIPSWAGESX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.TIPS_WAGES);// "000000000000000";
-             _EAMT.NETCOMPENSATIONX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.NET_COMP);
+            _EAMT.NETCOMPENSATIONX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.NET_COMP);
             _EAMT.RESIDENTPAYROLLAX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.RESIDENT_PAYROLL_A);
             _EAMT.RESIDENTTAXDUEAX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.RESIDENT_TAX_DUE_A);
             _EAMT.RESIDENTPAYROLLBX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.RESIDENT_PAYROLL_B);
@@ -268,14 +270,14 @@ namespace CopRevenueGov2.Helpers
             _EAMT.TAXOVERPAIDX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.TAX_OVERPAID);
             _EAMT.POSTINGDATEX = CopMvcUtil.ConvDateDecimalString(e.AMT_INFO.POSTING_DATE);
             _EAMT.FILINGDATEX = CopMvcUtil.ConvDateDecimalString(e.AMT_INFO.FILING_DATE);
-            _EAMT.USERID =e.AMT_INFO.USER_ID;
+            _EAMT.USERID = e.AMT_INFO.USER_ID;
 
             string s = CopMvcUtil.GetXMlFromObject(_EWAG);
             string s1 = CopMvcUtil.GetXMlFromObject(_EAMT);
 
-            _SMAResponse = serv_req.CallRT01E027
+            _SMAResponse = serv_req.CallTT027E00
                                             (_SMA, _EWAG,
-                                              _EAMT,
+                                              _EAMT, _SERR,
                                               out _EWAGResponse,
                                               out _EAMTResponse,
                                               out _SERRResponse

@@ -26,17 +26,16 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="TIPSACCDSOAP11Binding", Namespace="http://namespace.softwareag.com/entirex/xml/mapping")]
-    public partial class RT01E034 : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    [System.Web.Services.WebServiceBindingAttribute(Name="TIPSACCTSOAP11Binding", Namespace="http://namespace.softwareag.com/entirex/xml/mapping")]
+    public partial class TT034E00 : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback CallRT01E034OperationCompleted;
+        private System.Threading.SendOrPostCallback CallTT034E00OperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public RT01E034() {
-            this.Url = "http://istest.city.phila.local:10010/wsstack/services/RT01E034.TIPSACCDSOAP11Port" +
-                "/";
+        public TT034E00() {
+            this.Url = "http://192.168.204.70:10010/wsstack/services/TT034E00.TIPSACCTSOAP11Port/";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -71,39 +70,39 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
         }
         
         /// <remarks/>
-        public event CallRT01E034CompletedEventHandler CallRT01E034Completed;
+        public event CallTT034E00CompletedEventHandler CallTT034E00Completed;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("RT01E034", RequestElementName="RT01E034", RequestNamespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E034", ResponseElementName="RT01E034Response", ResponseNamespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E034", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("TT034E00", RequestElementName="TT034E00", RequestNamespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT034E00", ResponseElementName="TT034E00Response", ResponseNamespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT034E00", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("_SMA", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RT01E034Response_SMA CallRT01E034([System.Xml.Serialization.XmlElementAttribute("_E-REQ", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT01E034_EREQ _EREQ, [System.Xml.Serialization.XmlElementAttribute("_E-LIST", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT01E034_ELIST _ELIST, [System.Xml.Serialization.XmlElementAttribute("_E-REQ", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT01E034Response_EREQ _EREQ1, [System.Xml.Serialization.XmlElementAttribute("_E-LIST", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT01E034Response_ELIST _ELIST1) {
-            object[] results = this.Invoke("CallRT01E034", new object[] {
+        public TT034E00Response_SMA CallTT034E00([System.Xml.Serialization.XmlElementAttribute("_E-REQ", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT034E00_EREQ _EREQ, [System.Xml.Serialization.XmlElementAttribute("_E-LIST", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT034E00_ELIST _ELIST, [System.Xml.Serialization.XmlElementAttribute("_E-REQ", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT034E00Response_EREQ _EREQ1, [System.Xml.Serialization.XmlElementAttribute("_E-LIST", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT034E00Response_ELIST _ELIST1) {
+            object[] results = this.Invoke("CallTT034E00", new object[] {
                         _EREQ,
                         _ELIST});
-            _EREQ1 = ((RT01E034Response_EREQ)(results[1]));
-            _ELIST1 = ((RT01E034Response_ELIST)(results[2]));
-            return ((RT01E034Response_SMA)(results[0]));
+            _EREQ1 = ((TT034E00Response_EREQ)(results[1]));
+            _ELIST1 = ((TT034E00Response_ELIST)(results[2]));
+            return ((TT034E00Response_SMA)(results[0]));
         }
         
         /// <remarks/>
-        public void CallRT01E034Async(RT01E034_EREQ _EREQ, RT01E034_ELIST _ELIST) {
-            this.CallRT01E034Async(_EREQ, _ELIST, null);
+        public void CallTT034E00Async(TT034E00_EREQ _EREQ, TT034E00_ELIST _ELIST) {
+            this.CallTT034E00Async(_EREQ, _ELIST, null);
         }
         
         /// <remarks/>
-        public void CallRT01E034Async(RT01E034_EREQ _EREQ, RT01E034_ELIST _ELIST, object userState) {
-            if ((this.CallRT01E034OperationCompleted == null)) {
-                this.CallRT01E034OperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallRT01E034OperationCompleted);
+        public void CallTT034E00Async(TT034E00_EREQ _EREQ, TT034E00_ELIST _ELIST, object userState) {
+            if ((this.CallTT034E00OperationCompleted == null)) {
+                this.CallTT034E00OperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallTT034E00OperationCompleted);
             }
-            this.InvokeAsync("CallRT01E034", new object[] {
+            this.InvokeAsync("CallTT034E00", new object[] {
                         _EREQ,
-                        _ELIST}, this.CallRT01E034OperationCompleted, userState);
+                        _ELIST}, this.CallTT034E00OperationCompleted, userState);
         }
         
-        private void OnCallRT01E034OperationCompleted(object arg) {
-            if ((this.CallRT01E034Completed != null)) {
+        private void OnCallTT034E00OperationCompleted(object arg) {
+            if ((this.CallTT034E00Completed != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.CallRT01E034Completed(this, new CallRT01E034CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.CallTT034E00Completed(this, new CallTT034E00CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -131,8 +130,8 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E034")]
-    public partial class RT01E034_EREQ {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT034E00")]
+    public partial class TT034E00_EREQ {
         
         private string eNTITYIDField;
         
@@ -166,15 +165,15 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E034")]
-    public partial class RT01E034_ELIST {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT034E00")]
+    public partial class TT034E00_ELIST {
         
-        private RT01E034_ELIST_UOLACCOUNTS[] _UOLACCOUNTSsField;
+        private TT034E00_ELIST_UOLACCOUNTS[] _UOLACCOUNTSsField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute("_UOL-ACCOUNTSs", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlArrayItemAttribute("_UOL-ACCOUNTS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public RT01E034_ELIST_UOLACCOUNTS[] _UOLACCOUNTSs {
+        public TT034E00_ELIST_UOLACCOUNTS[] _UOLACCOUNTSs {
             get {
                 return this._UOLACCOUNTSsField;
             }
@@ -189,10 +188,10 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E034")]
-    public partial class RT01E034_ELIST_UOLACCOUNTS {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT034E00")]
+    public partial class TT034E00_ELIST_UOLACCOUNTS {
         
-        private RT01E034_ELIST_UOLACCOUNTSACCOUNTIDX aCCOUNTIDXField;
+        private TT034E00_ELIST_UOLACCOUNTSACCOUNTIDX aCCOUNTIDXField;
         
         private string bRTNUMBERField;
         
@@ -202,11 +201,11 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
         
         private string eNDDATEField;
         
-        private RT01E034_ELIST_UOLACCOUNTSFREQTABLE fREQTABLEField;
+        private TT034E00_ELIST_UOLACCOUNTSFREQTABLE fREQTABLEField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("ACCOUNT-ID-X", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RT01E034_ELIST_UOLACCOUNTSACCOUNTIDX ACCOUNTIDX {
+        public TT034E00_ELIST_UOLACCOUNTSACCOUNTIDX ACCOUNTIDX {
             get {
                 return this.aCCOUNTIDXField;
             }
@@ -261,7 +260,7 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("FREQ-TABLE", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RT01E034_ELIST_UOLACCOUNTSFREQTABLE FREQTABLE {
+        public TT034E00_ELIST_UOLACCOUNTSFREQTABLE FREQTABLE {
             get {
                 return this.fREQTABLEField;
             }
@@ -276,8 +275,8 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E034")]
-    public partial class RT01E034_ELIST_UOLACCOUNTSACCOUNTIDX {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT034E00")]
+    public partial class TT034E00_ELIST_UOLACCOUNTSACCOUNTIDX {
         
         private string aCCOUNTIDField;
         
@@ -337,15 +336,15 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E034")]
-    public partial class RT01E034_ELIST_UOLACCOUNTSFREQTABLE {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT034E00")]
+    public partial class TT034E00_ELIST_UOLACCOUNTSFREQTABLE {
         
-        private RT01E034_ELIST_UOLACCOUNTSFREQTABLEFREQ[] fREQsField;
+        private TT034E00_ELIST_UOLACCOUNTSFREQTABLEFREQ[] fREQsField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlArrayItemAttribute("FREQ", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public RT01E034_ELIST_UOLACCOUNTSFREQTABLEFREQ[] FREQs {
+        public TT034E00_ELIST_UOLACCOUNTSFREQTABLEFREQ[] FREQs {
             get {
                 return this.fREQsField;
             }
@@ -360,8 +359,8 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E034")]
-    public partial class RT01E034_ELIST_UOLACCOUNTSFREQTABLEFREQ {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT034E00")]
+    public partial class TT034E00_ELIST_UOLACCOUNTSFREQTABLEFREQ {
         
         private string fREQCODEField;
         
@@ -382,8 +381,8 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E034")]
-    public partial class RT01E034Response_SMA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT034E00")]
+    public partial class TT034E00Response_SMA {
         
         private string _PROGRAMField;
         
@@ -469,8 +468,8 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E034")]
-    public partial class RT01E034Response_EREQ {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT034E00")]
+    public partial class TT034E00Response_EREQ {
         
         private string eNTITYIDField;
         
@@ -504,15 +503,15 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E034")]
-    public partial class RT01E034Response_ELIST {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT034E00")]
+    public partial class TT034E00Response_ELIST {
         
-        private RT01E034Response_ELIST_UOLACCOUNTS[] _UOLACCOUNTSsField;
+        private TT034E00Response_ELIST_UOLACCOUNTS[] _UOLACCOUNTSsField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute("_UOL-ACCOUNTSs", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlArrayItemAttribute("_UOL-ACCOUNTS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public RT01E034Response_ELIST_UOLACCOUNTS[] _UOLACCOUNTSs {
+        public TT034E00Response_ELIST_UOLACCOUNTS[] _UOLACCOUNTSs {
             get {
                 return this._UOLACCOUNTSsField;
             }
@@ -527,10 +526,10 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E034")]
-    public partial class RT01E034Response_ELIST_UOLACCOUNTS {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT034E00")]
+    public partial class TT034E00Response_ELIST_UOLACCOUNTS {
         
-        private RT01E034Response_ELIST_UOLACCOUNTSACCOUNTIDX aCCOUNTIDXField;
+        private TT034E00Response_ELIST_UOLACCOUNTSACCOUNTIDX aCCOUNTIDXField;
         
         private string bRTNUMBERField;
         
@@ -540,11 +539,11 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
         
         private string eNDDATEField;
         
-        private RT01E034Response_ELIST_UOLACCOUNTSFREQTABLE fREQTABLEField;
+        private TT034E00Response_ELIST_UOLACCOUNTSFREQTABLE fREQTABLEField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("ACCOUNT-ID-X", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RT01E034Response_ELIST_UOLACCOUNTSACCOUNTIDX ACCOUNTIDX {
+        public TT034E00Response_ELIST_UOLACCOUNTSACCOUNTIDX ACCOUNTIDX {
             get {
                 return this.aCCOUNTIDXField;
             }
@@ -599,7 +598,7 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("FREQ-TABLE", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RT01E034Response_ELIST_UOLACCOUNTSFREQTABLE FREQTABLE {
+        public TT034E00Response_ELIST_UOLACCOUNTSFREQTABLE FREQTABLE {
             get {
                 return this.fREQTABLEField;
             }
@@ -614,8 +613,8 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E034")]
-    public partial class RT01E034Response_ELIST_UOLACCOUNTSACCOUNTIDX {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT034E00")]
+    public partial class TT034E00Response_ELIST_UOLACCOUNTSACCOUNTIDX {
         
         private string aCCOUNTIDField;
         
@@ -675,15 +674,15 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E034")]
-    public partial class RT01E034Response_ELIST_UOLACCOUNTSFREQTABLE {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT034E00")]
+    public partial class TT034E00Response_ELIST_UOLACCOUNTSFREQTABLE {
         
-        private RT01E034Response_ELIST_UOLACCOUNTSFREQTABLEFREQ[] fREQsField;
+        private TT034E00Response_ELIST_UOLACCOUNTSFREQTABLEFREQ[] fREQsField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlArrayItemAttribute("FREQ", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public RT01E034Response_ELIST_UOLACCOUNTSFREQTABLEFREQ[] FREQs {
+        public TT034E00Response_ELIST_UOLACCOUNTSFREQTABLEFREQ[] FREQs {
             get {
                 return this.fREQsField;
             }
@@ -698,8 +697,8 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E034")]
-    public partial class RT01E034Response_ELIST_UOLACCOUNTSFREQTABLEFREQ {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT034E00")]
+    public partial class TT034E00Response_ELIST_UOLACCOUNTSFREQTABLEFREQ {
         
         private string fREQCODEField;
         
@@ -717,42 +716,42 @@ namespace CopRevenueGov2.UOList_RTTIE034_SrvRef {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    public delegate void CallRT01E034CompletedEventHandler(object sender, CallRT01E034CompletedEventArgs e);
+    public delegate void CallTT034E00CompletedEventHandler(object sender, CallTT034E00CompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class CallRT01E034CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class CallTT034E00CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal CallRT01E034CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal CallTT034E00CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public RT01E034Response_SMA Result {
+        public TT034E00Response_SMA Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT01E034Response_SMA)(this.results[0]));
+                return ((TT034E00Response_SMA)(this.results[0]));
             }
         }
         
         /// <remarks/>
-        public RT01E034Response_EREQ _EREQ1 {
+        public TT034E00Response_EREQ _EREQ1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT01E034Response_EREQ)(this.results[1]));
+                return ((TT034E00Response_EREQ)(this.results[1]));
             }
         }
         
         /// <remarks/>
-        public RT01E034Response_ELIST _ELIST1 {
+        public TT034E00Response_ELIST _ELIST1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT01E034Response_ELIST)(this.results[2]));
+                return ((TT034E00Response_ELIST)(this.results[2]));
             }
         }
     }

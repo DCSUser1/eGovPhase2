@@ -26,17 +26,16 @@ namespace CopRevenueGov2.LCF_RTTIE031_SrvRef {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="TIPSACCDSOAP11Binding", Namespace="http://namespace.softwareag.com/entirex/xml/mapping")]
-    public partial class RTTIE031 : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    [System.Web.Services.WebServiceBindingAttribute(Name="TIPSACCTSOAP11Binding", Namespace="http://namespace.softwareag.com/entirex/xml/mapping")]
+    public partial class TT031E00 : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback CallRTTIE031OperationCompleted;
+        private System.Threading.SendOrPostCallback CallTT031E00OperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public RTTIE031() {
-            //this.Url = global::CopRevenueGov2.Properties.Settings.Default.CopRevenueGov2_LCF_RTTIE031_SrvRef_RTTIE031;
-            this.Url = "http://ISTEST.City.Phila.Local:10010/wsstack/services/RTTIE031.TIPSACCDSOAP11Port/";        
+        public TT031E00() {
+            this.Url = "http://192.168.204.70:10010/wsstack/services/TT031E00.TIPSACCTSOAP11Port/";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -71,38 +70,38 @@ namespace CopRevenueGov2.LCF_RTTIE031_SrvRef {
         }
         
         /// <remarks/>
-        public event CallRTTIE031CompletedEventHandler CallRTTIE031Completed;
+        public event CallTT031E00CompletedEventHandler CallTT031E00Completed;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("RTTIE031", RequestElementName="RTTIE031", RequestNamespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE031", ResponseElementName="RTTIE031Response", ResponseNamespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE031", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("TT031E00", RequestElementName="TT031E00", RequestNamespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT031E00", ResponseElementName="TT031E00Response", ResponseNamespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT031E00", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("_SMA", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RTTIE031Response_SMA CallRTTIE031([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RTTIE031_SMA _SMA, [System.Xml.Serialization.XmlElementAttribute("_E-LCF", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RTTIE031_ELCF _ELCF, [System.Xml.Serialization.XmlElementAttribute("_E-LCF", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RTTIE031Response_ELCF _ELCF1) {
-            object[] results = this.Invoke("CallRTTIE031", new object[] {
+        public TT031E00Response_SMA CallTT031E00([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT031E00_SMA _SMA, [System.Xml.Serialization.XmlElementAttribute("_E-LCF", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT031E00_ELCF _ELCF, [System.Xml.Serialization.XmlElementAttribute("_E-LCF", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT031E00Response_ELCF _ELCF1) {
+            object[] results = this.Invoke("CallTT031E00", new object[] {
                         _SMA,
                         _ELCF});
-            _ELCF1 = ((RTTIE031Response_ELCF)(results[1]));
-            return ((RTTIE031Response_SMA)(results[0]));
+            _ELCF1 = ((TT031E00Response_ELCF)(results[1]));
+            return ((TT031E00Response_SMA)(results[0]));
         }
         
         /// <remarks/>
-        public void CallRTTIE031Async(RTTIE031_SMA _SMA, RTTIE031_ELCF _ELCF) {
-            this.CallRTTIE031Async(_SMA, _ELCF, null);
+        public void CallTT031E00Async(TT031E00_SMA _SMA, TT031E00_ELCF _ELCF) {
+            this.CallTT031E00Async(_SMA, _ELCF, null);
         }
         
         /// <remarks/>
-        public void CallRTTIE031Async(RTTIE031_SMA _SMA, RTTIE031_ELCF _ELCF, object userState) {
-            if ((this.CallRTTIE031OperationCompleted == null)) {
-                this.CallRTTIE031OperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallRTTIE031OperationCompleted);
+        public void CallTT031E00Async(TT031E00_SMA _SMA, TT031E00_ELCF _ELCF, object userState) {
+            if ((this.CallTT031E00OperationCompleted == null)) {
+                this.CallTT031E00OperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallTT031E00OperationCompleted);
             }
-            this.InvokeAsync("CallRTTIE031", new object[] {
+            this.InvokeAsync("CallTT031E00", new object[] {
                         _SMA,
-                        _ELCF}, this.CallRTTIE031OperationCompleted, userState);
+                        _ELCF}, this.CallTT031E00OperationCompleted, userState);
         }
         
-        private void OnCallRTTIE031OperationCompleted(object arg) {
-            if ((this.CallRTTIE031Completed != null)) {
+        private void OnCallTT031E00OperationCompleted(object arg) {
+            if ((this.CallTT031E00Completed != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.CallRTTIE031Completed(this, new CallRTTIE031CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.CallTT031E00Completed(this, new CallTT031E00CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -130,8 +129,8 @@ namespace CopRevenueGov2.LCF_RTTIE031_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE031")]
-    public partial class RTTIE031_SMA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT031E00")]
+    public partial class TT031E00_SMA {
         
         private string _PROGRAMField;
         
@@ -217,8 +216,8 @@ namespace CopRevenueGov2.LCF_RTTIE031_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE031")]
-    public partial class RTTIE031_ELCF {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT031E00")]
+    public partial class TT031E00_ELCF {
         
         private string aCCOUNTIDField;
         
@@ -421,8 +420,8 @@ namespace CopRevenueGov2.LCF_RTTIE031_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE031")]
-    public partial class RTTIE031Response_SMA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT031E00")]
+    public partial class TT031E00Response_SMA {
         
         private string _PROGRAMField;
         
@@ -508,8 +507,8 @@ namespace CopRevenueGov2.LCF_RTTIE031_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE031")]
-    public partial class RTTIE031Response_ELCF {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT031E00")]
+    public partial class TT031E00Response_ELCF {
         
         private string aCCOUNTIDField;
         
@@ -709,34 +708,34 @@ namespace CopRevenueGov2.LCF_RTTIE031_SrvRef {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    public delegate void CallRTTIE031CompletedEventHandler(object sender, CallRTTIE031CompletedEventArgs e);
+    public delegate void CallTT031E00CompletedEventHandler(object sender, CallTT031E00CompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class CallRTTIE031CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class CallTT031E00CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal CallRTTIE031CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal CallTT031E00CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public RTTIE031Response_SMA Result {
+        public TT031E00Response_SMA Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RTTIE031Response_SMA)(this.results[0]));
+                return ((TT031E00Response_SMA)(this.results[0]));
             }
         }
         
         /// <remarks/>
-        public RTTIE031Response_ELCF _ELCF1 {
+        public TT031E00Response_ELCF _ELCF1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RTTIE031Response_ELCF)(this.results[1]));
+                return ((TT031E00Response_ELCF)(this.results[1]));
             }
         }
     }

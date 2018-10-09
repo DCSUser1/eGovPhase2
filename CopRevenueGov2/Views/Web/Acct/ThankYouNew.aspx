@@ -14,6 +14,7 @@
 
         function DisplayThankYou() {
             debugger;
+            parent.ScrollTop(1);
             $('#AcctThankYou').css('display', 'block');
             $('#AcctExistThankYou').css('display', 'none');
             $('#AcctNewThankYou').css('display', 'none');
@@ -66,16 +67,17 @@
 
 
 
-        function DoThankYou() {            
+        function DoThankYou() {
+            debugger;
             var sEmailMsg;
-            var txaComments=document.getElementById('txaComments');
+            var txaComments = document.getElementById('txaComments');
             if (txaComments.value != '') {
                 sEmailMsg = '<p align=middle><strong>Comments and Feedback</strong></p>';
                 sEmailMsg += '<p>The following comments or feedback was submitted by: ';
                 sEmailMsg += parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS NAME', '', 0) + '</p>';
                 sEmailMsg += '<p>Company: ';
                 sEmailMsg += parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS TRADE_NAME', '', 0) + '</p>';
-                sEmailMsg += '<p>E-mail address: ';
+                //sEmailMsg += '<p>E-mail address: ' + "egovservices@phila.gov" + '</p><br>';
                 sEmailMsg += parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS EMAIL', '', 0) + '</p><br>';
                 sEmailMsg += '<p><strong>Message: </strong></p>';
                 sEmailMsg += '<p>' + txaComments.value + '</p>';
@@ -84,49 +86,50 @@
                 sEmailMsg = ispReplace(sEmailMsg, '<', '&LT&');
 
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlEmail, sEmailMsg, 'DATA', '', 0);
-                parent.$x.ispXmlSetFieldVal(parent.$g.xmlEmail, parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS EMAIL', '', 0), 'ADDRESS', '', 0);
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlEmail, "egovservices@phila.gov", 'ADDRESS', '', 0);
+                debugger;
                 ispCallXMLForm(parent.$g.xmlEmail, parent.$g.xmlEmail, 'MailPIN', '');
             }		//if
 
             if ($('#AcctNewThankYou').css('display') == 'block') {
                 $(parent.document).find('#mnuLogLogout').first().trigger('click');
             } else {
-               
+
                 $('#ApplyPinThankYou').css('display', 'none');
-              
+
                 $('#ForgotPinThankYou').css('display', 'none');
-               
+
                 parent.sNew = false;
-                
+
                 parent.setFrameUrl('Acct/ApplyMain');
-                
+
             }		//if
-           
+
         }		//DoThankYou
 
 
 
         function ShowReturns() {
             var lDisplay = false;
-           
-           
+
+
             $('#divReturns').css("display", "none");
-            
+
             $('#mnuReWage').css("display", "none");
-           
+
             $('#mnuReSchool').css("display", "none");
-            
+
             $('#mnuLCF').css("display", "none");
             $('#mnuBPTlf').css("display", "none");
-           
+
             $('#mnuReBPTez').css("display", "none");
-           
+
             $('#mnuReNPT').css("display", "none");
-           
+
             $('#mnuReERN').css("display", "none");
             var taxcount = 0;
             TotalAccounts = 0
-            
+
             taxcount = GetSingleNodeCount(parent.$g.xmlAccount, 'TAX_ACCT', '');
             var acc = '';
             for (i = 0; i < taxcount; i++) {
@@ -178,7 +181,7 @@
                         $('#divReturns').css("display", "block");
                         //EGOVWEB-107 Added
 
-                       
+
                     }
 
                     //if
@@ -186,7 +189,7 @@
             }		//for
 
 
-            
+
         } 	//ShowReturns
 
         function GetSingleNodeCount(oXML, sElement, val)//Chayan
@@ -251,6 +254,7 @@
 				<tr vAlign="top" align="left">
 					<td width="75%">
                           <h4  id="h1" name="hdrThankYou">Your Tax Account Application is now being processed. Shortly, you will receive, via email, your Philadelphia Tax Account Number and Personal Identification Number (PIN). Your account number and PIN are needed for any online activity such as making changes to your account, filing tax returns and/or submitting tax payments.</h4>
+                          <h4>For questions about your tax account, tax bills, payment arrangements, notices, etc, please dial 215 686-6600.</h4>
 						</td>
 				<td></td></tr>
 			</table>

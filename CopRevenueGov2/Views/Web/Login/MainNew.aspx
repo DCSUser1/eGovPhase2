@@ -32,12 +32,12 @@
   
     <script ID="clientEventHandlersJS" language="javascript" type="text/javascript">
 
-     
-        
+
+
         function DisplayMain() {
             PaymentDone.style.display = 'none';
             //LogMain.style.display = 'block'
-            $('#AppHeader').html('Online Services');  
+            $('#AppHeader').html('Online Services');
             parent.gsInstructionItem = '';
         }		//DisplayMain
 
@@ -48,7 +48,7 @@
             PaymentDone.style.display = 'block'
             $('#accountID').html(localStorage.getItem("AccountNumber"));
             $('#name').html(localStorage.getItem("AccountName"));
-            $('#AppHeader').html('Online Services');  
+            $('#AppHeader').html('Online Services');
             var currenturl = window.location.search;
             if (currenturl.indexOf("?status=true") !== -1) {
                 failure.style.display = 'none';
@@ -64,18 +64,18 @@
 
 
             }
-           
+
         }
         //'''''''''''''''''
 
 
         function MainLinks() {
-           
+
             var evt = window.event || arguments.callee.caller.arguments[0];
             var source = evt.target || evt.srcElement;
             sourceid = source.id;
             gsLoginPage = '';
-          
+
             switch (sourceid) {
                 case 'lnkProfile':
                 case 'lnkSIT':
@@ -86,12 +86,12 @@
                 case 'lnkU&O':
                 case 'lnkTOB':
                 case 'lnkDelPay':
-               
+
                     if (sourceid == 'lnkProfile') {
                         gsLoginPage = 'PROFILE';
                     } else if (sourceid == 'lnkSIT') {
-                      
-                        gsLoginPage = 'SIT';                      
+
+                        gsLoginPage = 'SIT';
                         if ($(parent.ancLogin).text() == "Logout") {
                             if (parent.GetNodeCount(parent.$g.xmlAccount, 'TAX_ACCT ACCOUNT', '29') == 1) {
                                 $(parent.document).find('#mnuReSchool').first().trigger('click');
@@ -192,7 +192,7 @@
                             ShowForm('LogLogin');
                     } else if (sourceid == 'lnkTOB') {
                         gsLoginPage = 'TOB';
-                      
+
 
                         if ($(parent.ancLogin).text() == "Logout") {
                             if (parent.GetNodeCount(parent.$g.xmlAccount, 'TAX_ACCT ACCOUNT', '27') == 1) {
@@ -217,17 +217,17 @@
                     }
                     $('#mnuLogLogon').css("cursor", "pointer");
                     $('#mnuLogLogon').css("color", "blue");
-                   
+
                     break;
                 case 'lnkPIN':
                     $('#mnuLogPinApply').css("cursor", "pointer");
                     $('#mnuLogPinApply').css("color", "blue");
-                   
+
                     ShowForm('LogPinApply');
                     break;
                 case 'lnkID':
                 case 'imglnkID':
-                   
+
                     $('#mnuLogNewAcct').css("cursor", "pointer");
                     $('#mnuLogNewAcct').css("color", "blue");
                     ShowForm('LogApplyFirst');
@@ -238,12 +238,12 @@
                 case 'imglnkNTL':
                     $('#mnuLogPayCoupon').css("cursor", "pointer");
                     $('#mnuLogPayCoupon').css("color", "blue");
-                    
+
                     if ((sourceid == 'lnkNTL')) {
                         bNtlOnly = 'TRUE';
                     } 	//if
                     ShowForm('LogCoupon');
-                   
+
                     break;
                 case 'imglnkEPaymt':
                 case 'lnkEPaymt':
@@ -256,19 +256,19 @@
                 case 'lnkVehicle':
                     $('#mnuLogPayCoupon').css("cursor", "pointer");
                     $('#mnuLogPayCoupon').css("color", "blue");
-                    
+
                     if ((sourceid == 'lnkEPaymt' || sourceid == 'lnkAmu' || sourceid == 'lnkEar' || sourceid == 'lnkLiquor' || sourceid == 'lnkOA' || sourceid == 'lnkPark' || sourceid == 'lnkValet' || sourceid == 'lnkVehicle')) {
                         EPaymt = 'TRUE';
                     }  //if
                     ShowForm('LogCoupon');
-                   
+
                     break;
 
             } 	//switch
         } 	//MainLinks
         function DisplayModal() {
 
-            var alpha = new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h','j', 'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+            var alpha = new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
 
             var i, j;
 
@@ -299,6 +299,7 @@
             $("#myModal_W2").css("display", "none");  //tanu
             //$("#myModal").css("display", "none");
             $('#fileToUpload').val('');
+            $('#lblMessageW2').text('');
         }
         function Display1099Modal() {
 
@@ -328,11 +329,15 @@
         function Close1099Modal() {
             $("#divCaptha_1099").css("display", "none");
             $('#fileToUpload1').val('');
+            $('#lblMessage1099Beforelogin').text('');
+
         }
         function Close1099Modal_1099() {
             $("#myModal_1099").css("display", "none");
             $('#fileToUpload1').val('');
             //$("#myModal1").css("display", "none");
+            $('#lblMessage1099Beforelogin').text('');
+
         }
     </script>
    

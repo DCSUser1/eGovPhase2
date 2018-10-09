@@ -101,15 +101,41 @@
     function DoChangePin() {
 
         ValidateChangePin();
-        var txtPcNewPin1=document.getElementById('txtPcNewPin1');
+        var txtPcNewPin1 = document.getElementById('txtPcNewPin1');
         if ($(AppError_Pc).text() == '') {
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, '3', "ENTITY_INFO FUNCTION_CODE", '', 0);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, txtPcNewPin1.value, "ENTITY_INFO PIN", '', 0);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, 'Y', "ENTITY_INFO FORCEPINCHG", '', 0);
 
+
+            var ReqXML = parent.$g.xmlAccount;
+
+            $.ajax({
+                type: 'POST',
+                url: '../Returns/Log',
+                data: '{ "OriginationFom" : "ChangePin","ServiceName" : "TT010E00","RequestXML" : "' + btoa(ReqXML.toString()) + '"}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (msg) {
+
+                }
+            });
             ispCallXMLForm(parent.$g.xmlAccount, oAcctInfo, "AccountInfo");
 
             parent.$g.xmlAccount.loadXML(oAcctInfo.xml);
+
+            var ResXML = parent.$g.xmlAccount;
+
+            $.ajax({
+                type: 'POST',
+                url: '../Returns/Log',
+                data: '{ "OriginationFom" : "ChangePin","ServiceName" : "TT010E00","ResponseXML" : "' + btoa(ResXML.toString()) + '"}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (msg) {
+
+                }
+            });
 
             if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ERROR_INFO MESSAGE', "", 0) == "") {
 
@@ -140,9 +166,9 @@
 
 <div class="container-fluid no-padding">
     <div id="divChangePin" class="block3" style="display: none;">
-        <div class="container-fluid">
+        <div class="smaller-container">
             <div class="row">
-                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3" name="LogChangePin" style="display: none;" id="LogChangePin">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2" name="LogChangePin" style="display: none;" id="LogChangePin">
                     <div class="blue_base_box">
                         <h2 id="AppHeaderChangePwd"></h2>
 

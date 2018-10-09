@@ -31,6 +31,7 @@
         var strBRTAcct = ' ';
         var strBRTaddr = ' ';
         var iSelectIdx = 0;
+        var iSelectIdxAcct = 0;
         var iTaxYear = 0;
         var strScanLine;
         var strAccountName;
@@ -46,24 +47,24 @@
         var link;
         var strForm;
         var strFormId;
-        var linkScan='';
+        var linkScan = '';
         //var strForm = '';
 
-        function generate(data) {          
-           
+        function generate(data) {
+            debugger;
             PDF417.init(data);
 
             var barcode = PDF417.getBarcodeArray();
 
             // block sizes (width and height) in pixels
             var bw = 1;
-            var bh = 2;
+            var bh = 0.6;
 
             // create canvas element based on number of columns and rows in barcode
             var canvas = document.createElement('canvas');
             canvas.width = bw * barcode['num_cols'];
             canvas.height = bh * barcode['num_rows'];
-           // parent.document.getElementById('imagedata').appendChild(canvas);
+            // parent.document.getElementById('imagedata').appendChild(canvas);
 
             var ctx = canvas.getContext('2d');
 
@@ -85,8 +86,11 @@
             link = canvas.toDataURL();
             //var image = document.getElementById("myCanvas").toDataURL("image/png");
             link = link.replace('data:image/png;base64,', '');
-                      
-                $.ajax({
+
+            $.ajax({
+
+                cache: false,
+                headers: { "cache-control": "no-cache" },
                 type: 'POST',
                 url: '../Returns/Upload',
                 data: '{ "imageData" : "' + link + '","AccountId":"' + strAcctID + '","Form":"' + strForm + '" }',
@@ -96,23 +100,24 @@
                     //alert('Image saved successfully !');
                 }
             });
-            
-           
-
-        }    
 
 
+
+        }
 
 
 
 
 
 
-        function DisplayPrntCoupon() {       
+
+
+        function DisplayPrntCoupon() {
+            parent.ScrollTop(1);
             debugger;
             var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-           
-           
+
+
             for (var i = 0; i < url.length; i++) {
                 var urlparam = url[i].split('=');
 
@@ -121,7 +126,7 @@
                     break;
                 }
             }
-         
+
             if (curInd == 1) {
                 $('#btnNTL_print').css("display", "none");
                 $('#btnSubmit_print').css("display", "none");
@@ -154,15 +159,110 @@
                         var uName = parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME', '', 0);
                         debugger;
                         if (uName.indexOf("*") >= 0) {
-                            uName = uName.replace(/\*/g, " ");                           
+                            uName = uName.replace(/\*/g, " ");
                         }
                         localStorage.setItem("AccountName", uName);
 
-                       // parent.fillUserAfterLogin(true, uName);
+                        parent.fillUserAfterLogin(true, uName);
+                        parent.hide();
                     }
                 }
-              
 
+                parent.sNew = false;
+                $('#LogPrntCoupon').css("display", "block");
+
+
+                LoadPrntCouponError();
+                ddPCAcctType.selectedIndex = 0;
+                ddPCAcctID.selectedIndex = 0;
+                ddPCTaxYear.selectedIndex = 0;
+                ddPCTaxPeriod.selectedIndex = 0;
+                ddAccountAddr.selectedIndex = 0;
+                FixLeadingZeroForSSN();
+
+                LoadPCAccountType();
+                $('tdPaPrint').css("display", "block");
+                ddPCAcctType.disabled = false;
+                var count = 0;
+                var entid = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'ENTITY_INFO ENTITY_ID', '', 0);
+                var account;
+
+                $(parent.$g.xmlPayCoupon).find("TAX_ACCT ACCOUNT_ID").each(function () {
+                    if ($(this).text() != null && $(this).text() != '' && $(this).text() == entid) {
+                        account = $(this).parent().find("ACCOUNT").text();
+                        count = count + 1;
+                    }
+
+
+                });
+
+
+            }
+            else if (curInd == 3) {
+                $('#btnSubmit_print').css("display", "block");
+
+                $('#btnElec_payment').css("display", "none");
+                $('#divElec_pay_amt').css("display", "none");
+                $('#tdSubmit').css("display", "none");
+                $('#AppHeader').html('Payment Coupon');
+
+                var dobj = parent.$g.getXmlDocObj();
+                //parent.$g.loadXmls();
+
+                var acct = localStorage.getItem("AccountNumber");
+                debugger;
+                var pin = localStorage.getItem("Pin");
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, "I", "ENTITY_INFO FUNCTION_CODE", '', 0);
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, acct, "ENTITY_INFO ENTITY_ID", '', 0);
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, pin, "ENTITY_INFO PIN", '', 0);
+                ispCallXMLForm(parent.$g.xmlAccount, dobj, "AccountInfo");
+                if (parent.$x.ispXmlGetFieldVal(dobj, 'ERROR_INFO MESSAGE', "", 0) == "") {
+
+                    parent.$g.xmlAccount.loadXML(dobj.xml);
+
+                    if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO ACCOUNT_ID', '', 0) != "") {
+
+
+                        var uName = parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME', '', 0);
+                        debugger;
+                        if (uName.indexOf("*") >= 0) {
+                            uName = uName.replace(/\*/g, " ");
+                        }
+                        localStorage.setItem("AccountName", uName);
+
+                        parent.fillUserAfterLogin(true, uName);
+                        parent.hide();
+                        $('#treeMenu').css("height", "305px");
+                        $('#div_menu').css("height", "305px");
+                    }
+                }
+                parent.sNew = false;
+                $('#LogPrntCoupon').css("display", "block");
+
+
+                LoadPrntCouponError();
+                ddPCAcctType.selectedIndex = 0;
+                ddPCAcctID.selectedIndex = 0;
+                ddPCTaxYear.selectedIndex = 0;
+                ddPCTaxPeriod.selectedIndex = 0;
+                ddAccountAddr.selectedIndex = 0;
+                FixLeadingZeroForSSN();
+
+                LoadPCAccountType();
+                $('tdPaPrint').css("display", "block");
+                ddPCAcctType.disabled = false;
+                var count = 0;
+                var entid = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'ENTITY_INFO ENTITY_ID', '', 0);
+                var account;
+
+                $(parent.$g.xmlPayCoupon).find("TAX_ACCT ACCOUNT_ID").each(function () {
+                    if ($(this).text() != null && $(this).text() != '' && $(this).text() == entid) {
+                        account = $(this).parent().find("ACCOUNT").text();
+                        count = count + 1;
+                    }
+
+
+                });
             }
             else {
                 $('#btnSubmit_print').css("display", "block");
@@ -171,40 +271,41 @@
                 $('#divElec_pay_amt').css("display", "none");
                 $('#tdSubmit').css("display", "none");
                 $('#AppHeader').html('Payment Coupon');
+                parent.sNew = false;
+                $('#LogPrntCoupon').css("display", "block");
+                debugger;
+
+                LoadPrntCouponError();
+                ddPCAcctType.selectedIndex = 0;
+                ddPCAcctID.selectedIndex = 0;
+                ddPCTaxYear.selectedIndex = 0;
+                ddPCTaxPeriod.selectedIndex = 0;
+                ddAccountAddr.selectedIndex = 0;
+                FixLeadingZeroForSSN();
+
+                LoadPCAccountType();
+                $('tdPaPrint').css("display", "block");
+                ddPCAcctType.disabled = false;
+                var count = 0;
+                var entid = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'ENTITY_INFO ENTITY_ID', '', 0);
+                var account;
+
+                $(parent.$g.xmlPayCoupon).find("TAX_ACCT ACCOUNT_ID").each(function () {
+                    if ($(this).text() != null && $(this).text() != '' && $(this).text() == entid) {
+                        account = $(this).parent().find("ACCOUNT").text();
+                        count = count + 1;
+                    }
+
+
+                });
             }
-            parent.sNew = false;
-            $('#LogPrntCoupon').css("display", "block");
-           
-
-            LoadPrntCouponError();
-            ddPCAcctType.selectedIndex = 0;
-            ddPCAcctID.selectedIndex = 0;
-            ddPCTaxYear.selectedIndex = 0;
-            ddPCTaxPeriod.selectedIndex = 0;
-            ddAccountAddr.selectedIndex = 0;
-            FixLeadingZeroForSSN();
-
-            LoadPCAccountType();
-            $('tdPaPrint').css("display", "block");
-            ddPCAcctType.disabled = false;
-            var count = 0;
-            var entid = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'ENTITY_INFO ENTITY_ID', '', 0);
-            var account;
-           
-            $(parent.$g.xmlPayCoupon).find("TAX_ACCT ACCOUNT_ID").each(function () {
-                if ($(this).text() != null && $(this).text() != '' && $(this).text() == entid) {                  
-                    account = $(this).parent().find("ACCOUNT").text();
-                    count = count + 1;
-                }
 
 
-            });
 
 
-          
             if (count == 1) {
                 for (var i = 0; i < ddPCAcctType.options.length; i++) {
-                  
+
                     if ($(ddPCAcctType.options[i]).attr("CODE") == account) {
 
                         $(ddPCAcctType.options[i]).attr('selected', 'true');
@@ -227,23 +328,23 @@
 
                 ddPCAcctType.focus();
             } 	//if
-           
-           
-            if ((curInd == '2' ||curInd == '') && parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'LOGIN_FROM NTL_ONLY', '', 0) == 'TRUE') { //Sudipta
 
-                    SetDDList(ddPCAcctType, '', '1');
-                    
-                    if (ddPCAcctType.selectedIndex != '0') {
-                        AppHeader.innerHTML = 'Select No Tax Liability Coupon';
-                        LoadPCAccountID();                   
-                     
-                        $('#ddPCAcctType').prop('disabled', true);
-                        ddPCAcctID.focus();
-                    } else {
-                        ddPCAcctType.selectedIndex = '0';
-                    } 	//if
+
+            if ((curInd == '2' || curInd == '') && parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'LOGIN_FROM NTL_ONLY', '', 0) == 'TRUE') { //Sudipta
+
+                SetDDList(ddPCAcctType, '', '1');
+
+                if (ddPCAcctType.selectedIndex != '0') {
+                    AppHeader.innerHTML = 'Select No Tax Liability Coupon';
+                    LoadPCAccountID();
+
+                    $('#ddPCAcctType').prop('disabled', true);
+                    ddPCAcctID.focus();
+                } else {
+                    ddPCAcctType.selectedIndex = '0';
                 } 	//if
-         
+            } 	//if
+
         } 	//DisplayPrntCoupon
 
         function GetSingleNodeCount(oXML, sElement, val)//Chayan
@@ -289,8 +390,8 @@
         } 	//ClearPrntCouponScreen     
 
 
-        function LoadPrntCouponError() {         
-           
+        function LoadPrntCouponError() {
+
             $('#AppError').text("");
             var ddPCAcctType = document.getElementById('ddPCAcctType');
             if ($(ddPCAcctType.options[ddPCAcctType.selectedIndex]).text() == "Select") {
@@ -299,14 +400,14 @@
             else if ($(ddPCAcctID.options[ddPCAcctID.selectedIndex]).text() == "Select") {
                 $('#AppError').text("Select Account ID");
             }
-                  
+
         }   //LoadPrntCouponError
 
 
-        function ValidatePrntCoupon() {            
-            LoadPrntCouponError();            
+        function ValidatePrntCoupon() {
+            LoadPrntCouponError();
 
-                        
+
         } 	//ValidatePrntCoupon
 
 
@@ -337,10 +438,10 @@
 
 
             for (i = 0; i < icount; i++) {
-                if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT ACCOUNT", "", i) == '84' && curInd=='2') {//Code changed by SumanG
+                if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT ACCOUNT", "", i) == '84' && (curInd == '2' || curInd == '3')) {//Code changed by SumanG
                     //Do not load UO - Tenant (84)
                 }
-                else if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT ACCOUNT", "", i) == '27' && (curInd == '2'||curInd=='')) {//Code changed by SumanG
+                else if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT ACCOUNT", "", i) == '27' && (curInd == '2' || curInd == '3' || curInd == '')) {//Code changed by SumanG
                     //Do not load Tobacco (27)
                 }
                 else if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT ACCOUNT", "", i) == lastUniqueCode) {
@@ -378,7 +479,7 @@
 
                 ddPCAcctType.options.length = iunique + 1;
 
-                if (ddPCAcctType.selectedIndex < '') {
+                if (ddPCAcctType.selectedIndex == '') {
 
                     LoadPCAccountID();
                     ddPCAcctID.focus();
@@ -387,7 +488,7 @@
                     ddPCAcctType.focus();
                 } //if
             } //if
-           
+
         }   //loadPCAccountType
 
         function TranslateAccountType() {
@@ -412,6 +513,9 @@
                     break
                 case '11':
                     strUniqueText = 'Police Tax'; //Police    POL
+                    break
+                case '12':
+                    strUniqueText = 'Small Commercial Establishment';  //Small Commercial Establishment  SCE
                     break
                 case '14':
                     strUniqueText = 'Vehicle Rental Tax';  //Vehicle Rental   VRT
@@ -480,9 +584,10 @@
             var strAccountType;
 
             strUniqueText = '';
-            iSelectIdx = '';
+            iSelectIdx = new Array();
+            iSelectIdxAcct = new Array();
             strSelectType = $(ddPCAcctType.options[ddPCAcctType.selectedIndex]).attr("CODE");
-           
+
             $('#ddPCAcctID').html('');
             $('#ddPCTaxYear').html('');
             $('#ddPCTaxPeriod').html('');
@@ -499,37 +604,48 @@
 
                 if (strAccountType == strSelectType) {
                     strUniqueText = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT ACCOUNT_ID", "", i);
-                    if ($(ddPCAcctID.options[iunique]).text() == strUniqueText) {
+                    // iunique = iunique + 1;
+                    if ($(ddPCAcctID.options[i]).text() == strUniqueText) {
                         iunique = iunique;
+
                     }
                     else {
-                        if ($(ddPCAcctID.options[iunique]).text() > "") {
-                            iunique = iunique + 1;
-                        } // if
-                        $(ddPCAcctID.options[iunique]).text(strUniqueText);
-                        $(ddPCAcctID.options[iunique]).attr("CODE", parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT ACCOUNT_ID", "", i));
-                        if (strSelectType == '60') {
-                            strBRTAcct = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT BRT_ACCOUNT", "", i);
-                            $(ddPCAcctID.options[iunique]).text(strBRTAcct);
-                            $(ddAccountAddr.options[iunique]).text(parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT BRT_ADDRESS1", "", i));
-                        } // if
 
-                        iSelectIdx = i;
+                        if (new Date(parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT END_DATE", "", i)) < new Date()) {
+                        }
+                        else {
+                            if ($(ddPCAcctID.options[i]).text() == "") {
+                                iunique = iunique + 1;
+
+                            } // if
+                            $(ddPCAcctID.options[iunique]).text(strUniqueText);
+                            $(ddPCAcctID.options[iunique]).attr("CODE", parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT ACCOUNT_ID", "", i));
+                            //if (strSelectType == '60') {
+                            //    strBRTAcct = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT BRT_ACCOUNT", "", i);
+                            //    $(ddPCAcctID.options[iunique]).text(strBRTAcct);
+                            //    $(ddAccountAddr.options[iunique]).text(parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT BRT_ADDRESS1", "", i));
+                            //} // if
+
+                            iSelectIdx[iunique] = i;
+                            iSelectIdxAcct[iunique] = strUniqueText;
+                        }
+
+
                     }  //if
                 }  //if
             }  //for
 
             if (iunique == 1) {
-                $(ddPCAcctID.options[0]).text($(ddPCAcctID.options[1]).text());
-                $(ddPCAcctID.options[0]).attr("CODE", $(ddPCAcctID.options[1]).attr("CODE"));
-                ddPCAcctID.options.length = 1;
-                $(ddAccountAddr.options[0]).text($(ddAccountAddr.options[1]).innerText);
+                //$(ddPCAcctID.options[0]).text($(ddPCAcctID.options[1]).text());
+                //$(ddPCAcctID.options[0]).attr("CODE", $(ddPCAcctID.options[1]).attr("CODE"));
+                //ddPCAcctID.options.length = 1;
+                //$(ddAccountAddr.options[0]).text($(ddAccountAddr.options[1]).innerText);
 
                 LoadPCTaxYear();
                 ddPCTaxYear.focus();
             } else {
                 ddPCAcctID.options.length = iunique + 1; //EGOVWEB-106
-                if (ddPCAcctID.selectedIndex < '') {
+                if (ddPCAcctID.selectedIndex == '') {
 
                     LoadPCTaxYear();
                     ddPCTaxYear.focus();
@@ -537,20 +653,21 @@
                     ddPCTaxYear.focus();
                 } //if
             } //if
-          
-            if (strSelectType == '1' && curInd!= '1' ) { //Sudipta               
+
+            if (strSelectType == '1' && curInd != '1') { //Sudipta               
                 $('#btnNTL_print').css("display", "block");
                 $('#trNtlMessage').css("display", "block");
                 $('#trNtlMessage').css("visiblity", "visible");
-                $('#trNtlMessage td').css("width", "100%");               
+                $('#trNtlMessage td').css("width", "100%");
                 $('#tdPaNTL').css("display", "block");
                 $('#tdPaNTL').removeAttr("style");
                 $('#trNtlMessage').removeAttr("style");
-            } else {               
+            } else {
                 $('#btnNTL_print').css("display", "none");
-                $('#trNtlMessage').css("display", "none");               
+                $('#trNtlMessage').css("display", "none");
                 $('#tdPaNTL').css("display", "none");
             } 	//if
+            $("#ddPCAcctID option[CODE='']").remove();
         }   //loadPCAccountID
 
         function LoadPCTaxYear() {
@@ -569,148 +686,167 @@
 
 
             ddPCTaxYear.options.length = icount;
-           
+
             strAcctID = $(ddPCAcctID.options[ddPCAcctID.selectedIndex]).attr("CODE");
-            
-            if (strSelectType == '60') {
-                strBRTAcct = $(ddPCAcctID.options[ddPCAcctID.selectedIndex]).text();
-                strBRTAddr = $(ddAccountAddr.options[ddPCAcctID.selectedIndex]).text();
-            } // if
 
-            HoldDate = new Date(parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT START_DATE", "", iSelectIdx));
+            //if (strSelectType == '60') {
+            //    strBRTAcct = $(ddPCAcctID.options[ddPCAcctID.selectedIndex]).text();
+            //    strBRTAddr = $(ddAccountAddr.options[ddPCAcctID.selectedIndex]).text();
+            //} // if
 
-            iStartYear = HoldDate.getFullYear();
+            for (i = 0; i < iSelectIdx.length; i++) {
+                if (iSelectIdxAcct[i] == strAcctID) {
+                    HoldDate = new Date(parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT START_DATE", "", iSelectIdx[i]));
 
-            HoldDate = new Date(parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT END_DATE", "", iSelectIdx));
-            iEndYear = HoldDate.getFullYear();  // end of current year
+                    iStartYear = HoldDate.getFullYear();
+                    if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT END_DATE", "", iSelectIdx[i]) != 0) {
+                        HoldDate = new Date(parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT END_DATE", "", iSelectIdx[i]));
+                    }
+                    else
+                        HoldDate = new Date();
+                    iEndYear = HoldDate.getFullYear();
 
-            HoldDate = new Date();
-            //EHD - 01122009 - Task EHD100 - Remove estimate current year from the BPT tax
-            if (strSelectType == '24') {		//BPT
-                iCurrYear = HoldDate.getFullYear() - 1;
-            } else {
-                iCurrYear = HoldDate.getFullYear(); // end of current year
-            } 	//if
+                    //EHD - 01122009 - Task EHD100 - Remove estimate current year from the BPT tax
+                    if (strSelectType == '24') {		//BPT
+                        iCurrYear = HoldDate.getFullYear() - 1;
+                    } else {
+                        iCurrYear = HoldDate.getFullYear(); // end of current year
+                    } 	//if
 
 
-            if (iEndYear == 0) {
-                iEndYear = iCurrYear;  // end of current year
-            } //if
+                    if (iEndYear == 0) {
+                        iEndYear = iCurrYear;  // end of current year
+                    } //if
 
-            if (iEndYear == '') {
-                iEndYear = iCurrYear; // end of current year
-            } //if
+                    if (iEndYear == '') {
+                        iEndYear = iCurrYear; // end of current year
+                    } //if
 
-            if (iEndYear == 9999) {
-                iEndYear = iCurrYear;  // end of current year
-            } //if
+                    if (iEndYear == 9999) {
+                        iEndYear = iCurrYear;  // end of current year
+                    } //if
 
-            if (iEndYear > 1939) {
-                if (iEndYear < 2500) {
-                    iTaxYear = iEndYear;
-                } else {
-                    iEndYear = iCurrYear;  // end of current year
-                }  //  inner if
-            } else {
-                iEndYear = iCurrYear; // end of current year
-            }  // if
+                    if (iEndYear > 1939) {
+                        if (iEndYear < 2500) {
+                            iTaxYear = iEndYear;
+                        } else {
+                            iEndYear = iCurrYear;  // end of current year
+                        }  //  inner if
+                    } else {
+                        iEndYear = iCurrYear; // end of current year
+                    }  // if
 
-            iTaxYear = iEndYear
-        
-            for (i = 0; i < icount; i++) {
+                    iTaxYear = iEndYear
 
-                $(ddPCTaxYear.options[i]).text(iTaxYear);
-                $(ddPCTaxYear.options[i]).attr("CODE", iTaxYear);
-                iTaxYear = iTaxYear - 1
-                if (iTaxYear < iStartYear) {
-                    ddPCTaxYear.options.length = i + 1;
-                    break
-                } //if		
-            }  //for
-            //$('select[name^="ddPCTaxYear"]').eq(1).focus();
-            if ($('select option[code="2014"]') != [] && $(ddPCAcctType.options[ddPCAcctType.selectedIndex]).text() == "Business Income and Receipts Tax") {
-                $('select option[code="2014"]').prop('selected', true);
-            }
-            else if ($('select option[code="2014"]') != [] && $(ddPCAcctType.options[ddPCAcctType.selectedIndex]).text() == "Net Profits Tax") {
-                $('select option[code="2014"]').prop('selected', true);
-            }
-            ddPCTaxPeriod.focus();
+                    for (j = 0; j < icount; j++) {
 
-            LoadTaxPeriods();
-
-            if (iStartYear == iEndYear) {
-                ddPCTaxPeriod.focus();
-                LoadTaxPeriods();
-            }
-            else {
-                if (iEndYear == HoldDate.getFullYear()) {
+                        $(ddPCTaxYear.options[j]).text(iTaxYear);
+                        $(ddPCTaxYear.options[j]).attr("CODE", iTaxYear);
+                        iTaxYear = iTaxYear - 1
+                        if (iTaxYear < iStartYear) {
+                            ddPCTaxYear.options.length = j + 1;
+                            break
+                        } //if		
+                    }  //for
+                    //$('select[name^="ddPCTaxYear"]').eq(1).focus();
+                    if ($('select option[code="2014"]') != [] && $(ddPCAcctType.options[ddPCAcctType.selectedIndex]).text() == "Business Income and Receipts Tax") {
+                        $('select option[code="2014"]').prop('selected', true);
+                    }
+                    else if ($('select option[code="2014"]') != [] && $(ddPCAcctType.options[ddPCAcctType.selectedIndex]).text() == "Net Profits Tax") {
+                        $('select option[code="2014"]').prop('selected', true);
+                    }
                     ddPCTaxPeriod.focus();
+
                     LoadTaxPeriods();
+                    DisplayNTLbutton();
+
+                    if (iStartYear == iEndYear) {
+                        ddPCTaxPeriod.focus();
+                        LoadTaxPeriods();
+                        DisplayNTLbutton();
+                    }
+                    else {
+                        if (iEndYear == HoldDate.getFullYear()) {
+                            ddPCTaxPeriod.focus();
+                            LoadTaxPeriods();
+                            DisplayNTLbutton();
+                        }
+                        else {
+                            ddPCTaxYear.focus()
+                        } //if
+                    } //if	
+                    debugger;
+
+                    ($("#ddPCTaxYear option[code='2010']").length > 0)
+                    {
+                        $("#ddPCTaxYear option[code='2010']").remove();
+                    }
+                    ($("#ddPCTaxYear option[code='2011']").length > 0)
+                    {
+                        $("#ddPCTaxYear option[code='2011']").remove();
+                    }
+                    ($("#ddPCTaxYear option[code='2009']").length > 0)
+                    {
+                        $("#ddPCTaxYear option[code='2009']").remove();
+                    }
+                    ($("#ddPCTaxYear option[code='2008']").length > 0)
+                    {
+                        $("#ddPCTaxYear option[code='2008']").remove();
+                    }
+                    ($("#ddPCTaxYear option[code='2007']").length > 0)
+                    {
+                        $("#ddPCTaxYear option[code='2007']").remove();
+                    }
+                    ($("#ddPCTaxYear option[code='2006']").length > 0)
+                    {
+                        $("#ddPCTaxYear option[code='2006']").remove();
+                    }
+                    ($("#ddPCTaxYear option[code='2005']").length > 0)
+                    {
+                        $("#ddPCTaxYear option[code='2005']").remove();
+                    }
+                    ($("#ddPCTaxYear option[code='2004']").length > 0)
+                    {
+                        $("#ddPCTaxYear option[code='2004']").remove();
+                    }
+                    ($("#ddPCTaxYear option[code='2003']").length > 0)
+                    {
+                        $("#ddPCTaxYear option[code='2003']").remove();
+                    }
+                    ($("#ddPCTaxYear option[code='2002']").length > 0)
+                    {
+                        $("#ddPCTaxYear option[code='2002']").remove();
+                    }
+                    ($("#ddPCTaxYear option[code='2001']").length > 0)
+                    {
+                        $("#ddPCTaxYear option[code='2001']").remove();
+                    }
+                    ($("#ddPCTaxYear option[code='2000']").length > 0)
+                    {
+                        $("#ddPCTaxYear option[code='2000']").remove();
+                    }
+
                 }
-                else {
-                    ddPCTaxYear.focus()
-                } //if
-            } //if	
-            debugger;
-           
-            ($("#ddPCTaxYear option[code='2010']").length > 0)
-            {
-                $("#ddPCTaxYear option[code='2010']").remove();
             }
-            ($("#ddPCTaxYear option[code='2011']").length > 0)
-            {
-                $("#ddPCTaxYear option[code='2011']").remove();
-            }
-            ($("#ddPCTaxYear option[code='2009']").length > 0)
-            {
-                $("#ddPCTaxYear option[code='2009']").remove();
-            }
-            ($("#ddPCTaxYear option[code='2008']").length > 0)
-            {
-                $("#ddPCTaxYear option[code='2008']").remove();
-            }
-            ($("#ddPCTaxYear option[code='2007']").length > 0)
-            {
-                $("#ddPCTaxYear option[code='2007']").remove();
-            }
-            ($("#ddPCTaxYear option[code='2006']").length > 0)
-            {
-                $("#ddPCTaxYear option[code='2006']").remove();
-            }
-            ($("#ddPCTaxYear option[code='2005']").length > 0)
-            {
-                $("#ddPCTaxYear option[code='2005']").remove();
-            }
-            ($("#ddPCTaxYear option[code='2004']").length > 0)
-            {
-                $("#ddPCTaxYear option[code='2004']").remove();
-            }
-            ($("#ddPCTaxYear option[code='2003']").length > 0)
-            {
-                $("#ddPCTaxYear option[code='2003']").remove();
-            }
-            ($("#ddPCTaxYear option[code='2002']").length > 0)
-            {
-                $("#ddPCTaxYear option[code='2002']").remove();
-            }
-            ($("#ddPCTaxYear option[code='2001']").length > 0)
-            {
-                $("#ddPCTaxYear option[code='2001']").remove();
-            }
-            ($("#ddPCTaxYear option[code='2000']").length > 0)
-            {
-                $("#ddPCTaxYear option[code='2000']").remove();
-            }
+            // end of current year
+
+
+
         }   //LoadPCTaxYear
 
         function LoadTaxPeriods() {
-            ifreq = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT FREQUENCY_CODE", "", iSelectIdx);
+            debugger;
+            for (i = 0; i < iSelectIdx.length; i++) {
+                if (iSelectIdxAcct[i] == strAcctID) {
+                    ifreq = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "TAX_ACCT FREQUENCY_CODE", "", iSelectIdx[i]);
+                }
+            }
 
             //ValidatePrntCoupon();
 
             ddPCTaxPeriod.selectedIndex = 0;
             strTaxYear = $(ddPCTaxYear.options[ddPCTaxYear.selectedIndex]).attr("CODE");
-            var isLeap = new Date(strTaxYear, 1, 29).getDate() == 29;           
+            var isLeap = new Date(strTaxYear, 1, 29).getDate() == 29;
             switch (ifreq) {
                 case 'Y':
                     ddPCTaxPeriod.options.length = 0;
@@ -739,26 +875,26 @@
                         } else if (parseInt(strTaxYear) > 2016) {
                             ddPCTaxPeriod.options.length = 2
                             if (parseInt(strTaxYear) == 2017) {
-                                $(ddPCTaxPeriod.options[0]).text('1st Estimate');	
+                                $(ddPCTaxPeriod.options[0]).text('1st Estimate');
                                 $(ddPCTaxPeriod.options[0]).attr("CODE", '01');
                             }		//if
-                            $(ddPCTaxPeriod.options[1]).text('2nd Estimate');		
+                            $(ddPCTaxPeriod.options[1]).text('2nd Estimate');
                             $(ddPCTaxPeriod.options[1]).attr("CODE", '02');
                         }
                         else {
-                            ddPCTaxPeriod.options.length = 2	                      
+                            ddPCTaxPeriod.options.length = 2
                             $(ddPCTaxPeriod.options[0]).text('December 31');
                             $(ddPCTaxPeriod.options[0]).attr("CODE", '12');
                             $(ddPCTaxPeriod.options[1]).text('Extension');
                             $(ddPCTaxPeriod.options[1]).attr("CODE", '13');
                         }
                     }
-                    
+
                     if (ddPCTaxPeriod.options.length == 0) {
                         ddPCTaxPeriod.options.length = 1;
                         $(ddPCTaxPeriod.options[0]).text('December 31');
                         $(ddPCTaxPeriod.options[0]).attr("CODE", '12');
-                        btnPrint.focus();
+                        //btnPrint.focus();
                     } //if
                     break;
                 case 'H':
@@ -773,22 +909,22 @@
                     if (strSelectType == '1') {
                         ddPCTaxPeriod.options.length = 5;
                         //$(ddPCTaxPeriod.options[0]).text('March 31');
-                        $(ddPCTaxPeriod.options[0]).text('March 30');
+                        $(ddPCTaxPeriod.options[0]).text('March 31');
                         $(ddPCTaxPeriod.options[0]).attr("CODE", "92");
                         $(ddPCTaxPeriod.options[1]).text('June 30');
                         $(ddPCTaxPeriod.options[1]).attr("CODE", "93");
                         $(ddPCTaxPeriod.options[2]).text('September 30');
                         $(ddPCTaxPeriod.options[2]).attr("CODE", "94");
-                       
+
                         $(ddPCTaxPeriod.options[3]).text('December 31');
                         $(ddPCTaxPeriod.options[3]).attr("CODE", "95");
-                        $(ddPCTaxPeriod.options[4]).text('Reconcile');
+                        $(ddPCTaxPeriod.options[4]).text('Reconciliation Payment');
                         $(ddPCTaxPeriod.options[4]).attr("CODE", "96");
                     } //if
                     if (strSelectType == '2') {
                         ddPCTaxPeriod.options.length = 5;
                         //$(ddPCTaxPeriod.options[0]).text('March 31');
-                        $(ddPCTaxPeriod.options[0]).text('March 30');
+                        $(ddPCTaxPeriod.options[0]).text('March 31');
                         $(ddPCTaxPeriod.options[0]).attr("CODE", "1");
                         $(ddPCTaxPeriod.options[1]).text('June 30');
                         $(ddPCTaxPeriod.options[1]).attr("CODE", "2");
@@ -796,13 +932,13 @@
                         $(ddPCTaxPeriod.options[2]).attr("CODE", "3");
                         $(ddPCTaxPeriod.options[3]).text('December 31');
                         $(ddPCTaxPeriod.options[3]).attr("CODE", "4");
-                        $(ddPCTaxPeriod.options[4]).text('Reconcile');
+                        $(ddPCTaxPeriod.options[4]).text('Reconciliation Payment');
                         $(ddPCTaxPeriod.options[4]).attr("CODE", "5");
                     } //if
                     if (strSelectType == '84' || strSelectType == '85') {
                         ddPCTaxPeriod.options.length = 4;
                         //$(ddPCTaxPeriod.options[0]).text('March 31');
-                        $(ddPCTaxPeriod.options[0]).text('March 30');
+                        $(ddPCTaxPeriod.options[0]).text('March 31');
                         $(ddPCTaxPeriod.options[0]).attr("CODE", "21");
                         $(ddPCTaxPeriod.options[1]).text('June 30');
                         $(ddPCTaxPeriod.options[1]).attr("CODE", "22");
@@ -819,11 +955,11 @@
                     //if (isLeap) {
                     //    $(ddPCTaxPeriod.options[1]).text('February 29');
                     //} else {
-                        $(ddPCTaxPeriod.options[1]).text('February 28');
+                    $(ddPCTaxPeriod.options[1]).text('February 28');
                     //} 	//if
                     $(ddPCTaxPeriod.options[1]).attr("CODE", "2");
                     //$(ddPCTaxPeriod.options[2]).text('March 31');
-                    $(ddPCTaxPeriod.options[2]).text('March 30');
+                    $(ddPCTaxPeriod.options[2]).text('March 31');
                     $(ddPCTaxPeriod.options[2]).attr("CODE", "3");
                     $(ddPCTaxPeriod.options[3]).text('April 30');
                     $(ddPCTaxPeriod.options[3]).attr("CODE", "4");
@@ -848,7 +984,7 @@
 					strSelectType == '23' || strSelectType == '28' || strSelectType == '58' ||
 					strSelectType == '76') {
                         ddPCTaxPeriod.options.length = 13;
-                        $(ddPCTaxPeriod.options[12]).text('Reconcile');
+                        $(ddPCTaxPeriod.options[12]).text('Reconciliation Payment');
 
                         $(ddPCTaxPeriod.options[12]).attr("CODE", "13");
                     } //if
@@ -867,7 +1003,7 @@
                         $(ddPCTaxPeriod.options[11]).attr("CODE", "90");
                         //EGOVWEB-61
                         ddPCTaxPeriod.options.length = 13;
-                        $(ddPCTaxPeriod.options[12]).text('Reconcile');
+                        $(ddPCTaxPeriod.options[12]).text('Reconciliation Payment');
                         $(ddPCTaxPeriod.options[12]).attr("CODE", "91");
                     } //if
                     break;
@@ -884,13 +1020,13 @@
                     //    $(ddPCTaxPeriod.options[3]).text('February 29');
                     //} else {
 
-                        $(ddPCTaxPeriod.options[3]).text('February 28');
+                    $(ddPCTaxPeriod.options[3]).text('February 28');
                     //} 	//if
                     $(ddPCTaxPeriod.options[3]).attr("CODE", "57");
                     $(ddPCTaxPeriod.options[4]).text('March 15');
                     $(ddPCTaxPeriod.options[4]).attr("CODE", "58");
                     //$(ddPCTaxPeriod.options[5]).text('March 31');
-                    $(ddPCTaxPeriod.options[5]).text('March 30');
+                    $(ddPCTaxPeriod.options[5]).text('March 31');
                     $(ddPCTaxPeriod.options[5]).attr("CODE", "59");
                     $(ddPCTaxPeriod.options[6]).text('April 15');
                     $(ddPCTaxPeriod.options[6]).attr("CODE", "60");
@@ -921,23 +1057,23 @@
                     $(ddPCTaxPeriod.options[19]).text('October 31');
                     $(ddPCTaxPeriod.options[19]).attr("CODE", "73");
                     $(ddPCTaxPeriod.options[20]).text('November 15');
-                    $(ddPCTaxPeriod.options[20]).attr("CODE") = '74';
+                    $(ddPCTaxPeriod.options[20]).attr("CODE", '74');
                     $(ddPCTaxPeriod.options[21]).text('November 30');
                     $(ddPCTaxPeriod.options[21]).attr("CODE", "75");
                     $(ddPCTaxPeriod.options[22]).text('December	15');
                     $(ddPCTaxPeriod.options[22]).attr("CODE", "76");
-                  
+
                     $(ddPCTaxPeriod.options[23]).text('December 31');
                     $(ddPCTaxPeriod.options[23]).attr("CODE", "77");
-                   
-                    $(ddPCTaxPeriod.options[24]).text('Reconcile');
+
+                    $(ddPCTaxPeriod.options[24]).text('Reconciliation Payment');
                     $(ddPCTaxPeriod.options[24]).attr("CODE", "78");
                     break
                 case 'W':
                     var DayToBeDisplayed = 6; //1 = Monday
                     var i = 0;
                     var j = 0;
-                  
+
                     var WagDate = new Date(strTaxYear, 0, 1);
 
                     var DayCalc = WagDate.getDay();
@@ -945,7 +1081,7 @@
                     var WagDate = new Date(WagDate.getFullYear(), WagDate.getMonth(), DayCalc);
 
                     ddPCTaxPeriod.options.length = 0;
-                   
+
                     if (WagDate.getFullYear() == '2011') {
                         WagDate = new Date('01/08/2011');
                         ddPCTaxPeriod.options.length = 53;
@@ -973,14 +1109,14 @@
                             temp = new Date(WagDate.getFullYear(), WagDate.getMonth(), WagDate.getDate() + i);
                         } 	//While
                     } 	//if
-                   
+
                     if (ddPCTaxPeriod.options.length == 54 && j == 53) {
                         $(ddPCTaxPeriod.options[53]).text('12/31/' + strTaxYear);
                     } else if (j == 53 || j == 52) {
                         $(ddPCTaxPeriod.options[52]).text('12/31/' + strTaxYear);
                     } 	//if
                     ddPCTaxPeriod.options.length = ddPCTaxPeriod.options.length + 1;
-                    $(ddPCTaxPeriod.options[ddPCTaxPeriod.length - 1]).text('Reconcile');
+                    $(ddPCTaxPeriod.options[ddPCTaxPeriod.length - 1]).text('Reconciliation Payment');
                     $(ddPCTaxPeriod.options[ddPCTaxPeriod.length - 1]).attr("CODE", "53");
                     break;
             } 	//switch
@@ -990,7 +1126,7 @@
 
 
         function SetupPassFields() {
-           
+
             var strPayPeriod = $(ddPCTaxPeriod.options[ddPCTaxPeriod.selectedIndex]).attr("CODE");
             strAccountName = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "ENTITY_INFO NAME", "");
             strAccountAddr = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "ENTITY_INFO ADDRESS1", "");
@@ -1172,7 +1308,7 @@
                 iTotal = 10 - parseInt(iTotal.toString().substr(parseInt(iTotal.toString().length) - 1, 1));
             } 	//if
 
-            strScanLine = strScanLine + iTotal;          
+            strScanLine = strScanLine + iTotal;
 
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, strSelectType, "COUPON_FORM CPN_ACCOUNT_TYPE", "");
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, strAcctID, "COUPON_FORM CPN_ACCOUNT", "");
@@ -1184,7 +1320,7 @@
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, strAccountCity, "COUPON_FORM CPN_CITY", "");
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, strAccountState, "COUPON_FORM CPN_STATE", "");
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, strAccountZip, "COUPON_FORM CPN_ZIP_CODE", "");
-           
+
 
 
         } 	//SetupPassFields
@@ -1250,31 +1386,42 @@
                 } 	//if
             } 	//if
             lsPeriod = $(ddPCTaxYear.options[ddPCTaxYear.selectedIndex]).text() + lsPeriod;
-            //EGOVWEB-61 EDD 2011.02.04 Last week payment must be 12/31/ccyy per Nancy Needs to go MF as 30
-            if (lsPeriod.substr(4) == '1231' && strSelectType == '1') {
-                lsPeriod = lsPeriod.replace('1231', '1230');               
-            } 	//if
+            ////EGOVWEB-61 EDD 2011.02.04 Last week payment must be 12/31/ccyy per Nancy Needs to go MF as 30
+            //if (lsPeriod.substr(4) == '1231' && strSelectType == '1') {
+            //    lsPeriod = lsPeriod.replace('1231', '1230');               
+            //} 	//if//Changed by SumanG on 26.07.18
 
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, $(ddPCAcctID.options[ddPCAcctID.selectedIndex]).text(), "WAGE_NTL ACCOUNT_ID", "");
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, lsPeriod, "WAGE_NTL PERIOD", "");
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, ifreq, "WAGE_NTL FREQUENCY_CODE", "");
-            
+
             parent.setFrameUrl('PayCoupon/NTL_Initial')
         } 	//NTLPrntCoupon
 
         function CnclPrntCoupon() {
             debugger;
             if ((curInd == '2' || curInd == '') && parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'LOGIN_FROM NTL_ONLY', '', 0) == 'TRUE') {
-                $('#AppError').text("");
-                parent.bLoadCoupon = false;
-                parent.NTL = true;
-                
-                parent.setFrameUrl('Login/MainAsp');
+                if (parent.document.getElementById("ancLogin").style.display == "block") {
+                    $('#AppError').text("");
+                    parent.bLoadCoupon = false;
+                    parent.NTL = true;
+                    parent.setFrameUrl('Acct/ApplyMain');
+
+                }
+                else {
+                    $('#AppError').text("");
+                    parent.bLoadCoupon = false;
+                    parent.NTL = true;
+
+                    parent.setFrameUrl('Login/MainAsp');
+                }
             }
             else {
                 parent.Cancelform = true;
                 $('#AppError').text("");
                 parent.setFrameUrl('Login/MainAsp');
+                parent.fillUserAfterLogin(false);
+                parent.ShowAllMenu();
             }
 
         }  // CnclPrntCoupon
@@ -1302,7 +1449,7 @@
             debugger;
 
             var strAcctType = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "COUPON_FORM CPN_ACCOUNT_TYPE", "");
-           
+
             var strAccountAddr = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "COUPON_FORM CPN_ADDR", "");
             var strAccountAddr2 = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "COUPON_FORM CPN_ADDR2", "");
             var strAccountAddr3 = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "COUPON_FORM CPN_ADDR3", "");
@@ -1314,10 +1461,10 @@
                     PopulateAccount("Wage", "204");
                     break;
                 case "02":		//'"ERN"
-                    PopulateAccount("Earnings","201");
+                    PopulateAccount("Earnings", "201");
                     break;
                 case "03":		//'"NPT"
-                    PopulateAccount("Net Profits","203");
+                    PopulateAccount("Net Profits", "203");
                     break;
                 case "06":		//'"AMU"
                     PopulateAccount("Amusement", "205");
@@ -1326,46 +1473,46 @@
                     PopulateAccount("Parking", "206");
                     break;
                 case "09":		//'"COI"
-                    PopulateAccount("Coin Operated","2099");
+                    PopulateAccount("Coin Operated", "2099");
                     break;
                 case "11":		//'"POL"
-                    PopulateAccount("Police","2099");
+                    PopulateAccount("Police", "2099");
                     break;
                 case "14":		//'"VRT"
-                    PopulateAccount("Vehicle Rental","208");
+                    PopulateAccount("Vehicle Rental", "208");
                     break;
                 case "18":		//'"RTT"
                     PopulateAccount("Realty Transfer", "2099");
                     break;
                 case "23":		//'"HOT"
-                    PopulateAccount("Hotel","211");
+                    PopulateAccount("Hotel", "211");
                     break;
                 case "24":		//'"BPT"
-                    PopulateAccount("Business Income and Receipts","202");
+                    PopulateAccount("BusinessIncomeandReceipts", "202");
                     break;
                 case "27":		//'"TOB"
                     PopulateAccount("Tobacco", "2099");
                     break;
                 case "28":		//'"LIQ"
-                    PopulateAccount("Liquor","212");
+                    PopulateAccount("Liquor", "212");
                     break;
                 case "29":		//'"SIT"
-                    PopulateAccount("School Income Tax","210");
+                    PopulateAccount("School Income Tax", "210");
                     break;
                 case "58":		//'"VPT"
-                    PopulateAccount("Valet Parking","207");
+                    PopulateAccount("Valet Parking", "207");
                     break;
                 case "60":		//'"REA"
                     PopulateAccount("Real Estate", "213");
                     break;
                 case "76":		//'"OAT"
-                    PopulateAccount("Outdoor Advertizing","209");
+                    PopulateAccount("Outdoor Advertizing", "209");
                     break;
                 case "84":		//'"UOL"
-                    PopulateAccount("U&O - Landlord","2099");
+                    PopulateAccount("U&O - Landlord", "2099");
                     break;
                 case "85":		//'"UOL"
-                    PopulateAccount("U&O - Tenant","2099");
+                    PopulateAccount("U&O - Tenant", "2099");
                     break;
                 case "90":		//'"ASM"
                     PopulateAccount("Assessment Screen", "2099");
@@ -1380,19 +1527,19 @@
                     PopulateAccount("General", "2099");
                     break;
                 case "99":		//'"GN3"
-                    PopulateAccount("Entity Level Charges","2099");
+                    PopulateAccount("Entity Level Charges", "2099");
                     break;
 
                 default:
                     break;
             }
-            
+
             generate(strFormId + strScanLine);
-                        
-            var tempParameters = 'a=' + strAcctID + '&b=' + strAccountName + '&c=' + strCouponAddr + '&d=' +strScanLine + '&e=' + strPeriod + '&f=' + strSelectType + '&h=' + '../Uploads/' + strForm + "_" + strAcctID + '.png' + '&i=' + 'T' + '&g=' + strAccountAddr + '|' + strAccountAddr2 + '|' + strAccountAddr3 + '|' + strAccountCity + '|' + strAccountState + '|' + strAccountZip;
+            debugger;
+            var tempParameters = 'a=' + strAcctID + '&b=' + strAccountName + '&c=' + strCouponAddr + '&d=' + strScanLine + '&e=' + strPeriod + '&f=' + strSelectType + '&h=' + '../Uploads/' + strForm + "_" + strAcctID + '.png' + '&i=' + 'T' + '&g=' + strAccountAddr + '|' + strAccountAddr2 + '|' + strAccountAddr3 + '|' + strAccountCity + '|' + strAccountState + '|' + strAccountZip;
             tempParameters = tempParameters.replace(/#/g, '~LBSIGN~');
-            
-           
+
+
             if (navigator.userAgent.indexOf("Firefox") > 0) {
                 parent.setFrameUrl('PayCoupon/PDFCouponCreate_Firefox?y=' + tempParameters);
             }
@@ -1405,14 +1552,15 @@
 
         } 	//SubmitPrntCoupon
 
-        function PopulateAccount(formname,id) {
+        function PopulateAccount(formname, id) {
             strForm = formname;
             strFormId = id;
         }
 
         //EGOVWEB-61
-        function DisplayNTLbutton() {            
+        function DisplayNTLbutton() {
             //btnPaNTL.disabled = false;
+            debugger;
             if ($(ddPCTaxPeriod.options[ddPCTaxPeriod.selectedIndex]).text().toUpperCase() == 'RECONCILE' && $(ddPCAcctType.options[ddPCAcctType.selectedIndex]).text().toUpperCase() == 'WAGE TAX') {
                 $('#btnNTL_print').css("display", "none");
                 $('#trNtlMessage').css("display", "none");
@@ -1432,16 +1580,16 @@
         function DoPayment() {
             ValidateCoupPIN();
             var sPaymentAmount;
-           
+
             sPaymentAmount = $("#txtElec_pay_amt").val();
 
-           
-                	//if
+
+            //if
             //$('#txtPaymentAmount').attr('class', 'inpNormal');
             DoCreditCardCall();
         } 	//DoPaymen
 
-      
+
 
         function DoCreditCardCall() {
             //
@@ -1469,10 +1617,10 @@
             var sAcctPeriodCode = $(ddPCTaxPeriod.options[ddPCTaxPeriod.selectedIndex]).attr("CODE")
             var sAcctYearCode = $(ddPCTaxYear.options[ddPCTaxYear.selectedIndex]).attr("CODE")
             //
-           
+
             var sAddress1 = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "ENTITY_INFO ADDRESS1", "");
-            
-            
+
+
             var sAddress2 = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'ENTITY_INFO ADDRESS2', '', 0)
             var sAddress3 = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'ENTITY_INFO ADDRESS3', '', 0)
             if (sAddress2 !== '') {
@@ -1481,21 +1629,21 @@
             if (sAddress3 !== '') {
                 sAddress1 = sAddress1 + ', ' + sAddress3
             }
-           
+
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, sAcctNumberCode, 'AccountNumber', '', 0);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, sAcctNumberCode, 'BillNumber', '', 0);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, '', 'StatementNumber', '', 0);
 
-            
+
 
             var aPeriodDateParts;
             var sPeriodMonth;
             var sPeriodDate;
-          
+
             if (ifreq == 'W') {
                 aPeriodDateParts = $(ddPCTaxPeriod.options[ddPCTaxPeriod.selectedIndex]).text().split('/');
                 sPeriodMonth = aPeriodDateParts[0].length == 1 ? '0' + aPeriodDateParts[0] : aPeriodDateParts[0];
-                sPeriodDate = aPeriodDateParts[1].length == 1 ? '0' + aPeriodDateParts[1] : aPeriodDateParts[1];               
+                sPeriodDate = aPeriodDateParts[1].length == 1 ? '0' + aPeriodDateParts[1] : aPeriodDateParts[1];
             } else {
                 var arrMonthValues = new Array();
                 arrMonthValues['January'] = '01';
@@ -1515,7 +1663,7 @@
                 sTaxPeriodText = sTaxPeriodText.replace('1st Estimated - ', '');
                 sTaxPeriodText = sTaxPeriodText.replace('2nd Estimated - ', '');
                 sTaxPeriodText = sTaxPeriodText.replace('Extension - ', '');
-                sTaxPeriodText = sTaxPeriodText.replace('Reconcile', 'December 31');
+                sTaxPeriodText = sTaxPeriodText.replace('Reconciliation Payment', 'December 31');
                 if (sTaxPeriodText.indexOf(' to June 30 ') > -1) {
                     sTaxPeriodText = 'June 30';
                     strTaxYear = parseInt(strTaxYear) + 1;
@@ -1523,24 +1671,30 @@
 
                 aPeriodDateParts = sTaxPeriodText.split(' ');
                 sPeriodMonth = arrMonthValues[aPeriodDateParts[0]];
-                sPeriodDate = aPeriodDateParts[1].length == 1 ? '0' + aPeriodDateParts[1] : aPeriodDateParts[1];
-               
+                if (sPeriodMonth != null) {
+                    sPeriodDate = aPeriodDateParts[1].length == 1 ? '0' + aPeriodDateParts[1] : aPeriodDateParts[1];
+                }
+                else {
+                    sPeriodMonth = sMonth;
+                    sPeriodDate = sDate;
+                }
+
             }
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, strTaxYear + '-' + sPeriodMonth + '-' + sPeriodDate, 'BillingDate', '', 0);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, strTaxYear + '-' + sPeriodMonth + '-' + sPeriodDate, 'DueDate', '', 0);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, '123', 'DepartMentId', '', 0);	//DOR
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, sToday.getFullYear() + '-' + sMonth + '-' + sDate, 'PaymentDate', '', 0);
-           
+
 
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, '<![CDATA[' + parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'ENTITY_INFO NAME', '', 0) + ']]>', 'Customers Customer FirstName', '', 0)
-           
-           
+
+
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, sAddress1, 'Customers Customer BillingAddress Address AddressLine1', '', 0)
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'ENTITY_INFO CITY', '', 0), 'Customers Customer BillingAddress Address City', '', 0)
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'ENTITY_INFO STATE', '', 0), 'Customers Customer BillingAddress Address State', '', 0)
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'ENTITY_INFO ZIP_CODE', '', 0), 'Customers Customer BillingAddress Address PostalCode', '', 0);
 
-            parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, '', 'Customers Customer PhoneNumber', '', 0)           
+            parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, '', 'Customers Customer PhoneNumber', '', 0)
             debugger;
             var arrEpayValues = new Array();
             //'<%= COPSession.CC_Wage_ePay_ID %>'
@@ -1558,23 +1712,36 @@
             arrEpayValues['14'] = '<%= COPSession.CC_Rental_ePay_ID %>'; //Added by SumanG for Vehical Rental tax type
             arrEpayValues['28'] = '<%= COPSession.CC_Liquor_ePay_ID %>'; //Added by SumanG for Liquor tax type
             arrEpayValues['58'] = '<%= COPSession.CC_Valet_ePay_ID %>'; //Added by SumanG for Valet Parking tax type
-            arrEpayValues['76'] = '<%= COPSession.CC_Outdoor_ePay_ID %>';//Added by SumanG for Outdoor Advertising tax type 
+            arrEpayValues['76'] = '<%= COPSession.CC_Outdoor_ePay_ID %>';//Added by SumanG for Outdoor Advertising tax type
+
+            // arrEpayValues['12'] =   //Added by SumanG for Small Commercial Establishment 
 
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, arrEpayValues[sAcctTypeCode], 'ApplicationID', '', 0)
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, strSelectType.length == 1 ? '0' + strSelectType : strSelectType, 'OtherAttributes Attribute Value', '', 0) //TaxType
             var sPeriodCode = $(ddPCTaxPeriod.options[ddPCTaxPeriod.selectedIndex]).attr("CODE")
+            //if (sPeriodCode.length == 1) {
+            //    sPeriodCode = '0' + sPeriodCode;
+            //}
+            //else
+            //    sPeriodCode = sPeriodCode;
+            //if (sAcctTypeCode == '1') {
+            //    parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, sPeriodCode + $(ddPCTaxYear.options[ddPCTaxYear.selectedIndex]).attr("CODE").substr(2, 2), 'OtherAttributes Attribute Value', '', 2)	//TaxYear
+            //}
+            //else
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, sPeriodCode.length == 1 ? '0' + sPeriodCode : sPeriodCode, 'OtherAttributes Attribute Value', '', 1)	//TaxPeriod
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, $(ddPCTaxYear.options[ddPCTaxYear.selectedIndex]).attr("CODE").substr(2, 2), 'OtherAttributes Attribute Value', '', 2)	//TaxYear
 
-                     
+
             var sAmount = $("#txtElec_pay_amt").val();
+
+            if (sAmount.indexOf('$') > -1) { sAmount = sAmount.replace('$', ''); }
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, sAmount, 'ItemAmount', '', 0)
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, sAmount, 'TotalDue', '', 0)
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, sAmount, 'TotalAmountdue', '', 0)
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, '<![CDATA[' + GetCreditCardDescription(strSelectType) + ']]>', 'Details BillingStatementDetail ItemDescription', '', 0)
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, sAmount, 'Details BillingStatementDetail Charges', '', 0)
 
-          
+
             var encodeCCXML = parent.$g.xmlCC.toString();
             var ReqXML = encodeCCXML;
             encodeCCXML = encodeCCXML.replace(/</g, '&lt;')
@@ -1583,7 +1750,7 @@
             encodeCCXML = encodeCCXML.replace(/\t/g, '')
             encodeCCXML = encodeCCXML.replace(/\r\n/g, '')
             debugger;
-            
+
             $.ajax({
                 type: 'POST',
                 url: '../Returns/Log',
@@ -1594,17 +1761,17 @@
 
                 }
             });
-           
+
             if (parent.gEnvironment == 'U') {
                 clipboardData.setData('Text', xmlCC.xml);
             }		//if
 
-          
-          frmePay.action = '<%= COPSession.CC_SiteName %>';
-          frmePay.BillStmt.value = encodeCCXML;
-		  frmePay.submit();
-		  
-          
+
+            frmePay.action = '<%= COPSession.CC_SiteName %>';
+            frmePay.BillStmt.value = encodeCCXML;
+            frmePay.submit();
+
+
 
         } 	//DoCreditCardCall
 
@@ -1639,9 +1806,9 @@
             LoadPymtError();
             debugger;
             //var pinerror = ispSetInputErr(arrCoupPINErr);
-           
+
             //$('#AppError_Payment').text(pinerror);
-            
+
             resolvedIframeheight();
             parent.ScrollTop(1);
         } 	//ValidateCoupPIN 

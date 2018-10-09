@@ -11,10 +11,10 @@ using System.Xml;
 namespace CopRevenueGov2.Helpers
 {
     public class RTTIE028 : CopRestServiceBase, ICopSoapService
-    {        
+    {
         public static void Init()
         {
-           
+
         }
 
         public static string CallService(string Request)
@@ -70,31 +70,31 @@ namespace CopRevenueGov2.Helpers
             switch (e.TOBACCO_INFO.RETURN_STATUS)
             {
                 case "INQ": // fill
-                    e = __RTTIE028_F_I(e);                   
+                    e = __RTTIE028_F_I(e);
                     break;
                 case null: // submit
                     e = __RTTIE028_F_U(e);
                     break;
 
                 default:
-                     e.TOBACCO_INFO.RETURN_STATUS = "INQ";
-                     e = __RTTIE028_F_I(e);                   
+                    e.TOBACCO_INFO.RETURN_STATUS = "INQ";
+                    e = __RTTIE028_F_I(e);
                     break;
             }
             return e;
         }
-       
-       
+
+
 
         private static COPXmlFactory.RTTIE028.TOBACCORETURN __RTTIE028_F_I(COPXmlFactory.RTTIE028.TOBACCORETURN e)
-        {          
+        {
 
-            TOBACCO_RTTIE028_SrvRef.RT01E028_ETOB _ETOB = new TOBACCO_RTTIE028_SrvRef.RT01E028_ETOB();
-            TOBACCO_RTTIE028_SrvRef.RT01E028 serv_req = new TOBACCO_RTTIE028_SrvRef.RT01E028();
-            TOBACCO_RTTIE028_SrvRef.RT01E028Response_SMA _SMAResponse = new TOBACCO_RTTIE028_SrvRef.RT01E028Response_SMA();
-            TOBACCO_RTTIE028_SrvRef.RT01E028Response_ETOB _ETOBResponse = new TOBACCO_RTTIE028_SrvRef.RT01E028Response_ETOB();
-            TOBACCO_RTTIE028_SrvRef.RT01E028Response_EAMT _EAMTResponse = new TOBACCO_RTTIE028_SrvRef.RT01E028Response_EAMT();
-           
+            TOBACCO_RTTIE028_SrvRef.TT028E00_ETOB _ETOB = new TOBACCO_RTTIE028_SrvRef.TT028E00_ETOB();
+            TOBACCO_RTTIE028_SrvRef.TT028E00 serv_req = new TOBACCO_RTTIE028_SrvRef.TT028E00();
+            TOBACCO_RTTIE028_SrvRef.TT028E00Response_SMA _SMAResponse = new TOBACCO_RTTIE028_SrvRef.TT028E00Response_SMA();
+            TOBACCO_RTTIE028_SrvRef.TT028E00Response_ETOB _ETOBResponse = new TOBACCO_RTTIE028_SrvRef.TT028E00Response_ETOB();
+            TOBACCO_RTTIE028_SrvRef.TT028E00Response_EAMT _EAMTResponse = new TOBACCO_RTTIE028_SrvRef.TT028E00Response_EAMT();
+
 
 
 
@@ -103,11 +103,11 @@ namespace CopRevenueGov2.Helpers
             _ETOB.RETURNSTATUS = e.TOBACCO_INFO.RETURN_STATUS;
 
 
-            _SMAResponse = serv_req.CallRT01E028
-                                            (new TOBACCO_RTTIE028_SrvRef.RT01E028_SMA(), _ETOB,
-                                              new TOBACCO_RTTIE028_SrvRef.RT01E028_EAMT(),
+            _SMAResponse = serv_req.CallTT028E00
+                                            (new TOBACCO_RTTIE028_SrvRef.TT028E00_SMA(), _ETOB,
+                                              new TOBACCO_RTTIE028_SrvRef.TT028E00_EAMT(),
                                               out _ETOBResponse,
-                                              out _EAMTResponse                                             
+                                              out _EAMTResponse
                                             );
 
 
@@ -118,13 +118,13 @@ namespace CopRevenueGov2.Helpers
             return e;
         }
 
-        private static COPXmlFactory.RTTIE028.TOBACCORETURN __Fill(TOBACCO_RTTIE028_SrvRef.RT01E028Response_SMA _SMA,TOBACCO_RTTIE028_SrvRef.RT01E028Response_ETOB _ETOB,TOBACCO_RTTIE028_SrvRef.RT01E028Response_EAMT _EAMT)
+        private static COPXmlFactory.RTTIE028.TOBACCORETURN __Fill(TOBACCO_RTTIE028_SrvRef.TT028E00Response_SMA _SMA, TOBACCO_RTTIE028_SrvRef.TT028E00Response_ETOB _ETOB, TOBACCO_RTTIE028_SrvRef.TT028E00Response_EAMT _EAMT)
         {
             COPXmlFactory.RTTIE028.TOBACCORETURN fobj = RevenueGovXMLFactory.GetTOBACCORETURN();
 
             //LOAD ERRORS INTO OBJECT
             fobj.ERROR_INFO = new ERROR_INFO();
-            if (fobj.ERROR_INFO.LENGTH != null)
+            if (_SMA != null)
             {
                 fobj.ERROR_INFO.PROGRAM = _SMA._PROGRAM;
                 fobj.ERROR_INFO.LINE = _SMA.ERRORLINE.ToString();
@@ -132,71 +132,71 @@ namespace CopRevenueGov2.Helpers
                 fobj.ERROR_INFO.ERROR = _SMA.SYSTEMERROR.ToString();
             }
             //LOAD TOBACCO_INFO 
-            fobj.TOBACCO_INFO= new TOBACCO_INFO();
-            
-                fobj.TOBACCO_INFO.ACCOUNT_ID = _ETOB.ACCOUNTID;
-                fobj.TOBACCO_INFO.PERIOD = CopMvcUtil.ConvDate(_ETOB.PERIODX);
-                fobj.TOBACCO_INFO.VERSION = _ETOB.VERSIONX;
-                fobj.TOBACCO_INFO.RETURN_STATUS = _ETOB.RETURNSTATUS;
-                fobj.TOBACCO_INFO.LAST_UPD_DATE = CopMvcUtil.ConvDate(_ETOB.LASTUPDATEDATEX);
-                fobj.TOBACCO_INFO.USER_ID = _ETOB.USERID;
-                fobj.TOBACCO_INFO.RECORDING_DATE = CopMvcUtil.ConvDate(_ETOB.RECORDINGDATEX);
-                fobj.TOBACCO_INFO.SEQUENCE = _ETOB.SEQUENCENUM;
-                fobj.TOBACCO_INFO.ADJUSTMENT_REF_NO = _ETOB.ADJUSTMENTREFERENCENUM;
-                fobj.TOBACCO_INFO.RATE_ITEM = CopMvcUtil.ConvDigitToDouble9(_ETOB.RATEITEM);
-                fobj.TOBACCO_INFO.RATE_PACK = CopMvcUtil.ConvDigitToDouble9(_ETOB.RATEPACK);
-                fobj.TOBACCO_INFO.RATE_PAPER = CopMvcUtil.ConvDigitToDouble9(_ETOB.RATEPAPER);
-                fobj.TOBACCO_INFO.PREPARER_NAME = _ETOB.PREPARERNAME;
-                fobj.TOBACCO_INFO.PREPARER_PHONE = Convert.ToString(_ETOB.PREPARERPHONE);
-                fobj.TOBACCO_INFO.PREPARER_PHONE_EXT = _ETOB.PREPARERPHONEEXT;
-                fobj.TOBACCO_INFO.PREPARER_IP_ADDRESS = _ETOB.PREPARERIPADDRESS;
-                fobj.TOBACCO_INFO.PREPARER_EMAIL_ADDRESS = _ETOB.PREPAREREMAILADDRESS;
-                fobj.TOBACCO_INFO.PREPARER_WHO = _ETOB.PREPARERTYPE;
-            
-        
+            fobj.TOBACCO_INFO = new TOBACCO_INFO();
+
+            fobj.TOBACCO_INFO.ACCOUNT_ID = _ETOB.ACCOUNTID;
+            fobj.TOBACCO_INFO.PERIOD = CopMvcUtil.ConvDate(_ETOB.PERIODX);
+            fobj.TOBACCO_INFO.VERSION = _ETOB.VERSIONX;
+            fobj.TOBACCO_INFO.RETURN_STATUS = _ETOB.RETURNSTATUS;
+            fobj.TOBACCO_INFO.LAST_UPD_DATE = CopMvcUtil.ConvDate(_ETOB.LASTUPDATEDATEX);
+            fobj.TOBACCO_INFO.USER_ID = _ETOB.USERID;
+            fobj.TOBACCO_INFO.RECORDING_DATE = CopMvcUtil.ConvDate(_ETOB.RECORDINGDATEX);
+            fobj.TOBACCO_INFO.SEQUENCE = _ETOB.SEQUENCENUM;
+            fobj.TOBACCO_INFO.ADJUSTMENT_REF_NO = _ETOB.ADJUSTMENTREFERENCENUM;
+            fobj.TOBACCO_INFO.RATE_ITEM = CopMvcUtil.ConvDigitToDouble9(_ETOB.RATEITEM);
+            fobj.TOBACCO_INFO.RATE_PACK = CopMvcUtil.ConvDigitToDouble9(_ETOB.RATEPACK);
+            fobj.TOBACCO_INFO.RATE_PAPER = CopMvcUtil.ConvDigitToDouble9(_ETOB.RATEPAPER);
+            fobj.TOBACCO_INFO.PREPARER_NAME = _ETOB.PREPARERNAME;
+            fobj.TOBACCO_INFO.PREPARER_PHONE = Convert.ToString(_ETOB.PREPARERPHONE);
+            fobj.TOBACCO_INFO.PREPARER_PHONE_EXT = _ETOB.PREPARERPHONEEXT;
+            fobj.TOBACCO_INFO.PREPARER_IP_ADDRESS = _ETOB.PREPARERIPADDRESS;
+            fobj.TOBACCO_INFO.PREPARER_EMAIL_ADDRESS = _ETOB.PREPAREREMAILADDRESS;
+            fobj.TOBACCO_INFO.PREPARER_WHO = _ETOB.PREPARERTYPE;
+
+
 
             //LOAD AMT_INFO 
             fobj.AMT_INFO = new AMT_INFO();
-           
-                fobj.AMT_INFO.ITEM_TOTAL = CopMvcUtil.GetDouble(_EAMT.ITEMTOTALX).ToString();
-                fobj.AMT_INFO.ITEM_NOT_PHILA = CopMvcUtil.GetDouble(_EAMT.ITEMNOTPHILAX).ToString();
-                fobj.AMT_INFO.ITEM_PHILA = CopMvcUtil.GetDouble(_EAMT.ITEMPHILAX).ToString();
-                fobj.AMT_INFO.ITEM_TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.ITEMTAXDUEX);
-                fobj.AMT_INFO.PACK_TOTAL = CopMvcUtil.GetDouble(_EAMT.PACKTOTALX).ToString();
-                fobj.AMT_INFO.PACK_NOT_PHILA = CopMvcUtil.GetDouble(_EAMT.PACKNOTPHILAX).ToString();
-                fobj.AMT_INFO.PACK_PHILA = CopMvcUtil.GetDouble(_EAMT.PACKPHILAX).ToString();
-                fobj.AMT_INFO.PACK_TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.PACKTAXDUEX);
-                fobj.AMT_INFO.PAPER_TOTAL = CopMvcUtil.GetDouble(_EAMT.PAPERTOTALX).ToString();
-                fobj.AMT_INFO.PAPER_NOT_PHILA = CopMvcUtil.GetDouble(_EAMT.PAPERNOTPHILAX).ToString();
-                fobj.AMT_INFO.PAPER_PHILA = CopMvcUtil.GetDouble(_EAMT.PAPERPHILAX).ToString();
-                fobj.AMT_INFO.PAPER_TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.PAPERTAXDUEX);
-                fobj.AMT_INFO.TOTAL_TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.TOTALTAXDUEX);
-                fobj.AMT_INFO.CREDITS = CopMvcUtil.ConvDigitToCurrency(_EAMT.CREDITSX).ToString();
-                fobj.AMT_INFO.NET_TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.NETTAXDUEX);
-                fobj.AMT_INFO.INTEREST_PENALTY = CopMvcUtil.ConvDigitToCurrency(_EAMT.INTERESTPENALTYX).ToString();
 
-                fobj.AMT_INFO.TOTAL_AMOUNT_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.TOTALAMTDUEX);
-                fobj.AMT_INFO.REFUND = CopMvcUtil.ConvDigitToCurrency(_EAMT.REFUNDX).ToString();
-                fobj.AMT_INFO.ROLL_FORWARD = CopMvcUtil.ConvDigitToCurrency(_EAMT.ROLLFORWARDX).ToString();
-           
+            fobj.AMT_INFO.ITEM_TOTAL = CopMvcUtil.GetDouble(_EAMT.ITEMTOTALX).ToString();
+            fobj.AMT_INFO.ITEM_NOT_PHILA = CopMvcUtil.GetDouble(_EAMT.ITEMNOTPHILAX).ToString();
+            fobj.AMT_INFO.ITEM_PHILA = CopMvcUtil.GetDouble(_EAMT.ITEMPHILAX).ToString();
+            fobj.AMT_INFO.ITEM_TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.ITEMTAXDUEX);
+            fobj.AMT_INFO.PACK_TOTAL = CopMvcUtil.GetDouble(_EAMT.PACKTOTALX).ToString();
+            fobj.AMT_INFO.PACK_NOT_PHILA = CopMvcUtil.GetDouble(_EAMT.PACKNOTPHILAX).ToString();
+            fobj.AMT_INFO.PACK_PHILA = CopMvcUtil.GetDouble(_EAMT.PACKPHILAX).ToString();
+            fobj.AMT_INFO.PACK_TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.PACKTAXDUEX);
+            fobj.AMT_INFO.PAPER_TOTAL = CopMvcUtil.GetDouble(_EAMT.PAPERTOTALX).ToString();
+            fobj.AMT_INFO.PAPER_NOT_PHILA = CopMvcUtil.GetDouble(_EAMT.PAPERNOTPHILAX).ToString();
+            fobj.AMT_INFO.PAPER_PHILA = CopMvcUtil.GetDouble(_EAMT.PAPERPHILAX).ToString();
+            fobj.AMT_INFO.PAPER_TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.PAPERTAXDUEX);
+            fobj.AMT_INFO.TOTAL_TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.TOTALTAXDUEX);
+            fobj.AMT_INFO.CREDITS = CopMvcUtil.ConvDigitToCurrency(_EAMT.CREDITSX).ToString();
+            fobj.AMT_INFO.NET_TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.NETTAXDUEX);
+            fobj.AMT_INFO.INTEREST_PENALTY = CopMvcUtil.ConvDigitToCurrency(_EAMT.INTERESTPENALTYX).ToString();
 
-            
+            fobj.AMT_INFO.TOTAL_AMOUNT_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.TOTALAMTDUEX);
+            fobj.AMT_INFO.REFUND = CopMvcUtil.ConvDigitToCurrency(_EAMT.REFUNDX).ToString();
+            fobj.AMT_INFO.ROLL_FORWARD = CopMvcUtil.ConvDigitToCurrency(_EAMT.ROLLFORWARDX).ToString();
+
+
+
             return fobj;
 
         }
 
         private static COPXmlFactory.RTTIE028.TOBACCORETURN __RTTIE028_F_U(COPXmlFactory.RTTIE028.TOBACCORETURN e)
-        {            
+        {
 
-            TOBACCO_RTTIE028_SrvRef.RT01E028 serv_req = new TOBACCO_RTTIE028_SrvRef.RT01E028();
-            TOBACCO_RTTIE028_SrvRef.RT01E028_SMA _SMA = new TOBACCO_RTTIE028_SrvRef.RT01E028_SMA();
-            TOBACCO_RTTIE028_SrvRef.RT01E028_ETOB _ETOB = new TOBACCO_RTTIE028_SrvRef.RT01E028_ETOB();
-            TOBACCO_RTTIE028_SrvRef.RT01E028_EAMT _EAMT = new TOBACCO_RTTIE028_SrvRef.RT01E028_EAMT();
+            TOBACCO_RTTIE028_SrvRef.TT028E00 serv_req = new TOBACCO_RTTIE028_SrvRef.TT028E00();
+            TOBACCO_RTTIE028_SrvRef.TT028E00_SMA _SMA = new TOBACCO_RTTIE028_SrvRef.TT028E00_SMA();
+            TOBACCO_RTTIE028_SrvRef.TT028E00_ETOB _ETOB = new TOBACCO_RTTIE028_SrvRef.TT028E00_ETOB();
+            TOBACCO_RTTIE028_SrvRef.TT028E00_EAMT _EAMT = new TOBACCO_RTTIE028_SrvRef.TT028E00_EAMT();
 
-            TOBACCO_RTTIE028_SrvRef.RT01E028Response_SMA _SMAResponse = new TOBACCO_RTTIE028_SrvRef.RT01E028Response_SMA();
-            TOBACCO_RTTIE028_SrvRef.RT01E028Response_ETOB _ETOBResponse = new TOBACCO_RTTIE028_SrvRef.RT01E028Response_ETOB();
-            TOBACCO_RTTIE028_SrvRef.RT01E028Response_EAMT _EAMTResponse = new TOBACCO_RTTIE028_SrvRef.RT01E028Response_EAMT();
-            
+            TOBACCO_RTTIE028_SrvRef.TT028E00Response_SMA _SMAResponse = new TOBACCO_RTTIE028_SrvRef.TT028E00Response_SMA();
+            TOBACCO_RTTIE028_SrvRef.TT028E00Response_ETOB _ETOBResponse = new TOBACCO_RTTIE028_SrvRef.TT028E00Response_ETOB();
+            TOBACCO_RTTIE028_SrvRef.TT028E00Response_EAMT _EAMTResponse = new TOBACCO_RTTIE028_SrvRef.TT028E00Response_EAMT();
+
 
             _ETOB.ACCOUNTID = e.TOBACCO_INFO.ACCOUNT_ID;
             _ETOB.VERSIONX = e.TOBACCO_INFO.VERSION;
@@ -210,22 +210,22 @@ namespace CopRevenueGov2.Helpers
             _ETOB.RATEPACK = CopMvcUtil.ConvNumberToDigit9(e.TOBACCO_INFO.RATE_PACK);
             _ETOB.RATEPAPER = CopMvcUtil.ConvNumberToDigit9(e.TOBACCO_INFO.RATE_PAPER);
             _ETOB.PREPARERNAME = e.TOBACCO_INFO.PREPARER_NAME;
-            _ETOB.PREPARERPHONE =CopMvcUtil.GetDecimal(e.TOBACCO_INFO.PREPARER_PHONE);
+            _ETOB.PREPARERPHONE = CopMvcUtil.GetDecimal(e.TOBACCO_INFO.PREPARER_PHONE);
             _ETOB.PREPARERPHONEEXT = e.TOBACCO_INFO.PREPARER_PHONE_EXT;
             _ETOB.PREPARERIPADDRESS = e.TOBACCO_INFO.PREPARER_IP_ADDRESS;
             _ETOB.PREPAREREMAILADDRESS = e.TOBACCO_INFO.PREPARER_EMAIL_ADDRESS;
             _ETOB.PREPARERTYPE = e.TOBACCO_INFO.PREPARER_WHO;
             _ETOB.PREPARERPHONESpecified = true;
 
-            
+
             _EAMT.ITEMTOTALX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.ITEM_TOTAL);
             _EAMT.ITEMNOTPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.ITEM_NOT_PHILA).ToString();
             _EAMT.ITEMPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.ITEM_PHILA).ToString();
             _EAMT.ITEMTAXDUEX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.ITEM_TAX_DUE).ToString();
             _EAMT.PACKTOTALX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.PACK_TOTAL).ToString();
-            _EAMT.PACKNOTPHILAX =CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.PACK_NOT_PHILA).ToString();
+            _EAMT.PACKNOTPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.PACK_NOT_PHILA).ToString();
             _EAMT.PACKPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.PACK_PHILA).ToString();
-            _EAMT.PACKTAXDUEX =CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.PACK_TAX_DUE).ToString();
+            _EAMT.PACKTAXDUEX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.PACK_TAX_DUE).ToString();
             _EAMT.PAPERTOTALX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.PAPER_TOTAL).ToString();
             _EAMT.PAPERNOTPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.PAPER_NOT_PHILA).ToString();
             _EAMT.PAPERPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.PAPER_PHILA).ToString();
@@ -233,13 +233,13 @@ namespace CopRevenueGov2.Helpers
             _EAMT.TOTALTAXDUEX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.TOTAL_TAX_DUE).ToString();
             _EAMT.CREDITSX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.CREDITS).ToString();
             _EAMT.NETTAXDUEX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.NET_TAX_DUE).ToString();
-            _EAMT.INTERESTPENALTYX =CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.INTEREST_PENALTY).ToString();
+            _EAMT.INTERESTPENALTYX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.INTEREST_PENALTY).ToString();
             _EAMT.TOTALAMTDUEX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.TOTAL_AMOUNT_DUE).ToString();
             _EAMT.REFUNDX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.REFUND).ToString();
             _EAMT.ROLLFORWARDX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.ROLL_FORWARD).ToString();
             string ETOB = CopMvcUtil.GetXMlFromObject(_ETOB);
             string EAMT = CopMvcUtil.GetXMlFromObject(_EAMT);
-            _SMAResponse = serv_req.CallRT01E028
+            _SMAResponse = serv_req.CallTT028E00
                                             (_SMA, _ETOB,
                                              _EAMT,
                                               out _ETOBResponse,

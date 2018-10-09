@@ -12,15 +12,15 @@ namespace CopRevenueGov2.Helpers
 {
     public class RTTIE036 : CopRestServiceBase, ICopSoapService
     {
-        
+
         public static void Init()
         {
-           
+
         }
 
         public static string CallService(string Request)
         {
-           
+
             COPXmlFactory.RTTIE036.SCHOOLRETURN xo;
 
             try
@@ -70,11 +70,11 @@ namespace CopRevenueGov2.Helpers
 
         private static SCHOOLRETURN __Call(SCHOOLRETURN e)
         {
-           
-            switch(e.SCHOOL_INFO.RETURN_STATUS)
+
+            switch (e.SCHOOL_INFO.RETURN_STATUS)
             {
                 case "INQ": // fill
-                   e = __RTTIE036_F_I(e);                    
+                    e = __RTTIE036_F_I(e);
                     break;
                 case null: // submit
                     e = __RTTIE036_F_U(e);
@@ -82,7 +82,7 @@ namespace CopRevenueGov2.Helpers
 
                 default:
                     e.SCHOOL_INFO.RETURN_STATUS = "INQ";
-                    e = __RTTIE036_F_I(e);                    
+                    e = __RTTIE036_F_I(e);
                     break;
             }
             return e;
@@ -90,24 +90,24 @@ namespace CopRevenueGov2.Helpers
 
         private static COPXmlFactory.RTTIE036.SCHOOLRETURN __RTTIE036_F_I(COPXmlFactory.RTTIE036.SCHOOLRETURN e)
         {
-            SIT_RTTIE036_SrvRef.RTTIE036_ESIT _ESIT = new SIT_RTTIE036_SrvRef.RTTIE036_ESIT();
-            SIT_RTTIE036_SrvRef.RTTIE036 serv_req = new SIT_RTTIE036_SrvRef.RTTIE036();
+            SIT_RTTIE036_SrvRef.TT036E00_ESIT _ESIT = new SIT_RTTIE036_SrvRef.TT036E00_ESIT();
+            SIT_RTTIE036_SrvRef.TT036E00 serv_req = new SIT_RTTIE036_SrvRef.TT036E00();
 
-            SIT_RTTIE036_SrvRef.RTTIE036Response_SMA _SMAResponse = new SIT_RTTIE036_SrvRef.RTTIE036Response_SMA();
-            SIT_RTTIE036_SrvRef.RTTIE036Response_ESIT _ESITResponse = new SIT_RTTIE036_SrvRef.RTTIE036Response_ESIT();
-            SIT_RTTIE036_SrvRef.RTTIE036Response_EAMT _EAMTResponse = new SIT_RTTIE036_SrvRef.RTTIE036Response_EAMT();
+            SIT_RTTIE036_SrvRef.TT036E00Response_SMA _SMAResponse = new SIT_RTTIE036_SrvRef.TT036E00Response_SMA();
+            SIT_RTTIE036_SrvRef.TT036E00Response_ESIT _ESITResponse = new SIT_RTTIE036_SrvRef.TT036E00Response_ESIT();
+            SIT_RTTIE036_SrvRef.TT036E00Response_EAMT _EAMTResponse = new SIT_RTTIE036_SrvRef.TT036E00Response_EAMT();
 
-           _ESIT.ACCOUNTID = e.SCHOOL_INFO.ACCOUNT_ID;
-           _ESIT.PERIODX = CopMvcUtil.ConvDateDecimal(e.SCHOOL_INFO.PERIOD).ToString();
-           _ESIT.RETURNSTATUS = e.SCHOOL_INFO.RETURN_STATUS;
+            _ESIT.ACCOUNTID = e.SCHOOL_INFO.ACCOUNT_ID;
+            _ESIT.PERIODX = CopMvcUtil.ConvDateDecimal(e.SCHOOL_INFO.PERIOD).ToString();
+            _ESIT.RETURNSTATUS = e.SCHOOL_INFO.RETURN_STATUS;
 
 
-            _SMAResponse = serv_req.CallRTTIE036
-                                            (new SIT_RTTIE036_SrvRef.RTTIE036_SMA(), _ESIT,
-                                              new SIT_RTTIE036_SrvRef.RTTIE036_EAMT(),                                              
-                                              out _ESITResponse,
-                                              out _EAMTResponse
-                                            );
+            _SMAResponse = serv_req.CallTT036E00
+                                             (new SIT_RTTIE036_SrvRef.TT036E00_SMA(), _ESIT,
+                                               new SIT_RTTIE036_SrvRef.TT036E00_EAMT(),
+                                               out _ESITResponse,
+                                               out _EAMTResponse
+                                             );
 
 
 
@@ -116,10 +116,10 @@ namespace CopRevenueGov2.Helpers
             e = _Fill(_SMAResponse, _ESITResponse, _EAMTResponse);
 
             return e;
-            
+
         }
-        
-        private static COPXmlFactory.RTTIE036.SCHOOLRETURN _Fill(SIT_RTTIE036_SrvRef.RTTIE036Response_SMA _SMA,SIT_RTTIE036_SrvRef.RTTIE036Response_ESIT _ESIT,SIT_RTTIE036_SrvRef.RTTIE036Response_EAMT _EAMT)
+
+        private static COPXmlFactory.RTTIE036.SCHOOLRETURN _Fill(SIT_RTTIE036_SrvRef.TT036E00Response_SMA _SMA, SIT_RTTIE036_SrvRef.TT036E00Response_ESIT _ESIT, SIT_RTTIE036_SrvRef.TT036E00Response_EAMT _EAMT)
         {
             COPXmlFactory.RTTIE036.SCHOOLRETURN fobj = new SCHOOLRETURN();
 
@@ -134,68 +134,68 @@ namespace CopRevenueGov2.Helpers
             }
             //LOAD SCHOOL_INFO 
             fobj.SCHOOL_INFO = new SCHOOL_INFO();
-            
-                fobj.SCHOOL_INFO.ACCOUNT_ID = _ESIT.ACCOUNTID;
-                fobj.SCHOOL_INFO.PERIOD = CopMvcUtil.ConvDate(_ESIT.PERIODX);
-                fobj.SCHOOL_INFO.VERSION = _ESIT.VERSIONX;
-                fobj.SCHOOL_INFO.RETURN_STATUS = _ESIT.RETURNSTATUS;
-                fobj.SCHOOL_INFO.LAST_UPD_DATE = CopMvcUtil.ConvDate(_ESIT.LASTUPDATEDATEX);
 
-                fobj.SCHOOL_INFO.RECORDING_DATE = CopMvcUtil.ConvDate(_ESIT.RECORDINGDATEX);
-                fobj.SCHOOL_INFO.SEQUENCE = _ESIT.SEQUENCENUM;
-                fobj.SCHOOL_INFO.ADJUSTMENT_REF_NO = _ESIT.ADJUSTMENTREFERENCENUM;
-                fobj.SCHOOL_INFO.RATE = CopMvcUtil.ConvDigitToDouble9(_ESIT.RATE);
-                fobj.SCHOOL_INFO.EXTENSION_DATE = CopMvcUtil.ConvDate(_ESIT.EXTENSIONDATEX);
-                fobj.SCHOOL_INFO.PREPARER_NAME = _ESIT.PREPARERNAME;
-                fobj.SCHOOL_INFO.PREPARER_PHONE = Convert.ToString(_ESIT.PREPARERPHONE);
-                fobj.SCHOOL_INFO.PREPARER_PHONE_EXT = _ESIT.PREPARERPHONEEXT;
-                fobj.SCHOOL_INFO.PREPARER_IP_ADDRESS = _ESIT.PREPARERIPADDRESS;
-                fobj.SCHOOL_INFO.PREPARER_EMAIL_ADDRESS = _ESIT.PREPAREREMAILADDRESS;
-                fobj.SCHOOL_INFO.PREPARER_WHO = _ESIT.PREPARERTYPE;
-           
+            fobj.SCHOOL_INFO.ACCOUNT_ID = _ESIT.ACCOUNTID;
+            fobj.SCHOOL_INFO.PERIOD = CopMvcUtil.ConvDate(_ESIT.PERIODX);
+            fobj.SCHOOL_INFO.VERSION = _ESIT.VERSIONX;
+            fobj.SCHOOL_INFO.RETURN_STATUS = _ESIT.RETURNSTATUS;
+            fobj.SCHOOL_INFO.LAST_UPD_DATE = CopMvcUtil.ConvDate(_ESIT.LASTUPDATEDATEX);
+
+            fobj.SCHOOL_INFO.RECORDING_DATE = CopMvcUtil.ConvDate(_ESIT.RECORDINGDATEX);
+            fobj.SCHOOL_INFO.SEQUENCE = _ESIT.SEQUENCENUM;
+            fobj.SCHOOL_INFO.ADJUSTMENT_REF_NO = _ESIT.ADJUSTMENTREFERENCENUM;
+            fobj.SCHOOL_INFO.RATE = CopMvcUtil.ConvDigitToDouble9(_ESIT.RATE);
+            fobj.SCHOOL_INFO.EXTENSION_DATE = CopMvcUtil.ConvDate(_ESIT.EXTENSIONDATEX);
+            fobj.SCHOOL_INFO.PREPARER_NAME = _ESIT.PREPARERNAME;
+            fobj.SCHOOL_INFO.PREPARER_PHONE = Convert.ToString(_ESIT.PREPARERPHONE);
+            fobj.SCHOOL_INFO.PREPARER_PHONE_EXT = _ESIT.PREPARERPHONEEXT;
+            fobj.SCHOOL_INFO.PREPARER_IP_ADDRESS = _ESIT.PREPARERIPADDRESS;
+            fobj.SCHOOL_INFO.PREPARER_EMAIL_ADDRESS = _ESIT.PREPAREREMAILADDRESS;
+            fobj.SCHOOL_INFO.PREPARER_WHO = _ESIT.PREPARERTYPE;
+
 
             //LOAD AMT_INFO 
             fobj.AMT_INFO = new AMT_INFO();
 
-            
-                fobj.AMT_INFO.NET_TAX_DIVIDENDS = CopMvcUtil.ConvDigitToCurrency(_EAMT.NETTAXABLEDIVIDENDSX).ToString();
-                fobj.AMT_INFO.TAXABLE_INTEREST = CopMvcUtil.ConvDigitToCurrency(_EAMT.TAXABLEINTERESTX).ToString();
-                fobj.AMT_INFO.S_CORP_DISTRIBUTIONS = CopMvcUtil.ConvDigitToCurrency(_EAMT.SCORPDISTRIBUTIONSX).ToString();
-                fobj.AMT_INFO.PARTNERSHIP_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMT.PARTNERSHIPINCOMEX);
-                fobj.AMT_INFO.BENEFICIARY_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMT.BENEFICIARYINCOMEX).ToString();
-                fobj.AMT_INFO.SHORT_TERM_GAINS = CopMvcUtil.ConvDigitToCurrency(_EAMT.SHORTTERMGAINSX).ToString();
-                fobj.AMT_INFO.NET_RENTAL_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMT.NETRENTALINCOMEX).ToString();
-                fobj.AMT_INFO.OTHER_TAXABLE_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMT.OTHERTAXABLEINCOMEX);
-                fobj.AMT_INFO.TOTAL_TAXABLE_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMT.TOTALTAXABLEINCOMEX).ToString();
-                fobj.AMT_INFO.DEDUCTIBLE_EXPENSES = CopMvcUtil.ConvDigitToCurrency(_EAMT.DEDUCTIBLEEXPENSESX).ToString();
-                fobj.AMT_INFO.NET_TAXABLE_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMT.NETTAXABLEINCOMEX).ToString();
-                fobj.AMT_INFO.GROSS_TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.GROSSTAXDUEX);
-                fobj.AMT_INFO.CREDITS = CopMvcUtil.ConvDigitToCurrency(_EAMT.CREDITSX);
-                fobj.AMT_INFO.TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.TAXDUEX).ToString();
-                fobj.AMT_INFO.TAX_REFUND = CopMvcUtil.ConvDigitToCurrency(_EAMT.REFUNDAMTX);
-                fobj.AMT_INFO.TAX_OVERPAID = CopMvcUtil.ConvDigitToCurrency(_EAMT.OVERPAYMENTX).ToString();
 
-                fobj.AMT_INFO.USER_ID = _EAMT.USERID;
-            
-          
+            fobj.AMT_INFO.NET_TAX_DIVIDENDS = CopMvcUtil.ConvDigitToCurrency(_EAMT.NETTAXABLEDIVIDENDSX).ToString();
+            fobj.AMT_INFO.TAXABLE_INTEREST = CopMvcUtil.ConvDigitToCurrency(_EAMT.TAXABLEINTERESTX).ToString();
+            fobj.AMT_INFO.S_CORP_DISTRIBUTIONS = CopMvcUtil.ConvDigitToCurrency(_EAMT.SCORPDISTRIBUTIONSX).ToString();
+            fobj.AMT_INFO.PARTNERSHIP_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMT.PARTNERSHIPINCOMEX);
+            fobj.AMT_INFO.BENEFICIARY_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMT.BENEFICIARYINCOMEX).ToString();
+            fobj.AMT_INFO.SHORT_TERM_GAINS = CopMvcUtil.ConvDigitToCurrency(_EAMT.SHORTTERMGAINSX).ToString();
+            fobj.AMT_INFO.NET_RENTAL_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMT.NETRENTALINCOMEX).ToString();
+            fobj.AMT_INFO.OTHER_TAXABLE_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMT.OTHERTAXABLEINCOMEX);
+            fobj.AMT_INFO.TOTAL_TAXABLE_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMT.TOTALTAXABLEINCOMEX).ToString();
+            fobj.AMT_INFO.DEDUCTIBLE_EXPENSES = CopMvcUtil.ConvDigitToCurrency(_EAMT.DEDUCTIBLEEXPENSESX).ToString();
+            fobj.AMT_INFO.NET_TAXABLE_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMT.NETTAXABLEINCOMEX).ToString();
+            fobj.AMT_INFO.GROSS_TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.GROSSTAXDUEX);
+            fobj.AMT_INFO.CREDITS = CopMvcUtil.ConvDigitToCurrency(_EAMT.CREDITSX);
+            fobj.AMT_INFO.TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMT.TAXDUEX).ToString();
+            fobj.AMT_INFO.TAX_REFUND = CopMvcUtil.ConvDigitToCurrency(_EAMT.REFUNDAMTX);
+            fobj.AMT_INFO.TAX_OVERPAID = CopMvcUtil.ConvDigitToCurrency(_EAMT.OVERPAYMENTX).ToString();
+
+            fobj.AMT_INFO.USER_ID = _EAMT.USERID;
+
+
             return fobj;
 
         }
 
         private static COPXmlFactory.RTTIE036.SCHOOLRETURN __RTTIE036_F_U(COPXmlFactory.RTTIE036.SCHOOLRETURN e)
         {
-            
-            SIT_RTTIE036_SrvRef.RTTIE036 serv_req = new SIT_RTTIE036_SrvRef.RTTIE036();
-            SIT_RTTIE036_SrvRef.RTTIE036_SMA _SMA = new SIT_RTTIE036_SrvRef.RTTIE036_SMA();
-            SIT_RTTIE036_SrvRef.RTTIE036_ESIT _ESIT = new SIT_RTTIE036_SrvRef.RTTIE036_ESIT();
-            SIT_RTTIE036_SrvRef.RTTIE036_EAMT _EAMT = new SIT_RTTIE036_SrvRef.RTTIE036_EAMT();
+
+            SIT_RTTIE036_SrvRef.TT036E00 serv_req = new SIT_RTTIE036_SrvRef.TT036E00();
+            SIT_RTTIE036_SrvRef.TT036E00_SMA _SMA = new SIT_RTTIE036_SrvRef.TT036E00_SMA();
+            SIT_RTTIE036_SrvRef.TT036E00_ESIT _ESIT = new SIT_RTTIE036_SrvRef.TT036E00_ESIT();
+            SIT_RTTIE036_SrvRef.TT036E00_EAMT _EAMT = new SIT_RTTIE036_SrvRef.TT036E00_EAMT();
 
 
-            SIT_RTTIE036_SrvRef.RTTIE036Response_SMA _SMAResponse = new SIT_RTTIE036_SrvRef.RTTIE036Response_SMA();
-            SIT_RTTIE036_SrvRef.RTTIE036Response_ESIT _ESITResponse = new SIT_RTTIE036_SrvRef.RTTIE036Response_ESIT();
-            SIT_RTTIE036_SrvRef.RTTIE036Response_EAMT _EAMTResponse = new SIT_RTTIE036_SrvRef.RTTIE036Response_EAMT();
+            SIT_RTTIE036_SrvRef.TT036E00Response_SMA _SMAResponse = new SIT_RTTIE036_SrvRef.TT036E00Response_SMA();
+            SIT_RTTIE036_SrvRef.TT036E00Response_ESIT _ESITResponse = new SIT_RTTIE036_SrvRef.TT036E00Response_ESIT();
+            SIT_RTTIE036_SrvRef.TT036E00Response_EAMT _EAMTResponse = new SIT_RTTIE036_SrvRef.TT036E00Response_EAMT();
 
-           
+
             _ESIT.ACCOUNTID = e.SCHOOL_INFO.ACCOUNT_ID;
             _ESIT.VERSIONX = e.SCHOOL_INFO.VERSION;
             _ESIT.PERIODX = CopMvcUtil.ConvDateDecimal(e.SCHOOL_INFO.PERIOD).ToString();
@@ -204,16 +204,16 @@ namespace CopRevenueGov2.Helpers
             _ESIT.RECORDINGDATEX = CopMvcUtil.ConvDateDecimal(e.SCHOOL_INFO.RECORDING_DATE).ToString();
             _ESIT.SEQUENCENUM = e.SCHOOL_INFO.SEQUENCE;
             _ESIT.ADJUSTMENTREFERENCENUM = e.SCHOOL_INFO.ADJUSTMENT_REF_NO;
-            _ESIT.RATE = CopMvcUtil.ConvNumberToDigit9(e.SCHOOL_INFO.RATE);         
+            _ESIT.RATE = CopMvcUtil.ConvNumberToDigit9(e.SCHOOL_INFO.RATE);
             _ESIT.PREPARERNAME = e.SCHOOL_INFO.PREPARER_NAME;
-            _ESIT.PREPARERPHONE =CopMvcUtil.GetDecimal(e.SCHOOL_INFO.PREPARER_PHONE);
+            _ESIT.PREPARERPHONE = CopMvcUtil.GetDecimal(e.SCHOOL_INFO.PREPARER_PHONE);
             _ESIT.PREPARERPHONEEXT = e.SCHOOL_INFO.PREPARER_PHONE_EXT;
             _ESIT.PREPARERIPADDRESS = e.SCHOOL_INFO.PREPARER_IP_ADDRESS;
             _ESIT.PREPAREREMAILADDRESS = e.SCHOOL_INFO.PREPARER_EMAIL_ADDRESS;
             _ESIT.PREPARERTYPE = e.SCHOOL_INFO.PREPARER_WHO; ;
             _ESIT.PREPARERPHONESpecified = true;
 
-            
+
             _EAMT.NETTAXABLEDIVIDENDSX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.NET_TAX_DIVIDENDS);
             _EAMT.TAXABLEINTERESTX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.TAXABLE_INTEREST).ToString();
             _EAMT.SCORPDISTRIBUTIONSX = CopMvcUtil.ConvCurrencyToDigit(e.AMT_INFO.S_CORP_DISTRIBUTIONS).ToString();
@@ -236,10 +236,10 @@ namespace CopRevenueGov2.Helpers
             string _ESITT = CopMvcUtil.GetXMlFromObject(_ESIT);
             string _EAMTT = CopMvcUtil.GetXMlFromObject(_EAMT);
 
-            _SMAResponse = serv_req.CallRTTIE036
+            _SMAResponse = serv_req.CallTT036E00
                                  (_SMA, _ESIT, _EAMT, out _ESITResponse,
                                   out _EAMTResponse
-                                 
+
                                 );
 
 

@@ -26,132 +26,125 @@ namespace CopRevenueGov2.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://istest.city.phila.local:10010/wsstack/services/RTTIE010.TIPSACCDSOAP11Port" +
-            "/")]
-        public string CopRevenueGov2_RTTIE010_SrvRef_RTTIE010 {
+        [global::System.Configuration.DefaultSettingValueAttribute("https://192.168.204.70:10011/wsstack/services/TT010E00.TT010E00HttpsSoap12Endpoin" +
+            "t/")]
+        public string CopRevenueGov2_RTTIE010_SrvRef_TT010E00 {
             get {
-                return ((string)(this["CopRevenueGov2_RTTIE010_SrvRef_RTTIE010"]));
+                return ((string)(this["CopRevenueGov2_RTTIE010_SrvRef_TT010E00"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://istest.city.phila.local:10010/wsstack/services/RT02E030.TIPSACCDSOAP11Port" +
-            "/")]
-        public string CopRevenueGov2_RTTIE030_SrvRef_RT02E030 {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.204.70:10010/wsstack/services/TT037E00.TIPSACCTSOAP12Port/")]
+        public string CopRevenueGov2_BPTLFEZ_RT01E037_SrvRef_TT037E00 {
             get {
-                return ((string)(this["CopRevenueGov2_RTTIE030_SrvRef_RT02E030"]));
+                return ((string)(this["CopRevenueGov2_BPTLFEZ_RT01E037_SrvRef_TT037E00"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://istest.city.phila.local:10010/wsstack/services/RT01E037.TIPSACCDSOAP11Port" +
-            "/")]
-        public string CopRevenueGov2_BPTLFEZ_RT01E037_SrvRef_RT01E037 {
+        [global::System.Configuration.DefaultSettingValueAttribute("https://192.168.204.70:10011/wsstack/services/TT031E00.TT031E00HttpsSoap11Endpoin" +
+            "t/")]
+        public string CopRevenueGov2_LCF_RTTIE031_SrvRef_TT031E00 {
             get {
-                return ((string)(this["CopRevenueGov2_BPTLFEZ_RT01E037_SrvRef_RT01E037"]));
+                return ((string)(this["CopRevenueGov2_LCF_RTTIE031_SrvRef_TT031E00"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://istest.city.phila.local:10010/wsstack/services/RTTIE031.TIPSACCDSOAP11Port" +
-            "/")]
-        public string CopRevenueGov2_LCF_RTTIE031_SrvRef_RTTIE031 {
+        [global::System.Configuration.DefaultSettingValueAttribute("https://192.168.204.70:10011/wsstack/services/TT016E00.TT016E00HttpsSoap11Endpoin" +
+            "t/")]
+        public string CopRevenueGov2_RTTIE016_SrvRef_TT016E00 {
             get {
-                return ((string)(this["CopRevenueGov2_LCF_RTTIE031_SrvRef_RTTIE031"]));
+                return ((string)(this["CopRevenueGov2_RTTIE016_SrvRef_TT016E00"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://istest.city.phila.local:10011/wsstack/services/RT01E040.RT01E040HttpsSoap" +
-            "12Endpoint/")]
-        public string CopRevenueGov2_RTTIE040_SrvRef_RT01E040 {
+        [global::System.Configuration.DefaultSettingValueAttribute("https://192.168.204.70:10011/wsstack/services/TT022E00.TT022E00HttpsSoap11Endpoin" +
+            "t/")]
+        public string CopRevenueGov2_RTTIE022_SrvRef_TT022E00 {
             get {
-                return ((string)(this["CopRevenueGov2_RTTIE040_SrvRef_RT01E040"]));
+                return ((string)(this["CopRevenueGov2_RTTIE022_SrvRef_TT022E00"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://istest.city.phila.local:10011/wsstack/services/RTTIE016.RTTIE016HttpsSoap" +
-            "12Endpoint/")]
-        public string CopRevenueGov2_RTTIE016_SrvRef_RTTIE016 {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.204.70:10010/wsstack/services/TT030E00.TIPSACCTSOAP12Port/")]
+        public string CopRevenueGov2_RTTIE030_SrvRef_TT030E00 {
             get {
-                return ((string)(this["CopRevenueGov2_RTTIE016_SrvRef_RTTIE016"]));
+                return ((string)(this["CopRevenueGov2_RTTIE030_SrvRef_TT030E00"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://istest.city.phila.local:10011/wsstack/services/RTTIE036.RTTIE036HttpsSoap" +
-            "12Endpoint/")]
-        public string CopRevenueGov2_SIT_RTTIE036_SrvRef_RTTIE036 {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.204.70:10010/wsstack/services/TT040E00.TIPSACCTSOAP12Port/")]
+        public string CopRevenueGov2_RTTIE040_SrvRef_TT040E00 {
             get {
-                return ((string)(this["CopRevenueGov2_SIT_RTTIE036_SrvRef_RTTIE036"]));
+                return ((string)(this["CopRevenueGov2_RTTIE040_SrvRef_TT040E00"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://istest.city.phila.local:10010/wsstack/services/RT01E028.TIPSACCDSOAP11Port" +
-            "/")]
-        public string CopRevenueGov2_TOBACCO_RTTIE028_SrvRef_RT01E028 {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.204.70:10010/wsstack/services/TT036E00.TIPSACCTSOAP12Port/")]
+        public string CopRevenueGov2_SIT_RTTIE036_SrvRef_TT036E00 {
             get {
-                return ((string)(this["CopRevenueGov2_TOBACCO_RTTIE028_SrvRef_RT01E028"]));
+                return ((string)(this["CopRevenueGov2_SIT_RTTIE036_SrvRef_TT036E00"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://istest.city.phila.local:10010/wsstack/services/RTTIE035.TIPSACCDSOAP11Port" +
-            "/")]
-        public string CopRevenueGov2_UOForm_RTTIE035_SrvRef_RTTIE035 {
+        [global::System.Configuration.DefaultSettingValueAttribute("https://192.168.204.70:10011/wsstack/services/TT028E00.TT028E00HttpsSoap11Endpoin" +
+            "t/")]
+        public string CopRevenueGov2_TOBACCO_RTTIE028_SrvRef_TT028E00 {
             get {
-                return ((string)(this["CopRevenueGov2_UOForm_RTTIE035_SrvRef_RTTIE035"]));
+                return ((string)(this["CopRevenueGov2_TOBACCO_RTTIE028_SrvRef_TT028E00"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://istest.city.phila.local:10010/wsstack/services/RTTIE022.TIPSACCDSOAP11Port" +
-            "/")]
-        public string CopRevenueGov2_RTTIE022_SrvRef_RTTIE022 {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.204.70:10010/wsstack/services/TT035E00.TIPSACCTSOAP12Port/")]
+        public string CopRevenueGov2_UOForm_RTTIE035_SrvRef_TT035E00 {
             get {
-                return ((string)(this["CopRevenueGov2_RTTIE022_SrvRef_RTTIE022"]));
+                return ((string)(this["CopRevenueGov2_UOForm_RTTIE035_SrvRef_TT035E00"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://istest.city.phila.local:10011/wsstack/services/RT01E034.RT01E034HttpsSoap" +
-            "12Endpoint/")]
-        public string CopRevenueGov2_UOList_RTTIE034_SrvRef_RT01E034 {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.204.70:10010/wsstack/services/TT034E00.TIPSACCTSOAP12Port/")]
+        public string CopRevenueGov2_UOList_RTTIE034_SrvRef_TT034E00 {
             get {
-                return ((string)(this["CopRevenueGov2_UOList_RTTIE034_SrvRef_RT01E034"]));
+                return ((string)(this["CopRevenueGov2_UOList_RTTIE034_SrvRef_TT034E00"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://istest.city.phila.local:10011/wsstack/services/RT01E027.RT01E027HttpsSoap" +
-            "12Endpoint/")]
-        public string CopRevenueGov2_WAGE_RTTIE027_SrvRef_RT01E027 {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.204.70:10010/wsstack/services/TT027E00.TIPSACCTSOAP12Port/")]
+        public string CopRevenueGov2_WAGE_RTTIE027_SrvRef_TT027E00 {
             get {
-                return ((string)(this["CopRevenueGov2_WAGE_RTTIE027_SrvRef_RT01E027"]));
+                return ((string)(this["CopRevenueGov2_WAGE_RTTIE027_SrvRef_TT027E00"]));
             }
         }
     }

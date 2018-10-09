@@ -12,11 +12,11 @@ namespace CopRevenueGov2.Helpers
 {
     public class RTTIE016 : CopRestServiceBase, ICopSoapService
     {
-       
+
 
         public static void Init()
         {
-          
+
         }
 
         public static string CallService(string Request)
@@ -76,8 +76,8 @@ namespace CopRevenueGov2.Helpers
                     e = __RTTIE016_F_I(e);
                     break;
                 case "N": // submit
-                   
-                     e = __RTTIE016_F_U(e);
+
+                    e = __RTTIE016_F_U(e);
                     break;
 
                 default:
@@ -88,36 +88,36 @@ namespace CopRevenueGov2.Helpers
         }
 
         private static COPXmlFactory.RTTIE016.PAYCOUPON __RTTIE016_F_I(COPXmlFactory.RTTIE016.PAYCOUPON e)
-        {            
+        {
 
-            RTTIE016_SrvRef.RTTIE016 rttie016 = new RTTIE016_SrvRef.RTTIE016();
-            RTTIE016_SrvRef.RTTIE016_EMI _EMI = new RTTIE016_SrvRef.RTTIE016_EMI();
-            RTTIE016_SrvRef.RTTIE016Response_SMA _SMAReponse = new RTTIE016_SrvRef.RTTIE016Response_SMA();
-            RTTIE016_SrvRef.RTTIE016Response_EMI _EMIResponse = new RTTIE016_SrvRef.RTTIE016Response_EMI();
-            RTTIE016_SrvRef.RTTIE016Response_ETA _ETAResponse = new RTTIE016_SrvRef.RTTIE016Response_ETA();
-            RTTIE016_SrvRef.RTTIE016Response_EWAGNTL _EWAGNTLResponse = new RTTIE016_SrvRef.RTTIE016Response_EWAGNTL();
+            RTTIE016_SrvRef.TT016E00 rttie016 = new RTTIE016_SrvRef.TT016E00();
+            RTTIE016_SrvRef.TT016E00_EMI _EMI = new RTTIE016_SrvRef.TT016E00_EMI();
+            RTTIE016_SrvRef.TT016E00Response_SMA _SMAReponse = new RTTIE016_SrvRef.TT016E00Response_SMA();
+            RTTIE016_SrvRef.TT016E00Response_EMI _EMIResponse = new RTTIE016_SrvRef.TT016E00Response_EMI();
+            RTTIE016_SrvRef.TT016E00Response_ETA _ETAResponse = new RTTIE016_SrvRef.TT016E00Response_ETA();
+            RTTIE016_SrvRef.TT016E00Response_EWAGNTL _EWAGNTLResponse = new RTTIE016_SrvRef.TT016E00Response_EWAGNTL();
 
-            _EMI._ENTITYMASTERINFO = new RTTIE016_SrvRef.RTTIE016_EMI_ENTITYMASTERINFO();
+            _EMI._ENTITYMASTERINFO = new RTTIE016_SrvRef.TT016E00_EMI_ENTITYMASTERINFO();
             _EMI._ENTITYMASTERINFO.ENTITYID = e.ENTITY_INFO.ENTITY_ID;
             _EMI._ENTITYMASTERINFO.FUNCTIONCODE = e.ENTITY_INFO.ENT_TYPE;
 
-           _SMAReponse = rttie016.CallRTTIE016(
-                                                 new RTTIE016_SrvRef.RTTIE016_SMA(), 
-                                                 _EMI, 
-                                                 new RTTIE016_SrvRef.RTTIE016_ETA(), 
-                                                 new RTTIE016_SrvRef.RTTIE016_EWAGNTL(), 
-                                                 out _EMIResponse, 
-                                                 out _ETAResponse, 
-                                                 out  _EWAGNTLResponse                                                 
-            
+            _SMAReponse = rttie016.CallTT016E00(
+                                                 new RTTIE016_SrvRef.TT016E00_SMA(),
+                                                 _EMI,
+                                                 new RTTIE016_SrvRef.TT016E00_ETA(),
+                                                 new RTTIE016_SrvRef.TT016E00_EWAGNTL(),
+                                                 out _EMIResponse,
+                                                 out _ETAResponse,
+                                                 out  _EWAGNTLResponse
+
                                                  );
 
-           e = __Fill(_SMAReponse, _EMIResponse, _ETAResponse, _EWAGNTLResponse);
+            e = __Fill(_SMAReponse, _EMIResponse, _ETAResponse, _EWAGNTLResponse);
 
             return e;
         }
 
-        private static COPXmlFactory.RTTIE016.PAYCOUPON __Fill(RTTIE016_SrvRef.RTTIE016Response_SMA _SMA,RTTIE016_SrvRef.RTTIE016Response_EMI _EMI,RTTIE016_SrvRef.RTTIE016Response_ETA _ETA,RTTIE016_SrvRef.RTTIE016Response_EWAGNTL _EWAGNTL)
+        private static COPXmlFactory.RTTIE016.PAYCOUPON __Fill(RTTIE016_SrvRef.TT016E00Response_SMA _SMA, RTTIE016_SrvRef.TT016E00Response_EMI _EMI, RTTIE016_SrvRef.TT016E00Response_ETA _ETA, RTTIE016_SrvRef.TT016E00Response_EWAGNTL _EWAGNTL)
         {
             COPXmlFactory.RTTIE016.PAYCOUPON fobj = RevenueGovXMLFactory.GetPAYCOUPON();
 
@@ -135,7 +135,7 @@ namespace CopRevenueGov2.Helpers
             //LOAD ENTITY_INFO 
             fobj.ENTITY_INFO = new ENTITY_INFO();
             fobj.ENTITY_INFO.FUNCTION_CODE = _EMI._ENTITYMASTERINFO.FUNCTIONCODE;
-            fobj.ENTITY_INFO.ENT_TYPE =CopMvcUtil.GetDouble(_EMI._ENTITYMASTERINFO.ENTITYTYPE).ToString();
+            fobj.ENTITY_INFO.ENT_TYPE = CopMvcUtil.GetDouble(_EMI._ENTITYMASTERINFO.ENTITYTYPE).ToString();
             fobj.ENTITY_INFO.ENTITY_ID = _EMI._ENTITYMASTERINFO.ENTITYID;
             fobj.ENTITY_INFO.ACCT_ID = _EMI._ENTITYMASTERINFO.ACCTID;
             fobj.ENTITY_INFO.NAME = _EMI._ENTITYMASTERINFO.ENTITYNAME;
@@ -187,10 +187,10 @@ namespace CopRevenueGov2.Helpers
                 fobj.WAGE_NTL.ADJ_REF_NO = "";
                 fobj.WAGE_NTL.PREPARER_NAME = "";
                 fobj.WAGE_NTL.PREPARER_PHONE = "";
-                fobj.WAGE_NTL.PREPARER_PHONE_EXT ="";
+                fobj.WAGE_NTL.PREPARER_PHONE_EXT = "";
                 fobj.WAGE_NTL.PREPARER_IP_ADDRESS = "";
-                fobj.WAGE_NTL.PREPARER_EMAIL_ADDRESS ="";
-                fobj.WAGE_NTL.PREPARER_WHO ="";
+                fobj.WAGE_NTL.PREPARER_EMAIL_ADDRESS = "";
+                fobj.WAGE_NTL.PREPARER_WHO = "";
             }
             //LOAD COUPON_FORM 
             fobj.COUPON_FORM = new COUPON_FORM();
@@ -198,7 +198,7 @@ namespace CopRevenueGov2.Helpers
             {
                 fobj.COUPON_FORM.CPN_ACCOUNT = "";
                 fobj.COUPON_FORM.CPN_ACCOUNT_TYPE = "";
-                fobj.COUPON_FORM.CPN_NAME ="";
+                fobj.COUPON_FORM.CPN_NAME = "";
                 fobj.COUPON_FORM.CPN_ADDR = "";
                 fobj.COUPON_FORM.CPN_ADDR2 = "";
                 fobj.COUPON_FORM.CPN_ADDR3 = "";
@@ -210,7 +210,7 @@ namespace CopRevenueGov2.Helpers
                 fobj.COUPON_FORM.CPN_YEAR = "";
                 fobj.COUPON_FORM.CPN_FORM = "";
             }
-         
+
             return fobj;
 
         }
@@ -219,22 +219,22 @@ namespace CopRevenueGov2.Helpers
         {
 
 
-            RTTIE016_SrvRef.RTTIE016 rttie016 = new RTTIE016_SrvRef.RTTIE016();
-            RTTIE016_SrvRef.RTTIE016_EMI _EMI = new RTTIE016_SrvRef.RTTIE016_EMI();
-            RTTIE016_SrvRef.RTTIE016_ETA _ETA = new RTTIE016_SrvRef.RTTIE016_ETA();
-            RTTIE016_SrvRef.RTTIE016_EWAGNTL _EWAGNTL = new RTTIE016_SrvRef.RTTIE016_EWAGNTL();
+            RTTIE016_SrvRef.TT016E00 rttie016 = new RTTIE016_SrvRef.TT016E00();
+            RTTIE016_SrvRef.TT016E00_EMI _EMI = new RTTIE016_SrvRef.TT016E00_EMI();
+            RTTIE016_SrvRef.TT016E00_ETA _ETA = new RTTIE016_SrvRef.TT016E00_ETA();
+            RTTIE016_SrvRef.TT016E00_EWAGNTL _EWAGNTL = new RTTIE016_SrvRef.TT016E00_EWAGNTL();
 
-            RTTIE016_SrvRef.RTTIE016Response_SMA _SMAReponse = new RTTIE016_SrvRef.RTTIE016Response_SMA();
-            RTTIE016_SrvRef.RTTIE016Response_EMI _EMIResponse = new RTTIE016_SrvRef.RTTIE016Response_EMI();
-            RTTIE016_SrvRef.RTTIE016Response_ETA _ETAResponse = new RTTIE016_SrvRef.RTTIE016Response_ETA();
-            RTTIE016_SrvRef.RTTIE016Response_EWAGNTL _EWAGNTLResponse = new RTTIE016_SrvRef.RTTIE016Response_EWAGNTL();
+            RTTIE016_SrvRef.TT016E00Response_SMA _SMAReponse = new RTTIE016_SrvRef.TT016E00Response_SMA();
+            RTTIE016_SrvRef.TT016E00Response_EMI _EMIResponse = new RTTIE016_SrvRef.TT016E00Response_EMI();
+            RTTIE016_SrvRef.TT016E00Response_ETA _ETAResponse = new RTTIE016_SrvRef.TT016E00Response_ETA();
+            RTTIE016_SrvRef.TT016E00Response_EWAGNTL _EWAGNTLResponse = new RTTIE016_SrvRef.TT016E00Response_EWAGNTL();
 
 
             //LOAD ENTITY_INFO 
-            _EMI._ENTITYMASTERINFO = new RTTIE016_SrvRef.RTTIE016_EMI_ENTITYMASTERINFO();
-            
+            _EMI._ENTITYMASTERINFO = new RTTIE016_SrvRef.TT016E00_EMI_ENTITYMASTERINFO();
+
             _EMI._ENTITYMASTERINFO.FUNCTIONCODE = e.ENTITY_INFO.FUNCTION_CODE;
-            _EMI._ENTITYMASTERINFO.ENTITYTYPE =CopMvcUtil.GetDecimal(e.ENTITY_INFO.ENT_TYPE);
+            _EMI._ENTITYMASTERINFO.ENTITYTYPE = CopMvcUtil.GetDecimal(e.ENTITY_INFO.ENT_TYPE);
             _EMI._ENTITYMASTERINFO.ENTITYID = e.ENTITY_INFO.ENTITY_ID;
             _EMI._ENTITYMASTERINFO.ACCTID = e.ENTITY_INFO.ACCT_ID;
             _EMI._ENTITYMASTERINFO.ENTITYNAME = e.ENTITY_INFO.NAME;
@@ -247,24 +247,24 @@ namespace CopRevenueGov2.Helpers
 
             if (e.TAX_ACCT.Count > 0)
             {
-                
-                _ETA._ENTITYTAXACCOUNTSs = new RTTIE016_SrvRef.RTTIE016_ETA_ENTITYTAXACCOUNTS[e.TAX_ACCT.Count];
+
+                _ETA._ENTITYTAXACCOUNTSs = new RTTIE016_SrvRef.TT016E00_ETA_ENTITYTAXACCOUNTS[e.TAX_ACCT.Count];
 
                 for (int i = 0; i < e.TAX_ACCT.Count; i++)
                 {
-                    _ETA._ENTITYTAXACCOUNTSs[i] = new RTTIE016_SrvRef.RTTIE016_ETA_ENTITYTAXACCOUNTS();
+                    _ETA._ENTITYTAXACCOUNTSs[i] = new RTTIE016_SrvRef.TT016E00_ETA_ENTITYTAXACCOUNTS();
 
                     _ETA._ENTITYTAXACCOUNTSs[i].FUNCTIONCODE = CopMvcUtil.GetString(e.TAX_ACCT[i].FUNC_CODE);
 
-                   
-                   _ETA._ENTITYTAXACCOUNTSs[i].ACCOUNT = CopMvcUtil.GetDecimal(e.TAX_ACCT[i].ACCOUNT);
+
+                    _ETA._ENTITYTAXACCOUNTSs[i].ACCOUNT = CopMvcUtil.GetDecimal(e.TAX_ACCT[i].ACCOUNT);
 
                     _ETA._ENTITYTAXACCOUNTSs[i].ACCOUNTID = e.TAX_ACCT[i].ACCOUNT_ID;
 
-                    
+
                     _ETA._ENTITYTAXACCOUNTSs[i].STARTDATE = CopMvcUtil.GetDecimal(e.TAX_ACCT[i].START_DATE);
 
-                   
+
                     _ETA._ENTITYTAXACCOUNTSs[i].ENDDATE = CopMvcUtil.GetDecimal(e.TAX_ACCT[i].END_DATE);
 
                     _ETA._ENTITYTAXACCOUNTSs[i].BRTADDRESS = CopMvcUtil.GetString(e.TAX_ACCT[i].BRT_ADDRESS1);
@@ -273,7 +273,7 @@ namespace CopRevenueGov2.Helpers
 
                 }
             }
-           
+
             _EWAGNTL.ACCOUNTID = e.WAGE_NTL.ACCOUNT_ID;
 
 
@@ -299,12 +299,12 @@ namespace CopRevenueGov2.Helpers
             _EMI._ENTITYMASTERINFO.STATE = e.ENTITY_INFO.STATE;
             _EMI._ENTITYMASTERINFO.ZIPCODE = e.ENTITY_INFO.ZIP_CODE;
 
-            _EWAGNTL.PERIODX = new RTTIE016_SrvRef.RTTIE016_EWAGNTLPERIODX();
-            
+            _EWAGNTL.PERIODX = new RTTIE016_SrvRef.TT016E00_EWAGNTLPERIODX();
+
             _EWAGNTL.PERIODX.PERIOD = CopMvcUtil.GetDecimal(e.WAGE_NTL.PERIOD);
             _EWAGNTL.PERIODX.PERIODSpecified = true;
-            _SMAReponse = rttie016.CallRTTIE016(
-                                                 new RTTIE016_SrvRef.RTTIE016_SMA(),
+            _SMAReponse = rttie016.CallTT016E00(
+                                                 new RTTIE016_SrvRef.TT016E00_SMA(),
                                                  _EMI,
                                                  _ETA,
                                                  _EWAGNTL,
@@ -315,7 +315,7 @@ namespace CopRevenueGov2.Helpers
                                                  );
 
             e = __Fill(_SMAReponse, _EMIResponse, _ETAResponse, _EWAGNTLResponse);
-           
+
 
             return e;
 

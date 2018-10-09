@@ -28,22 +28,22 @@
         }
 
         function parseXml_xmlCode1(xml) {
-            
+
             xmlCode1.loadXML(xml);
         }
 
         function parseXml_xmlCode1Return(xml) {
-           
+
             xmlCode1Return.loadXML(xml);
         }
 
         function acCeaAccept() {
             $('#divAC').css('display', 'none');//style.display = 'none'
-            
+
             if (AC_Form == 'PROFILE') {
                 AC_ProfileDisabled(false);		//Located on Profile Page
                 bAcctAddressChanged = false;
-               
+
             } else if (AC_Form == 'PARTNERS') {
                 AC_OfficersDisabled(false);		//Located on Officers Page
                 bOfficersAddressChanged = 'accepted';
@@ -59,35 +59,35 @@
             }		//if
         }
 
-        function acCvaAccept() {          
-           
+        function acCvaAccept() {
+
             $('#divAC').css('display', 'none');
-            
+
             if (AC_Form == 'PROFILE') {
                 AC_ProfileDisabled(false);		//Located on Profile Page
                 AC_ProfileChangePopulate();			//Located on Profile Page
                 bAcctAddressChanged = false;
-               
+
             } else if (AC_Form == 'PARTNERS') {
                 AC_OfficersDisabled(false);		//Located on Officers Page
                 AC_OfficersChangePopulate();			//Located on Officers Page
                 bOfficersAddressChanged = 'accepted';
-                
+
                 bOfficersAddressChanged = false;
             } else if (AC_Form == 'ADDRESSES') {
                 AC_AddressDisabled(false);		//Located on Addresses Page
                 AC_AddressChangePopulate();	//Located on Addresses Page
                 bAddrAddressChanged = 'accepted';
-                
+
                 bAddrAddressChanged = false;
             }		//if
         }		//acAccept
 
         function acCancel() {
-           
+
 
             $('#divAC').css('display', 'none');
-           
+
             if (AC_Form == 'PROFILE') {
                 AC_ProfileDisabled(false);		//Located on Profile Page
                 $('#txtBusAddress1').focus();
@@ -102,10 +102,10 @@
             //	parent.focus()	
         }		//acCancel
 
-        function ac_CheckAddress() {           
+        function ac_CheckAddress() {
             //EHD 2009.05.13 Code1 check on Profile, Address and Partners screens
             var sAddress1, sAddress2, sZipCode;
-            
+
             $('#btnCVA').removeAttr('disabled');
             if (AC_Form == 'PROFILE') {
                 sAddress1 = $('#txtBusAddress1').val();
@@ -166,7 +166,7 @@
 
 
         function ispReplace(sInput, sFind, sReplace) {
-           
+
 
             //suman ---------
             var r;
@@ -177,10 +177,10 @@
         }
 
         function ShowAddressCorrection() {
-          
+
             var ddAddrBusState = document.getElementById("ddAddrBusState");
             var ddBusState = document.getElementById("ddBusState");
-            
+
             var text = '';
             var left = 0;
             var top = 0;
@@ -188,8 +188,8 @@
             $('#divAC').css('display', 'block');
             //divAC.style.position = 'absolute'
             $('#divAC').css('position', 'absolute');
-            
 
+            debugger;
             var l1_ctrl;
             var l2_ctrl;
             var l1_ctrl_offset;
@@ -197,10 +197,10 @@
 
             if (AC_Form == 'PROFILE') {
                 text = $('#txtBusAddress1').val() + ' ' + $('#txtBusCity').val() + ' ' +
-                        $(ddBusState.options[ddBusState.selectedIndex]).attr('CODE') + ' ' + $('#txtBusZip').val();
+                        $("#ddBusState option:selected").attr("CODE") + ' ' + $('#txtBusZip').val();
                 $('#lblCEA').text(text);
                 DisplayProfile();
-               
+
                 l1_ctrl = $('#AcctProfile');
                 l2_ctrl = $('#divAC');
                 l1_ctrl_offset = l1_ctrl.offset();
@@ -211,16 +211,16 @@
 
 
 
-                $('#divAC').css('left', left);
+                $('#divAC').css('left', '170px');
                 $('#divAC').css('top', top);
 
 
                 AC_ProfileDisabled(true);		//Located on Profile Page
             } else if (AC_Form == 'PARTNERS') {
                 text = $('#txtPartAddr1').val() + ' ' + $('#txtPartAddr2').val() + ' ' + $('#txtPartBusCity').val() + ', ' +
-                        $(ddPartBusState.options[ddPartBusState.selectedIndex]).attr('CODE') + ' ' + $('#txtPartBusZip').val();
+                        $("#ddBusState option:selected").attr("CODE") + ' ' + $('#txtPartBusZip').val();
                 $('#lblCEA').text(text);
-               
+
 
                 l1_ctrl = $('#AcctPartners');
                 l2_ctrl = $('#divAC');
@@ -231,25 +231,25 @@
                 top = ((l1_ctrl.height() / 2) - (l2_ctrl.height() / 2)) + l1_ctrl_offset.top;
 
 
-              $('#divAC').css('left', left);
-               $('#divAC').css('top', top);
+                $('#divAC').css('left', '170px');
+                $('#divAC').css('top', top);
 
                 AC_OfficersDisabled(true);		//Located on Officers Page
             } else if (AC_Form == 'ADDRESSES') {
                 text = $('#txtAddr1').val() + ' ' + $('#txtAddr2').val() + ' ' + $('#txtAddrBusCity').val() + ' ' +
-                        $(ddAddrBusState.options[$('#ddBusState').selectedIndex]).attr('CODE') + ' ' + $('#txtAddrBusZip').val();
+                        $("#ddBusState option:selected").attr("CODE") + ' ' + $('#txtAddrBusZip').val();
                 $('#lblCEA').text(text);
-               
+
 
                 l1_ctrl = $('#AcctAddresses');
                 l2_ctrl = $('#divAC');
                 l1_ctrl_offset = l1_ctrl.offset();
                 l2_ctrl_offset = l2_ctrl.offset();
 
-               left = ((l1_ctrl.width() / 2) - (l2_ctrl.width() / 2)) + l1_ctrl_offset.left;
+                left = ((l1_ctrl.width() / 2) - (l2_ctrl.width() / 2)) + l1_ctrl_offset.left;
                 top = ((l1_ctrl.height() / 2) - (l2_ctrl.height() / 2)) + l1_ctrl_offset.top;
 
-                $('#divAC').css('left', left);
+                $('#divAC').css('left', '170px');
                 $('#divAC').css('top', top);
 
                 AC_AddressDisabled(true);		//Located on Addresses Page
@@ -295,7 +295,7 @@
 </head>
 <body>
      <div id="divAC" class="div-border table-width " style="DISPLAY: none; 
-			 POSITION: relative; BACKGROUND-COLOR: #e5e4e2; z-index:100">
+			 POSITION: absolute; BACKGROUND-COLOR: #e5e4e2; z-index:500;">
 		<table width="100%" border=0 cellSpacing=0 cellPadding=0 >
 			<tr>
 				<td WIDTH="5%"></td>
@@ -341,7 +341,7 @@
 				</td>
 
 				<td colspan=2 valign=center align=middle height=10>
-					<INPUT id="btnCEA" onclick="acCeaAccept()" class="small_edit" style="margin-left: 5px; WIDTH: 60px" type=button value="Accept">
+					<INPUT id="btnCEA" onclick="acCeaAccept()" class="small_edit" style="margin-left: 5px; WIDTH: 65px" type=button value="Accept">
 				</td>
 			</tr>
 			<tr>
@@ -358,7 +358,7 @@
 					<label id="lblCVA" class="inpNormal" style="margin-left: 10px; VERTICAL-ALIGN: middle"></label><br>
 				</td>
 				<td colspan=2 valign=center align=middle height=10>
-					<INPUT id="btnCVA" onclick="acCvaAccept()" class="small_edit" style="MARGIN-LEFT: 5px; WIDTH: 60px" type=button value="Accept">
+					<INPUT id="btnCVA" onclick="acCvaAccept()" class="small_edit" style="MARGIN-LEFT: 5px; WIDTH: 65px" type=button value="Accept">
 				</td>
 			</tr>
 		</table>

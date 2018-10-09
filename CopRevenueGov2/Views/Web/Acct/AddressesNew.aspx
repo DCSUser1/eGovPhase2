@@ -50,8 +50,9 @@
         }
 
         function DisplayAddresses() {
-           // alert('I am inside DisplayAddresses() before doing anything');
 
+            // alert('I am inside DisplayAddresses() before doing anything');
+            parent.ScrollTop(1);
             AC_Form = 'ADDRESSES';
             var ddAddrType = document.getElementById('ddAddrType');
             var ddAddrBusState = document.getElementById('ddAddrBusState');
@@ -59,7 +60,7 @@
             var txtHeader = document.getElementById('txtHeader');
             //alert(parent.$g.xmlAccount);
 
-            	//CreateAltAddr()
+            //CreateAltAddr()
             if (initAddresses == false) {
                 //alert('initAddresses false');
                 LoadGenericDD(xmlAddressType2, ddAddrType, "DDOWN", false);
@@ -69,12 +70,12 @@
                 $('#ddAddrType').attr('disabled', 'true');
             }
             else {
-               // alert('initAddresses true');
+                // alert('initAddresses true');
                 ad_CorrectBLAddress();
             }		//if
 
 
-            
+
 
             if (ddAddrType.length == 0) {
                 LoadGenericDD(xmlAddressType2, ddAddrType, "DDOWN", false);
@@ -83,7 +84,7 @@
             $('#AppHeaderAddress').html(txtHeader + '<Font class=hdrMedium>|addresses</Font>');
             parent.gsInstructionItem = '#Address';
             $('#AppMessageAddress').html('<BR><font class="lblTextRed">*</font> Required Fields');
-           
+
 
 
             CurrentLayer = 'AcctAddresses';
@@ -92,16 +93,16 @@
             txtAddr1.focus();
 
             var mnuobj = $(parent.document).find('#mnuAcctAddresses').first();
-           
+
             if (bAddrRequired == true) {
                 errAddresses = 'Please enter your secondary address';
             }
             if (errAddresses != '') {
-                        
+
                 $(AppError_Add).html(errAddresses);
             }		//if
             initAddresses = true;
-        }		
+        }
 
         function CreateAltAddr() {
             debugger;
@@ -121,7 +122,7 @@
             var txtFaxPhone1 = document.getElementById('txtFaxPhone1');
             var txtFaxPhone2 = document.getElementById('txtFaxPhone2');
 
-           // alert('CreateAltAddr::' + sMailingAdd);
+            // alert('CreateAltAddr::' + sMailingAdd);
 
             var tmpZip;
             if (parent.sNew != true) {
@@ -134,14 +135,14 @@
             } else {
                 sAddType = '102'; 		//Headquarters
             }		//if
-           
+
             if (sMailingAdd == -1) {
                 iAltAddressIdx = LocatePrimaryAddr(' ', true); 		//Next Empty Line
             }		//if
             //EGOVWEB-28 Changed sMailingAdd value
             if (sMailingAdd == -1) {
-               // alert('CreateAltAddr:: when sMailingAdd == -1' + sMailingAdd);
-              //  alert($("#ddTaxIDType option:selected").attr("CODE"));
+                // alert('CreateAltAddr:: when sMailingAdd == -1' + sMailingAdd);
+                //  alert($("#ddTaxIDType option:selected").attr("CODE"));
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, 'A', 'NAME_ADDRESS FUNCTION_CODE', '', iAltAddressIdx);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $("#ddTaxIDType option:selected").attr("CODE"), 'NAME_ADDRESS TYPE', '', iAltAddressIdx);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtIdNumber').val().replace(/-/g, ''), 'NAME_ADDRESS ID', '', iAltAddressIdx);
@@ -208,7 +209,7 @@
             }		//if
             //EGOVWEB-28 Changed sMailingAdd value
             if (sMailingAdd == -1) {
-               // alert('CreateSecAddr:: when sMailingAdd == -1' + sMailingAdd);
+                // alert('CreateSecAddr:: when sMailingAdd == -1' + sMailingAdd);
                 //iAltAddressIdx
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, 'A', 'NAME_ADDRESS FUNCTION_CODE', '', 0);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $("#ddTaxIDType option:selected").attr("CODE"), 'NAME_ADDRESS TYPE', '', 0);
@@ -229,13 +230,13 @@
                 // parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtBusAreaCode').val() + $('#txtBusPhone1').val() + $('#txtBusPhone2').val(), 'NAME_ADDRESS WORK_PHONE', '', iAltAddressIdx);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, sessionStorage.ProfileBusareaCode + sessionStorage.ProfileBusPhone1 + sessionStorage.ProfileBusPhone2,
                       'NAME_ADDRESS WORK_PHONE', '', 0);
-               // parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtBusPhoneExt').val(), 'NAME_ADDRESS WORK_PHONE_EXT', '', iAltAddressIdx);
+                // parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtBusPhoneExt').val(), 'NAME_ADDRESS WORK_PHONE_EXT', '', iAltAddressIdx);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, phExt, 'NAME_ADDRESS WORK_PHONE_EXT', '', 0);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtFaxAreaCode').val() + $('#txtFaxPhone1').val() + $('#txtFaxPhone2').val(), 'NAME_ADDRESS WORK_FAX', '', 0);
                 //EGOVWEB-28 Added
                 sMailingAdd = 0;
             } 	//if
-           // CreateAddressTable();
+            // CreateAddressTable();
         }
         function LoadAddressErrors() {
 
@@ -247,7 +248,7 @@
             var txtAddrAreaCode = document.getElementById('txtAddrAreaCode');
             var txtAddrPhone1 = document.getElementById('txtAddrPhone1');
             var txtAddrPhone2 = document.getElementById('txtAddrPhone2');
-           
+
             var txtAddrPhone1 = document.getElementById('txtAddrPhone1');
             var txtAddrPhone2 = document.getElementById('txtAddrPhone2');
             var txtAddrFaxAreaCode = document.getElementById('txtAddrFaxAreaCode');
@@ -258,11 +259,11 @@
 
             var i = 0;
 
-           
+
             arrAddr[i++] = [txtAddr1, '$(\'#txtAddr1\').val()==""', 'Address required'];
 
 
-            
+
             if (strAddrType == "Business Location") {
                 arrAddr[i++] = [txtAddr1, '($(\'#txtAddr1\').val() != "") && ' +
                     '((strAddr1.indexOf("PO ") == 0 || strAddr1.indexOf("P.O") == 0) || ' +
@@ -308,16 +309,16 @@
             $('#divAddressGrid').text('');
             iCount = parent.$x.ispXmlGetRecCount(parent.$g.xmlAccount, 'NAME_ADDRESS', '');
             iAddressCount = 0;
-           
+
             for (j = 0; j < iCount; j++) {
                 if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS ADDRESS_TYPE', '', j) != '0') {
                     //alert(parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS ADDRESS_TYPE', '', j));
                     if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS RELATIONSHIP_CODE', '', j) == '0') {
-                       // alert('At CreateAddressTable::' + parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS ADDRESS_TYPE', '', j));
+                        // alert('At CreateAddressTable::' + parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS ADDRESS_TYPE', '', j));
                         if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS ADDRESS_TYPE', '', j) == '60' || parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS ADDRESS_TYPE', '', j) == '100') { //changes
-                           // if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS ADDRESS_TYPE', '', j) != '60' ) {
+                            // if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS ADDRESS_TYPE', '', j) != '60' ) {
                             LoadAddressValues(j);
-                            if (j==0) { // changes
+                            if (j == 0) { // changes
                                 sAddrType = 'Primary';
                             }
                             bHaveAddresses = true;
@@ -375,9 +376,9 @@
                 }
                 alert(sAddrType);
             }*/
-            
+
             //alert('sAddrType' + sAddrType);
-           // alert(parent.$g.xmlAccount);
+            // alert(parent.$g.xmlAccount);
             //console.log('LoadAddressValues::' + );
 
             if (sAddrType == null) { //changes
@@ -395,13 +396,13 @@
             if (iAreaCode == '0') {//changes
                 iAreaCode = ''
             }
-            
-          //  alert(splitField(parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS WORK_PHONE', '', j), 3, 3));
+
+            //  alert(splitField(parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS WORK_PHONE', '', j), 3, 3));
 
             iPhone1 = splitField(parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS WORK_PHONE', '', j), 3, 3);
             iPhone2 = splitField(parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS WORK_PHONE', '', j), 6, 4);
 
-            
+
             iPhoneExt = parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS WORK_PHONE_EXT', '', j);
             if (iPhoneExt.length > 0) {
                 iPhoneExt = 'x' + iPhoneExt;
@@ -414,7 +415,7 @@
 
 
         function PopAddrXml() {
-            
+            debugger;
             var txtAddrBusZip = document.getElementById('txtAddrBusZip');
             var ddAddrType = document.getElementById('ddAddrType');
             var txtAddr1 = document.getElementById('txtAddr1');
@@ -455,13 +456,18 @@
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, sID, 'NAME_ADDRESS ID', '', iCurrAddrRec);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, '0', 'NAME_ADDRESS RELATIONSHIP_CODE', '', iCurrAddrRec);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, sAction, 'NAME_ADDRESS FUNCTION_CODE', '', iCurrAddrRec);
-
+            var type = parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS ADDRESS_TYPE', '', iCurrAddrRec);
             if (sAction == 'A') {
                 if (sBusLocType.search(txtAddrBusZip.value.substr(0, 2)) != '-1') {
                     sBusLocType = '100'; 		//Business Location
                 } else {
                     sBusLocType = '101'; 		//Minor Business Location
-                }		//if
+                }                //if
+                if (type == '60') {
+                    sBusLocType = '60';
+                    primaryaddresschanged = true;
+                }
+
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, sBusLocType, 'NAME_ADDRESS ADDRESS_TYPE', '', iCurrAddrRec);
                 //parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, sBusLocType, 'NAME_ADDRESS ADDRESS_TYPE', '', 1);
             } else {
@@ -493,6 +499,7 @@
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, txtAddrFaxAreaCode.value + txtAddrFaxPhone1.value + txtAddrFaxPhone2.value, 'NAME_ADDRESS WORK_FAX', '', iCurrAddrRec);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, txtAddrAttn.value, 'NAME_ADDRESS ATTENTION', '', iCurrAddrRec);
             //alert(parent.$g.xmlAccount);
+            debugger;
         }		//PopAddrXml
 
 
@@ -519,21 +526,21 @@
             var source = parent.getEventSource(evt);
 
             iCurrAddrRec = $(source).attr('idx');
-           // alert('loadAddrEditFrame::' + $(source).attr('idx'));
+            // alert('loadAddrEditFrame::' + $(source).attr('idx'));
             LoadAddressValues(iCurrAddrRec);
             for (j = 0; j < iAddressCount; j++) {
-               
+
                 eval('$("#btnAddrEdit' + j + '").attr("disabled","true")');
             }		//for
 
             btnAddrAdd.value = 'Update';
             $('#pNoteAdd').css('display', 'none');
-           
+
             $('#pNoteAdd').css('visibility', 'hidden');
 
-            
+
             $('#pNoteUpd').css('display', 'block');
-           
+
             $('#pNoteUpd').css('visibility', 'visible');
 
             SetDDList(ddAddrType, 'innerText', sAddrType, '')
@@ -584,19 +591,19 @@
 
 
             for (j = 0; j < iAddressCount; j++) {
-              
+
                 eval('$("#btnAddrEdit' + j + '").removeAttr("disabled")');
-                
+
             }		//for
             $(AppError_Add).text('');
-           
+
             iCurrAddrRec = -1;
             btnAddrAdd.value = 'Add';
-          
+
             $('#pNoteUpd').css('display', 'none');
             $('#pNoteUpd').css('visibility', 'hidden');
 
-           
+
             $('#pNoteAdd').css('visibility', 'hidden');
 
             LoadGenericDD(xmlAddressType2, ddAddrType, "DDOWN", false);
@@ -604,57 +611,57 @@
             ddAddrType.selectedIndex = 0;
             $('#ddAddrType').attr('class', 'form-control input-sm');
             txtAddr1.value = '';
-           
+
             $('#txtAddr1').attr('class', 'form-control input-sm');
             txtAddr2.value = '';
-           
+
             $('#txtAddr2').attr('class', 'form-control input-sm');
             txtAddrBusCity.value = '';
-            
+
             $('#txtAddrBusCity').attr('class', 'form-control input-sm');
             SetDDList(ddAddrBusState, '', 'PA');
-            
+
             $('#ddAddrBusState').attr('class', 'form-control input-sm');
             txtAddrBusZip.value = '';
-           
+
             $('#txtAddrBusZip').attr('class', 'form-control input-sm');
 
             txtAddrBusZipExt.value = '';
-           
+
             $('#txtAddrBusZipExt').attr('class', 'form-control input-sm');
             txtAddrAreaCode.value = '';
-           
+
             $('#txtAddrAreaCode').attr('class', 'form-control input-sm');
             txtAddrPhone1.value = '';
-           
+
             $('#txtAddrPhone1').attr('class', 'form-control input-sm');
             txtAddrPhone2.value = '';
-            
+
             $('#txtAddrPhone2').attr('class', 'form-control input-sm');
             txtAddrPhoneExt.value = '';
-           
+
             $('#txtAddrPhoneExt').attr('class', 'form-control input-sm');
             txtAddrFaxAreaCode.value = '';
-           
+
             $('#txtAddrFaxAreaCode').attr('class', 'form-control input-sm');
             txtAddrFaxPhone1.value = '';
-           
+
             $('#txtAddrFaxPhone1').attr('class', 'form-control input-sm');
             txtAddrFaxPhone2.value = '';
-          
+
             $('#txtAddrFaxPhone2').attr('class', 'form-control input-sm');
             txtAddrAttn.value = '';
-            
+
             $('#txtAddrAttn').attr('class', 'form-control input-sm');
             errAddresses = '';
-            
-        }		
+
+        }
 
         function ResolveIframeHeight() {
             //----------Manoranjan------------------------------
             var iframe = window.parent.document.getElementById('ifrmDocwin');
             var container = $('#tab1').css("height");
-            iframe.style.height = container;
+            // iframe.style.height = container;
             //----------------------------------------
         }
         function UpdateAddr() {
@@ -663,13 +670,13 @@
 
             var strAddUpdate = btnAddrAdd.value;
             ValidateAddr();
-           
+
             if ($(AppError_Add).text() == '') {
-              
+
 
                 if (bAddrAddressChanged == true) {
                     if (ac_CheckAddress() == false) {
-                        
+
                         return;
                     }		//if
                 }		//if
@@ -679,34 +686,34 @@
                 PopAddrXml();
 
                 CreateAddressTable();
-                
+
 
                 if (strAddUpdate == 'Add') {
-                    
+
                     $('#AddrTable').css('display', 'none');//style.display = 'none';
                     $('#AddrTable').css('visibility', 'hidden');
 
 
-                  
+
                     $('#divAddressGrid').css('display', 'none');
                     $('#divAddressGrid').css('visibility', 'hidden');
 
-                   
+
                     $('#divAfterAdd').css('display', 'block');
                     $('#divAfterAdd').css('visibility', 'visible');
 
                     lbAddressesChanged = true;
                     bAddrRequired = false;
                     IsAddrShown = true;
-                   
+
                 }		//if
             } else {
                 errAddresses = true;
                 IsAddrShown = true;
-               
+
             }		//if
             ResolveIframeHeight();
-        }		
+        }
 
 
         function setRow(iRow) {
@@ -746,7 +753,7 @@
                 bAddrAddressChanged = true;
             }		//if
             if ($(AcctAddresses).css('display') == 'block') {
-               
+
 
                 $(AppError_Add).text(errAddresses);
                 if (errAddresses != '') {
@@ -755,7 +762,7 @@
                 }
 
             }
-            
+
         }	//ValidateAddr
 
 
@@ -767,15 +774,15 @@
             $('#divAddressGrid').css('display', 'block');
             $('#divAddressGrid').css('visibility', 'visible');
             $(parent.document).find('#imgAddresses').first().attr('src', '../Content/Images/address_tbd.gif');
-           
+
             $(parent.document).find('#imgAddresses').first().attr('title', 'Required');
             lbAddressesChanged = false;
             $(parent.document).find('#imgSubmit').first().attr('src', '../Content/Images/submit_tbd.gif');
-          
+
             $(parent.document).find('#imgSubmit').first().attr('disabled', 'true');
-           
+
             $(parent.document).find('#imgSubmit').first().css('cursor', '');
-           	
+
             $('#btnAddrCancel').attr('disabled', 'true');
             ResolveIframeHeight();
         }	//ReplyYes
@@ -789,16 +796,16 @@
             $('#divAddressGrid').css('display', 'block');
             $('#divAddressGrid').css('visibility', 'visible');
 
-           
+
             $(parent.document).find('#imgAddresses').first().attr('title', '');
             $('#btnAddrCancel').removeAttr('disabled');
             ResolveIframeHeight();
-            alert('You must click Submit in order to save your new Business Location(s).');
+            //alert('You must click Submit in order to save your new Business Location(s).');
 
         }	//ReplyNo
 
         function AC_AddressDisabled(bDisabled) {
-           
+
 
             if (bDisabled == true) {
                 $('#txtAddr1').attr('disabled', bDisabled);
@@ -817,19 +824,19 @@
                 $('#txtAddrBusZipExt').removeAttr('disabled');
             }
 
-           
+
             if (bDisabled == true) {
                 $('#ddAddrType').css('visibility', 'hidden');
                 $('#ddAddrType').css('display', 'none');
-              
+
                 $('#ddAddrBusState').css('visibility', 'hidden');
                 $('#ddAddrBusState').css('display', 'none');
             } else {
-              
+
                 $('#ddAddrType').css('visibility', 'visible');
                 $('#ddAddrType').css('display', 'block');
 
-                
+
                 $('#ddAddrBusState').css('visibility', 'visible');
                 $('#ddAddrBusState').css('display', '');
             }		//if
@@ -876,7 +883,7 @@
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $("#ddTaxIDType option:selected").attr('CODE'), 'NAME_ADDRESS TYPE', '', sMailingAdd);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, txtIdNumber.value.replace(/-/g, ''), 'NAME_ADDRESS ID', '', sMailingAdd);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, '0', 'NAME_ADDRESS RELATIONSHIP_CODE', '', sMailingAdd);
-              
+
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, txtBusAddress1.value, 'NAME_ADDRESS ADDRESS1', '', sMailingAdd);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, txtBusAddress2.value, 'NAME_ADDRESS ADDRESS2', '', sMailingAdd);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, txtBusCity.value, 'NAME_ADDRESS CITY', '', sMailingAdd);
@@ -901,21 +908,21 @@
         function Address_Print(bPrint) {
             if (bPrint == true) {
                 $('#AcctAddresses').css('display', 'block');
-               
+
                 $('#divAddressGrid').css('display', 'block');
-              
+
                 $('#AddrTable').css('display', 'none');
-               
+
                 $('#PrintAddressHdr').css('display', 'block');
                 CreateAddressTable();
             } else {
-               
+
                 $('#AddrTable').css('display', 'block');
-               
+
                 $('#PrintAddressHdr').css('display', 'none');
             }		//if
         }		//Address_Print
-      
+
         $(function () {
             $('#txtAddr1').keyup(function () {
                 var yourInput = $(this).val();
@@ -991,7 +998,7 @@
 <body>
     <%--<div class="tab-content customtabs" id="tab1">   --%>
 
-    <div style="display: block;" id="AcctAddresses" role="tabpanel" class="tab-pane active">
+    <div style="display: none;" id="AcctAddresses" role="tabpanel" class="tab-pane active">
         <h2>Taxpayer Information  |   <span>Addresses</span>  </h2>
         <div class="inner_white-panel">
 

@@ -27,7 +27,7 @@
     var errPartners = '', initPartners = false;
 
     function DisplayPartners() {
-
+        parent.ScrollTop(1);
         var ddPartTaxIDType = document.getElementById('ddPartTaxIDType');
         var ddRelationship = document.getElementById('ddRelationship');
         var ddPartBusState = document.getElementById('ddPartBusState');
@@ -68,12 +68,12 @@
         } else {
             SetDDList(ddPartBusState, '', 'PA');
             txtPartName.focus();
-
-            if (bOfficersRequired == true) {  //bin
+            debugger;
+            if (parent.sNew == true) {  //bin
                 errPartners = 'Filling up officer/partner detail is mandatary';
             }
             if (errPartners != '') {
-                $(AppError).html(errPartners);
+                $(AppError_Part).html(errPartners);
             }		//if
             var menuobj = parent.$(parent.document).find('#mnuAcctPartners').first();
             // parent.MenuProcessCurrent(menuobj);
@@ -98,11 +98,11 @@
 
         arrPart[i++] = [txtPartName, '$(\'#txtPartName\').val()==""', 'Name required'];
         arrPart[i++] = [ddPartTaxIDType, '$("#ddPartTaxIDType option:selected").text()=="Select"', 'Select ID Type'];
-        arrPart[i++] = [ddPartTaxIDType, 'CheckEIN_SSN()==false', 'SSN/EIN & ID combination are duplicated'];
+        //arrPart[i++] = [ddPartTaxIDType, 'CheckEIN_SSN()==false', 'SSN/EIN & ID combination are duplicated'];
         arrPart[i++] = [txtPartTaxID, '$(\'#txtPartTaxID\').val()==""', 'ID Required']
         arrPart[i++] = [txtPartTaxID, '$(\'#txtPartTaxID\').val().length != 9', 'Enter SSN/EIN Number'];
         arrPart[i++] = [txtPartTaxID, 'isNaN($(\'#txtPartTaxID\').val().replace(/-/g,""))==true', 'ID Not Numeric'];
-        arrPart[i++] = [txtPartTaxID, 'CheckEIN_SSN()==false', 'SSN/EIN & ID combination are duplicated'];
+        //arrPart[i++] = [txtPartTaxID, 'CheckEIN_SSN()==false', 'SSN/EIN & ID combination are duplicated'];
         arrPart[i++] = [ddRelationship, '$("#ddRelationship option:selected").text()=="Select"', 'Select Relationship'];
         arrPart[i++] = [txtPartAddr1, '$(\'#txtPartAddr1\').val()==""', 'Address required'];
         arrPart[i++] = [txtPartBusCity, '$(\'#txtPartBusCity\').val()==""', 'City required'];
@@ -207,7 +207,7 @@
         sPartID = FormatSsnEin(sPartIdType,
                 parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS ID', '', j));
         //EGOVWEB-67
-           
+
 
         if (sPartIdType == "SSN") {
             sPartID = 'XXX-XX-XX' + sPartID.substr(9);
@@ -286,7 +286,7 @@
 
 
     function popPartXml(sAction) {
-        
+
         var txtPartName = document.getElementById('txtPartName');
         var ddPartTaxIDType = document.getElementById('ddPartTaxIDType');
         var txtPartTaxID = document.getElementById('txtPartTaxID');
@@ -362,7 +362,7 @@
             eval('$("#btnPartEdit' + j + '").removeAttr("disabled")');
         }		//for	
 
-        $(AppError).text('');
+        $(AppError_Part).text('');
         iCurrPartRec = -1;
         btnPartAdd.value = "Add";
         //	parent.NavWin.btnOfficers.style.backgroundColor = ''
@@ -397,7 +397,7 @@
     }
 
     function CheckEIN_SSN() {
-        var ddPartTaxIDType=document.getElementById('ddPartTaxIDType');
+        var ddPartTaxIDType = document.getElementById('ddPartTaxIDType');
         lsEntType = parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO TYPE', '', 0);
         lsEntID = parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO ENTITY_ID', '', 0);
         lsPartType = $(ddPartTaxIDType.options[ddPartTaxIDType.selectedIndex]).attr('CODE');
@@ -421,7 +421,7 @@
 
         $('#ddPartTaxIDType').attr('class', 'inpNormal');
         $('#txtPartTaxID').attr('class', 'inpNormal');
-       $(AppError).text('');
+        $(AppError_Part).text('');
         return true;
     }		//CheckEIN_SSN
 
@@ -429,10 +429,10 @@
         debugger;
         var btnPartAdd = document.getElementById('btnPartAdd');
         var strAddUpdate = btnPartAdd.value;
-        LoadPartnersError();
+        //LoadPartnersError();
         ValidatePart();
         //	CheckEIN_SSN()
-        if ($(AppError).text() == '') {
+        if ($(AppError_Part).text() == '') {
             //Code1 Validation
             if (bOfficersAddressChanged == true) {
                 if (ac_CheckAddress() == false) {
@@ -440,10 +440,11 @@
                 }		//if
             }		//if
             //End Code1 Validation
+
             popPartXml();
             CreatePartnersTable();
             clearPartEditFrame();
-
+            alert('Click on Submit in order to complete your account registration');
             if (strAddUpdate == 'Add') {
                 IsOfficerShown = true;
                 bOfficersRequired = false;
@@ -459,11 +460,12 @@
 
     function ValidatePart() {
         debugger;
-        ClearErrors();
+        //ClearErrors();
         LoadPartnersError();
         errPartners = ispSetInputErr(arrPart);
         if ($('#AcctPartners').css('display') == 'block') {
-            $(AppError).text(errPartners);
+            $(AppError_Part).text(errPartners);
+            parent.ScrollTop(1);
         }		//if
 
         if (errPartners == '') {
@@ -559,6 +561,17 @@
             $('#PrintPartnersHdr').css('display', 'none');
         } 	//if
     } 	//Address_Print
+    function ValidatePartner() {
+        debugger;
+        if (iPartnerCount == 0 && parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO TYPE', '', 0) == 1) {
+
+            $(AppError_Part).html('Filling up officer/partner detail is mandatary');
+            parent.ScrollTop(1);
+            return false;
+        }
+        else
+            return true;
+    }
 </script>
 
     <title></title>
@@ -575,7 +588,7 @@
                  <%-- sudipta--%>
                  <div class="row">
                                                  <div class="col-lg-12 col-lg-offset-0 no-padding-left">
-                                                  <div id="AppError" class="errormsg no-padding" style="display:block;">
+                                                  <div id="AppError_Part" class="errormsg no-padding" style="display:block;">
                                                    </div>
                                                      </div>
                                              <%-- <div class="col-lg-12 col-xs-12 col-sm-12">
@@ -700,7 +713,7 @@
                 <b>Warning</b> - You are registering with a Social Security Number so no Officers or Partners are allowed.</h4> </div>
                      <div class="form-group" id="divbtnSubmit" style="display: block">
                         <div class="col-sm-offset-3 col-sm-5  text-right">                                                               
-                            <a class="btn btn-default submit_button" onclick="DoSubmit()" id="imgSubmit">Submit</a>
+                            <a class="btn btn-default submit_button" onclick="var temp=ValidatePartner();DoSubmit();return temp;" id="imgSubmit">Submit</a>
                         </div>
                     </div>
                 </div>

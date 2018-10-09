@@ -95,6 +95,8 @@
     var Cancelform = false;
     var NTL = false;
     var logout = false;
+    var bW2 = false;
+    var b1099 = false;
 
     /*SUMAN --------------------------------
     This function may not work properly if called from another page 
@@ -181,11 +183,11 @@
             setTimeout('isMenuLoaded()', 1000);
         } 	//if
     } 	//isLoaded
-   
-    function ispMenu_onclick(mnuElement) {       
+
+    function ispMenu_onclick(mnuElement) {
         debugger;
         var lbSrcElement = false
-        
+
         if ($('#spnMenu').disabled == true) {
             return
         } 	//if
@@ -204,7 +206,7 @@
         var caller_menu_id = mnuElement.id;
         //alert(caller_menu_id);
 
-        if (caller_menu_id == '' || caller_menu_id == 'mnuOnline' || caller_menu_id.search('div') > -1) {
+        if (caller_menu_id == '' || caller_menu_id == 'mnuOnline' || caller_menu_id == 'A1' || caller_menu_id == 'A2' || caller_menu_id.search('div') > -1 || caller_menu_id == 'treeMenu' || caller_menu_id == 'lnkW2' || caller_menu_id == 'lnk1099' || caller_menu_id == 'lnkNTL') {
 
             return;
         } 	//if
@@ -223,15 +225,14 @@
         if (mnuElement.disabled == true) {
             return;
         } 	//if
-       if ($(".cbp-spmenu-push nav").hasClass("cbp-spmenu-open"))
-        {
+        if ($(".cbp-spmenu-push nav").hasClass("cbp-spmenu-open")) {
             //alert('hi');
 
             //$(".cbp-spmenu-push nav").removeClass("cbp-spmenu-open")
 
         }
         //alert(mnuElement.id);
-        var a
+        var a;
         switch (mnuElement.id) {
             case 'mnuHome':
                 var a = window.open('https://beta.phila.gov/departments/department-of-revenue/', 'copdor');
@@ -248,7 +249,7 @@
                 a.focus();
                 break;
                 //EGOVWEB-50 Changed Link
-            case 'mnuTaxForms':                
+            case 'mnuTaxForms':
                 var a = window.open('https://beta.phila.gov/services/payments-assistance-taxes/tax-forms-instructions/', 'copdor');
                 a.focus();
                 break;
@@ -280,22 +281,22 @@
 
         // parent.RightFrame.rows = '*,34'
         $(parent.RightFrame).attr("rows", '*,34');
-      
+
         // MenuProcessCurrent(mnuElement);//Sangha
         window_onload();
         // ispHighlightMenu(mnuElement);//Sangha
         var tempTaxYr;
         var tempid;
-      
+
         switch (mnuElement.id) {
             //Login Section		 
             case 'mnuLogLogon':
             case 'mnuLogNewAcct':
             case 'mnuLogPinApply':
-            //case 'mnuLogPayCoupon':
+                //case 'mnuLogPayCoupon':
             case 'mnuServices':
             case 'mnuServices_a':
-               
+
                 if ($('#divLogin').css('display') == 'none') {
                     $('#divLogout').css("display", "block");
                     //alert('menuelment');
@@ -305,6 +306,7 @@
 
                 $('#divLogin').css("display", "block");
                 $('#mnuServices').css("color", "black");
+
 
                 if (document.getElementById('ifrmDocwin').contentWindow.location.href.search('Login/MainAsp') != -1) {
 
@@ -329,7 +331,9 @@
                         debugger;
                         //  parent.DocWin.ShowForm('LogCoupon');
                         EPaymt = 'TRUE';
+
                         document.getElementById('ifrmDocwin').contentWindow.ShowForm('LogCoupon');
+
                     }
 
                     else if (mnuElement.id == 'mnuServices') {
@@ -349,113 +353,132 @@
 
                 }
                 break;
-            case 'mnuLogPayCoupon':            
-                if (document.getElementById('ifrmDocwin').contentWindow.location.href.search('Login/MainAsp') != -1) {
-                    // parent.DocWin.ShowForm('LogChangePin');
-                    document.getElementById('ifrmDocwin').contentWindow.ShowForm('LogCoupon');
-                } else {
-                    bLoadCoupon = true;
-                    gbElectronicCoupon = false;
-                    //$('#treeMenu ul li:has("div")').find('span:first').removeClass('opened');
-                    //$('#treeMenu ul li:has("div")').find('div').hide();
+            case 'mnuLogPayCoupon':
+                //if (document.getElementById('ifrmDocwin').contentWindow.location.href.search('Login/MainAsp') != -1) {
+                //    // parent.DocWin.ShowForm('LogChangePin');
+                //    document.getElementById('ifrmDocwin').contentWindow.ShowForm('LogCoupon');
+                //} else {
+                bLoadCoupon = true;
+                gbElectronicCoupon = false;
+                //$('#treeMenu ul li:has("div")').find('span:first').removeClass('opened');
+                //$('#treeMenu ul li:has("div")').find('div').hide();
 
-                    fillUserAfterLogin(false, '');
+                fillUserAfterLogin(false, '');
 
-                    //$('#spnMenu').find('.mnuNormal').css('background-color', '');
-                    //  parent.DocWin.location.href = '../Login/MainAsp';//sanghamitra
-                    parent.setFrameUrl('Login/MainAsp');
-                    $('#lnkCoupon').css("display", "block");
-                    $('#lnkEPaymt').css("display", "block");
-                    $('#lnkNTLLI').css("display", "block");
-                    $('#lnkNTL').css("display", "block");
-                    $('#lnkPIN').css("display", "block");                    
-                    $('#lnkUploadLI').css("display", "block");
-                    $('#lnkUpload').css("display", "block");
-                    $('#lnkW2').css("display", "block");
-                    $('#lnk1099').css("display", "block");
-                    $('#divUpload').css("display", "block");
-                    $('#mnuTaxForms').css("display", "block");
-                    $('#mnuRulings').css("display", "block");
-                    $('#divLogin').css("display", "block");
-                    //$('#divAcctInfo').css("display", "block");
-                    //ShowReturns();
+                //$('#spnMenu').find('.mnuNormal').css('background-color', '');
+                //  parent.DocWin.location.href = '../Login/MainAsp';//sanghamitra
+                parent.setFrameUrl('Login/MainAsp');
+                $('#lnkCoupon').css("display", "block");
+                $('#lnkEPaymt').css("display", "block");
+                $('#lnkNTLLI').css("display", "block");
+                $('#lnkNTL').css("display", "block");
+                $('#lnkPIN').css("display", "block");
+                $('#lnkUploadLI').css("display", "block");
+                $('#lnkUpload').css("display", "block");
+                $('#lnkW2').css("display", "block");
+                $('#lnk1099').css("display", "block");
+                $('#divUpload').css("display", "block");
+                $('#mnuTaxForms').css("display", "block");
+                $('#mnuRulings').css("display", "block");
+                $('#divLogin').css("display", "block");
+                //$('#divAcctInfo').css("display", "block");
+                //ShowReturns();
 
-                }
+
+                //}
                 break;
             case 'mnuLogElectronicPay':
-                if (document.getElementById('ifrmDocwin').contentWindow.location.href.search('Login/MainAsp') != -1) {
-                    // parent.DocWin.ShowForm('LogChangePin');
-                    document.getElementById('ifrmDocwin').contentWindow.ShowForm('LogCoupon');
-                } else {
-                    bLoadCoupon = false;
-                    gbElectronicCoupon = true;
-                    //  parent.DocWin.location.href = '../Login/MainAsp';//sanghamitra
-                    fillUserAfterLogin(false, '');
-                    parent.setFrameUrl('Login/MainAsp');
-                    $('#lnkCoupon').css("display", "block");
-                    $('#lnkEPaymt').css("display", "block");
-                    $('#lnkNTLLI').css("display", "block");
-                    $('#lnkNTL').css("display", "block");
-                    $('#lnkUploadLI').css("display", "block");
-                    $('#lnkUpload').css("display", "block");
-                    $('#lnkPIN').css("display", "block");
-                    $('#lnkW2').css("display", "block");
-                    $('#lnk1099').css("display", "block");
-                    $('#divUpload').css("display", "block");
-                    $('#mnuTaxForms').css("display", "block");
-                    $('#mnuRulings').css("display", "block");
-                    $('#divLogin').css("display", "block");
+                //if (document.getElementById('ifrmDocwin').contentWindow.location.href.search('Login/MainAsp') != -1) {
+                //    // parent.DocWin.ShowForm('LogChangePin');
+                //    document.getElementById('ifrmDocwin').contentWindow.ShowForm('LogCoupon');
+                //} else {
+                debugger;
+                bLoadCoupon = false;
+                gbElectronicCoupon = true;
+                //  parent.DocWin.location.href = '../Login/MainAsp';//sanghamitra
+                fillUserAfterLogin(false, '');
+                parent.setFrameUrl('Login/MainAsp');
+                $('#lnkCoupon').css("display", "block");
+                $('#lnkEPaymt').css("display", "block");
+                $('#lnkNTLLI').css("display", "block");
+                $('#lnkNTL').css("display", "block");
+                $('#lnkUploadLI').css("display", "block");
+                $('#lnkUpload').css("display", "block");
+                $('#lnkPIN').css("display", "block");
+                $('#lnkW2').css("display", "block");
+                $('#lnk1099').css("display", "block");
+                $('#divUpload').css("display", "block");
+                $('#mnuTaxForms').css("display", "block");
+                $('#mnuRulings').css("display", "block");
+                $('#divLogin').css("display", "block");
 
-
-                }
+                //}
                 break;
             case 'lnkNTL':
-                bNtlOnly = 'TRUE';
-                // parent.setFrameUrl('Login/MainAsp');
-                bLoadCoupon = true;
-                document.getElementById('ifrmDocwin').contentWindow.DisplayCoupLogin('NTL', 'TRUE');
-                document.getElementById('ifrmDocwin').contentWindow.HidePayCoupon();
+                if (parent.document.getElementById("ancLogin").style.display == "none") {
+                    $('#divLogin').css('display', 'block');
+                    $('#divLogout').css("display", "none");
+                    parent.NTL = true;
+                    parent.setFrameUrl('Login/MainAsp');
+                }
+                else {
+                    bNtlOnly = 'TRUE';
+                    // parent.setFrameUrl('Login/MainAsp');
+                    bLoadCoupon = true;
+                    document.getElementById('ifrmDocwin').contentWindow.DisplayCoupLogin('NTL', 'TRUE');
+                    document.getElementById('ifrmDocwin').contentWindow.HidePayCoupon();
+                }
                 break;
-            //case 'mnuLogElectronicPay':
-            //    if (document.getElementById('ifrmDocwin').contentWindow.location.href.search('Login/MainAsp') != -1) {
-            //        debugger;
-            //        // parent.DocWin.ShowForm('LogChangePin');
-            //        EPaymt = 'TRUE';
-            //        document.getElementById('ifrmDocwin').contentWindow.ShowForm('LogCoupon');
-            //    } else {
-            //       bLoadCoupon = true;
-            //       gbElectronicCoupon = true;
-                    
-            //        //  parent.DocWin.location.href = '../Login/MainAsp';//sanghamitra
-            //        parent.setFrameUrl('Login/MainAsp');
-            //        $('#divLogout').css("display", "block");
-            //        $('#divAcctInfo').css("display", "block");
-            //        ShowReturns();
-            //        EPaymt = 'TRUE';
-            //        ShowForm('LogCoupon');
-            //        //$('#divLogout').css("display", "block");
-            //        //$('#divAcctInfo').css("display", "block");
-            //        //ShowReturns();
+                //case 'mnuLogElectronicPay':
+                //    if (document.getElementById('ifrmDocwin').contentWindow.location.href.search('Login/MainAsp') != -1) {
+                //        debugger;
+                //        // parent.DocWin.ShowForm('LogChangePin');
+                //        EPaymt = 'TRUE';
+                //        document.getElementById('ifrmDocwin').contentWindow.ShowForm('LogCoupon');
+                //    } else {
+                //       bLoadCoupon = true;
+                //       gbElectronicCoupon = true;
 
-            //    }
-            //    break;
+                //        //  parent.DocWin.location.href = '../Login/MainAsp';//sanghamitra
+                //        parent.setFrameUrl('Login/MainAsp');
+                //        $('#divLogout').css("display", "block");
+                //        $('#divAcctInfo').css("display", "block");
+                //        ShowReturns();
+                //        EPaymt = 'TRUE';
+                //        ShowForm('LogCoupon');
+                //        //$('#divLogout').css("display", "block");
+                //        //$('#divAcctInfo').css("display", "block");
+                //        //ShowReturns();
+
+                //    }
+                //    break;
             case 'mnuLogPinChange':
                 debugger;
                 if (document.getElementById('ifrmDocwin').contentWindow.location.href.search('Login/MainAsp') != -1) {
                     // parent.DocWin.ShowForm('LogChangePin');
                     document.getElementById('ifrmDocwin').contentWindow.ShowForm('LogChangePin');
                 } else {
-                    bChangePin = true;
-                    //  parent.DocWin.location.href = '../Login/MainAsp';//sanghamitra
-                    parent.setFrameUrl('Login/MainAsp');
-                   // document.getElementById('ifrmDocwin').contentWindow.ShowForm('LogChangePin');
-                    $('#divLogout').css("display", "block");
-                    $('#divAcctInfo').css("display", "block");
-                    ShowReturns();
+
+                    if (parent.document.getElementById("ancLogin").style.display == "none") {
+                        $('#divLogin').css('display', 'block');
+                        $('#divLogout').css("display", "none");
+                        bChangePin = true;
+                        parent.setFrameUrl('Login/MainAsp');
+                    }
+                    else {
+                        bChangePin = true;
+                        //  parent.DocWin.location.href = '../Login/MainAsp';//sanghamitra
+                        parent.setFrameUrl('Login/MainAsp');
+                        // document.getElementById('ifrmDocwin').contentWindow.ShowForm('LogChangePin');
+                        $('#divLogout').css("display", "block");
+                        $('#divAcctInfo').css("display", "block");
+                        ShowReturns();
+
+                    }
 
                 }
                 break;
-            case 'mnuLogLogout':           
+            case 'mnuLogLogout':
                 debugger;
                 logout = true;
                 parent.$g.xmlAccount = parent.$g.xmlTemplate;
@@ -488,10 +511,10 @@
                     $('#treeMenu ul li:has("div")').find('span:first').removeClass('opened');
                     $('#treeMenu ul li:has("div")').find('div').hide();
 
-                    fillUserAfterLogin(false, '');                  
+                    fillUserAfterLogin(false, '');
                     $('#spnMenu').find('.mnuNormal').css('background-color', '');
                     parent.setFrameUrl('Login/MainAsp');
-                    
+
 
                 }
 
@@ -510,12 +533,7 @@
                 $('#divUpload').css("display", "block");
                 $('#mnuTaxForms').css("display", "block");
                 $('#mnuRulings').css("display", "block");
-                
 
-                
-                
-                
-                
                 break;
             case 'mnuAcctInfo':
                 if (parent.DocWin.location.href.search('ApplyMain') == -1) {
@@ -528,7 +546,7 @@
             case 'mnuAcctAddresses':
             case 'mnuAcctPartners':
             case 'mnuAcctECheck':
-               
+
                 $('#divLogin').css("display", "none");
                 if (mnuElement.id == 'mnuAcctProfile' || mnuElement.id == 'mnuAcctProfile_s') {
                     $('#spnMenu').find('.mnuNormal').css('background-color', '');
@@ -540,10 +558,10 @@
                     $('#divLogout').css("display", "block");
                     $('#mnuOnline').css("display", "none");
                     $('#divAccount').css("display", "block");
-                    if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO NAIC_CODE', '', 0) != '0') {
+                    //if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO NAIC_CODE', '', 0) != '0') {
 
-                        ShowReturns();
-                    }
+                    ShowReturns();
+                    //}
                     if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ECHECK ACCOUNT_NUMBER', '', 0) == '') {
                         // $('#mnuAcctECheck').html('&nbsp;&nbsp;* e-Check enroll');//Sanghamitra
                         $('#mnuAcctECheck').html('<a  class="parent" > &nbsp;&nbsp;* e-Check enroll</a>');//Sanghamitra
@@ -570,7 +588,7 @@
                 break;
 
             case 'mnuPayCurrent':
-              
+
                 // parent.NavWin.ClearImages();
                 $('#divAccount').css("display", "block");
                 $('#divPayments').css("display", "block");
@@ -579,7 +597,7 @@
                 // MenuProcessClear(divAccount);
                 break;
             case 'mnuPayBalances':
-              
+
                 //  parent.NavWin.ClearImages();
                 // parent.DocWin.location.href = '../Balances/AccountBalances';//SAnghamitra
                 parent.setFrameUrl('Balances/AccountBalances');
@@ -589,10 +607,14 @@
                 $('#divPayments1').css("display", "block");//Sanghamitra
                 $('#divReturns').css("display", "block");
                 $('#divAcctInfo').css("display", "block");
+                $('#lnkNTL').css("display", "block");
+                $('#lnkNTLLI').css("display", "block");
+                $('#mnuTaxForms').css("display", "none");
+                $('#mnuRulings').css("display", "none");
                 // MenuProcessClear(divAccount);
                 break;
             case 'mnuPayHistory':
-              
+
                 // parent.NavWin.ClearImages()
                 // parent.DocWin.location.href = '../E-check/Balances'//Sanghamitra
                 parent.setFrameUrl('E-check/Balances');
@@ -603,7 +625,7 @@
                 // MenuProcessClear(divAccount);
                 break;
             case 'mnuPayPayment':
-               
+
                 // parent.NavWin.ClearImages();
                 // parent.DocWin.location.href = '../E-check/Payment';
                 parent.setFrameUrl('E-check/Payment');
@@ -719,7 +741,7 @@
             case 'mnuReERNYear05':
             case 'mnuUO':
             case 'mnuUO1':
-               
+
                 $('#divLogout').css("display", "block");
                 $('#divLogin').css("display", "none"); //manoranjan
                 var bFound = false;
@@ -781,7 +803,7 @@
                 }
                 else if ((mnuElement.id == 'mnuReWage' || mnuElement.id.substr(0, 11) == 'mnuWageYear') &&
                     GetNodeCount(parent.$g.xmlAccount, 'TAX_ACCT ACCOUNT', '1') == 1) {
-                   
+
                     xmlWage = parent.$g.xmlWageTemplate;
                     $('#divWageYear').css("display", "block");
                     bFound = true;
@@ -1029,7 +1051,7 @@
 
                     //EGOVWEB-42 Tobacco(TOB) Form
                 } else if ((mnuElement.id == 'mnuTOB' || mnuElement.id.substr(0, 10) == 'mnuTOBYear') && GetNodeCount(parent.$g.xmlAccount, 'TAX_ACCT ACCOUNT', '27') == 1) { //changed by Manoranjan
-                  
+
                     //parent.DocWin.parent.$x.ispXmlGetRecCount(parent.$g.xmlAccount, 'TAX_ACCT[ACCOUNT = 27]', '') == 1{
                     //&& $(parent.$g.xmlAccount).find("TAX_ACCT").find("ACCOUNT:contains('27')")) {
                     //loadXmlAsync('../XML/AcctTemplate.xml', parseXml_xmlAccount);
@@ -1095,7 +1117,7 @@
                     //EHD - 01152008 - Task UO Return Added
                     //EGOVWEB-74 Restarted U&O -->
                 }
-                else if (mnuElement.id == 'mnuUO') {                  
+                else if (mnuElement.id == 'mnuUO') {
                     //			}else if ((mnuElement.id == 'mnuUO' || 
                     //					mnuElement.id == 'mnuUOYear11' || mnuElement.id == 'mnuReUOYearB') && 
                     //					parent.DocWin.parent.$x.ispXmlGetRecCount(parent.$g.xmlAccount, 'TAX_ACCT[ACCOUNT = 84]', '') == 1) {			
@@ -1117,9 +1139,9 @@
                     parent.setFrameUrl('UO/UOList');
                 } 	//if
                 else if (mnuElement.id == 'mnuUO1') {
-                  
+
                     bFound = true
-                 
+
                     parent.setFrameUrl('UO/UO2011Form');
                 } 	//if
                 if (bFound) {
@@ -1171,10 +1193,10 @@
                     } 	//switch
                 } 	//if
                 // divLogout.style.display = 'block'
-               
+
                 $('#divLogout').css("display", "block");
                 ShowReturns();
-               // loadpage();// binoy
+                // loadpage();// binoy
                 break
         } 	//switch
     } 	//ispMenu_onclick
@@ -1235,6 +1257,7 @@
         a.focus();
     } 	//InstructionLinks
     function ShowReturns() {
+        debugger;
         var lDisplay = false;
 
         //divReturns.style.display = 'none';
@@ -1256,11 +1279,12 @@
         $('#mnuUO').css("display", "none");// by manoranjan
         // mnuReERN.style.display = 'none';
         $('#mnuReERN').css("display", "none");
-        
 
-        
+        //$('#divPayments').css("display", "block");
+        //$('#divPayments1').css("display", "block");//Sanghamitra
 
-        
+
+
         var taxcount = 0;
         TotalAccounts = 0
         //	iCount = parent.$x.ispXmlGetRecCount(parent.$g.parent.$g.xmlAccount, 'TAX_ACCT', '') 
@@ -1270,7 +1294,7 @@
         for (i = 0; i < taxcount; i++) {
 
             acc = $(parent.$g.xmlAccount.xml).find('ACCOUNT').eq(i).text();
-         
+
             if (acc != '0') {
                 if (acc == '1') {
 
@@ -1312,7 +1336,7 @@
                     }
                 }
                 if (lDisplay == true && divLogout.style.display == 'block') {
-                 
+
                     $('#divReturns').css("display", "block");
                     //EGOVWEB-107 Added
                     $('#lnkPIN').css("display", "none");
@@ -1320,17 +1344,16 @@
                     $('#mnuRulings').css("display", "none");
                     $('#lnkCoupon').css("display", "none");
                     $('#lnkEPaymt').css("display", "none");
-                    $('#divUpload').css("display", "none");
-                    $('#lnkNTL').css("display", "none");
-                    $('#lnkNTLLI').css("display", "none");                    
-                    $('#lnkUpload').css("display", "none");
-                    $('#lnkUploadLI').css("display", "none");                    
+                    $('#divUpload').css("display", "block");
+                    $('#lnkNTL').css("display", "block");
+                    $('#lnkNTLLI').css("display", "block");
+                    $('#lnkUpload').css("display", "block");
+                    $('#lnkUploadLI').css("display", "block");
                     $('#divPayments').css("display", "block");
                     $('#divPayments1').css("display", "block");//Sanghamitra
 
                 }
-                if(divLogin.style.display=='block')
-                {
+                if (divLogin.style.display == 'block') {
                     $('#lnkPIN').css("display", "block");
                     $('#lnkCoupon').css("display", "block");
                     $('#lnkEPaymt').css("display", "block");
@@ -1339,8 +1362,8 @@
                     $('#lnkNTLLI').css("display", "block");
                     $('#lnkUploadLI').css("display", "block");
                     $('#lnkUpload').css("display", "block");
-                    
-                    
+
+
                 }
 
                 //if
@@ -1355,7 +1378,7 @@
         //alert(parent.DocWin.parent.$x.ispXmlGetFieldVal(parent.$g.parent.$g.xmlAccount, 'TAX_ACCT[ACCOUNT ="' + taxAcctCode + '"] PRK_ID', ''));
         //GetNodeCount
         //GetInnerNodeText
-        
+
         var a;
         var TwoBtyeDate;
         if (YearMinus1 == true) {
@@ -1426,12 +1449,12 @@
     } 	//ReformatTaxesEndDate
 
     function HideMenuTaxYears() {
-        
+
         //1 = Wage  29 = School  24 = BPT  3 = NPT  27 = Tobacco
         var iWageItems = 0, iSchoolItems = 0, iBPTezItems = 0, iBPTlfItems = 0, iNPTItems = 0, iTobaccoItems = 0;
         ReformatTaxesEndDate();
         var startDate;
-        var prkId;      
+        var prkId;
         a = parent.document.getElementsByTagName('li'); //removed menuwin Sangha
 
         for (i = 0; i < a.length; i++) {
@@ -1570,7 +1593,7 @@
             //mnuBPTlf.style.display = 'none'
         }		//if
         if (iTobaccoItems == 0) {
-           $('#mnuTOB').css("display", "none"); //by manoranjan
+            $('#mnuTOB').css("display", "none"); //by manoranjan
             //mnuTOB.style.display = 'none'
 
         }
@@ -1601,16 +1624,16 @@
         //}
         //else {
         //    var iFrameID1 = parent.document.getElementById('ifrmDocwin');
-            // if (mnuElement.id == 'mnuAcctProfile' || mnuElement.id == 'mnuAcctProfile_s' || mnuElement.id == 'mnuOnline') {
-            //iFrameID1.height = (iFrameID1.contentWindow.document.body.scrollHeight + 70) + "px";
+        // if (mnuElement.id == 'mnuAcctProfile' || mnuElement.id == 'mnuAcctProfile_s' || mnuElement.id == 'mnuOnline') {
+        //iFrameID1.height = (iFrameID1.contentWindow.document.body.scrollHeight + 70) + "px";
 
-            /*  }
-              else {
-                  
-                  iFrameID1.height = (iFrameID1.contentWindow.document.body.scrollHeight + 70) + "px";
-              }*/
+        /*  }
+          else {
+              
+              iFrameID1.height = (iFrameID1.contentWindow.document.body.scrollHeight + 70) + "px";
+          }*/
 
-       
+
 
     } //binoy
 
@@ -1622,9 +1645,9 @@
         sourceid = source.id;
         gsLoginPage = '';
 
-        switch (sourceid) {         
+        switch (sourceid) {
 
-               
+
             case 'lnkCoupon':
             case 'lnkNTL':
             case 'imglnkCoupon':
@@ -1632,29 +1655,75 @@
                 $('#mnuLogPayCoupon').css("cursor", "pointer");
                 //$('#mnuLogPayCoupon').css("color", "blue");
                 debugger;
-                if ((sourceid == 'lnkNTL')) {
+                if ((sourceid == 'lnkNTL') && parent.document.getElementById("ancLogin").style.display == "none") {
                     bNtlOnly = 'TRUE';
                     // parent.setFrameUrl('Login/MainAsp');
                     bLoadCoupon = true;
                     document.getElementById('ifrmDocwin').contentWindow.DisplayCoupLogin('NTL', 'TRUE');
                     document.getElementById('ifrmDocwin').contentWindow.HidePayCoupon();
-                   // $("#lnkCoupon").css("pointer-events", "none");
-
+                    // $("#lnkCoupon").css("pointer-events", "none");
+                    bLoadCoupon = false;
 
                 } 	//if
-                else {
+                else if ((sourceid != 'lnkCoupon')) {
+                    debugger;
                     //$("#lnkNTL").css("pointer-events", "none");
                     //$("#imglnkNTL").css("pointer-events", "none");
                     //$("#lnkPIN").css("pointer-events", "none");
                     //$("#lnkW2").css("pointer-events", "none");
                     //$("#lnk1099").css("pointer-events", "none");
                     //$("#lnkEPaymt").css("pointer-events", "none");
+                    parent.ScrollTop(1);
+                    var oCouponInfo = parent.$g.getXmlDocObj();
+
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ERROR_INFO PROGRAM", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ERROR_INFO ERROR", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ERROR_INFO LINE", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ERROR_INFO MESSAGE", '', 0);
+                    //el_payc_ind = 2;                                          parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, "G", "ENTITY_INFO ENT_TYPE", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, "I", "ENTITY_INFO FUNCTION_CODE", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO ACCOUNT_ID', '', 0), "ENTITY_INFO ENTITY_ID", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ACCT_ID", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO NAME", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ADDRESS1", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ADDRESS2", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ADDRESS3", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO CITY", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO STATE", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ZIP_CODE", '', 0);
+
+                    for (i = 0; i < 200; i++) {
+
+
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT FUNC_CODE", '', i);
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, "0", "TAX_ACCT ACCOUNT", '', i);
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT ACCOUNT_ID", '', i);
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT START_DATE", '', i);
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT END_DATE", '', i);
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT FREQUENCY_CODE", '', i);
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT BRT_ACCOUNT", '', i);
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT BRT_ADDRESS1", '', i);
+
+
+                    }  //for
+                    ispCallXMLForm(parent.$g.xmlPayCoupon, oCouponInfo, "PayCoupon/PayCouponRecv", "");
+                    parent.$g.xmlPayCoupon.loadXML(oCouponInfo.xml);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, 'TRUE', "LOGIN_FROM NTL_ONLY", '', 0)
+                    var tempParameters = 'aaa=2&el_payc_ind=2';
+                    parent.setFrameUrl('PayCoupon/PayCoupon?y=' + tempParameters);
+
+                    //document.getElementById('ifrmDocwin').contentWindow.DisplayCoupLogin('PayCoupon', 'TRUE');
+                    // document.getElementById('ifrmDocwin').contentWindow.HidePayCoupon();
+                    //parent.ScrollTop(1);
+                }
+                else {
                     document.getElementById('ifrmDocwin').contentWindow.DisplayCoupLogin('PayCoupon', 'TRUE');
                     document.getElementById('ifrmDocwin').contentWindow.HidePayCoupon();
+                    parent.ScrollTop(1);
                 }
-                
+
                 break;
-            case 'lnkPIN':                
+            case 'lnkPIN':
                 document.getElementById('ifrmDocwin').contentWindow.ShowForm('LogPinApply');
                 document.getElementById('ifrmDocwin').contentWindow.HideOtherForm();
                 //$("#lnkNTL").css("pointer-events", "none");
@@ -1665,22 +1734,75 @@
                 //$("#lnkEPaymt").css("pointer-events", "none");
                 break;
             case 'lnkW2':
+                debugger;
                 //$("#lnkNTL").css("pointer-events", "none");
                 //$("#imglnkNTL").css("pointer-events", "none");
                 //$("#lnkCoupon").css("pointer-events", "none");
                 //$("#lnkPIN").css("pointer-events", "none");
                 //$("#lnk1099").css("pointer-events", "none");
                 //$("#lnkEPaymt").css("pointer-events", "none");
-                document.getElementById('ifrmDocwin').contentWindow.displayw2();
+                if (parent.document.getElementById("ancLogin").style.display == "none") {
+                    parent.setFrameUrl('Login/MainAsp');
+                    $('#mnuOnline').css("display", "none");
+                    $('#divLogin').css("display", "block");
+                    $('#divReturns').css("display", "none");
+                    $('#mnuLogNewAcct').css("display", "block");
+                    $('#lnkCoupon').css("display", "block");
+                    $('#lnkEPaymt').css("display", "block");
+                    $('#lnkNTLLI').css("display", "block");
+                    $('#lnkNTL').css("display", "block");
+                    $('#lnkUploadLI').css("display", "block");
+                    $('#lnkUpload').css("display", "block");
+                    $('#lnkW2').css("display", "block");
+                    $('#lnk1099').css("display", "block");
+                    $('#divUpload').css("display", "block");
+
+                    bW2 = true;
+                    //parent.document.getElementById('ifrmDocwin').contentWindow.displayw2();
+
+                }
+                else if (parent.document.getElementById("ancLogin").text == "Logout") {
+                    DisplayModal();
+                }
+                else {
+
+                    document.getElementById('ifrmDocwin').contentWindow.displayw2();
+                }
                 break;
             case 'lnk1099':
+                debugger;
                 //$("#lnkNTL").css("pointer-events", "none");
                 //$("#imglnkNTL").css("pointer-events", "none");
                 //$("#lnkCoupon").css("pointer-events", "none");
                 //$("#lnkPIN").css("pointer-events", "none");
                 //$("#lnkW2").css("pointer-events", "none");
                 //$("#lnkEPaymt").css("pointer-events", "none");
-                document.getElementById('ifrmDocwin').contentWindow.display1099();
+                if (parent.document.getElementById("ancLogin").style.display == "none") {
+                    parent.setFrameUrl('Login/MainAsp');
+                    $('#mnuOnline').css("display", "none");
+                    $('#divLogin').css("display", "block");
+                    $('#divReturns').css("display", "none");
+                    $('#mnuLogNewAcct').css("display", "block");
+                    $('#lnkCoupon').css("display", "block");
+                    $('#lnkEPaymt').css("display", "block");
+                    $('#lnkNTLLI').css("display", "block");
+                    $('#lnkNTL').css("display", "block");
+                    $('#lnkUploadLI').css("display", "block");
+                    $('#lnkUpload').css("display", "block");
+                    $('#lnkW2').css("display", "block");
+                    $('#lnk1099').css("display", "block");
+                    $('#divUpload').css("display", "block");
+                    $('#mnuTaxForms').css("display", "block");
+                    $('#mnuRulings').css("display", "block");
+                    //parent.document.getElementById('ifrmDocwin').contentWindow.display1099();
+                    b1099 = true;
+                }
+                else if (parent.document.getElementById("ancLogin").text == "Logout") {
+                    Display1099Modal();
+                }
+                else {
+                    document.getElementById('ifrmDocwin').contentWindow.display1099();
+                }
                 break;
             case 'imglnkEPaymt':
             case 'lnkEPaymt':
@@ -1701,29 +1823,125 @@
                 //$("#imglnkNTL").css("pointer-events", "none");
                 //$("#lnkCoupon").css("pointer-events", "none");
                 //$("#lnkPIN").css("pointer-events", "none");
+
                 //$("#lnkW2").css("pointer-events", "none");
                 //$("#lnk1099").css("pointer-events", "none");
                 document.getElementById('ifrmDocwin').contentWindow.DisplayCoupLogin('EPayment', 'TRUE');
                 document.getElementById('ifrmDocwin').contentWindow.HidePayCoupon();
                 break;
+            case 'mnuoutstandingBalance':
+                debugger;
+                document.getElementById('ifrmDocwin').contentWindow.ShowForm('OutStandingBalance');
+                document.getElementById('ifrmDocwin').contentWindow.ShowOB();
+                $('#mnuTaxForms').css("display", "block");
+                $('#mnuRulings').css("display", "block");
+                $('#lnkCoupon').css("display", "none");
+                $('#lnkEPaymt').css("display", "none");
+                $('#divUpload').css("display", "block");
+                $('#lnkNTL').css("display", "block");
+                $('#lnkNTLLI').css("display", "block");
+                $('#lnkUpload').css("display", "block");
+                $('#lnkUploadLI').css("display", "block");
+                $('#divPayments').css("display", "block");
+                $('#divPayments1').css("display", "block");
+                break;
 
         } 	//switch
     } 	//MainLinks
+
+
+    function DisplayModal() {
+
+        var alpha = new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+
+        var i, j;
+
+        for (i = 0; i < 6; i++) {
+            var a = alpha[Math.floor(Math.random() * alpha.length)];
+            var b = alpha[Math.floor(Math.random() * alpha.length)];
+            var c = alpha[Math.floor(Math.random() * alpha.length)];
+            var d = alpha[Math.floor(Math.random() * alpha.length)];
+            var e = alpha[Math.floor(Math.random() * alpha.length)];
+            var f = alpha[Math.floor(Math.random() * alpha.length)];
+            var g = alpha[Math.floor(Math.random() * alpha.length)];
+        }
+        var code = a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e + ' ' + f + ' ' + g;
+        document.getElementById("mainCaptcha").value = code;
+
+        //$("#myModal").css("display", "block");   //tanu-
+        $("#divCaptha_W2").css("display", "block");
+        $('#txtInput').val('');
+        $("#progress-wrp .progress-bar").css("width", "0%");
+        $("#progress-wrp .status").text("0%");
+    }
+    function CloseModalAfterlogin() {
+        $("#divCaptha_W2").css("display", "none");  //tanu
+        $('#fileToUpload').val('');
+        $('#lblMessageW2AfterLogin').text('');
+    }
+
+    function CloseModal_W2() {
+        $("#myModal_W2").css("display", "none");  //tanu
+        //$("#myModal").css("display", "none");
+        $('#fileToUpload').val('');
+        $('#lblMessageW2AfterLogin').text('');
+    }
+    function Display1099Modal() {
+
+        var alpha = new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+
+        var i, j;
+        debugger;
+        for (i = 0; i < 6; i++) {
+            var a = alpha[Math.floor(Math.random() * alpha.length)];
+            var b = alpha[Math.floor(Math.random() * alpha.length)];
+            var c = alpha[Math.floor(Math.random() * alpha.length)];
+            var d = alpha[Math.floor(Math.random() * alpha.length)];
+            var e = alpha[Math.floor(Math.random() * alpha.length)];
+            var f = alpha[Math.floor(Math.random() * alpha.length)];
+            var g = alpha[Math.floor(Math.random() * alpha.length)];
+        }
+        var code = a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e + ' ' + f + ' ' + g;
+        document.getElementById("mainCaptcha_1099").value = code;
+
+
+        //$("#myModal1").css("display", "block");
+        $("#divCaptha_1099").css("display", "block");
+        $('#txtInput_1099').val('');
+        $("#progress1099-wrp .progress1099-bar").css("width", "0%");
+        $("#progress1099-wrp .status1099").text("0%");
+    }
+    function Close1099ModalAfterlogin() {
+        debugger;
+        $("#divCaptha_1099").css("display", "none");
+        $('#fileToUpload1').val('');
+        $('#lblMessage1099AfterLogin').text('');
+        $('#spanfile1099Afterlogin').text('');
+
+    }
+    function Close1099Modal_1099() {
+        debugger;
+        $("#myModal_1099").css("display", "none");
+        $('#fileToUpload1').val('');
+        //$("#myModal1").css("display", "none");
+        $('#lblMessage1099AfterLogin').text('');
+        $('#spanfile1099Afterlogin').text('');
+    }
 </script>
 
 
 
 
-<div class="cbp-spmenu-push">
-    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left">
+<div class="" id="div_menu">
+    <nav class="cbp-spmenu-vertical" style="margin-top:150px;width:280px;">
 
 
 
-        <h3>Inside our Site
-                    <button class="toggle-menu menu-left jPushMenuBtn" style="position: relative; left: 110px;"></button>
+        <h3 class="menu-header-class">Inside our Site
+                    <%--<button class="toggle-menu menu-left jPushMenuBtn" style="position: relative; left: 110px;"></button>--%>
         </h3>
         <span id="spnMenu" onclick="ispMenu_onclick()">
-            <div id="treeMenu">
+            <div id="treeMenu" style="height:500px" >
 
                 <ul class="nano-content">
                     <li class="mnuNormal"><span id="mnuHome" class="closed statics tree-menu-alink">Revenue Home Page</span></li>
@@ -1736,14 +1954,16 @@
 
 
                      
-                    <li class="mnuNormal"><span id="" class="closed"><a style="cursor:context-menu;" id="" class="parent sub-static-menu-account-maintop">Online Services Home</a></span></li>
+                    <li class="mnuNormal"><span id="" class="closed"><a href="#" style="cursor:context-menu;" id="A1" class="parent sub-static-menu-account-maintop">Online Services Home</a></span></li>
                     <div id="divLogin" style="display:block;"> 
                      <li class="mnuNormal"><span id="mnuLogLogon" class="closed statics tree-menu-alink sub-static-menu-account">-  Account Log-In</span></li>
-                    <li class="mnuNormal"><span id="lnkPIN" class="closed statics tree-menu-alink sub-static-menu-account" onclick="MainLinks(event)">-  Apply for an Account</span></li>
+                    <li class="mnuNormal"><span id="lnkPIN" class="closed statics tree-menu-alink sub-static-menu-account" onclick="MainLinks(event)">-  Apply for a PIN</span></li>
                     <li class="mnuNormal"><span id="mnuLogNewAcct" class="closed statics tree-menu-alink sub-static-menu-account">-  Register for an Account</span></li>
+                    <li class="mnuNormal"><span class="closed statics tree-menu-alink sub-static-menu-account" id="mnuoutstandingBalance" onclick="MainLinks(event)">-  Outstanding Balance</span></li>
+
                     <li class="mnuNormal"><span id="lnkCoupon" class="closed statics tree-menu-alink sub-static-menu-account" onclick="MainLinks(event)">-  Print a Payment Coupon</span></li>
                     <li class="mnuNormal"><span id="lnkEPaymt" class="closed statics tree-menu-alink sub-static-menu-account sub-static-menu-account-last" onclick="MainLinks(event)">-  Make an Electronic Payment</span></li>
-
+                    
                     </div>
                     <div id="divLogout" style="display:none">
                      <li class="mnuNormal"><span id="mnuLogLogout" class="closed statics tree-menu-alink sub-static-menu-account">-  Logout</span></li>
@@ -1801,13 +2021,13 @@
                         
                         <div style="display: none;">
                             <ul>
-                                <li id="" class="test"><span class="closed"><a href="#" class="parent submenu">Account Information</a></span>
+                                <li id="Li1" class="test"><span class="closed"><a href="#" class="parent submenu">Account Information</a></span>
                                     <div style="background: #666; display: none;">
                                         <ul class="bullet-list-type">
-                                            <li id="" onclick="document.getElementById('ifrmDocwin').contentWindow.ShowForm('AcctProfile');" class="mnuNormal year_spacing">Profile</li>
-                                            <li id="" onclick="document.getElementById('ifrmDocwin').contentWindow.ShowForm('AcctTaxes');" class="mnuNormal year_spacing">Accounts</li>
-                                            <li id="" onclick="document.getElementById('ifrmDocwin').contentWindow.ValidateProf();document.getElementById('ifrmDocwin').contentWindow.ShowForm('AcctAddresses');" class="mnuNormal year_spacing">Addresses</li>
-                                            <li id="" onclick="document.getElementById('ifrmDocwin').contentWindow.ShowForm('AcctPartners');" class="mnuNormal year_spacing">Partners/Officers</li>
+                                            <li id="Li2" onclick="document.getElementById('ifrmDocwin').contentWindow.ShowForm('AcctProfile');" class="mnuNormal year_spacing">Profile</li>
+                                            <li id="Li3" onclick="document.getElementById('ifrmDocwin').contentWindow.ShowForm('AcctTaxes');" class="mnuNormal year_spacing">Accounts</li>
+                                            <li id="Li4" onclick="document.getElementById('ifrmDocwin').contentWindow.ValidateProf();document.getElementById('ifrmDocwin').contentWindow.ShowForm('AcctAddresses');" class="mnuNormal year_spacing">Addresses</li>
+                                            <li id="Li5" onclick="document.getElementById('ifrmDocwin').contentWindow.ShowForm('AcctPartners');" class="mnuNormal year_spacing">Partners/Officers</li>
                                           <%--  <li id="" class="mnuNormal year_spacing">E-Check</li>--%>
                                         </ul>
                                     </div>
@@ -1987,6 +2207,8 @@
 
     </nav>
 </div>
+ <% Html.RenderAction("CapchaFile_W2", "Menu"); %>
+ <% Html.RenderAction("CapchaFile_1099", "Menu"); %>
 
 <%--<script type="text/javascript" src="Content/js/jquery.js"></script>--%>
 <script type="text/javascript" src="Content/js/bootstrap.min.js"></script>

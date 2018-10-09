@@ -1017,3 +1017,37 @@ E:\eGOV_New_Version\Suman\18.1.18\eGOV-PHASE II\CopRevenueGov2\bin\System.Web.We
 E:\eGOV_New_Version\Suman\18.1.18\eGOV-PHASE II\CopRevenueGov2\obj\Debug\CopRevenueGov2.csprojResolveAssemblyReference.cache
 E:\eGOV_New_Version\Suman\18.1.18\eGOV-PHASE II\CopRevenueGov2\obj\Debug\CopRevenueGov2.dll
 E:\eGOV_New_Version\Suman\18.1.18\eGOV-PHASE II\CopRevenueGov2\obj\Debug\CopRevenueGov2.pdb
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\NLog.config
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\CopRevenueGov2.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\CopRevenueGov2.pdb
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\AspUtils.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\COPXmlFactory.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\Microsoft.Web.Infrastructure.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\Newtonsoft.Json.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\NLog.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Net.Http.Formatting.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.Helpers.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.Http.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.Http.WebHost.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.Mvc.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.Razor.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.WebPages.Deployment.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.WebPages.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.WebPages.Razor.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\AspUtils.pdb
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\COPXmlFactory.pdb
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\Newtonsoft.Json.xml
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\NLog.xml
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Net.Http.Formatting.xml
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.Http.xml
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.Http.WebHost.xml
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.Helpers.xml
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.Mvc.xml
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.Razor.xml
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.WebPages.xml
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.WebPages.Deployment.xml
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\bin\System.Web.WebPages.Razor.xml
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\obj\Debug\CopRevenueGov2.csprojResolveAssemblyReference.cache
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\obj\Debug\CopRevenueGov2.dll
+E:\eGovPhase2\eGovPhase2\CopRevenueGov2\obj\Debug\CopRevenueGov2.pdb

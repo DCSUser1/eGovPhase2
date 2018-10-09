@@ -26,17 +26,17 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="TIPSACCDSOAP11Binding", Namespace="http://namespace.softwareag.com/entirex/xml/mapping")]
-    public partial class RT02E030 : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    [System.Web.Services.WebServiceBindingAttribute(Name="TIPSACCTSOAP11Binding", Namespace="http://namespace.softwareag.com/entirex/xml/mapping")]
+    public partial class TT030E00 : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback CallRT02E030OperationCompleted;
+        private System.Threading.SendOrPostCallback CallTT030E00OperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public RT02E030() {
-            //this.Url = global::CopRevenueGov2.Properties.Settings.Default.CopRevenueGov2_RTTIE030_SrvRef_RT02E030;
-            this.Url = "http://ISTEST.City.Phila.Local:10010/wsstack/services/RT02E030.TIPSACCDSOAP11Port/";
+        public TT030E00() {
+            this.Url = "http://192.168.204.70:10010/wsstack/services/TT030E00.TIPSACCTSOAP12Port/";
+                
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -71,34 +71,34 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
         }
         
         /// <remarks/>
-        public event CallRT02E030CompletedEventHandler CallRT02E030Completed;
+        public event CallTT030E00CompletedEventHandler CallTT030E00Completed;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("RT02E030", RequestElementName="RT02E030", RequestNamespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030", ResponseElementName="RT02E030Response", ResponseNamespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("TT030E00", RequestElementName="TT030E00", RequestNamespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00", ResponseElementName="TT030E00Response", ResponseNamespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("_SMA", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RT02E030Response_SMA CallRT02E030(
-                    [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT02E030_SMA _SMA, 
-                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-BPT", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT02E030_ELFBPT _ELFBPT, 
-                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-PG1", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT02E030_ELFPG1 _ELFPG1, 
-                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHA", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT02E030_ELFSCHA _ELFSCHA, 
-                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHB", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT02E030_ELFSCHB _ELFSCHB, 
-                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHC1", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT02E030_ELFSCHC1 _ELFSCHC1, 
-                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHD", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT02E030_ELFSCHD _ELFSCHD, 
-                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHE", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT02E030_ELFSCHE _ELFSCHE, 
-                    [System.Xml.Serialization.XmlElementAttribute("_NEW2014-FIELDS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT02E030_NEW2014FIELDS _NEW2014FIELDS, 
-                    [System.Xml.Serialization.XmlElementAttribute("_NEW2015-FIELDS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT02E030_NEW2015FIELDS _NEW2015FIELDS, 
-                    [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT02E030_SERR _SERR, 
-                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-BPT", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT02E030Response_ELFBPT _ELFBPT1, 
-                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-PG1", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT02E030Response_ELFPG1 _ELFPG11, 
-                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHA", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT02E030Response_ELFSCHA _ELFSCHA1, 
-                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHB", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT02E030Response_ELFSCHB _ELFSCHB1, 
-                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHC1", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT02E030Response_ELFSCHC1 _ELFSCHC11, 
-                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHD", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT02E030Response_ELFSCHD _ELFSCHD1, 
-                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHE", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT02E030Response_ELFSCHE _ELFSCHE1, 
-                    [System.Xml.Serialization.XmlElementAttribute("_NEW2014-FIELDS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT02E030Response_NEW2014FIELDS _NEW2014FIELDS1, 
-                    [System.Xml.Serialization.XmlElementAttribute("_NEW2015-FIELDS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT02E030Response_NEW2015FIELDS _NEW2015FIELDS1, 
-                    [System.Xml.Serialization.XmlElementAttribute("_SERR", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT02E030Response_SERR _SERR1) {
-            object[] results = this.Invoke("CallRT02E030", new object[] {
+        public TT030E00Response_SMA CallTT030E00(
+                    [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT030E00_SMA _SMA, 
+                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-BPT", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT030E00_ELFBPT _ELFBPT, 
+                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-PG1", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT030E00_ELFPG1 _ELFPG1, 
+                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHA", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT030E00_ELFSCHA _ELFSCHA, 
+                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHB", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT030E00_ELFSCHB _ELFSCHB, 
+                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHC1", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT030E00_ELFSCHC1 _ELFSCHC1, 
+                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHD", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT030E00_ELFSCHD _ELFSCHD, 
+                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHE", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT030E00_ELFSCHE _ELFSCHE, 
+                    [System.Xml.Serialization.XmlElementAttribute("_NEW2014-FIELDS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT030E00_NEW2014FIELDS _NEW2014FIELDS, 
+                    [System.Xml.Serialization.XmlElementAttribute("_NEW2015-FIELDS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT030E00_NEW2015FIELDS _NEW2015FIELDS, 
+                    [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT030E00_SERR _SERR, 
+                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-BPT", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT030E00Response_ELFBPT _ELFBPT1, 
+                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-PG1", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT030E00Response_ELFPG1 _ELFPG11, 
+                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHA", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT030E00Response_ELFSCHA _ELFSCHA1, 
+                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHB", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT030E00Response_ELFSCHB _ELFSCHB1, 
+                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHC1", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT030E00Response_ELFSCHC1 _ELFSCHC11, 
+                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHD", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT030E00Response_ELFSCHD _ELFSCHD1, 
+                    [System.Xml.Serialization.XmlElementAttribute("_E-LF-SCHE", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT030E00Response_ELFSCHE _ELFSCHE1, 
+                    [System.Xml.Serialization.XmlElementAttribute("_NEW2014-FIELDS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT030E00Response_NEW2014FIELDS _NEW2014FIELDS1, 
+                    [System.Xml.Serialization.XmlElementAttribute("_NEW2015-FIELDS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT030E00Response_NEW2015FIELDS _NEW2015FIELDS1, 
+                    [System.Xml.Serialization.XmlElementAttribute("_SERR", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT030E00Response_SERR _SERR1) {
+            object[] results = this.Invoke("CallTT030E00", new object[] {
                         _SMA,
                         _ELFBPT,
                         _ELFPG1,
@@ -110,30 +110,30 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
                         _NEW2014FIELDS,
                         _NEW2015FIELDS,
                         _SERR});
-            _ELFBPT1 = ((RT02E030Response_ELFBPT)(results[1]));
-            _ELFPG11 = ((RT02E030Response_ELFPG1)(results[2]));
-            _ELFSCHA1 = ((RT02E030Response_ELFSCHA)(results[3]));
-            _ELFSCHB1 = ((RT02E030Response_ELFSCHB)(results[4]));
-            _ELFSCHC11 = ((RT02E030Response_ELFSCHC1)(results[5]));
-            _ELFSCHD1 = ((RT02E030Response_ELFSCHD)(results[6]));
-            _ELFSCHE1 = ((RT02E030Response_ELFSCHE)(results[7]));
-            _NEW2014FIELDS1 = ((RT02E030Response_NEW2014FIELDS)(results[8]));
-            _NEW2015FIELDS1 = ((RT02E030Response_NEW2015FIELDS)(results[9]));
-            _SERR1 = ((RT02E030Response_SERR)(results[10]));
-            return ((RT02E030Response_SMA)(results[0]));
+            _ELFBPT1 = ((TT030E00Response_ELFBPT)(results[1]));
+            _ELFPG11 = ((TT030E00Response_ELFPG1)(results[2]));
+            _ELFSCHA1 = ((TT030E00Response_ELFSCHA)(results[3]));
+            _ELFSCHB1 = ((TT030E00Response_ELFSCHB)(results[4]));
+            _ELFSCHC11 = ((TT030E00Response_ELFSCHC1)(results[5]));
+            _ELFSCHD1 = ((TT030E00Response_ELFSCHD)(results[6]));
+            _ELFSCHE1 = ((TT030E00Response_ELFSCHE)(results[7]));
+            _NEW2014FIELDS1 = ((TT030E00Response_NEW2014FIELDS)(results[8]));
+            _NEW2015FIELDS1 = ((TT030E00Response_NEW2015FIELDS)(results[9]));
+            _SERR1 = ((TT030E00Response_SERR)(results[10]));
+            return ((TT030E00Response_SMA)(results[0]));
         }
         
         /// <remarks/>
-        public void CallRT02E030Async(RT02E030_SMA _SMA, RT02E030_ELFBPT _ELFBPT, RT02E030_ELFPG1 _ELFPG1, RT02E030_ELFSCHA _ELFSCHA, RT02E030_ELFSCHB _ELFSCHB, RT02E030_ELFSCHC1 _ELFSCHC1, RT02E030_ELFSCHD _ELFSCHD, RT02E030_ELFSCHE _ELFSCHE, RT02E030_NEW2014FIELDS _NEW2014FIELDS, RT02E030_NEW2015FIELDS _NEW2015FIELDS, RT02E030_SERR _SERR) {
-            this.CallRT02E030Async(_SMA, _ELFBPT, _ELFPG1, _ELFSCHA, _ELFSCHB, _ELFSCHC1, _ELFSCHD, _ELFSCHE, _NEW2014FIELDS, _NEW2015FIELDS, _SERR, null);
+        public void CallTT030E00Async(TT030E00_SMA _SMA, TT030E00_ELFBPT _ELFBPT, TT030E00_ELFPG1 _ELFPG1, TT030E00_ELFSCHA _ELFSCHA, TT030E00_ELFSCHB _ELFSCHB, TT030E00_ELFSCHC1 _ELFSCHC1, TT030E00_ELFSCHD _ELFSCHD, TT030E00_ELFSCHE _ELFSCHE, TT030E00_NEW2014FIELDS _NEW2014FIELDS, TT030E00_NEW2015FIELDS _NEW2015FIELDS, TT030E00_SERR _SERR) {
+            this.CallTT030E00Async(_SMA, _ELFBPT, _ELFPG1, _ELFSCHA, _ELFSCHB, _ELFSCHC1, _ELFSCHD, _ELFSCHE, _NEW2014FIELDS, _NEW2015FIELDS, _SERR, null);
         }
         
         /// <remarks/>
-        public void CallRT02E030Async(RT02E030_SMA _SMA, RT02E030_ELFBPT _ELFBPT, RT02E030_ELFPG1 _ELFPG1, RT02E030_ELFSCHA _ELFSCHA, RT02E030_ELFSCHB _ELFSCHB, RT02E030_ELFSCHC1 _ELFSCHC1, RT02E030_ELFSCHD _ELFSCHD, RT02E030_ELFSCHE _ELFSCHE, RT02E030_NEW2014FIELDS _NEW2014FIELDS, RT02E030_NEW2015FIELDS _NEW2015FIELDS, RT02E030_SERR _SERR, object userState) {
-            if ((this.CallRT02E030OperationCompleted == null)) {
-                this.CallRT02E030OperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallRT02E030OperationCompleted);
+        public void CallTT030E00Async(TT030E00_SMA _SMA, TT030E00_ELFBPT _ELFBPT, TT030E00_ELFPG1 _ELFPG1, TT030E00_ELFSCHA _ELFSCHA, TT030E00_ELFSCHB _ELFSCHB, TT030E00_ELFSCHC1 _ELFSCHC1, TT030E00_ELFSCHD _ELFSCHD, TT030E00_ELFSCHE _ELFSCHE, TT030E00_NEW2014FIELDS _NEW2014FIELDS, TT030E00_NEW2015FIELDS _NEW2015FIELDS, TT030E00_SERR _SERR, object userState) {
+            if ((this.CallTT030E00OperationCompleted == null)) {
+                this.CallTT030E00OperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallTT030E00OperationCompleted);
             }
-            this.InvokeAsync("CallRT02E030", new object[] {
+            this.InvokeAsync("CallTT030E00", new object[] {
                         _SMA,
                         _ELFBPT,
                         _ELFPG1,
@@ -144,13 +144,13 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
                         _ELFSCHE,
                         _NEW2014FIELDS,
                         _NEW2015FIELDS,
-                        _SERR}, this.CallRT02E030OperationCompleted, userState);
+                        _SERR}, this.CallTT030E00OperationCompleted, userState);
         }
         
-        private void OnCallRT02E030OperationCompleted(object arg) {
-            if ((this.CallRT02E030Completed != null)) {
+        private void OnCallTT030E00OperationCompleted(object arg) {
+            if ((this.CallTT030E00Completed != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.CallRT02E030Completed(this, new CallRT02E030CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.CallTT030E00Completed(this, new CallTT030E00CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -178,8 +178,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030_SMA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00_SMA {
         
         private string _PROGRAMField;
         
@@ -239,8 +239,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030_ELFBPT {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00_ELFBPT {
         
         private string aCCOUNTIDField;
         
@@ -547,8 +547,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030_ELFPG1 {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00_ELFPG1 {
         
         private string tAXONNETXField;
         
@@ -738,8 +738,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030_ELFSCHA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00_ELFSCHA {
         
         private string nETINCOMELOSSXField;
         
@@ -903,8 +903,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030_ELFSCHB {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00_ELFSCHB {
         
         private string _NETINCOMEXField;
         
@@ -1185,8 +1185,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030_ELFSCHC1 {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00_ELFSCHC1 {
         
         private string _PROPERTYPHILAXField;
         
@@ -1337,8 +1337,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030_ELFSCHD {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00_ELFSCHD {
         
         private string _GROSSSALESXField;
         
@@ -1528,8 +1528,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030_ELFSCHE {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00_ELFSCHE {
         
         private string _MALTRECEIPTSXField;
         
@@ -1758,8 +1758,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030_NEW2014FIELDS {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00_NEW2014FIELDS {
         
         private string _STATNETDEDUCTIONAXField;
         
@@ -1806,8 +1806,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030_NEW2015FIELDS {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00_NEW2015FIELDS {
         
         private string _ADJUSTEDNETINCOMEAXField;
         
@@ -1854,8 +1854,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030_SERR {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00_SERR {
         
         private string _SERRPROGRAMField;
         
@@ -1954,8 +1954,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030Response_SMA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00Response_SMA {
         
         private string _PROGRAMField;
         
@@ -2015,8 +2015,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030Response_ELFBPT {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00Response_ELFBPT {
         
         private string aCCOUNTIDField;
         
@@ -2323,8 +2323,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030Response_ELFPG1 {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00Response_ELFPG1 {
         
         private string tAXONNETXField;
         
@@ -2514,8 +2514,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030Response_ELFSCHA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00Response_ELFSCHA {
         
         private string nETINCOMELOSSXField;
         
@@ -2679,8 +2679,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030Response_ELFSCHB {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00Response_ELFSCHB {
         
         private string _NETINCOMEXField;
         
@@ -2961,8 +2961,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030Response_ELFSCHC1 {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00Response_ELFSCHC1 {
         
         private string _PROPERTYPHILAXField;
         
@@ -3113,8 +3113,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030Response_ELFSCHD {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00Response_ELFSCHD {
         
         private string _GROSSSALESXField;
         
@@ -3304,8 +3304,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030Response_ELFSCHE {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00Response_ELFSCHE {
         
         private string _MALTRECEIPTSXField;
         
@@ -3534,8 +3534,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030Response_NEW2014FIELDS {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00Response_NEW2014FIELDS {
         
         private string _STATNETDEDUCTIONAXField;
         
@@ -3582,8 +3582,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030Response_NEW2015FIELDS {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00Response_NEW2015FIELDS {
         
         private string _ADJUSTEDNETINCOMEAXField;
         
@@ -3630,8 +3630,8 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT02E030")]
-    public partial class RT02E030Response_SERR {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT030E00")]
+    public partial class TT030E00Response_SERR {
         
         private string _SERRPROGRAMField;
         
@@ -3727,106 +3727,106 @@ namespace CopRevenueGov2.RTTIE030_SrvRef {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    public delegate void CallRT02E030CompletedEventHandler(object sender, CallRT02E030CompletedEventArgs e);
+    public delegate void CallTT030E00CompletedEventHandler(object sender, CallTT030E00CompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class CallRT02E030CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class CallTT030E00CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal CallRT02E030CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal CallTT030E00CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public RT02E030Response_SMA Result {
+        public TT030E00Response_SMA Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT02E030Response_SMA)(this.results[0]));
+                return ((TT030E00Response_SMA)(this.results[0]));
             }
         }
         
         /// <remarks/>
-        public RT02E030Response_ELFBPT _ELFBPT1 {
+        public TT030E00Response_ELFBPT _ELFBPT1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT02E030Response_ELFBPT)(this.results[1]));
+                return ((TT030E00Response_ELFBPT)(this.results[1]));
             }
         }
         
         /// <remarks/>
-        public RT02E030Response_ELFPG1 _ELFPG11 {
+        public TT030E00Response_ELFPG1 _ELFPG11 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT02E030Response_ELFPG1)(this.results[2]));
+                return ((TT030E00Response_ELFPG1)(this.results[2]));
             }
         }
         
         /// <remarks/>
-        public RT02E030Response_ELFSCHA _ELFSCHA1 {
+        public TT030E00Response_ELFSCHA _ELFSCHA1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT02E030Response_ELFSCHA)(this.results[3]));
+                return ((TT030E00Response_ELFSCHA)(this.results[3]));
             }
         }
         
         /// <remarks/>
-        public RT02E030Response_ELFSCHB _ELFSCHB1 {
+        public TT030E00Response_ELFSCHB _ELFSCHB1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT02E030Response_ELFSCHB)(this.results[4]));
+                return ((TT030E00Response_ELFSCHB)(this.results[4]));
             }
         }
         
         /// <remarks/>
-        public RT02E030Response_ELFSCHC1 _ELFSCHC11 {
+        public TT030E00Response_ELFSCHC1 _ELFSCHC11 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT02E030Response_ELFSCHC1)(this.results[5]));
+                return ((TT030E00Response_ELFSCHC1)(this.results[5]));
             }
         }
         
         /// <remarks/>
-        public RT02E030Response_ELFSCHD _ELFSCHD1 {
+        public TT030E00Response_ELFSCHD _ELFSCHD1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT02E030Response_ELFSCHD)(this.results[6]));
+                return ((TT030E00Response_ELFSCHD)(this.results[6]));
             }
         }
         
         /// <remarks/>
-        public RT02E030Response_ELFSCHE _ELFSCHE1 {
+        public TT030E00Response_ELFSCHE _ELFSCHE1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT02E030Response_ELFSCHE)(this.results[7]));
+                return ((TT030E00Response_ELFSCHE)(this.results[7]));
             }
         }
         
         /// <remarks/>
-        public RT02E030Response_NEW2014FIELDS _NEW2014FIELDS1 {
+        public TT030E00Response_NEW2014FIELDS _NEW2014FIELDS1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT02E030Response_NEW2014FIELDS)(this.results[8]));
+                return ((TT030E00Response_NEW2014FIELDS)(this.results[8]));
             }
         }
         
         /// <remarks/>
-        public RT02E030Response_NEW2015FIELDS _NEW2015FIELDS1 {
+        public TT030E00Response_NEW2015FIELDS _NEW2015FIELDS1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT02E030Response_NEW2015FIELDS)(this.results[9]));
+                return ((TT030E00Response_NEW2015FIELDS)(this.results[9]));
             }
         }
         
         /// <remarks/>
-        public RT02E030Response_SERR _SERR1 {
+        public TT030E00Response_SERR _SERR1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT02E030Response_SERR)(this.results[10]));
+                return ((TT030E00Response_SERR)(this.results[10]));
             }
         }
     }

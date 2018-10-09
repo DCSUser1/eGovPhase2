@@ -10,13 +10,13 @@ using System.Xml;
 
 namespace CopRevenueGov2.Helpers
 {
-    
+
     public class RTTIE035 : CopRestServiceBase, ICopSoapService
-    {        
+    {
 
         public static void Init()
         {
-           
+
         }
 
         public static string CallService(string Request)
@@ -91,14 +91,14 @@ namespace CopRevenueGov2.Helpers
         private static COPXmlFactory.RTTIE035.UOFORM __RTTIE035_F_I(COPXmlFactory.RTTIE035.UOFORM e)
         {
 
-            
-            UOForm_RTTIE035_SrvRef.RTTIE035_EUOL _EUOL = new UOForm_RTTIE035_SrvRef.RTTIE035_EUOL();
-            UOForm_RTTIE035_SrvRef.RTTIE035 serv_req = new UOForm_RTTIE035_SrvRef.RTTIE035();
-            UOForm_RTTIE035_SrvRef.RTTIE035Response_SMA _SMAResponse = new UOForm_RTTIE035_SrvRef.RTTIE035Response_SMA();
-            UOForm_RTTIE035_SrvRef.RTTIE035Response_EUOL _EUOLResponse = new UOForm_RTTIE035_SrvRef.RTTIE035Response_EUOL();
-            UOForm_RTTIE035_SrvRef.RTTIE035Response_EAMTS _EAMTSResponse = new UOForm_RTTIE035_SrvRef.RTTIE035Response_EAMTS();
-            UOForm_RTTIE035_SrvRef.RTTIE035Response_EUO3 _EUO3Response = new UOForm_RTTIE035_SrvRef.RTTIE035Response_EUO3();
-            
+
+            UOForm_RTTIE035_SrvRef.TT035E00_EUOL _EUOL = new UOForm_RTTIE035_SrvRef.TT035E00_EUOL();
+            UOForm_RTTIE035_SrvRef.TT035E00 serv_req = new UOForm_RTTIE035_SrvRef.TT035E00();
+            UOForm_RTTIE035_SrvRef.TT035E00Response_SMA _SMAResponse = new UOForm_RTTIE035_SrvRef.TT035E00Response_SMA();
+            UOForm_RTTIE035_SrvRef.TT035E00Response_EUOL _EUOLResponse = new UOForm_RTTIE035_SrvRef.TT035E00Response_EUOL();
+            UOForm_RTTIE035_SrvRef.TT035E00Response_EAMTS _EAMTSResponse = new UOForm_RTTIE035_SrvRef.TT035E00Response_EAMTS();
+            UOForm_RTTIE035_SrvRef.TT035E00Response_EUO3 _EUO3Response = new UOForm_RTTIE035_SrvRef.TT035E00Response_EUO3();
+
 
 
 
@@ -112,16 +112,16 @@ namespace CopRevenueGov2.Helpers
             {
                 _EUOL.PERIODX = e.UO_ACCT.PERIOD;
             }
-            _EUOL.RETURNSTATUS = e.UO_ACCT.RETURN_STATUS;           
+            _EUOL.RETURNSTATUS = e.UO_ACCT.RETURN_STATUS;
 
 
-            _SMAResponse = serv_req.CallRTTIE035
-                                            ( new UOForm_RTTIE035_SrvRef.RTTIE035_SMA(), _EUOL,
-                                              new UOForm_RTTIE035_SrvRef.RTTIE035_EAMTS(),
-                                              new UOForm_RTTIE035_SrvRef.RTTIE035_EUO3(),                                             
+            _SMAResponse = serv_req.CallTT035E00
+                                            (new UOForm_RTTIE035_SrvRef.TT035E00_SMA(), _EUOL,
+                                              new UOForm_RTTIE035_SrvRef.TT035E00_EAMTS(),
+                                              new UOForm_RTTIE035_SrvRef.TT035E00_EUO3(),
                                               out _EUOLResponse,
                                               out _EAMTSResponse,
-                                              out _EUO3Response                                             
+                                              out _EUO3Response
                                             );
 
 
@@ -133,13 +133,13 @@ namespace CopRevenueGov2.Helpers
 
         }
 
-        private static COPXmlFactory.RTTIE035.UOFORM __Fill(UOForm_RTTIE035_SrvRef.RTTIE035Response_SMA _SMA,UOForm_RTTIE035_SrvRef.RTTIE035Response_EUOL _EUOL,UOForm_RTTIE035_SrvRef.RTTIE035Response_EAMTS _EAMTS,UOForm_RTTIE035_SrvRef.RTTIE035Response_EUO3 _EUO3)
+        private static COPXmlFactory.RTTIE035.UOFORM __Fill(UOForm_RTTIE035_SrvRef.TT035E00Response_SMA _SMA, UOForm_RTTIE035_SrvRef.TT035E00Response_EUOL _EUOL, UOForm_RTTIE035_SrvRef.TT035E00Response_EAMTS _EAMTS, UOForm_RTTIE035_SrvRef.TT035E00Response_EUO3 _EUO3)
         {
             COPXmlFactory.RTTIE035.UOFORM fobj = new UOFORM();
 
             //LOAD ERRORS INTO OBJECT
             fobj.ERROR_INFO = new ERROR_INFO();
-            if (fobj.ERROR_INFO.LENGTH != null)
+            if (_SMA != null)
             {
                 fobj.ERROR_INFO.PROGRAM = _SMA._PROGRAM;
                 fobj.ERROR_INFO.LINE = _SMA.ERRORLINE.ToString();
@@ -219,22 +219,22 @@ namespace CopRevenueGov2.Helpers
 
         private static COPXmlFactory.RTTIE035.UOFORM __RTTIE035_F_U(COPXmlFactory.RTTIE035.UOFORM e)
         {
-           
-            UOForm_RTTIE035_SrvRef.RTTIE035 serv_req = new UOForm_RTTIE035_SrvRef.RTTIE035();
-            UOForm_RTTIE035_SrvRef.RTTIE035_SMA _SMA = new UOForm_RTTIE035_SrvRef.RTTIE035_SMA();
-            UOForm_RTTIE035_SrvRef.RTTIE035_EUOL _EUOL = new UOForm_RTTIE035_SrvRef.RTTIE035_EUOL();
-            UOForm_RTTIE035_SrvRef.RTTIE035_EAMTS _EAMTS = new UOForm_RTTIE035_SrvRef.RTTIE035_EAMTS();
-            UOForm_RTTIE035_SrvRef.RTTIE035_EUO3 _EUO3 = new UOForm_RTTIE035_SrvRef.RTTIE035_EUO3();
+
+            UOForm_RTTIE035_SrvRef.TT035E00 serv_req = new UOForm_RTTIE035_SrvRef.TT035E00();
+            UOForm_RTTIE035_SrvRef.TT035E00_SMA _SMA = new UOForm_RTTIE035_SrvRef.TT035E00_SMA();
+            UOForm_RTTIE035_SrvRef.TT035E00_EUOL _EUOL = new UOForm_RTTIE035_SrvRef.TT035E00_EUOL();
+            UOForm_RTTIE035_SrvRef.TT035E00_EAMTS _EAMTS = new UOForm_RTTIE035_SrvRef.TT035E00_EAMTS();
+            UOForm_RTTIE035_SrvRef.TT035E00_EUO3 _EUO3 = new UOForm_RTTIE035_SrvRef.TT035E00_EUO3();
+
+            serv_req.Timeout = 120000;
+            UOForm_RTTIE035_SrvRef.TT035E00Response_SMA _SMAResponse = new UOForm_RTTIE035_SrvRef.TT035E00Response_SMA();
+            UOForm_RTTIE035_SrvRef.TT035E00Response_EUOL _EUOLResponse = new UOForm_RTTIE035_SrvRef.TT035E00Response_EUOL();
+            UOForm_RTTIE035_SrvRef.TT035E00Response_EAMTS _EAMTSResponse = new UOForm_RTTIE035_SrvRef.TT035E00Response_EAMTS();
+            UOForm_RTTIE035_SrvRef.TT035E00Response_EUO3 _EUO3Response = new UOForm_RTTIE035_SrvRef.TT035E00Response_EUO3();
 
 
-            UOForm_RTTIE035_SrvRef.RTTIE035Response_SMA _SMAResponse = new UOForm_RTTIE035_SrvRef.RTTIE035Response_SMA();
-            UOForm_RTTIE035_SrvRef.RTTIE035Response_EUOL _EUOLResponse = new UOForm_RTTIE035_SrvRef.RTTIE035Response_EUOL();
-            UOForm_RTTIE035_SrvRef.RTTIE035Response_EAMTS _EAMTSResponse = new UOForm_RTTIE035_SrvRef.RTTIE035Response_EAMTS();
-            UOForm_RTTIE035_SrvRef.RTTIE035Response_EUO3 _EUO3Response = new UOForm_RTTIE035_SrvRef.RTTIE035Response_EUO3();           
-
-            
             _EUOL.ACCOUNTID = e.UO_ACCT.ACCOUNT_ID;
-            _EUOL.VERSIONX = e.UO_ACCT.VERSION;           
+            _EUOL.VERSIONX = e.UO_ACCT.VERSION;
             _EUOL.PERIODX = CopMvcUtil.ConvDateDecimal(e.UO_ACCT.PERIOD).ToString();
             _EUOL.LASTUPDATEDATEX = CopMvcUtil.ConvDateDecimal(e.UO_ACCT.LAST_UPD_DATE).ToString();
             _EUOL.USERID = e.UO_ACCT.USER_ID;
@@ -251,64 +251,64 @@ namespace CopRevenueGov2.Helpers
             _EUOL.PERIODYY = e.UO_ACCT.PERIOD_YY;
 
             _EUOL.PREPARERNAME = e.UO_ACCT.PREPARER_NAME;
-            _EUOL.PREPARERPHONE =CopMvcUtil.GetDecimal(e.UO_ACCT.PREPARER_PHONE);
+            _EUOL.PREPARERPHONE = CopMvcUtil.GetDecimal(e.UO_ACCT.PREPARER_PHONE);
             _EUOL.PREPARERPHONEEXT = e.UO_ACCT.PREPARER_PHONE_EXT;
             _EUOL.PREPARERIPADDRESS = e.UO_ACCT.PREPARER_IP_ADDRESS;
             _EUOL.PREPAREREMAILADDRESS = e.UO_ACCT.PREPARER_EMAIL_ADDRESS;
             _EUOL.PREPARERTYPE = e.UO_ACCT.PREPARER_WHO; ;
 
-            
+
             _EAMTS.MAXTAXX = CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.MAX_TAX);
-            _EAMTS.VACANCYX =  CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.VACANCY);
-            _EAMTS.EXEMPTX =  CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.EXEMPT);
-            _EAMTS.RESIDENTIALX =  CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.RESIDENTIAL);
+            _EAMTS.VACANCYX = CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.VACANCY);
+            _EAMTS.EXEMPTX = CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.EXEMPT);
+            _EAMTS.RESIDENTIALX = CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.RESIDENTIAL);
             _EAMTS.DELINQUENTX = CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.DELINQUENT);
-            _EAMTS.EDICREDITX =  CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.KOZ_CREDIT);
+            _EAMTS.EDICREDITX = CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.KOZ_CREDIT);
             _EAMTS.TOTALDEDUCTIONSX = CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.TOTAL_DEDUCTIONS);
             _EAMTS.PERIODTAXX = CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.PERIOD_TAX);
             _EAMTS.DISCOUNTX = CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.DISCOUNT);
             _EAMTS.TAXDUEX = CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.TAX_DUE);
             _EAMTS.INTERESTPENALTYX = CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.INTEREST_PENALTY);
             _EAMTS.TOTALDUEX = CopMvcUtil.ConvCurrencyToDigit(e.UO_AMTS.TOTAL_DUE);
-            _EAMTS.DELINQUENTTENANTCOUNTX = e.UO_AMTS.DELINQUENT_TENANT_COUNT;           
+            _EAMTS.DELINQUENTTENANTCOUNTX = e.UO_AMTS.DELINQUENT_TENANT_COUNT;
 
 
 
             if (e.UO3_PAGE.Count > 0)
             {
-            
-                 int r = 0;
+
+                int r = 0;
 
                 for (int s = 0; s < e.UO3_PAGE.Count; s++)
-                 {
-                     if (e.UO3_PAGE[s].ACCOUNT_ID.Value != null)
-                     {
-                         r++;
-                     }
-                 }
+                {
+                    if (e.UO3_PAGE[s].ACCOUNT_ID.Value != null)
+                    {
+                        r++;
+                    }
+                }
 
-                 if (r > 0)
-                 {
-                     _EUO3._DELQs = new UOForm_RTTIE035_SrvRef.RTTIE035_EUO3_DELQ[r];
-                 }
-                 
-                 for (int i = 0; i <= r; i++)
-                 {
-                     if (e.UO3_PAGE[i].ACCOUNT_ID.Value != null)
-                     {
+                if (r > 0)
+                {
+                    _EUO3._DELQs = new UOForm_RTTIE035_SrvRef.TT035E00_EUO3_DELQ[r];
+                }
 
-                         _EUO3._DELQs[i] = new UOForm_RTTIE035_SrvRef.RTTIE035_EUO3_DELQ();
-                         _EUO3._DELQs[i].PROCESSCODED = CopMvcUtil.GetString(e.UO3_PAGE[i].PROCESS_CODE);
-                         _EUO3._DELQs[i].NAMED = CopMvcUtil.GetString(e.UO3_PAGE[i].TENANT_NAME);
-                         _EUO3._DELQs[i].ACCOUNTIDD = CopMvcUtil.GetString(e.UO3_PAGE[i].ACCOUNT_ID);
-                         _EUO3._DELQs[i].ENTITYIDD = CopMvcUtil.GetString(e.UO3_PAGE[i].TENANT_ID);
-                         _EUO3._DELQs[i].DELQAMTD = CopMvcUtil.ConvCurrencyToDigit(e.UO3_PAGE[i].AMOUNT);
-                     }
-                 }
-                 
-             }
+                for (int i = 0; i <= r; i++)
+                {
+                    if (e.UO3_PAGE[i].ACCOUNT_ID.Value != null)
+                    {
 
-            _SMAResponse = serv_req.CallRTTIE035
+                        _EUO3._DELQs[i] = new UOForm_RTTIE035_SrvRef.TT035E00_EUO3_DELQ();
+                        _EUO3._DELQs[i].PROCESSCODED = CopMvcUtil.GetString(e.UO3_PAGE[i].PROCESS_CODE);
+                        _EUO3._DELQs[i].NAMED = CopMvcUtil.GetString(e.UO3_PAGE[i].TENANT_NAME);
+                        _EUO3._DELQs[i].ACCOUNTIDD = CopMvcUtil.GetString(e.UO3_PAGE[i].ACCOUNT_ID);
+                        _EUO3._DELQs[i].ENTITYIDD = CopMvcUtil.GetString(e.UO3_PAGE[i].TENANT_ID);
+                        _EUO3._DELQs[i].DELQAMTD = CopMvcUtil.ConvCurrencyToDigit(e.UO3_PAGE[i].AMOUNT);
+                    }
+                }
+
+            }
+
+            _SMAResponse = serv_req.CallTT035E00
                                              (_SMA, _EUOL,
                                                _EAMTS,
                                                _EUO3,
@@ -324,5 +324,5 @@ namespace CopRevenueGov2.Helpers
             e = __Fill(_SMAResponse, _EUOLResponse, _EAMTSResponse, _EUO3Response);
             return e;
         }
-    } 
+    }
 }

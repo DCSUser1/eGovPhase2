@@ -24,6 +24,7 @@
         var lbAcctChanged = false;
         var lbAddressesChanged = false;
         var lbPartnerChanged = false, lbECheckChanged = false, CurrentLayer;
+        var primaryaddresschanged = false;
         var mToday = '<%= DateTime.Now.Date.ToString("m/d/y") %>';
         var mTime = '<%= DateTime.Now.Date.ToString("h:m") %>';
         var IsAddrShown = false;
@@ -43,31 +44,30 @@
 
 
         function window_onload() {
-          
-           
+
+
             loadXmlFiles();
             setTimeout('isLoaded()', 100);
 
-           
+
 
             ClearXmlFunctionVals();
             ShowForm('AcctProfile');
 
-            
+
         } 	//window_onload
 
-        function ResolveIframeHeight()
-        {
+        function ResolveIframeHeight() {
             //----------Manoranjan------------------------------
             var iframe = window.parent.document.getElementById('ifrmDocwin');
             var container = $('#tab1').css("height");
-            iframe.style.height = container;
+            iframe.style.height = '950px';
             //----------------------------------------
-        }       
+        }
 
         function loadXmlFiles() {
 
-           
+
             parent.$g.loadXmlSync("XML/email", load_oEmail);//sangha
             parent.$g.loadXmlSync("XML/AcctTemplate", load_oAcctInfo);//sangha
         }
@@ -81,80 +81,85 @@
         }
 
         function sendDemoMail() {
-            
+
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlEmail, 'NEWREG', 'FUNCTION', '', 0);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlEmail, 'Hello sUMAN this is a mail test demo', 'DATA', '', 0);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlEmail, 'sknath25@gmail.com', 'ADDRESS', '', 0);
-            
+
             ispCallXMLForm(oEmail, oEmail, 'MailPIN', '');
         }
 
         function ClearXmlFunctionVals() {
             var i;
-           
+
             for (i = 0; i < parent.$x.ispXmlGetRecCount(parent.$g.xmlAccount, "FUNCTION_CODE", "n") ; i++) {
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, "", "FUNCTION_CODE", "", i);
             } 	//for
         } 	//ClearXmlFunctionVals
 
         function ShowForm(id) {
-          
-          
+
+
             $(parent.AppError).text('');
-            
+
 
 
             $('#AcctProfile').css('display', 'none');
-         
+
             $('#divAcctTaxes').css('display', 'none');
             $('#AcctAddresses').css('display', 'none');
             $('#AcctPartners').css('display', 'none');
             $('#AcctECheck').css('display', 'none');
             $('#AcctThankYou').css('display', 'none');
             $('#AcctExistThankYou').css('display', 'none');
-            
+
             var menu_acctprof = parent.document.getElementById('mnuAcctProfile');     //sangha
 
 
             parent.ispMenu_onclick(menu_acctprof);  //sangha
-          
 
 
 
-           
+
+
 
             if (id == 'AcctProfile') {
-               
+                lbAcctChanged = false;
+                IsAddrShown = false;
                 DisplayProfile();
                 ResolveIframeHeight();
-                
+
             }
-            else if (id == 'AcctTaxes') {               
+            else if (id == 'AcctTaxes') {
                 DisplayTaxes();
                 ResolveIframeHeight();
-              
+
             }
             else if (id == 'AcctAddresses') {
+                lbAcctChanged = true;
+                IsAddrShown = true;
                 DisplayAddresses();
                 ResolveIframeHeight();
-                
+
             }
             else if (id == 'AcctPartners') {
+                lbAcctChanged = true;
+                IsAddrShown = true;
                 DisplayPartners();
                 ResolveIframeHeight();
-               
+
             }
             else if (id == 'AcctECheck') {
                 DisplayECheck();
                 ResolveIframeHeight();
-               
+
             }
             else if (id == 'AcctThankYou') {
                 $('#divbtnSubmit').css('display', 'none');
                 DisplayThankYou();
                 ResolveIframeHeight();
             }
-            
+
         } 	//ShowForm
 
 
@@ -169,70 +174,70 @@
 
             if (lbProfileChanged == true) {
                 chkProf = true;
-               
+
             } 	//if
             if (lbAcctChanged == true) {
                 chktax = true;
-               
+
             } 	//if
             if (lbECheckChanged == true) {
                 chkEcheck = true;
-               
+
             } 	//if
 
             if (errProfile != '') {
                 lError = true;
                 chkProf = false;
 
-               
+
             } 	//if
             if (errTaxes != '') {
                 lError = true;
                 chkEcheck = false;
-               
+
             } 	//if
 
             if (bAddrRequired == true) {
                 chkAddr = false;
-               
+
                 if (errAddresses != '') {
                 } else {	//No Error
                     if (lbAddressesChanged == true) {
                         chkAddr = true;
-                        
+
                     } 	//if
                 } //if
             } else {
                 chkAddr = true;
-               
+
                 if (errAddresses != '') {
                 } else {	//No Error
                     if (lbAddressesChanged == true) {
 
                         chkAddr = true;
-                        
+
                     } 	//if
                 } //if
             } 	//if
             //EHD - 20100528 - EGOVWEB-24 - Changed Started
             if (bOfficersRequired == true) {
                 chkOfficer = false;
-                
+
                 if (errPartners != '') {
                 } else {	//No Error
                     if (lbPartnerChanged == true) {
                         chkOfficer = true;
-                        
+
                     } 	//if
                 } //if
             } else {
                 chkOfficer = true;
-                
+
                 if (errPartners != '') {
                 } else {	//No Error
                     if (lbPartnerChanged == true) {
                         chkOfficer = true;
-                       
+
                     } 	//if
                 } //if
             } 	//if
@@ -241,22 +246,22 @@
             if (errECheck != '') {
                 lError = true;
                 chkEcheck = false;
-               
+
             } 	//if
 
 
 
-           
+
 
 
             if (lError != true) {
-               
+
                 if (chkProf != true ||
                    chkAddr != true ||
                    chkOfficer != true ||
                    chktax != true) {
 
-                    
+
                     $('#imgSubmit').removeClass('submit_button');
                     $('#imgSubmit').addClass('submit_buttonDeactivated')
                     $('#imgSubmit').attr('onclick', '').unbind('click');
@@ -264,7 +269,7 @@
 
                 } else {
 
-                    
+
                     $('#imgSubmit').css('cursor', 'hand');
                     $('#imgSubmit').removeClass('submit_buttonDeactivated');
                     $('#imgSubmit').addClass('submit_button');
@@ -278,7 +283,7 @@
                 $('#imgSubmit').attr('onclick', '').unbind('click');
                 $('#imgSubmit').css('cursor', 'default');
 
-               
+
             } 	//if
         } 	//SetNavButtons
 
@@ -308,7 +313,7 @@
 
 
 
-       
+
 
         function PrintApplication() {
             var CurrentDisplayed;
@@ -330,11 +335,11 @@
             Taxes_Print(true);
             Address_Print(true);
             Partners_Print(true);
-           
+
             parent.DocWin.focus();
             parent.DocWin.print();
 
-           
+
             $('#AppMessage').css('display', 'block');
             $('#AppHeader').html(txtHeader + oldHeader);
             Profile_Print(false);
@@ -346,9 +351,9 @@
         } 	//PrintApplication
 
         function DoSubmit() {
-            
+
             var xmlTemp = parent.$g.getXmlDocObj();
-        
+
             debugger;
             if (bAcctAddressChanged == true) {
                 ad_CorrectBLAddress();
@@ -359,22 +364,33 @@
                     return;
                 }
             }
-            
+
             if (UpdateProfileXml() == false) {
                 ispHideProgress();
                 ShowForm("AcctProfile");
                 return;
             } 	//if
 
-            if (UpdateAccounts() == false) {
+            //if (UpdateAccounts() == false) {
+            //    ispHideProgress();
+            //    ShowForm("AcctTaxes");
+            //    return;
+            //} 	//if
+
+            if (lbAcctChanged == false) {
+                UpdateAccounts();
                 ispHideProgress();
                 ShowForm("AcctTaxes");
                 return;
-            } 	//if
-           
+            }
+            else {
+                UpdateAccounts();
+
+            }
+
             if (bAddrRequired == true) {
                 ispHideProgress();
-                ShowForm("AcctAddresses");                
+                ShowForm("AcctAddresses");
                 return;
             } 	//if
             else {
@@ -389,13 +405,14 @@
             }
 
             if (bOfficersRequired == true) {
+                debugger;
                 ispHideProgress();
                 ShowForm("AcctPartners");
                 return;
             } 	//if
             else {
                 if (IsOfficerShown == false) {
-
+                    debugger;
                     ispHideProgress();
                     ShowForm("AcctPartners");
                     IsOfficerShown = true;
@@ -404,7 +421,7 @@
 
 
             }
-           // debugger;
+            // debugger;
             // alert(parent.$g.xmlAccount);
 
             var ReqXML = parent.$g.xmlAccount; //changes
@@ -414,15 +431,17 @@
             $.ajax({
                 type: 'POST',
                 url: '../Returns/Log',
-                data: '{ "OriginationFom" : "Registration","ServiceName" : "RTTIE010","RequestXML" : "' + btoa(ReqXML.toString()) + '"}',
+                data: '{ "OriginationFom" : "Registration","ServiceName" : "TT010E00","RequestXML" : "' + btoa(ReqXML.toString()) + '"}',
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (msg) {
 
                 }
             });
-            
+
             ispCallXMLForm(parent.$g.xmlAccount, xmlTemp, 'AccountInfo', '');
+            primaryaddresschanged = false;
+            parent.$g.xmlAccount.loadXML(xmlTemp.xml);
 
             var ResXML = parent.$g.xmlAccount; //changes
 
@@ -431,20 +450,20 @@
             $.ajax({
                 type: 'POST',
                 url: '../Returns/Log',
-                data: '{ "OriginationFom" : "Registration","ServiceName" : "RTTIE010","ResponseXML" : "' + btoa(ResXML.toString()) + '"}',
+                data: '{ "OriginationFom" : "Registration","ServiceName" : "TT010E00","ResponseXML" : "' + btoa(ResXML.toString()) + '"}',
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (msg) {
 
                 }
             });
-           
-           
+
+
 
             var err = xmlTemp;
             var txtEmail = document.getElementById('txtEmail');
             //alert(parent.$x.ispXmlGetFieldVal(xmlTemp, 'ERROR_INFO MESSAGE', '', 0));
-            if (parent.$x.ispXmlGetFieldVal(xmlTemp, 'ERROR_INFO MESSAGE', '', 0) == '' || parent.$x.ispXmlGetFieldVal(xmlTemp, 'ERROR_INFO MESSAGE', '', 0) == 'NAME REQUIRED' ) { //changes
+            if (parent.$x.ispXmlGetFieldVal(xmlTemp, 'ERROR_INFO MESSAGE', '', 0) == '' || parent.$x.ispXmlGetFieldVal(xmlTemp, 'ERROR_INFO MESSAGE', '', 0) == 'NAME REQUIRED') { //changes
                 ispHideProgress();
                 lbProfileChanged = false;
                 initProfile = false;
@@ -457,16 +476,16 @@
                 lbECheckChanged = false;
                 initEcheck = false;
 
-                parent.$g.xmlAccount.loadXML(xmlTemp.xml);
+                //parent.$g.xmlAccount.loadXML(xmlTemp.xml);
                 ClearXmlFunctionVals();
                 if (parent.sNew == true) {		//&& // SUMAN: ENABLE EMAIL FOR EDIT to test //parent.MenuWin.sNew == true
-                   
+
                     stemp = CreateAcctNewEmail();
 
                     parent.$x.ispXmlSetFieldVal(parent.$g.xmlEmail, 'NEWREG', 'FUNCTION', '', 0);
                     parent.$x.ispXmlSetFieldVal(parent.$g.xmlEmail, stemp, 'DATA', '', 0);
                     parent.$x.ispXmlSetFieldVal(parent.$g.xmlEmail, txtEmail.value, 'ADDRESS', '', 0);
-                   
+
                     ispCallXMLForm(parent.$g.xmlEmail, parent.$g.xmlEmail, 'MailPIN', '');
                     ShowForm('AcctThankYou');
                 }
@@ -477,10 +496,10 @@
             else {
                 ispHideProgress();
                 ShowForm('AcctProfile');
-                
+
             } 	//if
 
-           
+
         } 	//DoSubmit
 
         function FormatSsnEin(sType, iVal) {
@@ -533,7 +552,7 @@
                     } else {
                         $(a[i]).css("display", "block");
                         iWageItems = iWageItems + 1;
-                       
+
 
                     }		//if
                     //School Menu Items
@@ -551,7 +570,7 @@
                     } else {
                         $(a[i]).css("display", "block");
                         iSchoolItems = iSchoolItems + 1;
-                        
+
                     }		//if
                     //NPT Menu Items
                 } else if (a[i].id.indexOf('mnuNPTYear') != -1 && GetNodeCount(parent.$g.xmlAccount, 'TAX_ACCT ACCOUNT', '3') == 1) {
@@ -625,35 +644,35 @@
                 }		//if
             }		//for
 
-           
+
 
             if (iWageItems == 0) {
                 $('#mnuReWage').css("display", "none");
-               
+
             }		//if
             if (iSchoolItems == 0) {
                 $('#mnuReSchool').css("display", "none");
-              
+
             }		//if
             if (iNPTItems == 0) {
                 $('#mnuReNPT').css("display", "none");
-                
+
             }		//if
             if (iBPTezItems == 0) {
                 $('#mnuReBPTez').css("display", "none");//Sangha
-                
+
             }		//if
             if (iBPTlfItems == 0) {
                 $('#mnuBPTlf').css("display", "none");
-              
+
             }		//if
             if (iTobaccoItems == 0) {
                 $('#mnuTOB').css("display", "none"); //by manoranjan
-               
+
 
             }
 
-          
+
         }
 
 
@@ -671,11 +690,12 @@
 
         <%
             Html.RenderAction("Profile", "Acct");
+            Html.RenderAction("AddressCorrection", "Acct");
             Html.RenderAction("Echeck", "Acct");
             Html.RenderAction("ThankYou", "Acct");
             Html.RenderAction("NewEmail", "Acct");
            
-            Html.RenderAction("AddressCorrection", "Acct");
+            
             Html.RenderAction("Progress", "INC");
                
           

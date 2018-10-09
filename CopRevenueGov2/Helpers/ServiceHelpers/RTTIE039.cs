@@ -11,11 +11,11 @@ using System.Xml;
 namespace CopRevenueGov2.Helpers
 {
     public class RTTIE039 : CopRestServiceBase, ICopSoapService
-    {    
+    {
 
         public static void Init()
         {
-          
+
         }
 
         public static string CallService(string Request)
@@ -66,8 +66,8 @@ namespace CopRevenueGov2.Helpers
 
             return RevenueGovXMLFactory.GetXmlDocument(acct);
         }
-       
-       
+
+
         private static NPTRETURN __Call(NPTRETURN e)
         {
             switch (e.NPT_INFO.RETURN_STATUS)
@@ -92,21 +92,21 @@ namespace CopRevenueGov2.Helpers
         }
 
         private static COPXmlFactory.RTTIE039.NPTRETURN __RTTIE039_F_I(COPXmlFactory.RTTIE039.NPTRETURN e)
-        {           
+        {
 
-            RTTIE040_SrvRef.RT01E040_ENPT _ENPT = new RTTIE040_SrvRef.RT01E040_ENPT();
-            RTTIE040_SrvRef.RT01E040 rttie040 = new RTTIE040_SrvRef.RT01E040();
+            RTTIE040_SrvRef.TT040E00_ENPT _ENPT = new RTTIE040_SrvRef.TT040E00_ENPT();
+            RTTIE040_SrvRef.TT040E00 rttie040 = new RTTIE040_SrvRef.TT040E00();
             //
             _ENPT.ACCOUNTID = e.NPT_INFO.ACCOUNT_ID;
             _ENPT.PERIODX = CopMvcUtil.ConvDateDecimal(e.NPT_INFO.PERIOD).ToString();
             _ENPT.RETURNSTATUS = e.NPT_INFO.RETURN_STATUS;
             //
-            RTTIE040_SrvRef.RT01E040Response_SMA _SMAResponse = new RTTIE040_SrvRef.RT01E040Response_SMA();
-            RTTIE040_SrvRef.RT01E040Response_ENPT _ENPTResponse = new RTTIE040_SrvRef.RT01E040Response_ENPT();
-            RTTIE040_SrvRef.RT01E040Response_EAMTS _EAMTSResponse = new RTTIE040_SrvRef.RT01E040Response_EAMTS();
-            RTTIE040_SrvRef.RT01E040Response_SERR _SERRRespose = new RTTIE040_SrvRef.RT01E040Response_SERR();
+            RTTIE040_SrvRef.TT040E00Response_SMA _SMAResponse = new RTTIE040_SrvRef.TT040E00Response_SMA();
+            RTTIE040_SrvRef.TT040E00Response_ENPT _ENPTResponse = new RTTIE040_SrvRef.TT040E00Response_ENPT();
+            RTTIE040_SrvRef.TT040E00Response_EAMTS _EAMTSResponse = new RTTIE040_SrvRef.TT040E00Response_EAMTS();
+            RTTIE040_SrvRef.TT040E00Response_SERR _SERRRespose = new RTTIE040_SrvRef.TT040E00Response_SERR();
             //
-            _SMAResponse = rttie040.CallRT01E040(new RTTIE040_SrvRef.RT01E040_SMA(), _ENPT, new RTTIE040_SrvRef.RT01E040_EAMTS(),new RTTIE040_SrvRef.RT01E040_SERR(),
+            _SMAResponse = rttie040.CallTT040E00(new RTTIE040_SrvRef.TT040E00_SMA(), _ENPT, new RTTIE040_SrvRef.TT040E00_EAMTS(), new RTTIE040_SrvRef.TT040E00_SERR(),
                  out _ENPTResponse, out _EAMTSResponse, out _SERRRespose);
 
             e = __Fill(_SMAResponse, _ENPTResponse, _EAMTSResponse, _SERRRespose);
@@ -114,14 +114,14 @@ namespace CopRevenueGov2.Helpers
             return e;
         }
 
-        private static COPXmlFactory.RTTIE039.NPTRETURN __Fill(RTTIE040_SrvRef.RT01E040Response_SMA _SMA, RTTIE040_SrvRef.RT01E040Response_ENPT _ENPT,
-            RTTIE040_SrvRef.RT01E040Response_EAMTS _EAMTS, RTTIE040_SrvRef.RT01E040Response_SERR _SERR)
+        private static COPXmlFactory.RTTIE039.NPTRETURN __Fill(RTTIE040_SrvRef.TT040E00Response_SMA _SMA, RTTIE040_SrvRef.TT040E00Response_ENPT _ENPT,
+            RTTIE040_SrvRef.TT040E00Response_EAMTS _EAMTS, RTTIE040_SrvRef.TT040E00Response_SERR _SERR)
         {
             COPXmlFactory.RTTIE039.NPTRETURN fobj = RevenueGovXMLFactory.GetNPTReturn();
 
             //LOAD ERRORS INTO OBJECT
             fobj.ERROR_INFO = new ERROR_INFO();
-            if (fobj.ERROR_INFO.ERROR != null)
+            if (_SMA != null)
             {
                 fobj.ERROR_INFO.PROGRAM = _SMA._PROGRAM;
                 fobj.ERROR_INFO.LINE = _SMA.ERRORLINE.ToString();
@@ -130,95 +130,97 @@ namespace CopRevenueGov2.Helpers
             }
             //LOAD NPT_INFO 
             fobj.NPT_INFO = new NPT_INFO();
-            
-                fobj.NPT_INFO.ACCOUNT_ID = _ENPT.ACCOUNTID;
-                fobj.NPT_INFO.PERIOD = CopMvcUtil.ConvDate(_ENPT.PERIODX);
-                fobj.NPT_INFO.VERSION = _ENPT.VERSIONX;
-                fobj.NPT_INFO.RETURN_STATUS = _ENPT.RETURNSTATUS;
-                fobj.NPT_INFO.LAST_UPD_DATE = CopMvcUtil.ConvDate(_ENPT.LASTUPDATEDATEX);
-                fobj.NPT_INFO.RECORDING_DATE = CopMvcUtil.ConvDate(_ENPT.RECORDINGDATEX);
-                fobj.NPT_INFO.EXTENSION_DATE = CopMvcUtil.ConvDate(_ENPT.EXTENSIONDATEX);
-                fobj.NPT_INFO.SEQUENCE = _ENPT.SEQUENCENUMBER;
-                fobj.NPT_INFO.ADJUSTMENT_REF_NO = _ENPT.ADJUSTMENTREFERENCENUM;
-                fobj.NPT_INFO.USER_ID = _ENPT.USERID;
-                fobj.NPT_INFO.RESIDENT_RATE = CopMvcUtil.ConvDigitToDouble9(_ENPT.RATERES);
 
-                fobj.NPT_INFO.BASE_RESIDENT_RATE = CopMvcUtil.ConvDigitToDouble9(_ENPT.BASERATERES);
+            fobj.NPT_INFO.ACCOUNT_ID = _ENPT.ACCOUNTID;
+            fobj.NPT_INFO.PERIOD = CopMvcUtil.ConvDate(_ENPT.PERIODX);
+            fobj.NPT_INFO.VERSION = _ENPT.VERSIONX;
+            fobj.NPT_INFO.RETURN_STATUS = _ENPT.RETURNSTATUS;
+            fobj.NPT_INFO.LAST_UPD_DATE = CopMvcUtil.ConvDate(_ENPT.LASTUPDATEDATEX);
+            fobj.NPT_INFO.RECORDING_DATE = CopMvcUtil.ConvDate(_ENPT.RECORDINGDATEX);
+            fobj.NPT_INFO.EXTENSION_DATE = CopMvcUtil.ConvDate(_ENPT.EXTENSIONDATEX);
+            fobj.NPT_INFO.SEQUENCE = _ENPT.SEQUENCENUMBER;
+            fobj.NPT_INFO.ADJUSTMENT_REF_NO = _ENPT.ADJUSTMENTREFERENCENUM;
+            fobj.NPT_INFO.USER_ID = _ENPT.USERID;
+            fobj.NPT_INFO.RESIDENT_RATE = CopMvcUtil.ConvDigitToDouble9(_ENPT.RATERES);
 
-                fobj.NPT_INFO.NON_RES_RATE = CopMvcUtil.ConvDigitToDouble9(_ENPT.RATENONRES);
+            fobj.NPT_INFO.BASE_RESIDENT_RATE = CopMvcUtil.ConvDigitToDouble9(_ENPT.BASERATERES);
 
-                fobj.NPT_INFO.BASE_NON_RES_RATE = CopMvcUtil.ConvDigitToDouble9(_ENPT.BASERATENONRES);
+            fobj.NPT_INFO.NON_RES_RATE = CopMvcUtil.ConvDigitToDouble9(_ENPT.RATENONRES);
 
-                fobj.NPT_INFO.CORP_PARTNER_IND = _ENPT.CORPPARTNERIND;
-                    
+            fobj.NPT_INFO.BASE_NON_RES_RATE = CopMvcUtil.ConvDigitToDouble9(_ENPT.BASERATENONRES);
 
-                fobj.NPT_INFO.PREPARER_NAME = _ENPT.PREPARERNAME;
-
-                if ((CopMvcUtil.GetLong(_ENPT.PREPARERPHONE) == 0))
-                {
-                    fobj.NPT_INFO.PREPARER_PHONE = string.Empty;
-                }
-                else
-                {
-                    fobj.NPT_INFO.PREPARER_PHONE = CopMvcUtil.GetString(_ENPT.PREPARERPHONE);
-                }
+            fobj.NPT_INFO.CORP_PARTNER_IND = _ENPT.CORPPARTNERIND;
 
 
-                fobj.NPT_INFO.PREPARER_PHONE_EXT = _ENPT.PREPARERPHONEEXT;
-                fobj.NPT_INFO.PREPARER_IP_ADDRESS = _ENPT.PREPARERIPADDRESS;
-                fobj.NPT_INFO.PREPARER_EMAIL_ADDRESS = _ENPT.PREPAREREMAILADDRESS;
-                fobj.NPT_INFO.PREPARER_WHO = _ENPT.PREPARERTYPE;
-            
+            fobj.NPT_INFO.PREPARER_NAME = _ENPT.PREPARERNAME;
+
+            if ((CopMvcUtil.GetLong(_ENPT.PREPARERPHONE) == 0))
+            {
+                fobj.NPT_INFO.PREPARER_PHONE = string.Empty;
+            }
+            else
+            {
+                fobj.NPT_INFO.PREPARER_PHONE = CopMvcUtil.GetString(_ENPT.PREPARERPHONE);
+            }
+
+
+            fobj.NPT_INFO.PREPARER_PHONE_EXT = _ENPT.PREPARERPHONEEXT;
+            fobj.NPT_INFO.PREPARER_IP_ADDRESS = _ENPT.PREPARERIPADDRESS;
+            fobj.NPT_INFO.PREPARER_EMAIL_ADDRESS = _ENPT.PREPAREREMAILADDRESS;
+            fobj.NPT_INFO.PREPARER_WHO = _ENPT.PREPARERTYPE;
+
             //NPT_PG1
             fobj.NPT_PG1 = new NPT_PG1();
-           
-                fobj.NPT_PG1.RESIDENT_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMTS.RESTAXABLEINCOMEX);
-                fobj.NPT_PG1.RESIDENT_INCOME_TAX = CopMvcUtil.ConvDigitToCurrency(_EAMTS.RESTAXDUEX);
-                //
-                fobj.NPT_PG1.RESIDENT_BASE_INCOME_TAXABLE = CopMvcUtil.ConvDigitToCurrency(_EAMTS.RESBASERATETAXABLEX);
-                fobj.NPT_PG1.RESIDENT_BASE_INCOME_TAX = CopMvcUtil.ConvDigitToCurrency(_EAMTS.RESBASERATETAXX);
-                fobj.NPT_PG1.RESIDENT_TOTAL_TAX = CopMvcUtil.ConvDigitToCurrency(_EAMTS.TOTALRESTAXX);
-                //
-                fobj.NPT_PG1.NON_RES_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMTS.NONRESTAXINCOMEX);
-                fobj.NPT_PG1.NON_RES_INCOME_TAX = CopMvcUtil.ConvDigitToCurrency(_EAMTS.NONRESTAXDUEX);
-                //
-                fobj.NPT_PG1.NON_RES_BASE_INCOME_TAXABLE = CopMvcUtil.ConvDigitToCurrency(_EAMTS.NONRESBASERATETAXABLEX);
-                fobj.NPT_PG1.NON_RES_BASE_INCOME_TAX = CopMvcUtil.ConvDigitToCurrency(_EAMTS.NONRESBASERATETAXX);
-                fobj.NPT_PG1.NON_RES_TOTAL_TAX = CopMvcUtil.ConvDigitToCurrency(_EAMTS.TOTALNONRESTAXX);
-                //
-                fobj.NPT_PG1.TOTAL_TAX = CopMvcUtil.ConvDigitToCurrency(_EAMTS.TOTALTAXDUE1X);
-                fobj.NPT_PG1.BPT_TAX_CREDIT = CopMvcUtil.ConvDigitToCurrency(_EAMTS.BPTCREDITX);
-                fobj.NPT_PG1.OTHER_TAX_CREDIT = CopMvcUtil.ConvDigitToCurrency(_EAMTS.OTHERX);
-                fobj.NPT_PG1.TOTAL_PAY_CREDITS = CopMvcUtil.ConvDigitToCurrency(_EAMTS.TOTALCREDITSX);
-                fobj.NPT_PG1.TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMTS.TOTALTAXDUEX);
-                fobj.NPT_PG1.INTEREST_PENALTY = CopMvcUtil.ConvDigitToCurrency(_EAMTS.INTERESTPENALTYX);
-                fobj.NPT_PG1.TOTAL_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMTS.TOTALTAXDUEX);
-                fobj.NPT_PG1.OVERPAY = CopMvcUtil.ConvDigitToCurrency(_EAMTS.TAXOVERPAIDX);
-                fobj.NPT_PG1.LINE11 = CopMvcUtil.ConvDigitToCurrency(_EAMTS.NETPROFITESTX);
-                //
-                fobj.NPT_PG1.OVERPAY_AVAILABLE = CopMvcUtil.ConvDigitToCurrency(_EAMTS.OVERPAYMENTAVAILX);//newly added
-                //
-                fobj.NPT_PG1.REFUND = CopMvcUtil.ConvDigitToCurrency(_EAMTS.REFUNDAMTX);
-                fobj.NPT_PG1.BPT_OVERPAY = CopMvcUtil.ConvDigitToCurrency(_EAMTS.BPTOVERPAYMENTX);
-                fobj.NPT_PG1.NPT_OVERPAY = CopMvcUtil.ConvDigitToCurrency(_EAMTS.NPTOVERPAYMENTX);
-                //added 2015 corporation Tax
-                fobj.NPT_PG1.CORP_PARTNER_PERCENT = CopMvcUtil.ConvDigitToCurrency(_EAMTS.CORPPARTNERPERCENTX);
-            
+
+            fobj.NPT_PG1.RESIDENT_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMTS.RESTAXABLEINCOMEX);
+            fobj.NPT_PG1.RESIDENT_INCOME_TAX = CopMvcUtil.ConvDigitToCurrency(_EAMTS.RESTAXDUEX);
+            //
+            fobj.NPT_PG1.RESIDENT_BASE_INCOME_TAXABLE = CopMvcUtil.ConvDigitToCurrency(_EAMTS.RESBASERATETAXABLEX);
+            fobj.NPT_PG1.RESIDENT_BASE_INCOME_TAX = CopMvcUtil.ConvDigitToCurrency(_EAMTS.RESBASERATETAXX);
+            fobj.NPT_PG1.RESIDENT_TOTAL_TAX = CopMvcUtil.ConvDigitToCurrency(_EAMTS.TOTALRESTAXX);
+            //
+            fobj.NPT_PG1.NON_RES_INCOME = CopMvcUtil.ConvDigitToCurrency(_EAMTS.NONRESTAXINCOMEX);
+            fobj.NPT_PG1.NON_RES_INCOME_TAX = CopMvcUtil.ConvDigitToCurrency(_EAMTS.NONRESTAXDUEX);
+            //
+            fobj.NPT_PG1.NON_RES_BASE_INCOME_TAXABLE = CopMvcUtil.ConvDigitToCurrency(_EAMTS.NONRESBASERATETAXABLEX);
+            fobj.NPT_PG1.NON_RES_BASE_INCOME_TAX = CopMvcUtil.ConvDigitToCurrency(_EAMTS.NONRESBASERATETAXX);
+            fobj.NPT_PG1.NON_RES_TOTAL_TAX = CopMvcUtil.ConvDigitToCurrency(_EAMTS.TOTALNONRESTAXX);
+            //
+            fobj.NPT_PG1.TOTAL_TAX = CopMvcUtil.ConvDigitToCurrency(_EAMTS.TOTALTAXDUE1X);
+            fobj.NPT_PG1.BPT_TAX_CREDIT = CopMvcUtil.ConvDigitToCurrency(_EAMTS.BPTCREDITX);
+            fobj.NPT_PG1.OTHER_TAX_CREDIT = CopMvcUtil.ConvDigitToCurrency(_EAMTS.OTHERX);
+            fobj.NPT_PG1.TOTAL_PAY_CREDITS = CopMvcUtil.ConvDigitToCurrency(_EAMTS.TOTALCREDITSX);
+            fobj.NPT_PG1.TAX_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMTS.TOTALTAXDUEX);
+            fobj.NPT_PG1.INTEREST_PENALTY = CopMvcUtil.ConvDigitToCurrency(_EAMTS.INTERESTPENALTYX);
+            fobj.NPT_PG1.TOTAL_DUE = CopMvcUtil.ConvDigitToCurrency(_EAMTS.TOTALTAXDUEX);
+            fobj.NPT_PG1.OVERPAY = CopMvcUtil.ConvDigitToCurrency(_EAMTS.TAXOVERPAIDX);
+            fobj.NPT_PG1.LINE11 = CopMvcUtil.ConvDigitToCurrency(_EAMTS.NETPROFITESTX);
+            //
+            fobj.NPT_PG1.OVERPAY_AVAILABLE = CopMvcUtil.ConvDigitToCurrency(_EAMTS.OVERPAYMENTAVAILX);//newly added
+            //
+            fobj.NPT_PG1.REFUND = CopMvcUtil.ConvDigitToCurrency(_EAMTS.REFUNDAMTX);
+            fobj.NPT_PG1.BPT_OVERPAY = CopMvcUtil.ConvDigitToCurrency(_EAMTS.BPTOVERPAYMENTX);
+            fobj.NPT_PG1.NPT_OVERPAY = CopMvcUtil.ConvDigitToCurrency(_EAMTS.NPTOVERPAYMENTX);
+            //added 2015 corporation Tax
+            fobj.NPT_PG1.CORP_PARTNER_PERCENT = _EAMTS.CORPPARTNERPERCENTX;
+
             return fobj;
 
         }
 
         private static COPXmlFactory.RTTIE039.NPTRETURN __RTTIE039_F_U(COPXmlFactory.RTTIE039.NPTRETURN e)
         {
-            RTTIE040_SrvRef.RT01E040_ENPT _ENPT = new RTTIE040_SrvRef.RT01E040_ENPT();
-            RTTIE040_SrvRef.RT01E040_EAMTS _EAMTS = new RTTIE040_SrvRef.RT01E040_EAMTS();
-            RTTIE040_SrvRef.RT01E040 rttie040 = new RTTIE040_SrvRef.RT01E040();
+            RTTIE040_SrvRef.TT040E00_ENPT _ENPT = new RTTIE040_SrvRef.TT040E00_ENPT();
+            RTTIE040_SrvRef.TT040E00_EAMTS _EAMTS = new RTTIE040_SrvRef.TT040E00_EAMTS();
+            RTTIE040_SrvRef.TT040E00 rttie040 = new RTTIE040_SrvRef.TT040E00();
             //
-            RTTIE040_SrvRef.RT01E040Response_SMA _SMAResponse = new RTTIE040_SrvRef.RT01E040Response_SMA();
-            RTTIE040_SrvRef.RT01E040Response_ENPT _ENPTResponse = new RTTIE040_SrvRef.RT01E040Response_ENPT();
-            RTTIE040_SrvRef.RT01E040Response_EAMTS _EAMTSResponse = new RTTIE040_SrvRef.RT01E040Response_EAMTS();
-            RTTIE040_SrvRef.RT01E040Response_SERR _SERRRespose = new RTTIE040_SrvRef.RT01E040Response_SERR();
-           
+            RTTIE040_SrvRef.TT040E00Response_SMA _SMAResponse = new RTTIE040_SrvRef.TT040E00Response_SMA();
+            RTTIE040_SrvRef.TT040E00Response_ENPT _ENPTResponse = new RTTIE040_SrvRef.TT040E00Response_ENPT();
+            RTTIE040_SrvRef.TT040E00Response_EAMTS _EAMTSResponse = new RTTIE040_SrvRef.TT040E00Response_EAMTS();
+            RTTIE040_SrvRef.TT040E00Response_SERR _SERRRespose = new RTTIE040_SrvRef.TT040E00Response_SERR();
+
+            rttie040.Timeout = 120000;
+
             _ENPT.ACCOUNTID = e.NPT_INFO.ACCOUNT_ID;
             _ENPT.PERIODX = CopMvcUtil.ConvDateDecimalString(e.NPT_INFO.PERIOD);
             _ENPT.VERSIONX = e.NPT_INFO.VERSION;
@@ -250,7 +252,7 @@ namespace CopRevenueGov2.Helpers
             _ENPT.PREPARERPHONESpecified = true;
             //New column addded for save corporation TAX
             _EAMTS.CORPPARTNERPERCENTX = CopMvcUtil.ConvCurrencyToDigit(e.NPT_PG1.CORP_PARTNER_PERCENT);
-            
+
             _EAMTS.RESTAXABLEINCOMEX = CopMvcUtil.ConvCurrencyToDigit(e.NPT_PG1.RESIDENT_INCOME);
             _EAMTS.RESTAXDUEX = CopMvcUtil.ConvCurrencyToDigit(e.NPT_PG1.RESIDENT_INCOME_TAX);
             //
@@ -285,13 +287,13 @@ namespace CopRevenueGov2.Helpers
             string EAMTS = CopMvcUtil.GetXMlFromObject(_EAMTS);
 
 
-            _SMAResponse = rttie040.CallRT01E040(new RTTIE040_SrvRef.RT01E040_SMA(), _ENPT, _EAMTS,new RTTIE040_SrvRef.RT01E040_SERR(),
+            _SMAResponse = rttie040.CallTT040E00(new RTTIE040_SrvRef.TT040E00_SMA(), _ENPT, _EAMTS, new RTTIE040_SrvRef.TT040E00_SERR(),
              out _ENPTResponse, out _EAMTSResponse, out _SERRRespose);
 
             e = __Fill(_SMAResponse, _ENPTResponse, _EAMTSResponse, _SERRRespose);
 
             return e;
-           
+
 
         }
     }

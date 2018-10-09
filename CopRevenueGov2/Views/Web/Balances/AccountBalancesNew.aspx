@@ -14,7 +14,7 @@
 
     <script type="text/javascript" language="javascript" src="Content/Scripts/global.js"></script>
     <script type="text/javascript" language="javascript" src="Content/Scripts/ispXmlProc.js"></script>
-
+    <script src="../Content/js/pdf417-min.js" type="text/javascript"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file -->
@@ -37,7 +37,7 @@
 	    var addrIdx;
 	    var oAcctBalTable;
 	    var oDfltRow;
-	    var paymentdue=0;
+	    var paymentdue = 0;
 	    var oPartPaymentRow;
 	    var CONSTtdBody = 1;
 	    var tax_typeValue;
@@ -78,6 +78,8 @@
 
 	    var dobj = parent.$g.getXmlDocObj();
 
+	    var dobjNoticeNumber = parent.$g.getXmlDocObj();
+
 	    function SetInitFocus() {
 
 	        // parent.NavWin.ClearImages();
@@ -87,13 +89,15 @@
 	        parent.$x.ispXmlSetFieldVal(parent.$g.xmloAcctBalance, '00' + parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO TYPE', '', 0), 'DEL_INFO ENTITY_TYPE', '', 0);
 	        parent.$x.ispXmlSetFieldVal(parent.$g.xmloAcctBalance, parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO ENTITY_ID', '', 0), 'DEL_INFO ENTITY_ID', '', 0);
 	        parent.$x.ispXmlSetFieldVal(parent.$g.xmloAcctBalance, 'I', 'DEL_INFO FUNCTION', '', 0);
-	        PopulateEntityInfo();
 
+
+	        PopulateEntityInfo();
+	        debugger;
 	        var ReqXML = parent.$g.xmloAcctBalance;
 	        $.ajax({
 	            type: 'POST',
 	            url: '../Returns/Log',
-	            data: '{ "OriginationFom" : "OutstandingBalance","ServiceName" : "RTTIE022","RequestXML" : "' + btoa(ReqXML.toString()) + '"}',
+	            data: '{ "OriginationFom" : "OutstandingBalance","ServiceName" : "TT022E00","RequestXML" : "' + btoa(ReqXML.toString()) + '"}',
 	            contentType: 'application/json; charset=utf-8',
 	            dataType: 'json',
 	            success: function (msg) {
@@ -105,11 +109,17 @@
 
 	        parent.$g.xmloAcctBalance.loadXML(dobj.xml);
 
+	        //parent.$x.ispXmlSetFieldVal(parent.$g.xmloAcctBalance, '00' + parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO TYPE', '', 0), 'DEL_INFO ENTITY_TYPE', '', 0);
+	        //parent.$x.ispXmlSetFieldVal(parent.$g.xmloAcctBalance, parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO ENTITY_ID', '', 0), 'DEL_INFO ENTITY_ID', '', 0);
+	        //parent.$x.ispXmlSetFieldVal(parent.$g.xmloAcctBalance, 'P', 'DEL_INFO FUNCTION', '', 0);
+	        //ispCallXMLForm(parent.$g.xmloAcctBalance, dobjNoticeNumber, "Balances/AccountBalanceCall", "");
+	        //parent.$g.xmloAcctBalance.loadXML(dobjNoticeNumber.xml);
+
 	        var ResXML = parent.$g.xmloAcctBalance;
 	        $.ajax({
 	            type: 'POST',
 	            url: '../Returns/Log',
-	            data: '{ "OriginationFom" : "OutstandingBalance","ServiceName" : "RTTIE022","ResponseXML" : "' + btoa(ResXML.toString()) + '"}',
+	            data: '{ "OriginationFom" : "OutstandingBalance","ServiceName" : "TT022E00","ResponseXML" : "' + btoa(ResXML.toString()) + '"}',
 	            contentType: 'application/json; charset=utf-8',
 	            dataType: 'json',
 	            success: function (msg) {
@@ -253,7 +263,7 @@
 	        } 	//if
 	        //document.getElementById('tdABT_Period' + idSuffix).innerHTML = ispFormatPeriod(parent.$x.ispXmlGetFieldVal(parent.$g.xmloAcctBalance, 'DEL_ACCT PERIOD', '', idx), 'D')
 	        //Error Solved by SumanG Error code-3 on outstanding balance 
-	       
+
 	        document.getElementById('tdABT_Period' + idSuffix).innerHTML = parent.$x.ispXmlGetFieldVal(parent.$g.xmloAcctBalance, 'DEL_ACCT PERIOD', '', idx);
 	        //End Code
 	        document.getElementById('tdABT_Principal' + idSuffix).innerHTML = ispFormatMoney(parent.$x.ispXmlGetFieldVal(parent.$g.xmloAcctBalance, 'DEL_ACCT PRINCIPAL_DUE', '', idx), 2)
@@ -267,7 +277,7 @@
 	        tax_typeValue = tax_typeValue + '/*/' + ispFormatMoney(parent.$x.ispXmlGetFieldVal(parent.$g.xmloAcctBalance, 'DEL_ACCT INTEREST_DUE', '', idx), 2);
 	        tax_typeValue = tax_typeValue + '/*/' + ispFormatMoney(parent.$x.ispXmlGetFieldVal(parent.$g.xmloAcctBalance, 'DEL_ACCT PENALTY_DUE', '', idx), 2);
 	        tax_typeValue = tax_typeValue + '/*/' + ispFormatMoney(parent.$x.ispXmlGetFieldVal(parent.$g.xmloAcctBalance, 'DEL_ACCT OTHER_DUE', '', idx), 2);
-            //
+	        //
 	        SelectRow_Sum(idSuffix, false)
 	    }		//AcctTblInsertRow
 
@@ -352,8 +362,8 @@
 	    } 	//SelectRow_Sum
 
 	    function Totals_Sum() {
-	        
-	        var iTotOutBalDue = 0; var iTotAmtSelDue = 0; var sIdSuffix=0;
+
+	        var iTotOutBalDue = 0; var iTotAmtSelDue = 0; var sIdSuffix = 0;
 	        for (i = 0; i < document.getElementsByTagName('table').length; i++) {
 	            if (document.getElementsByTagName('table').item(i).id.indexOf('_', 7) > -1) {
 	                for (j = 0; j < document.getElementsByTagName('table').item(i).rows.length; j++) {
@@ -397,9 +407,9 @@
 	        //debugger;
 	        var sIdSuffix = sId.substr(sId.indexOf('_', 7));
 	        oCurr.value = ispRemoveMoney(oCurr.value);
-	        
-	        
-           
+
+
+
 	        document.getElementById('tdABT_Payment' + sIdSuffix).innerHTML =
 
             ispFormatMoney((ispRemoveMoney(document.getElementById('tdABT_Principal' + sIdSuffix).value)
@@ -409,11 +419,11 @@
 	        //var data = document.getElementById('tdABT_Principal' + sId.substr(sId.indexOf('_', 5))).value;
 	        Totals_Sum();
 	        oCurr.value = ispFormatMoney(oCurr.value, 2);
-	        
-	        
+
+
 	    } 	//Partial_Sum
 
-	    function Pay_Click(oButton) {
+	    function Pay_Click() {
 	        debugger;
 	        var sIdSuffix, sRowSuffix;
 	        var iRowIdx = 0;
@@ -424,11 +434,16 @@
 	            sIdSuffix = aAcctTables[i].id.substr(aAcctTables[i].id.indexOf('_', 7))
 	            for (j = 3; j < aAcctTables[i].rows.length; j++) {
 	                sRowSuffix = sIdSuffix + '_' + iRowIdx
-	                if (aAcctTables[i].rows[j].id.search('Default') > -1) {
-	                    // alert('sangha');
+	                //if (aAcctTables[i].rows[j].id.search('Default') > -1) {
+	                // alert('sangha');
+	                if (document.getElementById('chkABT_Select' + sRowSuffix) != null && document.getElementById('chkABT_Partial' + sRowSuffix) != null) {
 	                    bChkSelect = document.getElementById('chkABT_Select' + sRowSuffix).checked;
 	                    bChkPartial = document.getElementById('chkABT_Partial' + sRowSuffix).checked;
-	                } 	//if
+	                }
+	                    //} 	//if
+	                else {
+	                    bChkPartial = true;
+	                }
 
 	                if (bChkSelect == true && bChkPartial == false) {
 	                    //Full Payment on the current row
@@ -468,6 +483,18 @@
 
 	        //ispCallXMLForm(parent.$g.xmloAcctBalanceDelimited, dobj, "AccountBalanceCall1", "");
 
+	        var ReqXML = parent.$g.xmloAcctBalance;
+	        $.ajax({
+	            type: 'POST',
+	            url: '../Returns/Log',
+	            data: '{ "OriginationFom" : "OutstandingBalance","ServiceName" : "TT022E00","RequestXML" : "' + btoa(ReqXML.toString()) + '"}',
+	            contentType: 'application/json; charset=utf-8',
+	            dataType: 'json',
+	            success: function (msg) {
+
+	            }
+	        });
+
 	        ispCallXMLForm(parent.$g.xmloAcctBalance, dobj, "Balances/AccountBalanceCall", "");
 	        parent.$g.xmloAcctBalance.loadXML(dobj.xml);
 	        debugger;
@@ -475,22 +502,22 @@
 	        // alert(dobj.toString());
 	        // alert(parent.$x.ispXmlGetFieldVal(parent.$g.xmloAcctBalance, 'DEL_INFO NOTICE_NUM', '', 0));
 
-	        if (parent.$x.ispXmlGetFieldVal(parent.$g.xmloAcctBalance, 'DEL_INFO NOTICE_NUM', '', 0) != '') {
+	        //if (parent.$x.ispXmlGetFieldVal(parent.$g.xmloAcctBalance, 'DEL_INFO NOTICE_NUM', '', 0) != '') {
 
-	            if (oButton.id == btnCreditCard.id) {
-	                //Credit Card
-	                $('#divBalances').css("display", "none");
-	                $('#divNoBalances').css("display", "none");
-	                $('#divFinishedBalances').css("display", "block");
-	                DoCreditCard()
-	            } else {
-	                //Coupon
+	        //    if (oButton.id == btnCreditCard.id) {
+	        //        //Credit Card
+	        //        $('#divBalances').css("display", "none");
+	        //        $('#divNoBalances').css("display", "none");
+	        //        $('#divFinishedBalances').css("display", "block");
+	        //        DoCreditCard()
+	        //    } else {
+	        //        //Coupon
 
-	                DoPrintCoupon()
-	            }		//if
-	        } else {
-	            alert('Error occured posting your payment information the server.');
-	        }		//if
+	        //        DoPrintCoupon()
+	        //    }		//if
+	        //} else {
+	        //    alert('Error occured posting your payment information the server.');
+	        //}		//if
 	    }		//PayCC_Click
 
 	    function Print_Click() {
@@ -518,9 +545,9 @@
 	        ////var var_ent_name = $('#lblEntityName').text();
 	        ////var var_ent_add = $('#lblEntityAddress').text();
 	        ////var tempParameters = 'aaa=' + tax_type + '&var_ACC_ID=' + var_ACC_ID + '&var_EntityAccountID=' + var_EntityAccountID + '&var_EntityId=' + var_EntityId
-            ////   + '&var_EntityType=' + var_EntityType
-            ////   + '&var_ent_name=' + var_ent_name + '&var_ent_add=' + var_ent_add
-            ////   + '&tax_type=' + tax_type + '&tax_typeValue=' + tax_typeValue;
+	        ////   + '&var_EntityType=' + var_EntityType
+	        ////   + '&var_ent_name=' + var_ent_name + '&var_ent_add=' + var_ent_add
+	        ////   + '&tax_type=' + tax_type + '&tax_typeValue=' + tax_typeValue;
 	        //////alert(tempParameters);
 	        //////return false;
 	        ////parent.setFrameUrl('Returns/AccountBalance?y=' + tempParameters);
@@ -608,6 +635,7 @@
 
 
 	    function DoCreditCard() {
+
 	        debugger;
 	        var sAmount
 	        var sToday, sMonth, sDate
@@ -622,7 +650,23 @@
 	        if (sDate <= 9) {
 	            sDate = '0' + sDate
 	        } //if
-	       //
+	        //
+	        debugger;
+
+
+	        Pay_Click();
+
+	        var ResXML = parent.$g.xmloAcctBalance;
+	        $.ajax({
+	            type: 'POST',
+	            url: '../Returns/Log',
+	            data: '{ "OriginationFom" : "OutstandingBalance","ServiceName" : "TT022E00","ResponseXML" : "' + btoa(ResXML.toString()) + '"}',
+	            contentType: 'application/json; charset=utf-8',
+	            dataType: 'json',
+	            success: function (msg) {
+
+	            }
+	        });
 	        parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, '<%=  Session["CC_DB_ePay_ID"]%>', 'ApplicationID', '', 0)
 	        parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, parent.$x.ispXmlGetFieldVal(parent.$g.xmloAcctBalance, 'DEL_INFO NOTICE_NUM', '', 0), 'AccountNumber', '', 0)
 	        parent.$x.ispXmlSetFieldVal(parent.$g.xmlCC, parent.$x.ispXmlGetFieldVal(parent.$g.xmloAcctBalance, 'DEL_INFO NOTICE_NUM', '', 0), 'BillNumber', '', 0)	//Notice Number
@@ -657,8 +701,8 @@
 	        frmePay.submit()
         } 	//DoCreditCard
 
-	    function DoPrintCoupon() {
-	        //debugger;
+        function DoPrintCoupon() {
+            //debugger;
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, 'DELBAL', 'COUPON_FORM CPN_FORM', '');
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, '98', 'COUPON_FORM CPN_ACCOUNT_TYPE', '');
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, parent.$x.ispXmlGetFieldVal(parent.$g.xmloAcctBalance, 'DEL_ACCT ACCOUNT_ID', '', 0), 'COUPON_FORM CPN_ACCOUNT', '');
@@ -672,7 +716,7 @@
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, parent.$x.ispXmlGetFieldVal(parent.$g.xmloAcctBalance, 'DEL_ACCT PERIOD', '', 0), 'COUPON_FORM CPN_PERIOD', '');
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, parent.$x.ispXmlGetFieldVal(parent.$g.xmloAcctBalance, 'DEL_ACCT PERIOD', '', 0).substr(6, 4), 'COUPON_FORM CPN_YEAR', '');
 
-          
+
 
             var strPayPeriod = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'COUPON_FORM CPN_PERIOD', '')
             var strAcctType = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'COUPON_FORM CPN_ACCOUNT_TYPE', '')
@@ -685,7 +729,7 @@
             var strAccountState = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'COUPON_FORM CPN_STATE', '')
             var strAccountZip = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'COUPON_FORM CPN_ZIP_CODE', '')
 
-	        //  var strEntityID = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon,'COUPON_FORM/CPN_ENTITY_ID', '')
+            //  var strEntityID = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon,'COUPON_FORM/CPN_ENTITY_ID', '')
             var i = 0
             var iTotal = 0
             var iDigit = 0
@@ -699,23 +743,23 @@
                 //		strCouponAddr = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon,"ENTITY_INFO/ADDRESS1", "")  
             }  //if
 
-	        //	strPeriod = ddPCTaxPeriod.options(ddPCTaxPeriod.selectedIndex).innerText
+            //	strPeriod = ddPCTaxPeriod.options(ddPCTaxPeriod.selectedIndex).innerText
             strPeriod = new Date(strPayPeriod)
             strPeriod = strPeriod.getMonth() + 1 + '/' + strPeriod.getDate() + '/' + strPeriod.getFullYear()
             strPayPeriod = strPayPeriod.substr(0, 2)
-	        //	strAcctType = strAcctType
-	        /*  if (ifreq == 'W') {
+            //	strAcctType = strAcctType
+            /*  if (ifreq == 'W') {
                  strPeriod = strPeriod
                  } else {
                  strPeriod = strPeriod + ', ' + ddPCTaxYear.options(ddPCTaxYear.selectedIndex).CODE
               } //if */
 
-	        //        make type 2 digits	
+            //        make type 2 digits	
             if (new Number(strAcctType) < 10) {
                 strAcctType = '0' + strAcctType
             } //if		
 
-	        //		  add sufffix for UOL, UOT	
+            //		  add sufffix for UOL, UOT	
             if (strAcctID.length == 7) {
                 if (strAcctType == '84' || strAcctType == '85') {
                     if (strAcctID.substr(7, 8) == '  ') {
@@ -724,7 +768,7 @@
                 } // if
             } // if
 
-	        //		  make Account Id 12 bytes long	
+            //		  make Account Id 12 bytes long	
             if (strAcctID.length == 12) {
                 strScanID = strAcctID
             } //if
@@ -765,12 +809,12 @@
                 strScanID = strAcctID
             }		//if
 
-	        //		  Make pay period 2 digits
+            //		  Make pay period 2 digits
             if (strPayPeriod < 10) {
                 strPayPeriod = '0' + strPayPeriod
             } //if
 
-	        //		  Get today's date for due date
+            //		  Get today's date for due date
             HoldDate = new Date()
             holdmonth = HoldDate.getMonth()
             holdmonth = holdmonth + 1
@@ -785,7 +829,7 @@
 
             holdyear = HoldDate.getFullYear()
             twoyear = holdyear
-	        //		  find 2 digit year
+            //		  find 2 digit year
             if (twoyear > 2000) {
                 while (twoyear > 999) {
                     twoyear = twoyear - 1000
@@ -798,12 +842,12 @@
                 } //if
             } //if
 
-	        //		create dates for scan lines
+            //		create dates for scan lines
             HoldDate = new String(holdmonth) + new String(holdday) + new String(twoyear)
 
-	        //  Format Period year
+            //  Format Period year
             twoyear = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'COUPON_FORM CPN_YEAR', '')
-	        //		  find 2 digit year
+            //		  find 2 digit year
             if (twoyear > 2000) {
                 while (twoyear > 999) {
                     twoyear = twoyear - 1000
@@ -816,7 +860,7 @@
                 } //if
             } //if
 
-	        //		create century code for SIT accounts (in CCYY year, century code is 2nd C)\
+            //		create century code for SIT accounts (in CCYY year, century code is 2nd C)\
             centurySIT = '0'
             if (holdyear < 1999) {
                 centurySIT = '9'
@@ -838,9 +882,9 @@
                 strScanLine = '333' + strAcctType + HoldDate + '00' + '000000' + strScanID + '000000000000000000' + strPayPeriod + twoyear + '000' + '00000000000000000000'
             } //if
 
-	        //TODO Fix Check Digit Routine
-	        //Check digit routine
-	        //Even numbers added together for a running total
+            //TODO Fix Check Digit Routine
+            //Check digit routine
+            //Even numbers added together for a running total
             if (strAcctType == '98') {
                 for (i = 1; i < 59; i = i + 2) {
                     iTotal = iTotal + parseInt(strScanLine.substr(i, 1))
@@ -869,7 +913,7 @@
                     iTotal = iDigit + iTotal
                 }
             }  //for
-	        //Take the ones position and subtract from 10
+            //Take the ones position and subtract from 10
             if (parseInt(iTotal.toString().substr(parseInt(iTotal.toString().length) - 1, 1)) == 0) {
                 iTotal = 0
             } else {
@@ -882,11 +926,13 @@
             else
                 strScanLine = strScanLine.substr(0, 67) + iTotal
 
-            tempParameters = 'a=' + strAcctID + '&b=' + strAccountName + '&c=' + strAccountAddr + '&d=' + strScanLine + '&e=' + strPeriod + '&f=' + strAcctType + '&g=' + strAccountAddr + '|' + strAccountAddr2 + '|' + strAccountAddr3 + '|' + strAccountCity + '|' + strAccountState + '|' + strAccountZip
+            tempParameters = 'a=' + strAcctID + '&b=' + strAccountName + '&c=' + strAccountAddr + '&d=' + strScanLine + '&e=' + strPeriod + '&f=' + strAcctType + '&i=' + 'ThankYou' + '&g=' + strAccountAddr + '|' + strAccountAddr2 + '|' + strAccountAddr3 + '|' + strAccountCity + '|' + strAccountState + '|' + strAccountZip
             tempParameters = tempParameters.replace(/#/g, '~LBSIGN~')
             parent.setFrameUrl('PayCoupon/PDFCouponCreate?y=' + tempParameters);
             // parent.DocWin.location.href = '../PayCoupon/PDFCouponCreate?' + tempParameters;
         } 	//DoPrintCoupon
+
+
 	</script>
 </head>
 <body onload="SetInitFocus()">
@@ -902,7 +948,7 @@
             <div class="col-lg-12 col-md-12" style="display: block;" id="tab1">
             <div class="blue_base_box">
               <%-- <h2><span id="AppHeader">&nbsp;</span>  </h2>--%>
-                 <h2><span id="AppHeader"></span>  </h2>
+                 <h2><span id="AppHeader">Taxpayer Information|Account Balance</span>  </h2>
                 <div class="inner_white-panel">
                 
                 
@@ -1020,12 +1066,12 @@
 					<td class="celLeft" colspan="2" nowrap="nowrap" align="left">
 						<label style="margin-left:20px">Partial Payment</label></td>
 					<td class="celLeft" align="center">&nbsp;</td>
-					<td class="celLeft"><input id="tdABT_Principal" type="text" class="lblTblDataRight" style="color:Red; width:80%" value="$0.00" onblur="Partial_Sum(this)" /></td>
-					<td class="celLeft"><input id="tdABT_Interest" type="text" class="lblTblDataRight" style="color:Red; width:80%" value="$0.00" onblur="Partial_Sum(this)" /></td>
-					<td class="celLeft"><input id="tdABT_Penalty" type="text" class="lblTblDataRight" style="color:Red; width:80%" value="$0.00" onblur="Partial_Sum(this)" /></td>
-					<td class="celLeft"><input id="tdABT_Other" type="text" class="lblTblDataRight" style="color:Red; width:80%" value="$0.00" onblur="Partial_Sum(this)" /></td>
-					<td id="tdABT_Balance" class="celLeft lblTblDataRight">&nbsp;</td>
-					<td id="tdABT_Payment" class="celRightLeft lblTblDataRight">&nbsp;</td>
+					<td class="celLeft"><input id="Text1" type="text" class="lblTblDataRight" style="color:Red; width:80%" value="$0.00" onblur="Partial_Sum(this)" /></td>
+					<td class="celLeft"><input id="Text2" type="text" class="lblTblDataRight" style="color:Red; width:80%" value="$0.00" onblur="Partial_Sum(this)" /></td>
+					<td class="celLeft"><input id="Text3" type="text" class="lblTblDataRight" style="color:Red; width:80%" value="$0.00" onblur="Partial_Sum(this)" /></td>
+					<td class="celLeft"><input id="Text4" type="text" class="lblTblDataRight" style="color:Red; width:80%" value="$0.00" onblur="Partial_Sum(this)" /></td>
+					<td id="td1" class="celLeft lblTblDataRight">&nbsp;</td>
+					<td id="td2" class="celRightLeft lblTblDataRight">&nbsp;</td>
 				</tr>
 			</table>
 		</div>
@@ -1047,8 +1093,8 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
-				<td class="celLeft lblTblHeaderLeft" colspan="2" align="left" style="padding-left:10px">Total Outstanding Balance Due</td>
+				
+				<td class="celLeft lblTblHeaderLeft" colspan="3" align="left" style="padding-left:80px">Total Outstanding Balance Due</td>
 				<td id="tdTotOutBalDue" class="celLeft lblTblHeaderRight">&nbsp;</td>
 				<td class=celRightLeft>&nbsp;</td>
 			</tr>
@@ -1057,8 +1103,8 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td></td>
-				<td colspan="2" class="celLeft lblTblHeaderLeft" align="left" style="padding-left:10px">Total Amount Selected Due</td>
+				
+				<td colspan="3" class="celLeft lblTblHeaderLeft" align="left" style="padding-left:80px">Total Amount Selected Due</td>
 				<td class="celLeft"><p class=lblTblHeaderRight>&nbsp;</p></td>
 				<td id="tdTotAmtSelDue" class="celRightLeft lblTblHeaderRight" style="text-align:right; margin-right:5px">&nbsp;</td>
 			</tr>
@@ -1073,7 +1119,7 @@
   </div>
   <!--Disclaimer Section-->
 	
-	<div id="divDisclaimer" style="display:none; margin-left:4%; font-weight:light;padding-top:70px;font-size:10pt; margin-bottom:15px;" class="lblTextBlack">
+	<div id="divDisclaimer" style="display:none; margin-left:4%; font-weight:light;padding-top:30px;font-size:10pt; margin-bottom:15px;" class="lblTextBlack">
 
 			<strong>Disclaimer:</strong>
 			<br />

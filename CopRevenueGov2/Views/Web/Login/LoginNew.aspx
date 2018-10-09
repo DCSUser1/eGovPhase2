@@ -30,7 +30,7 @@
         var arrLoginErr = new Array();
 
         function DisplayLogin() {
-          
+
             parent.sNew = false;
             $('#divLogin').css('display', 'block');
             $('#LogLogin').css('display', 'block');
@@ -47,9 +47,9 @@
 
             }
             LoadLoginError();
-           
 
-            $('#txtAccountNumber').focus();          
+
+            $('#txtAccountNumber').focus();
         }
 
         function LoadLoginError() {
@@ -82,17 +82,17 @@
             $('#txtPIN').removeClass("inpErrorPwd");
             var err_text = ispSetInputErr(arrLoginErr);
             $(AppError).text(err_text);
-           // resolvedIframeheight();
+            // resolvedIframeheight();
         }
-       
+
         $(function () {
             $('#txtPIN').keypress(function (evt) {
                 if (evt.charCode > 31 && (evt.charCode < 48 || evt.charCode > 57)) {
-                           return false;
-                       }
+                    return false;
+                }
             });
         });
-      
+
         $(function () {
             $('#txtAccountNumber').keypress(function (evt) {
                 if (evt.charCode > 31 && (evt.charCode < 48 || evt.charCode > 57)) {
@@ -100,7 +100,7 @@
                 }
             });
         });
-       
+
         function DoLogin() {
             debugger;
             var dobj = parent.$g.getXmlDocObj();
@@ -116,7 +116,7 @@
                 $('#txtAccountNumber').focus();
                 resolvedIframeheight();
                 return false;
-              
+
             }
             else {
 
@@ -134,7 +134,7 @@
                         parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, "I", "ENTITY_INFO FUNCTION_CODE", '', 0);
                         parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtAccountNumber').val(), "ENTITY_INFO ENTITY_ID", '', 0);
                         parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtPIN').val(), "ENTITY_INFO PIN", '', 0);
-
+                        debugger;
 
                         //'''''''Sudipta'''''''''
                         var acctNumber = $('#txtAccountNumber').val();
@@ -144,35 +144,60 @@
                         localStorage.setItem("Pin", pin);
                         //'''''''''''''''''''
 
+                        var ReqXML = parent.$g.xmlAccount;
 
+                        $.ajax({
+                            type: 'POST',
+                            url: '../Returns/Log',
+                            data: '{ "OriginationFom" : "Login","ServiceName" : "TT010E00","RequestXML" : "' + btoa(ReqXML.toString()) + '"}',
+                            contentType: 'application/json; charset=utf-8',
+                            dataType: 'json',
+                            success: function (msg) {
+
+                            }
+                        });
 
 
                         ispCallXMLForm(parent.$g.xmlAccount, dobj, "AccountInfo");
+                        parent.$g.xmlAccount.loadXML(dobj.xml);
+
+                        var ResXML = parent.$g.xmlAccount;
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '../Returns/Log',
+                            data: '{ "OriginationFom" : "Login","ServiceName" : "TT010E00","ResponseXML" : "' + btoa(ResXML.toString()) + '"}',
+                            contentType: 'application/json; charset=utf-8',
+                            dataType: 'json',
+                            success: function (msg) {
+
+                            }
+                        });
 
                         if (parent.$x.ispXmlGetFieldVal(dobj, 'ERROR_INFO MESSAGE', "", 0) == "") {
 
                             if (parent.$x.ispXmlGetFieldVal(dobj, 'ENTITY_INFO FORCEPINCHG', "", 0) == "Y") {
 
-                                parent.$g.xmlAccount.loadXML(dobj.xml)
+                                //parent.$g.xmlAccount.loadXML(dobj.xml)
                                 ShowForm('LogChangePin');
 
                             } else {
 
-                                parent.$g.xmlAccount.loadXML(dobj.xml);
-                               
+                                //parent.$g.xmlAccount.loadXML(dobj.xml);
+                                debugger;
                                 switch (gsLoginPage) {
                                     case 'PROFILE':
                                     case '':
                                         parent.setFrameUrl('Acct/ApplyMain');
-                                       
+
                                         break;
                                     case 'SIT':
                                         if (parent.GetNodeCount(parent.$g.xmlAccount, 'TAX_ACCT ACCOUNT', '29') == 1) { //Chayan
                                             $(parent.document).find('#mnuReSchool').first().trigger('click'); //chayan
-                                           
+
                                         } else {
 
-                                            
+
                                             parent.setFrameUrl('Acct/ApplyMain');
                                         }
                                         getLoginName();
@@ -181,21 +206,21 @@
 
                                         if (parent.GetNodeCount(parent.$g.xmlAccount, 'TAX_ACCT ACCOUNT', '1') == 1) { //Chayan
                                             $(parent.document).find('#mnuReWage').first().trigger('click'); //chayan
-                                           
+
                                         } else {
-                                           
-                                            parent.setFrameUrl('Acct/ApplyMain');                                           
+
+                                            parent.setFrameUrl('Acct/ApplyMain');
                                         }
                                         getLoginName();
                                         break
                                     case 'BPTez':
                                         if (parent.GetNodeCount(parent.$g.xmlAccount, 'TAX_ACCT ACCOUNT', '24') == 1) { //Chayan
                                             $(parent.document).find('#mnuReBPTez').first().trigger('click'); //chayan
-                                           
+
                                         }
                                         else if (parent.GetNodeCount(parent.$g.xmlAccount, 'TAX_ACCT ACCOUNT', '3') == 1) { //Chayan
                                             $(parent.document).find('#mnuReNPT').first().trigger('click'); //chayan
-                                          
+
                                         } else {
                                             //parent.DocWin.location.href = '../Acct/ApplyMain';
                                             parent.setFrameUrl('Acct/ApplyMain');
@@ -209,7 +234,7 @@
                                         else if (parent.GetNodeCount(parent.$g.xmlAccount, 'TAX_ACCT ACCOUNT', '3') == 1) { //Chayan
                                             $(parent.document).find('#mnuReNPT').first().trigger('click'); //chayan
                                         } else {
-                                            
+
                                             parent.setFrameUrl('Acct/ApplyMain');
                                         }
                                         getLoginName();
@@ -218,7 +243,7 @@
                                         if (parent.GetNodeCount(parent.$g.xmlAccount, 'TAX_ACCT ACCOUNT', '3') == 1) { //Chayan
                                             $(parent.document).find('#mnuReNPT').first().trigger('click'); //chayan
                                         } else {
-                                           
+
                                             parent.setFrameUrl('Acct/ApplyMain');
                                         } 	//if
                                         getLoginName();
@@ -227,7 +252,7 @@
                                         if (parent.GetNodeCount(parent.$g.xmlAccount, 'TAX_ACCT ACCOUNT', '84') == 1) { //Chayan
                                             $(parent.document).find('#mnuUO').first().trigger('click'); //chayan
                                         } else {
-                                           
+
                                             parent.setFrameUrl('Acct/ApplyMain');
                                         }
                                         getLoginName();
@@ -238,7 +263,7 @@
 
                                             $(parent.document).find('#mnuTOB').first().trigger('click'); //chayan
                                         } else {
-                                           
+
                                             parent.setFrameUrl('Acct/ApplyMain');
                                         }
                                         getLoginName();
@@ -251,10 +276,10 @@
                             }
                         } else {
 
-                            
+
                             $(AppError).text(parent.$x.ispXmlGetFieldVal(dobj, 'ERROR_INFO MESSAGE', "", 0));
-                           
-                           
+
+
                             $('#txtAccountNumber').focus();
                         }
 
@@ -275,7 +300,7 @@
                     }
 
                 }
-            }          
+            }
         }
 
         $(function (e) {
@@ -300,7 +325,7 @@
                 }
 
             });
-          
+
         });
         function LocatePrimaryAddr(AddType, AddNewRow) {
 
@@ -327,7 +352,7 @@
 
             if (iFirstEmptyRow == -1 && AddNewRow == true) {
                 iFirstEmptyRow = iMaxIdx;
-               
+
 
                 var xmlTemp = parent.$g.getXmlDocObj();
                 xmlTemp.xml = parent.$x.ispXmlGetRecordXml(parent.$g.xmlTemplate, "NAME_ADDRESS", 0);
@@ -338,9 +363,8 @@
             }		//if
             return iFirstEmptyRow;
         }		//locatePrimaryAddr
-        function getLoginName()
-        {
-            addrIdx = LocatePrimaryAddr('60');          
+        function getLoginName() {
+            addrIdx = LocatePrimaryAddr('60');
 
             var uName = parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME', '', addrIdx);
             if (uName.indexOf("*") >= 0) {
@@ -359,12 +383,13 @@
     <div class="container-fluid no-padding">
         <div id="divLogin" style="display: none;" class="block3">
             <%--<div class="col-lg-8">--%>
-                 <p style="font: 14px/18px Verdana;font-weight:bold">Tax returns prior to 2012 and Use & Occupancy returns prior to 2014 must be obtained via our <a style="cursor:pointer" onclick="ClickHelp('https://beta.phila.gov/services/payments-assistance-taxes/tax-forms-instructions/ ')">Tax Forms</a> page or customer service at 215 686-6600. </p>
+                 <%--<p style="font: 14px/18px Verdana;font-weight:bold;">Use & Occupancy tax returns prior to 2014 must be obtained via customer service <br />at 215 686-6600 or <a style="cursor:pointer;font-weight:normal" href="mailto:revenue@phila.gov"><u>revenue@phila.gov</u></a>. All other tax returns, prior to 2012, can be <br />obtained via our <a style="cursor:pointer" onclick="ClickHelp('https://beta.phila.gov/services/payments-assistance-taxes/tax-forms-instructions/ ')">Tax Forms</a> page or by contacting customer service. <span style="color:#FF0000">These returns <br />cannot be filed online</span></p>--%>
            <%-- </div>--%>
-         <div class="container-fluid">
+         <div class="smaller-container">
           <div class="row">
              
-            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3" style="display: none;" id="LogLogin">
+            <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2" style="display: none;" id="LogLogin">
+                 <p style="font: 14px/18px Verdana;font-weight:bold;text-align:justify">Use & Occupancy tax returns prior to 2014 must be obtained via customer service at 215 686-6600 or <a style="cursor:pointer;font-weight:normal" href="mailto:revenue@phila.gov"><u>revenue@phila.gov</u></a>. All other tax returns, prior to 2012, can be obtained via our <a style="cursor:pointer" onclick="ClickHelp('https://beta.phila.gov/services/payments-assistance-taxes/tax-forms-instructions/ ')">Tax Forms</a> page or by contacting customer service. <span style="color:#FF0000">These returns cannot be filed online</span></p>
                  <p style="font: 17px/25px Verdana;font-weight:bold;text-align:center;margin-top:25px;color:#FF0000">Please Log-In to file a return</p>
                 <div class="blue_base_box" style="margin-top:10px !important">
                     <h2>Taxpayer Information  |   <span>Login</span>  </h2>
@@ -417,7 +442,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-sm-offset-2 col-sm-8">
+                                            <div class="col-sm-offset-3 col-sm-8">
                                                 <div class="checkbox">
                                                     <label>
                                                         <p><a onclick="ShowForm('LogApplyFirst')" id="lnkForgotPin" class="move_to_right" style="color:#FF0000">Register for a Philadelphia Tax Account Number</a></p>

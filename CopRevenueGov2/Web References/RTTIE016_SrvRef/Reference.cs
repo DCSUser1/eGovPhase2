@@ -26,17 +26,16 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="TIPSACCDSOAP11Binding", Namespace="http://namespace.softwareag.com/entirex/xml/mapping")]
-    public partial class RTTIE016 : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    [System.Web.Services.WebServiceBindingAttribute(Name="TIPSACCTSOAP11Binding", Namespace="http://namespace.softwareag.com/entirex/xml/mapping")]
+    public partial class TT016E00 : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback CallRTTIE016OperationCompleted;
+        private System.Threading.SendOrPostCallback CallTT016E00OperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public RTTIE016() {
-            this.Url = "http://istest.city.phila.local:10010/wsstack/services/RTTIE016.TIPSACCDSOAP11Port" +
-                "/";
+        public TT016E00() {
+            this.Url = "http://192.168.204.70:10010/wsstack/services/TT016E00.TIPSACCTSOAP11Port/";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -71,44 +70,44 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
         }
         
         /// <remarks/>
-        public event CallRTTIE016CompletedEventHandler CallRTTIE016Completed;
+        public event CallTT016E00CompletedEventHandler CallTT016E00Completed;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("RTTIE016", RequestElementName="RTTIE016", RequestNamespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016", ResponseElementName="RTTIE016Response", ResponseNamespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("TT016E00", RequestElementName="TT016E00", RequestNamespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00", ResponseElementName="TT016E00Response", ResponseNamespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("_SMA", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RTTIE016Response_SMA CallRTTIE016([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RTTIE016_SMA _SMA, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RTTIE016_EMI _EMI, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RTTIE016_ETA _ETA, [System.Xml.Serialization.XmlElementAttribute("_E-WAG-NTL", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RTTIE016_EWAGNTL _EWAGNTL, [System.Xml.Serialization.XmlElementAttribute("_EMI", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RTTIE016Response_EMI _EMI1, [System.Xml.Serialization.XmlElementAttribute("_ETA", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RTTIE016Response_ETA _ETA1, [System.Xml.Serialization.XmlElementAttribute("_E-WAG-NTL", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RTTIE016Response_EWAGNTL _EWAGNTL1) {
-            object[] results = this.Invoke("CallRTTIE016", new object[] {
+        public TT016E00Response_SMA CallTT016E00([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT016E00_SMA _SMA, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT016E00_EMI _EMI, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT016E00_ETA _ETA, [System.Xml.Serialization.XmlElementAttribute("_E-WAG-NTL", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT016E00_EWAGNTL _EWAGNTL, [System.Xml.Serialization.XmlElementAttribute("_EMI", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT016E00Response_EMI _EMI1, [System.Xml.Serialization.XmlElementAttribute("_ETA", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT016E00Response_ETA _ETA1, [System.Xml.Serialization.XmlElementAttribute("_E-WAG-NTL", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT016E00Response_EWAGNTL _EWAGNTL1) {
+            object[] results = this.Invoke("CallTT016E00", new object[] {
                         _SMA,
                         _EMI,
                         _ETA,
                         _EWAGNTL});
-            _EMI1 = ((RTTIE016Response_EMI)(results[1]));
-            _ETA1 = ((RTTIE016Response_ETA)(results[2]));
-            _EWAGNTL1 = ((RTTIE016Response_EWAGNTL)(results[3]));
-            return ((RTTIE016Response_SMA)(results[0]));
+            _EMI1 = ((TT016E00Response_EMI)(results[1]));
+            _ETA1 = ((TT016E00Response_ETA)(results[2]));
+            _EWAGNTL1 = ((TT016E00Response_EWAGNTL)(results[3]));
+            return ((TT016E00Response_SMA)(results[0]));
         }
         
         /// <remarks/>
-        public void CallRTTIE016Async(RTTIE016_SMA _SMA, RTTIE016_EMI _EMI, RTTIE016_ETA _ETA, RTTIE016_EWAGNTL _EWAGNTL) {
-            this.CallRTTIE016Async(_SMA, _EMI, _ETA, _EWAGNTL, null);
+        public void CallTT016E00Async(TT016E00_SMA _SMA, TT016E00_EMI _EMI, TT016E00_ETA _ETA, TT016E00_EWAGNTL _EWAGNTL) {
+            this.CallTT016E00Async(_SMA, _EMI, _ETA, _EWAGNTL, null);
         }
         
         /// <remarks/>
-        public void CallRTTIE016Async(RTTIE016_SMA _SMA, RTTIE016_EMI _EMI, RTTIE016_ETA _ETA, RTTIE016_EWAGNTL _EWAGNTL, object userState) {
-            if ((this.CallRTTIE016OperationCompleted == null)) {
-                this.CallRTTIE016OperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallRTTIE016OperationCompleted);
+        public void CallTT016E00Async(TT016E00_SMA _SMA, TT016E00_EMI _EMI, TT016E00_ETA _ETA, TT016E00_EWAGNTL _EWAGNTL, object userState) {
+            if ((this.CallTT016E00OperationCompleted == null)) {
+                this.CallTT016E00OperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallTT016E00OperationCompleted);
             }
-            this.InvokeAsync("CallRTTIE016", new object[] {
+            this.InvokeAsync("CallTT016E00", new object[] {
                         _SMA,
                         _EMI,
                         _ETA,
-                        _EWAGNTL}, this.CallRTTIE016OperationCompleted, userState);
+                        _EWAGNTL}, this.CallTT016E00OperationCompleted, userState);
         }
         
-        private void OnCallRTTIE016OperationCompleted(object arg) {
-            if ((this.CallRTTIE016Completed != null)) {
+        private void OnCallTT016E00OperationCompleted(object arg) {
+            if ((this.CallTT016E00Completed != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.CallRTTIE016Completed(this, new CallRTTIE016CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.CallTT016E00Completed(this, new CallTT016E00CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -136,14 +135,14 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016_SMA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00_SMA {
         
-        private RTTIE016_SMA_SYSTEMMESSAGEAREA _SYSTEMMESSAGEAREAField;
+        private TT016E00_SMA_SYSTEMMESSAGEAREA _SYSTEMMESSAGEAREAField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("_SYSTEM-MESSAGE-AREA", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RTTIE016_SMA_SYSTEMMESSAGEAREA _SYSTEMMESSAGEAREA {
+        public TT016E00_SMA_SYSTEMMESSAGEAREA _SYSTEMMESSAGEAREA {
             get {
                 return this._SYSTEMMESSAGEAREAField;
             }
@@ -158,8 +157,8 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016_SMA_SYSTEMMESSAGEAREA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00_SMA_SYSTEMMESSAGEAREA {
         
         private string _PROGRAMField;
         
@@ -245,14 +244,14 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016_EMI {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00_EMI {
         
-        private RTTIE016_EMI_ENTITYMASTERINFO _ENTITYMASTERINFOField;
+        private TT016E00_EMI_ENTITYMASTERINFO _ENTITYMASTERINFOField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("_ENTITY-MASTER-INFO", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RTTIE016_EMI_ENTITYMASTERINFO _ENTITYMASTERINFO {
+        public TT016E00_EMI_ENTITYMASTERINFO _ENTITYMASTERINFO {
             get {
                 return this._ENTITYMASTERINFOField;
             }
@@ -267,8 +266,8 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016_EMI_ENTITYMASTERINFO {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00_EMI_ENTITYMASTERINFO {
         
         private string fUNCTIONCODEField;
         
@@ -432,15 +431,15 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016_ETA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00_ETA {
         
-        private RTTIE016_ETA_ENTITYTAXACCOUNTS[] _ENTITYTAXACCOUNTSsField;
+        private TT016E00_ETA_ENTITYTAXACCOUNTS[] _ENTITYTAXACCOUNTSsField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute("_ENTITY-TAX-ACCOUNTSs", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlArrayItemAttribute("_ENTITY-TAX-ACCOUNTS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public RTTIE016_ETA_ENTITYTAXACCOUNTS[] _ENTITYTAXACCOUNTSs {
+        public TT016E00_ETA_ENTITYTAXACCOUNTS[] _ENTITYTAXACCOUNTSs {
             get {
                 return this._ENTITYTAXACCOUNTSsField;
             }
@@ -455,8 +454,8 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016_ETA_ENTITYTAXACCOUNTS {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00_ETA_ENTITYTAXACCOUNTS {
         
         private string fUNCTIONCODEField;
         
@@ -607,12 +606,12 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016_EWAGNTL {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00_EWAGNTL {
         
         private string aCCOUNTIDField;
         
-        private RTTIE016_EWAGNTLPERIODX pERIODXField;
+        private TT016E00_EWAGNTLPERIODX pERIODXField;
         
         private string fREQUENCYField;
         
@@ -643,7 +642,7 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("PERIOD-X", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RTTIE016_EWAGNTLPERIODX PERIODX {
+        public TT016E00_EWAGNTLPERIODX PERIODX {
             get {
                 return this.pERIODXField;
             }
@@ -746,8 +745,8 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016_EWAGNTLPERIODX {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00_EWAGNTLPERIODX {
         
         private decimal pERIODField;
         
@@ -781,14 +780,14 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016Response_SMA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00Response_SMA {
         
-        private RTTIE016Response_SMA_SYSTEMMESSAGEAREA _SYSTEMMESSAGEAREAField;
+        private TT016E00Response_SMA_SYSTEMMESSAGEAREA _SYSTEMMESSAGEAREAField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("_SYSTEM-MESSAGE-AREA", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RTTIE016Response_SMA_SYSTEMMESSAGEAREA _SYSTEMMESSAGEAREA {
+        public TT016E00Response_SMA_SYSTEMMESSAGEAREA _SYSTEMMESSAGEAREA {
             get {
                 return this._SYSTEMMESSAGEAREAField;
             }
@@ -803,8 +802,8 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016Response_SMA_SYSTEMMESSAGEAREA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00Response_SMA_SYSTEMMESSAGEAREA {
         
         private string _PROGRAMField;
         
@@ -890,14 +889,14 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016Response_EMI {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00Response_EMI {
         
-        private RTTIE016Response_EMI_ENTITYMASTERINFO _ENTITYMASTERINFOField;
+        private TT016E00Response_EMI_ENTITYMASTERINFO _ENTITYMASTERINFOField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("_ENTITY-MASTER-INFO", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RTTIE016Response_EMI_ENTITYMASTERINFO _ENTITYMASTERINFO {
+        public TT016E00Response_EMI_ENTITYMASTERINFO _ENTITYMASTERINFO {
             get {
                 return this._ENTITYMASTERINFOField;
             }
@@ -912,8 +911,8 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016Response_EMI_ENTITYMASTERINFO {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00Response_EMI_ENTITYMASTERINFO {
         
         private string fUNCTIONCODEField;
         
@@ -1077,15 +1076,15 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016Response_ETA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00Response_ETA {
         
-        private RTTIE016Response_ETA_ENTITYTAXACCOUNTS[] _ENTITYTAXACCOUNTSsField;
+        private TT016E00Response_ETA_ENTITYTAXACCOUNTS[] _ENTITYTAXACCOUNTSsField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayAttribute("_ENTITY-TAX-ACCOUNTSs", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         [System.Xml.Serialization.XmlArrayItemAttribute("_ENTITY-TAX-ACCOUNTS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=false)]
-        public RTTIE016Response_ETA_ENTITYTAXACCOUNTS[] _ENTITYTAXACCOUNTSs {
+        public TT016E00Response_ETA_ENTITYTAXACCOUNTS[] _ENTITYTAXACCOUNTSs {
             get {
                 return this._ENTITYTAXACCOUNTSsField;
             }
@@ -1100,8 +1099,8 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016Response_ETA_ENTITYTAXACCOUNTS {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00Response_ETA_ENTITYTAXACCOUNTS {
         
         private string fUNCTIONCODEField;
         
@@ -1252,12 +1251,12 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016Response_EWAGNTL {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00Response_EWAGNTL {
         
         private string aCCOUNTIDField;
         
-        private RTTIE016Response_EWAGNTLPERIODX pERIODXField;
+        private TT016E00Response_EWAGNTLPERIODX pERIODXField;
         
         private string fREQUENCYField;
         
@@ -1288,7 +1287,7 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("PERIOD-X", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RTTIE016Response_EWAGNTLPERIODX PERIODX {
+        public TT016E00Response_EWAGNTLPERIODX PERIODX {
             get {
                 return this.pERIODXField;
             }
@@ -1391,8 +1390,8 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RTTIE016")]
-    public partial class RTTIE016Response_EWAGNTLPERIODX {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT016E00")]
+    public partial class TT016E00Response_EWAGNTLPERIODX {
         
         private decimal pERIODField;
         
@@ -1423,50 +1422,50 @@ namespace CopRevenueGov2.RTTIE016_SrvRef {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    public delegate void CallRTTIE016CompletedEventHandler(object sender, CallRTTIE016CompletedEventArgs e);
+    public delegate void CallTT016E00CompletedEventHandler(object sender, CallTT016E00CompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class CallRTTIE016CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class CallTT016E00CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal CallRTTIE016CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal CallTT016E00CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public RTTIE016Response_SMA Result {
+        public TT016E00Response_SMA Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RTTIE016Response_SMA)(this.results[0]));
+                return ((TT016E00Response_SMA)(this.results[0]));
             }
         }
         
         /// <remarks/>
-        public RTTIE016Response_EMI _EMI1 {
+        public TT016E00Response_EMI _EMI1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RTTIE016Response_EMI)(this.results[1]));
+                return ((TT016E00Response_EMI)(this.results[1]));
             }
         }
         
         /// <remarks/>
-        public RTTIE016Response_ETA _ETA1 {
+        public TT016E00Response_ETA _ETA1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RTTIE016Response_ETA)(this.results[2]));
+                return ((TT016E00Response_ETA)(this.results[2]));
             }
         }
         
         /// <remarks/>
-        public RTTIE016Response_EWAGNTL _EWAGNTL1 {
+        public TT016E00Response_EWAGNTL _EWAGNTL1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RTTIE016Response_EWAGNTL)(this.results[3]));
+                return ((TT016E00Response_EWAGNTL)(this.results[3]));
             }
         }
     }

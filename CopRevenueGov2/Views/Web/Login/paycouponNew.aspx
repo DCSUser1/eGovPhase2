@@ -8,7 +8,9 @@
     var bNtlOnly = 'FALSE';
     var EPaymt = 'FALSE';
 
-    function DisplayCoupLogin(mode,data) {
+    function DisplayCoupLogin(mode, data) {
+        parent.ScrollTop(1);
+        $('#AppError_Payment').text('');
         var txtCouponAcctID = document.getElementById('txtCouponAcctID');
         parent.sNew = false;
         bNtlOnly = 'FALSE';
@@ -32,17 +34,17 @@
         $('#LogCoupon').css("display", "block");
         $('#AppHeader').html('Print Payment Coupons');
         $('#lblMessage').html('All tax payments should be mailed with a proper scannable' +
-                                ' payment document. Coupon books are mailed for these remittances. If you need a scannable' +
+                                ' payment document. Coupon books are mailed for these remittances. <br/><br/>If you need a scannable' +
                                 ' payment coupon for any tax type, enter the Social Security Number (SSN), Employer' +
                                 ' Identification Number (EIN), Philadelphia Tax Account Number or Real Estate Tax Number (BRT)' +
-                                ' below.  You will be presented with a list of the active tax types for that entity.' +
-                                ' If you receive a message indicating "SSN/EIN with PIN required for requested account(s)",' +
-                                ' the Tax Account ID you entered is inactive or has been rejected for security purposes. You may' +
-                                ' start over with another Tax Account ID or you may click' +
-                                ' <a id=lnkApply class="lblLink" onclick="LogApply()">here </a>to register for a Tax Account ID.');
-        $('#lblMessage1').html('Please enter your Philadelphia Tax Account Number, Employer' +
-                                 ' Identification Number (EIN), Social Security Number (SSN) or Real Estate Tax Number (BRT)' +
-                                 ' as your Tax Account Id.');
+                                ' below as your Tax account ID.Your BRT number can be located on the  <a id=lnkApply class="lblLink" onclick="RealEstate()"><b>Real Estate Tax Portal.</b></a>' +
+                                ' Enter your property address,click the arrows, then scroll down to find the number under the "Customer Information" heading.<br/><br/>' +
+                                'You will be presented with a list of the active tax types for that entity' +
+                                ' If you receive a message indicating "SSN/EIN with PIN required for requested account(s)", the Tax Account ID you entered is inactive or has been rejected for security purposes.' +
+                                ' You may start over with another Tax Account ID or you may click <a id=lnkApply class="lblLink" onclick="LogApply()">here </a>to register for a Tax Account ID.');
+        //$('#lblMessage1').html('Please enter your Philadelphia Tax Account Number, Employer' +
+        //                         ' Identification Number (EIN), Social Security Number (SSN) or Real Estate Tax Number (BRT)' +
+        //                         ' as your Tax Account Id.');
         if (bNtlOnly == 'TRUE') {
             $('#AppHeader').html('File No Tax Liability Coupons')
             $('#lblMessage').html('Please enter your Philadelphia Tax Account Number, Employer' +
@@ -53,6 +55,8 @@
                                  ' <a id=lnkApply class="lblLink" onclick="LogApply()">here</a> to register for a Tax Account ID.');
             $('#lblMessage1').html('Please enter your Philadelphia Tax Account Number, Employer' +
                                     'Identification Number (EIN), Social Security Number (SSN) as your Tax Account Id.');
+
+            $('#rowCouponPIN').css("display", "none");
         } 	//if
 
         if (EPaymt == 'TRUE') {
@@ -60,6 +64,7 @@
             $('#lblMessage').html('');
             $('#lblMessage1').html('Please enter your Philadelphia Tax Account Number, Employer Identification Number (EIN)' +
                                     'or Social Security Number (SSN) as your Tax Account Id.');
+
         } 	//if
 
         if (EPaymt == 'TRUE') {
@@ -69,8 +74,9 @@
             rowAcctidPIN.style.visibility = 'visible'
             $('#rowAcctidType').css("display", "none");
             rowAcctidType.style.visibility = 'hidden'
+            $('#txtCouponAcctID2').focus();
         }
-        else {
+        else if (bNtlOnly == 'TRUE') {
             $('#txtCouponAcctID').val('');
             $('#rowAcctid').css("display", "block");
             rowAcctid.style.visibility = 'visible'
@@ -82,32 +88,61 @@
             rowAcctidType.style.visibility = 'hidden'
             LoadCoupLoginError();
             txtCouponAcctID.focus();
+
+        }
+        else {
+            $('#txtCouponAcctID').val('');
+            $('#rowAcctid').css("display", "block");
+            rowAcctid.style.visibility = 'visible'
+            $('#rowAcctidPIN').css("display", "none");
+            rowAcctidPIN.style.visibility = 'hidden'
+            $('#rowForgotPIN').css("display", "none");
+            rowForgotPIN.style.visibility = 'hidden'
+            $('#rowAcctidType').css("display", "none");
+            rowAcctidType.style.visibility = 'hidden'
+            $('#rowCouponPIN').css("display", "block");
+            LoadCoupLoginError();
+            txtCouponAcctID.focus();
         }
 
-       
+
 
     } 	//DisplayCoupLogin
 
     function LoadCoupLoginError() {
         var i = 0;
         var txtCouponAcctID = document.getElementById('txtCouponAcctID')
-       
+
         arrCoupLoginErr[i++] = [txtCouponAcctID, '$(\'#txtCouponAcctID\').val() == ""', 'Enter Account number']
         arrCoupLoginErr[i++] = [txtCouponAcctID, '($(\'#txtCouponAcctID\').val().length > 12)', 'Invalid Account number']
-       
+
     } 	//LoadCoupLoginError
 
     function LogApply() {
 
         $('#LogCoupon').css("display", "none");
-        $('#divPayCoupon').css("display", "none");        
+        $('#divPayCoupon').css("display", "none");
         ShowForm('LogApplyFirst');
+
+    } 	//LogApply
+
+
+    function RealEstate() {
+
+        window.open("http://www.phila.gov/revenue/RealEstateTax/");
 
     } 	//LogApply
 
     function ValidateCoupLogin() {
 
-        $(AppError_Payment).text(ispSetInputErr(arrCoupLoginErr));
+        if ($('#txtCouponAcctID').val() == "") {
+            $(AppError_Payment).text("Enter Tax account ID");
+        }
+        else if (document.getElementById("rowCouponPIN").style.display != "none") {
+            if ($('#txtCouponPIN').val() == "") {
+                $(AppError_Payment).text("Enter PIN Number");
+            }
+        }
         if ($(AppError_Payment).text() != "") {
             resolvedIframeheight();
             parent.ScrollTop(1);
@@ -140,132 +175,247 @@
         if ($(AppError_Payment).text() == '') {
             if (EPaymt == 'TRUE') {
                 el_payc_ind = 1;
-                
-                }
-               
-            else
-            {
-               
+
+            }
+
+            else {
+
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ERROR_INFO PROGRAM", '', 0);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ERROR_INFO ERROR", '', 0);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ERROR_INFO LINE", '', 0);
-                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ERROR_INFO MESSAGE", '', 0);               
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ERROR_INFO MESSAGE", '', 0);
                 el_payc_ind = 2;
-             }
+
+            }
             //
 
-           
-             //changed the Function code to 'G' SUDIPTA ROY ::2016.11.18
-        
+
+            //changed the Function code to 'G' SUDIPTA ROY ::2016.11.18
+            var dobj = parent.$g.getXmlDocObj();
+            debugger;
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, "G", "ENTITY_INFO ENT_TYPE", '', 0);
+            parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, "I", "ENTITY_INFO FUNCTION_CODE", '', 0);
             if (EPaymt == 'TRUE') {
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, $('#txtCouponAcctID2').val(), "ENTITY_INFO ENTITY_ID", '', 0);
                 localStorage.setItem("AccountNumber", $('#txtCouponAcctID2').val());
                 localStorage.setItem("Pin", $('#txtCoupPIN').val());
+
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, "I", "ENTITY_INFO FUNCTION_CODE", '', 0);
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtCouponAcctID2').val(), "ENTITY_INFO ENTITY_ID", '', 0);
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtCoupPIN').val(), "ENTITY_INFO PIN", '', 0);
+                ispCallXMLForm(parent.$g.xmlAccount, dobj, "AccountInfo");
+            }
+            else if (bNtlOnly != 'TRUE') {
+                el_payc_ind = 3;
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, $('#txtCouponAcctID').val(), "ENTITY_INFO ENTITY_ID", '', 0);
+                localStorage.setItem("AccountNumber", $('#txtCouponAcctID').val());
+                localStorage.setItem("Pin", $('#txtCouponPIN').val());
+
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, "I", "ENTITY_INFO FUNCTION_CODE", '', 0);
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtCouponAcctID').val(), "ENTITY_INFO ENTITY_ID", '', 0);
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtCouponPIN').val(), "ENTITY_INFO PIN", '', 0);
+                ispCallXMLForm(parent.$g.xmlAccount, dobj, "AccountInfo");
             }
             else {
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, $('#txtCouponAcctID').val(), "ENTITY_INFO ENTITY_ID", '', 0);
-            }
-           
-            parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ACCT_ID", '', 0);
-            parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO NAME", '', 0);
-            parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ADDRESS1", '', 0);
-            parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ADDRESS2", '', 0);
-            parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ADDRESS3", '', 0);
-            parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO CITY", '', 0);
-            parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO STATE", '', 0);
-            parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ZIP_CODE", '', 0);
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ACCT_ID", '', 0);
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO NAME", '', 0);
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ADDRESS1", '', 0);
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ADDRESS2", '', 0);
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ADDRESS3", '', 0);
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO CITY", '', 0);
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO STATE", '', 0);
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ZIP_CODE", '', 0);
 
-            for (i = 0; i < 200; i++) {
-                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT FUNC_CODE", '', i);
-                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, "0", "TAX_ACCT ACCOUNT", '', i);
-                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT ACCOUNT_ID", '', i);
-                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT START_DATE", '', i);
-                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT END_DATE", '', i);
-                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT FREQUENCY_CODE", '', i);
-                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT BRT_ACCOUNT", '', i);
-                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT BRT_ADDRESS1", '', i);
-            }  //for
-            var ReqXML = parent.$g.xmlPayCoupon;
-            $.ajax({
-                type: 'POST',
-                url: '../Returns/Log',
-                data: '{ "OriginationFom" : "PayCoupon","ServiceName" : "RTTIE016","RequestXML" : "' + btoa(ReqXML.toString()) + '"}',
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                success: function (msg) {
+                for (i = 0; i < 200; i++) {
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT FUNC_CODE", '', i);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, "0", "TAX_ACCT ACCOUNT", '', i);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT ACCOUNT_ID", '', i);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT START_DATE", '', i);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT END_DATE", '', i);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT FREQUENCY_CODE", '', i);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT BRT_ACCOUNT", '', i);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT BRT_ADDRESS1", '', i);
+                }  //for
+                ispCallXMLForm(parent.$g.xmlPayCoupon, oCouponInfo, "PayCoupon/PayCouponRecv", "");
 
-                }
-            });
-            ispCallXMLForm(parent.$g.xmlPayCoupon, oCouponInfo, "PayCoupon/PayCouponRecv", "");
+                debugger;
+                if (parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ERROR_INFO MESSAGE', "", 0) == "") {
+                    parent.$g.xmlPayCoupon.loadXML(oCouponInfo.xml);
+                    localStorage.setItem("data", parent.$g.xmlPayCoupon);
+                    localStorage.setItem("mode", "NTL");
+                    var ResXML = parent.$g.xmlPayCoupon;
+                    $.ajax({
+                        type: 'POST',
+                        url: '../Returns/Log',
+                        data: '{ "OriginationFom" : "PayCoupon","ServiceName" : "RTTIE016","ResponseXML" : "' + btoa(ResXML.toString()) + '"}',
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (msg) {
 
-            
-          
-            if (parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ERROR_INFO MESSAGE', "", 0) == "") {
-                parent.$g.xmlPayCoupon.loadXML(oCouponInfo.xml);
+                        }
+                    });
 
-                var ResXML = parent.$g.xmlPayCoupon;
-                $.ajax({
-                    type: 'POST',
-                    url: '../Returns/Log',
-                    data: '{ "OriginationFom" : "PayCoupon","ServiceName" : "RTTIE016","ResponseXML" : "' + btoa(ResXML.toString()) + '"}',
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    success: function (msg) {
+                    if (EPaymt == 'TRUE') {
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, EPaymt, "LOGIN_FROM NTL_ONLY", '', 0)
 
                     }
-                });
+                    else {
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, bNtlOnly, "LOGIN_FROM NTL_ONLY", '', 0)
+                    }
 
-                if (EPaymt == 'TRUE') {
-                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, EPaymt, "LOGIN_FROM NTL_ONLY", '', 0)
-                }
-                else {
-                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, bNtlOnly, "LOGIN_FROM NTL_ONLY", '', 0)
-                }
-               
-                var tempParameters = 'aaa=' + el_payc_ind + '&el_payc_ind=' + el_payc_ind;
-                parent.setFrameUrl('PayCoupon/PayCoupon?y=' + tempParameters);
-
-            } else {
-                var err = parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ERROR_INFO MESSAGE', "", 0)
-                $(AppError_Payment).text(err);
-                resolvedIframeheight();
-                
-                if (parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ERROR_INFO ERROR', "", 0) == "2") {
-
-                    $('#rowAcctid').css("display", "none");
-                    $('#rowAcctid').css("visibility", "hidden");
-                    $('#rowAcctidPIN').css("display", "none");
-                    $('#rowAcctidPIN').css("visibility", "hidden");
-                    $('#rowForgotPIN').css("display", "none");
-                    $('#rowForgotPIN').css("visibility", "hidden");
-                    $('#rowAcctidType').css("display", "block");
-                    $('#rowAcctidType').css("visibility", "visible");
-                    $('#txtCouponAcctID3').val($('#txtCouponAcctID').val());
-                    LoadGenericDD(parent.xmlEntitytypeCoupon, ddCoupTaxType, "DDOWN", false);
-                    $('#ddCoupTaxType').selectedIndex = 0;
-                    $('#btnSubType').attr("disabled", "disabled");
-                    ddCoupTaxType.focus();
+                    var tempParameters = 'aaa=' + el_payc_ind + '&el_payc_ind=' + el_payc_ind;
+                    parent.setFrameUrl('PayCoupon/PayCoupon?y=' + tempParameters);
 
                 } else {
+                    var err = parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ERROR_INFO MESSAGE', "", 0)
+                    $(AppError_Payment).text(err);
+                    resolvedIframeheight();
 
-                    if (parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ERROR_INFO ERROR', "", 0) == "3") {
-                        $('#txtCouponAcctID2').val($('#txtCouponAcctID').val());
-                        $('#txtCoupPIN').val('');
-                        $('#rowAcctid').css("display", "none");
-                        $('#rowAcctid').css("visibility", "hidden");
-                        $('#rowAcctidPIN').css("display", "block");
-                        $('#rowAcctidPIN').css("visibility", "visible");
-                        $('#rowForgotPIN').css("display", "block");
-                        $('#rowForgotPIN').css("visibility", "visible");
-                        $('#rowAcctidType').css("display", "none");
-                        $('#rowAcctidType').css("visibility", "hidden");
-                        txtCoupPIN.focus();
+                    if (parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ERROR_INFO ERROR', "", 0) == "2") {
 
+                        //$('#rowAcctid').css("display", "none");
+                        //$('#rowAcctid').css("visibility", "hidden");
+                        //$('#rowAcctidPIN').css("display", "none");
+                        //$('#rowAcctidPIN').css("visibility", "hidden");
+                        //$('#rowForgotPIN').css("display", "none");
+                        //$('#rowForgotPIN').css("visibility", "hidden");
+                        //$('#rowAcctidType').css("display", "block");
+                        //$('#rowAcctidType').css("visibility", "visible");
+                        //$('#txtCouponAcctID3').val($('#txtCouponAcctID').val());
+                        //LoadGenericDD(parent.xmlEntitytypeCoupon, ddCoupTaxType, "DDOWN", false);
+                        //$('#ddCoupTaxType').selectedIndex = 0;
+                        //$('#btnSubType').attr("disabled", "disabled");
+                        //ddCoupTaxType.focus();
+
+                    } else {
+
+                        if (parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ERROR_INFO ERROR', "", 0) == "3") {
+                            //$('#txtCouponAcctID2').val($('#txtCouponAcctID').val());
+                            //$('#txtCoupPIN').val('');
+                            //$('#rowAcctid').css("display", "none");
+                            //$('#rowAcctid').css("visibility", "hidden");
+                            //$('#rowAcctidPIN').css("display", "block");
+                            //$('#rowAcctidPIN').css("visibility", "visible");
+                            //$('#rowForgotPIN').css("display", "block");
+                            //$('#rowForgotPIN').css("visibility", "visible");
+                            //$('#rowAcctidType').css("display", "none");
+                            //$('#rowAcctidType').css("visibility", "hidden");
+                            //txtCoupPIN.focus();
+
+                        } //if   
                     } //if   
-                } //if   
-            } //if
-        } //if
+                }
+            }
+
+            if (EPaymt == 'TRUE' || bNtlOnly != 'TRUE') {
+                if (parent.$x.ispXmlGetFieldVal(dobj, 'ERROR_INFO MESSAGE', "", 0) == "") {
+
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ACCT_ID", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO NAME", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ADDRESS1", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ADDRESS2", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ADDRESS3", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO CITY", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO STATE", '', 0);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "ENTITY_INFO ZIP_CODE", '', 0);
+
+                    for (i = 0; i < 200; i++) {
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT FUNC_CODE", '', i);
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, "0", "TAX_ACCT ACCOUNT", '', i);
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT ACCOUNT_ID", '', i);
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT START_DATE", '', i);
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT END_DATE", '', i);
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT FREQUENCY_CODE", '', i);
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT BRT_ACCOUNT", '', i);
+                        parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, " ", "TAX_ACCT BRT_ADDRESS1", '', i);
+                    }  //for
+                    var ReqXML = parent.$g.xmlPayCoupon;
+                    $.ajax({
+                        type: 'POST',
+                        url: '../Returns/Log',
+                        data: '{ "OriginationFom" : "PayCoupon","ServiceName" : "RTTIE016","RequestXML" : "' + btoa(ReqXML.toString()) + '"}',
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (msg) {
+
+                        }
+                    });
+                    ispCallXMLForm(parent.$g.xmlPayCoupon, oCouponInfo, "PayCoupon/PayCouponRecv", "");
+
+
+
+                    if (parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ERROR_INFO MESSAGE', "", 0) == "") {
+                        parent.$g.xmlPayCoupon.loadXML(oCouponInfo.xml);
+                        localStorage.setItem("data", parent.$g.xmlPayCoupon);
+                        var ResXML = parent.$g.xmlPayCoupon;
+                        $.ajax({
+                            type: 'POST',
+                            url: '../Returns/Log',
+                            data: '{ "OriginationFom" : "PayCoupon","ServiceName" : "RTTIE016","ResponseXML" : "' + btoa(ResXML.toString()) + '"}',
+                            contentType: 'application/json; charset=utf-8',
+                            dataType: 'json',
+                            success: function (msg) {
+
+                            }
+                        });
+
+                        if (EPaymt == 'TRUE') {
+                            parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, EPaymt, "LOGIN_FROM NTL_ONLY", '', 0)
+
+                        }
+                        else {
+                            parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, bNtlOnly, "LOGIN_FROM NTL_ONLY", '', 0)
+                        }
+
+                        var tempParameters = 'aaa=' + el_payc_ind + '&el_payc_ind=' + el_payc_ind;
+                        parent.setFrameUrl('PayCoupon/PayCoupon?y=' + tempParameters);
+
+                    } else {
+                        var err = parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ERROR_INFO MESSAGE', "", 0)
+                        $(AppError_Payment).text(err);
+                        resolvedIframeheight();
+
+                        if (parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ERROR_INFO ERROR', "", 0) == "2") {
+
+                            //$('#rowAcctid').css("display", "none");
+                            //$('#rowAcctid').css("visibility", "hidden");
+                            //$('#rowAcctidPIN').css("display", "none");
+                            //$('#rowAcctidPIN').css("visibility", "hidden");
+                            //$('#rowForgotPIN').css("display", "none");
+                            //$('#rowForgotPIN').css("visibility", "hidden");
+                            //$('#rowAcctidType').css("display", "block");
+                            //$('#rowAcctidType').css("visibility", "visible");
+                            //$('#txtCouponAcctID3').val($('#txtCouponAcctID').val());
+                            //LoadGenericDD(parent.xmlEntitytypeCoupon, ddCoupTaxType, "DDOWN", false);
+                            //$('#ddCoupTaxType').selectedIndex = 0;
+                            //$('#btnSubType').attr("disabled", "disabled");
+                            //ddCoupTaxType.focus();
+
+                        } else {
+
+                            if (parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ERROR_INFO ERROR', "", 0) == "3") {
+                                //$('#txtCouponAcctID2').val($('#txtCouponAcctID').val());
+                                //$('#txtCoupPIN').val('');
+                                //$('#rowAcctid').css("display", "none");
+                                //$('#rowAcctid').css("visibility", "hidden");
+                                //$('#rowAcctidPIN').css("display", "block");
+                                //$('#rowAcctidPIN').css("visibility", "visible");
+                                //$('#rowForgotPIN').css("display", "block");
+                                //$('#rowForgotPIN').css("visibility", "visible");
+                                //$('#rowAcctidType').css("display", "none");
+                                //$('#rowAcctidType').css("visibility", "hidden");
+                                //txtCoupPIN.focus();
+
+                            } //if   
+                        } //if   
+                    } //if
+                } //if
+                else {
+                    $(AppError_Payment).text(parent.$x.ispXmlGetFieldVal(dobj, 'ERROR_INFO MESSAGE', "", 0));
+                }
+            }
+        }//if
     } 	//DoCoupLogin
 
     function StoreTaxType() {
@@ -299,7 +449,7 @@
             //arrCoupPINErr[i++] = [txtCouponAcctID2, '$(\'#txtCouponAcctID2\').val() == ""', 'Enter Tax account ID']
         }
         else if (document.getElementById("rowAcctidType").style.display != "none") {
-            
+
             var txtCouponAcctID3 = document.getElementById('txtCouponAcctID3');
             if ($('#txtCouponAcctID3').val() == "") {
                 $(AppError_Payment).text("Enter Tax account ID");
@@ -309,9 +459,14 @@
             if ($('#txtCouponAcctID').val() == "") {
                 $(AppError_Payment).text("Enter Tax account ID");
             }
+            if (document.getElementById("rowCouponPIN").style.display != "none") {
+                if ($('#txtCouponPIN').val() == "") {
+                    $(AppError_Payment).text("Enter PIN Number");
+                }
+            }
         }
-        
-       // arrCoupPINErr[i++] = [txtCoupPIN, '$(\'#txtCoupPIN\').val() == ""', 'Enter PIN Number']
+
+        // arrCoupPINErr[i++] = [txtCoupPIN, '$(\'#txtCoupPIN\').val() == ""', 'Enter PIN Number']
         //arrCoupPINErr[i++] = [txtCoupPIN, 'regInteger.exec($(\'#txtCoupPIN\').val()) != $(\'#txtCoupPIN\').val()', 'PIN Number must be an Integer']
 
     } 	//LoadCoupPINError
@@ -333,14 +488,14 @@
         ValidateCoupPIN()
 
         if ($(AppError_Payment).text() == '') {
-           
-          
+
+
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, "I", "ENTITY_INFO FUNCTION_CODE", '', 0);
-           
+
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtCouponAcctID2').val(), "ENTITY_INFO ENTITY_ID", '', 0);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtCoupPIN').val(), "ENTITY_INFO PIN", '', 0);
 
-            
+
 
             ispCallXMLForm(parent.$g.xmlAccount, oAcctInfo, "AccountInfo", "");
             if (parent.$x.ispXmlGetFieldVal(oAcctInfo, 'ERROR_INFO MESSAGE', "", 0) == "") {
@@ -350,7 +505,7 @@
                     ShowForm('LogChangePin');
                 } else {
                     parent.$g.xmlPayCoupon.loadXML(oCouponInfo.xml);
-                  
+
                     parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, bNtlOnly, "LOGIN_FROM NTL_ONLY", '', 0);
                     parent.DocWin.location.href = '../PayCoupon/PayCoupon';
                 } 	//if
@@ -360,7 +515,7 @@
                 $(AppError_Payment).text(errtext);
                 resolvedIframeheight();
                 parent.ScrollTop(1);
-               $('#txtCoupPIN').focus();
+                $('#txtCoupPIN').focus();
             } 	//if
         } else {
 
@@ -392,15 +547,15 @@
             }
 
         });
-      
+
     });
 </script>
 
 <div class="container-fluid no-padding">
     <div id="divPayCoupon" class="block3" style="display: none;">
-        <div class="container-fluid">
+        <div class="smaller-container">
             <div class="row">
-                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3" name="LogCoupon" style="display: none;" id="LogCoupon">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2" name="LogCoupon" style="display: none;" id="LogCoupon">
                     <div class="blue_base_box">
                        
                          <h2>Online Services | <span id="AppHeader"></span>  </h2>
@@ -428,10 +583,19 @@
                                                 <div class="form-group text-left-custom">
                                                     <label for="inputEmail3" class="col-sm-3 control-label text-left-custom">TAX account ID<span class="lblTextRed">* </span>  : </label>
                                                     <div class="col-sm-9">
-                                                        <input class='form-control input-sm' id="txtCouponAcctID" name="txtCouponAcctID" onchange="ValidateCoupLogin()"
+                                                        <input class='form-control input-sm' id="txtCouponAcctID" name="txtCouponAcctID" 
                                                             maxlength="12" size="14">
                                                     </div>
                                                 </div>
+
+                                                <div id="rowCouponPIN" class="form-group text-left-custom">
+                                                    <label for="inputEmail3" class="col-sm-3 control-label text-left-custom">PIN<span class="lblTextRed">* </span>  : </label>
+                                                    <div class="col-sm-9">
+                                                        <input class='form-control input-sm' id="txtCouponPIN" name="txtCouponPIN" type="password" 
+                                                            maxlength="12" size="14">
+                                                    </div>
+                                                </div>
+                                               
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-4 col-sm-6">
                                                         <input class="submit_button" id="btnSubPrint" name="btnSubPrint" type="button" value="Submit"
@@ -456,7 +620,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-4 col-sm-6">
-                                                        <input class="submit_button" id="btnSubPrint" name="btnSubPrint" type="button" value="Submit"
+                                                        <input class="submit_button" id="Button1" name="btnSubPrint" type="button" value="Submit"
                                                             onclick="DoCoupLogin()">
                                                       
                                                     </div>
@@ -492,7 +656,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-4 col-sm-6">
-                                                        <input class="btnNormal" id="Button1" name="btnSubPIN" type="button" value="Submit"
+                                                        <input class="btnNormal" id="Button2" name="btnSubPIN" type="button" value="Submit"
                                                             onclick="DoCoupLoginPIN()" class="submit_button">
                                                         <div class="clear"></div>
                                                     </div>

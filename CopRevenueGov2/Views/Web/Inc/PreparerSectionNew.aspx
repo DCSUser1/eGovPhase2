@@ -23,7 +23,7 @@
         var preparerErr = false;
 
         function DisablePreparer(bDisabled) {
-         
+
             //	ClearPreparer()
             /*  txtPreparerName.disabled = bDisabled
             txtPrepAreaCode.disabled = bDisabled
@@ -148,7 +148,7 @@
                 }
             }
          );
-             
+
         });
         $(function () {
             $('#txtPrepPhone1').keypress(function (evt) {
@@ -179,7 +179,8 @@
         // );
 
         //});//by manoranjan
-        function ValidatePreparer() {         
+        function ValidatePreparer() {
+
             var strEmail = "";
             preparerErr = true;
             var txtPreparerName = document.getElementById("txtPreparerName");
@@ -191,15 +192,15 @@
             var chkTaxpayer = document.getElementById("chkTaxpayer");
             var chkPreparer = document.getElementById("chkPreparer");
             var chkAgreement = document.getElementById("chkAgreement");
-           
+
             $('#txtPreparerName').attr('class', 'form-control input-sm');
             $('#txtPrepAreaCode').attr('class', 'form-control input-sm');
             $('#txtPrepPhone1').attr('class', 'form-control input-sm');
             $('#txtPrepPhone2').attr('class', 'form-control input-sm');
             $('#txtPrepPhoneExt').attr('class', 'form-control input-sm');
             $('#txtPreparerEmail').attr('class', 'form-control input-sm');
-           
-            if ($('#chkTaxpayer').is(":checked") == false && $('#chkPreparer').is(":checked") == false) {              
+
+            if ($('#chkTaxpayer').is(":checked") == false && $('#chkPreparer').is(":checked") == false) {
                 $('#chkTaxpayer').attr("class", "inpError");
                 $('#chkPreparer').attr("class", "inpError");
                 return 'Filed by must be checked.';
@@ -208,47 +209,47 @@
                 $('#chkTaxpayer').attr("class", "inpNormal");//by manoranjan
                 $('#chkPreparer').attr("class", "inpNormal");
             }
-          
-            if ($('#txtPreparerName').val() == '' || $('#txtPreparerName').val().length < 2 ) {
-               
+
+            if ($('#txtPreparerName').val() == '' || $('#txtPreparerName').val().length < 2) {
+
                 $('#txtPreparerName').attr("class", "inpError form-control input-sm");
                 $('#txtPreparerName').focus();
                 $('#txtPreparerName').select();
                 return 'A valid filer name is required.';
             }	//if          
-           
-            if ($('#txtPrepAreaCode').val() == '' || txtPrepAreaCode.value.length != 3 || isNaN(txtPrepAreaCode.value) == true) {               
+
+            if ($('#txtPrepAreaCode').val() == '' || txtPrepAreaCode.value.length != 3 || isNaN(txtPrepAreaCode.value) == true) {
                 $('#txtPrepAreaCode').attr("class", "inpError form-control input-sm");
                 $('#txtPrepAreaCode').focus();
                 $('#txtPrepAreaCode').select();
                 return 'Area code is required and must be numeric.';
             }		//if
-            if ($('#txtPrepPhone1').val() == '' || txtPrepPhone1.value.length != 3 || isNaN(txtPrepPhone1.value) == true) {             
+            if ($('#txtPrepPhone1').val() == '' || txtPrepPhone1.value.length != 3 || isNaN(txtPrepPhone1.value) == true) {
                 $('#txtPrepPhone1').attr("class", "inpError form-control input-sm");
                 $('#txtPrepPhone1').focus();
                 $('#txtPrepPhone1').select();
                 return 'Phone number is required and must be numeric.';
             }		//if
             if ($('#txtPrepPhone2').val() == '' || txtPrepPhone2.value.length != 4 || isNaN(txtPrepPhone2.value) == true) {
-                $('#txtPrepPhone2').attr("class", "inpError form-control input-sm");               
+                $('#txtPrepPhone2').attr("class", "inpError form-control input-sm");
                 $('#txtPrepPhone2').focus();
                 $('#txtPrepPhone2').select();
                 return 'Phone number is required and must be numeric.';
             }		//if
-            if ($('#txtPrepPhoneExt').val() != '' && isNaN($('#txtPrepPhoneExt').val()) == true) {              
+            if ($('#txtPrepPhoneExt').val() != '' && isNaN($('#txtPrepPhoneExt').val()) == true) {
                 $('#txtPrepPhoneExt').attr("class", "inpError form-control input-sm");
                 $('#txtPrepPhoneExt').focus();
                 $('#txtPrepPhoneExt').select();
                 return 'Phone extension must be numeric.';
             }		//if
-            if ($('#txtPreparerEmail').val() == "") {              
+            if ($('#txtPreparerEmail').val() == "") {
                 $('#txtPreparerEmail').attr("class", "inpError form-control input-sm");
                 $('#txtPreparerEmail').focus();
                 $('#txtPreparerEmail').select();
                 return 'Filer email address required';
             }		//if
             if ((txtPreparerEmail.value.indexOf("@") == -1) || (txtPreparerEmail.value.indexOf(".") == -1) ||
-                    (txtPreparerEmail.value.indexOf("@.") != -1) || (txtPreparerEmail.value.indexOf("@") == 0)) {               
+                    (txtPreparerEmail.value.indexOf("@.") != -1) || (txtPreparerEmail.value.indexOf("@") == 0)) {
                 $('#txtPreparerEmail').attr("class", "inpError form-control input-sm");
                 txtPreparerEmail.focus();
                 txtPreparerEmail.select();
@@ -266,7 +267,7 @@
                 (txtPreparerEmail.value.indexOf(".JOBS") == -1) && (txtPreparerEmail.value.indexOf(".MIL") == -1) &&
                 (txtPreparerEmail.value.indexOf(".MOBI") == -1) && (txtPreparerEmail.value.indexOf(".MUSEUM") == -1) &&
                 (txtPreparerEmail.value.indexOf(".TEL") == -1) && (txtPreparerEmail.value.indexOf(".TRAVEL") == -1) &&
-                (txtPreparerEmail.value.indexOf(".US") == -1) && (txtPreparerEmail.value.indexOf(".ASIA") == -1)) {               
+                (txtPreparerEmail.value.indexOf(".US") == -1) && (txtPreparerEmail.value.indexOf(".ASIA") == -1)) {
                 $('#txtPreparerEmail').attr("class", "inpError form-control input-sm");
                 $('#txtPreparerEmail').focus();
                 $('#txtPreparerEmail').select();
@@ -276,6 +277,8 @@
                 return 'Signature Box is not checked';
             }		//if
             preparerErr = false;
+
+
             return ''
         }		//ValidatePreparer
 
@@ -362,7 +365,40 @@
 
         function NTLThankYou() {
             parent.DocWin.location.href = '../login/MainAsp';
-        }		//NTLThankYou
+        }//NTLThankYou
+
+        function CalculateLengthAreaCode() {
+            if (txtPrepAreaCode.value.length == 3) {
+                txtPrepPhone1.focus();
+            }
+
+        }
+
+        function CalculateLengthPhone1() {
+
+            if (txtPrepPhone1.value.length == 3) {
+                txtPrepPhone2.focus();
+            }
+
+        }
+        function CalculateLengthPhone2() {
+
+            if (txtPrepPhone2.value.length == 4) {
+                txtPreparerEmail.focus();
+            }
+        }
+
+        function movetoNext(current, nextFieldID) {
+
+            if (current.value.length >= current.maxLength) {
+
+                document.getElementById(nextFieldID).focus();
+
+            }
+
+        }
+
+
     </script>
     <title></title>
 </head>
@@ -488,13 +524,13 @@
 
             </div>
             <div class="col-sm-1 col-xs-1 col-md-1" style="padding-right:0px;width:15%">
-                <input id="txtPrepAreaCode" name="txtPrepAreaCode" class="form-control input-sm" onchange="ValidatePreparer()" maxlength="3" style="height:17px !important; padding:0 !important; font-size:12px !important;" />
+                <input id="txtPrepAreaCode" name="txtPrepAreaCode" class="form-control input-sm" onkeyup="movetoNext(this, 'txtPrepPhone1')" onchange="ValidatePreparer()" maxlength="3" style="height:17px !important; padding:0 !important; font-size:12px !important;" />
             </div>
             <div class="col-sm-1 col-xs-1 col-md-1" style="padding-right:0px;width:15%">
-                <input id="txtPrepPhone1" name="txtPrepPhone1" class="form-control input-sm" onchange="ValidatePreparer()" maxlength="3" style="height:17px !important; padding:0 !important; font-size:12px !important;" />
+                <input id="txtPrepPhone1" name="txtPrepPhone1" class="form-control input-sm" onkeyup="movetoNext(this, 'txtPrepPhone2')" onchange="ValidatePreparer()" maxlength="3" style="height:17px !important; padding:0 !important; font-size:12px !important;" />
             </div>
             <div class="col-sm-1 col-xs-1 col-md-1" style="padding-right:0px;width:15%">
-                <input id="txtPrepPhone2" name="txtPrepPhone2" class="form-control input-sm" onchange="ValidatePreparer()" maxlength="4" style="height:17px !important; padding:0 !important; font-size:12px !important;" />
+                <input id="txtPrepPhone2" name="txtPrepPhone2" class="form-control input-sm" onkeyup="movetoNext(this, 'txtPreparerEmail')" onchange="ValidatePreparer()" maxlength="4" style="height:17px !important; padding:0 !important; font-size:12px !important;" />
             </div>
             <div class="col-sm-4 col-xs-4 col-md-4  customwidth_input no-padding" style="padding-right:0px;width:25%;">
                 <span class="small_span2">EXT -</span>               

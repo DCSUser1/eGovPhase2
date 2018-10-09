@@ -219,3 +219,16 @@ E:\eGOV_New_Version\Suman\18.1.18\eGOV-PHASE II\COPXmlFactory\bin\Debug\System.W
 E:\eGOV_New_Version\Suman\18.1.18\eGOV-PHASE II\COPXmlFactory\obj\Debug\COPXmlFactory.csprojResolveAssemblyReference.cache
 E:\eGOV_New_Version\Suman\18.1.18\eGOV-PHASE II\COPXmlFactory\obj\Debug\COPXmlFactory.dll
 E:\eGOV_New_Version\Suman\18.1.18\eGOV-PHASE II\COPXmlFactory\obj\Debug\COPXmlFactory.pdb
+E:\eGovPhase2\eGovPhase2\COPXmlFactory\bin\Debug\COPXmlFactory.dll
+E:\eGovPhase2\eGovPhase2\COPXmlFactory\bin\Debug\COPXmlFactory.pdb
+E:\eGovPhase2\eGovPhase2\COPXmlFactory\bin\Debug\Newtonsoft.Json.dll
+E:\eGovPhase2\eGovPhase2\COPXmlFactory\bin\Debug\System.Net.Http.Formatting.dll
+E:\eGovPhase2\eGovPhase2\COPXmlFactory\bin\Debug\System.Web.Http.dll
+E:\eGovPhase2\eGovPhase2\COPXmlFactory\bin\Debug\System.Web.Http.WebHost.dll
+E:\eGovPhase2\eGovPhase2\COPXmlFactory\bin\Debug\Newtonsoft.Json.xml
+E:\eGovPhase2\eGovPhase2\COPXmlFactory\bin\Debug\System.Net.Http.Formatting.xml
+E:\eGovPhase2\eGovPhase2\COPXmlFactory\bin\Debug\System.Web.Http.xml
+E:\eGovPhase2\eGovPhase2\COPXmlFactory\bin\Debug\System.Web.Http.WebHost.xml
+E:\eGovPhase2\eGovPhase2\COPXmlFactory\obj\Debug\COPXmlFactory.csprojResolveAssemblyReference.cache
+E:\eGovPhase2\eGovPhase2\COPXmlFactory\obj\Debug\COPXmlFactory.dll
+E:\eGovPhase2\eGovPhase2\COPXmlFactory\obj\Debug\COPXmlFactory.pdb

@@ -11,11 +11,11 @@ using System.Xml;
 namespace CopRevenueGov2.Helpers
 {
     public class RTTIE031 : CopRestServiceBase, ICopSoapService
-    {       
+    {
 
         public static void Init()
         {
-            
+
         }
 
         public static string CallService(string Request)
@@ -57,7 +57,7 @@ namespace CopRevenueGov2.Helpers
             }
             catch (Exception ex)
             {
-                acct =RevenueGovXMLFactory.GetLossCarryForwardReturn();
+                acct = RevenueGovXMLFactory.GetLossCarryForwardReturn();
 
                 acct.ERROR_INFO = new ERROR_INFO();
                 acct.ERROR_INFO.ERROR = 11.ToString();
@@ -73,25 +73,25 @@ namespace CopRevenueGov2.Helpers
 
         }
         private static COPXmlFactory.RTTIE031.LossCarryForward __RTTIE031_F_I(COPXmlFactory.RTTIE031.LossCarryForward e)
-        {        
+        {
 
-            LCF_RTTIE031_SrvRef.RTTIE031_ELCF _ELCF = new LCF_RTTIE031_SrvRef.RTTIE031_ELCF();
-            LCF_RTTIE031_SrvRef.RTTIE031 serv_req = new LCF_RTTIE031_SrvRef.RTTIE031();
-            LCF_RTTIE031_SrvRef.RTTIE031Response_SMA _SMAResponse = new LCF_RTTIE031_SrvRef.RTTIE031Response_SMA();
-            LCF_RTTIE031_SrvRef.RTTIE031Response_ELCF _ELCFResponse = new LCF_RTTIE031_SrvRef.RTTIE031Response_ELCF();            
+            LCF_RTTIE031_SrvRef.TT031E00_ELCF _ELCF = new LCF_RTTIE031_SrvRef.TT031E00_ELCF();
+            LCF_RTTIE031_SrvRef.TT031E00 serv_req = new LCF_RTTIE031_SrvRef.TT031E00();
+            LCF_RTTIE031_SrvRef.TT031E00Response_SMA _SMAResponse = new LCF_RTTIE031_SrvRef.TT031E00Response_SMA();
+            LCF_RTTIE031_SrvRef.TT031E00Response_ELCF _ELCFResponse = new LCF_RTTIE031_SrvRef.TT031E00Response_ELCF();
 
             _ELCF.ACCOUNTID = e.LCF_INFO.ACCOUNT_ID;
             _ELCF.YEARX = e.LCF_INFO.YEAR_X;
 
-            _SMAResponse = serv_req.CallRTTIE031
-                                                ( new LCF_RTTIE031_SrvRef.RTTIE031_SMA(), _ELCF,
+            _SMAResponse = serv_req.CallTT031E00
+                                                (new LCF_RTTIE031_SrvRef.TT031E00_SMA(), _ELCF,
                                                   out _ELCFResponse
                                                 );
 
             e = __Fill(_SMAResponse, _ELCFResponse);
             return e;
         }
-        private static COPXmlFactory.RTTIE031.LossCarryForward __Fill(LCF_RTTIE031_SrvRef.RTTIE031Response_SMA _SMA,LCF_RTTIE031_SrvRef.RTTIE031Response_ELCF _ELCF)
+        private static COPXmlFactory.RTTIE031.LossCarryForward __Fill(LCF_RTTIE031_SrvRef.TT031E00Response_SMA _SMA, LCF_RTTIE031_SrvRef.TT031E00Response_ELCF _ELCF)
         {
             COPXmlFactory.RTTIE031.LossCarryForward fobj = new LossCarryForward();
 
@@ -106,24 +106,24 @@ namespace CopRevenueGov2.Helpers
             }
             //LOAD LCF_INFO 
             fobj.LCF_INFO = new LCF_INFO();
-           
-                fobj.LCF_INFO.ACCOUNT_ID = _ELCF.ACCOUNTID;
-                fobj.LCF_INFO.YEAR_X = _ELCF.YEARX;
-                fobj.LCF_INFO.EST_PAID_X = CopMvcUtil.ConvDigitToCurrency(_ELCF.ESTPAIDX);
-                fobj.LCF_INFO.YEAR = _ELCF.YEAR;
-                fobj.LCF_INFO.AMOUNT = CopMvcUtil.ConvDigitToCurrency(_ELCF.AMOUNT);
-                fobj.LCF_INFO.COMMENT = _ELCF.COMMENT;
-                fobj.LCF_INFO.YEAR_1 = _ELCF.YEAR1;
-                fobj.LCF_INFO.INCOME_1 = CopMvcUtil.ConvDigitToCurrency(_ELCF.INCOME1);
-                fobj.LCF_INFO.COMMENT_1 = _ELCF.COMMENT1;
-                fobj.LCF_INFO.YEAR_2 = _ELCF.YEAR2;
-                fobj.LCF_INFO.INCOME_2 = CopMvcUtil.ConvDigitToCurrency(_ELCF.INCOME2);
-                fobj.LCF_INFO.COMMENT_2 = _ELCF.COMMENT2;
-                fobj.LCF_INFO.YEAR_3 = _ELCF.YEAR3;
-                fobj.LCF_INFO.INCOME_3 = CopMvcUtil.ConvDigitToCurrency(_ELCF.INCOME3);
-                fobj.LCF_INFO.COMMENT_3 = _ELCF.COMMENT3;
-            
-           
+
+            fobj.LCF_INFO.ACCOUNT_ID = _ELCF.ACCOUNTID;
+            fobj.LCF_INFO.YEAR_X = _ELCF.YEARX;
+            fobj.LCF_INFO.EST_PAID_X = CopMvcUtil.ConvDigitToCurrency(_ELCF.ESTPAIDX);
+            fobj.LCF_INFO.YEAR = _ELCF.YEAR;
+            fobj.LCF_INFO.AMOUNT = CopMvcUtil.ConvDigitToCurrency(_ELCF.AMOUNT);
+            fobj.LCF_INFO.COMMENT = _ELCF.COMMENT;
+            fobj.LCF_INFO.YEAR_1 = _ELCF.YEAR1;
+            fobj.LCF_INFO.INCOME_1 = CopMvcUtil.ConvDigitToCurrency(_ELCF.INCOME1);
+            fobj.LCF_INFO.COMMENT_1 = _ELCF.COMMENT1;
+            fobj.LCF_INFO.YEAR_2 = _ELCF.YEAR2;
+            fobj.LCF_INFO.INCOME_2 = CopMvcUtil.ConvDigitToCurrency(_ELCF.INCOME2);
+            fobj.LCF_INFO.COMMENT_2 = _ELCF.COMMENT2;
+            fobj.LCF_INFO.YEAR_3 = _ELCF.YEAR3;
+            fobj.LCF_INFO.INCOME_3 = CopMvcUtil.ConvDigitToCurrency(_ELCF.INCOME3);
+            fobj.LCF_INFO.COMMENT_3 = _ELCF.COMMENT3;
+
+
             return fobj;
 
         }

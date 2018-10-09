@@ -31,13 +31,13 @@
         function DisplayNTL() {
 
             debugger;
-            
+
             $('#AppError').html('');
-            $('#AppHeaderNTL').text('No Tax Liability');           
-            $('#AppMessage').text('Complete this screen to file a no wage tax liabilty coupon for the period selected.');          
+            $('#AppHeaderNTL').text('No Tax Liability');
+            $('#AppMessage').text('Complete this screen to file a no wage tax liabilty coupon for the period selected.');
             $('#PrtCoupAcctID').text('Wage Tax - ' + parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "WAGE_NTL ACCOUNT_ID", "", 0));
             var chkAgreement = document.getElementById('chkAgreement');
-           
+
             var lsPeriod = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "WAGE_NTL PERIOD", "", 0);
             if (lsPeriod.substr(4, 2) == '01') {
                 lsPeriod = 'January ' + lsPeriod.substr(6, 2) + ', ' + lsPeriod.substr(0, 4)
@@ -64,13 +64,13 @@
             } else if (lsPeriod.substr(4, 2) == '12') {
                 lsPeriod = 'December ' + lsPeriod.substr(6, 2) + ', ' + lsPeriod.substr(0, 4)
             }		//if
-          
+
             if (lsPeriod.substr(0, 11) == 'December 30') {
-                lsPeriod = lsPeriod.replace('30', '31');                
+                lsPeriod = lsPeriod.replace('30', '31');
             }		//if
-           
+
             $('#PrtCoupPeriod').text(lsPeriod);
-           
+
             $('#PrtEntityName').text(parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "ENTITY_INFO NAME", '', 0));
             var info = parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "ENTITY_INFO ADDRESS1", '', 0) +
                     '<br>' + parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "ENTITY_INFO CITY", '', 0) + ', ' +
@@ -78,11 +78,11 @@
                     parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, "ENTITY_INFO ZIP_CODE", '', 0)
             $('#PrtEntityAddr').html(info);
             chkAgreement.checked = false;
-          
+
         }		//DisplayNTL
 
         function SubmitNTL() {
-           
+            debugger;
             $('#AppError').html('');
             var validerr = ValidatePreparer();
 
@@ -95,13 +95,13 @@
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, "", "ERROR_INFO ERROR", '', 0);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, "", "ERROR_INFO MESSAGE", '', 0);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, "N", "ENTITY_INFO FUNCTION_CODE", '', 0);
-            
+
             PopulatePreparerXML(parent.$g.xmlPayCoupon, "WAGE_NTL");
 
-            
+
             for (i = 199; i > 0; i--) {
                 if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlPayCoupon, 'TAX_ACCT ACCOUNT', "", i) == '0') {
-                  
+
                     $(parent.$g.xmlPayCoupon.xml).find('PAYCOUPON TAX_ACCT').eq(i).remove();
 
                 } else {
@@ -112,7 +112,7 @@
             $.ajax({
                 type: 'POST',
                 url: '../Returns/Log',
-                data: '{ "OriginationFom" : "NTL","ServiceName" : "RTTIE016","RequestXML" : "' + btoa(ReqXML.toString()) + '"}',
+                data: '{ "OriginationFom" : "NTL","ServiceName" : "TT016E00","RequestXML" : "' + btoa(ReqXML.toString()) + '"}',
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (msg) {
@@ -127,7 +127,7 @@
             $.ajax({
                 type: 'POST',
                 url: '../Returns/Log',
-                data: '{ "OriginationFom" : "NTL","ServiceName" : "RTTIE016","ResponseXML" : "' + btoa(ResXML.toString()) + '"}',
+                data: '{ "OriginationFom" : "NTL","ServiceName" : "TT016E00","ResponseXML" : "' + btoa(ResXML.toString()) + '"}',
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (msg) {
@@ -135,27 +135,43 @@
                 }
             });
 
-            if (parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ERROR_INFO MESSAGE', "", 0) == "") {               
+            if (parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ERROR_INFO MESSAGE', "", 0) == "") {
                 $('#divNTL_Init').css("display", "none");
-                $('#divNtlThankYou').css("display", "block");               
+                $('#divNtlThankYou').css("display", "block");
                 $('#lblPeriod').text($('#PrtCoupPeriod').text());
                 $('#lblName').text(parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ENTITY_INFO NAME', "", 0));
                 $('#lblAcctNo').text(parent.$x.ispXmlGetFieldVal(oCouponInfo, "WAGE_NTL ACCOUNT_ID", "", 0));
                 $('#lblConfirmNo').text(parent.$x.ispXmlGetFieldVal(oCouponInfo, 'WAGE_NTL ADJ_REF_NO', "", 0));
             } else {
-          
+
                 $('#AppError').text(parent.$x.ispXmlGetFieldVal(oCouponInfo, 'ERROR_INFO MESSAGE', "", 0));
             }		//if
         }		//SubmitNTL
 
-        function DoThankYou() {           
-            parent.$g.xmlAccount = parent.$g.xmlTemplate;          
+        function DoThankYou() {
+            parent.$g.xmlAccount = parent.$g.xmlTemplate;
             $(parent.mnuLogPayCoupon).addClass('mnuNormal');
-            parent.setFrameUrl('login/Main');            
+            parent.setFrameUrl('login/Main');
         }		//DoThankYou
 
-        function ReturnToSelection() {          
-            parent.setFrameUrl('PayCoupon/PayCoupon');
+        function ReturnToSelection() {
+            debugger;
+            parent.ScrollTop(1);
+            $('#AppError').text('');
+            var xmldata = localStorage.getItem("data");
+            var tempParameters = "";
+            parent.$g.xmlPayCoupon.loadXML(xmldata);
+            //localStorage.setItem("data","");
+            if (localStorage.getItem("mode") == "NTL") {
+                tempParameters = 'aaa=2&el_payc_ind=2';
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlPayCoupon, 'TRUE', "LOGIN_FROM NTL_ONLY", '', 0);
+                //localStorage.setItem("mode", "");
+            }
+            else {
+                tempParameters = 'aaa=3&el_payc_ind=3';
+
+            }
+            parent.setFrameUrl('PayCoupon/PayCoupon?y' + tempParameters);
         }		//ReturnToSelection
     </script>
 </head>

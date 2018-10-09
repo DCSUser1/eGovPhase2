@@ -5,10 +5,10 @@
 <html>
 <head>
     <title></title>
-     <script id="clientEventHandlersJS" language="javascript" type="text/javascript">  
+     <script id="clientEventHandlersJS" language="javascript" type="text/javascript">
          function Captcha_1099() {
              //document.getElementById('txtInput').focus();
-             var alpha = new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k','m', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+             var alpha = new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
 
              var i, j;
 
@@ -34,7 +34,7 @@
              if (string1 == string2) {
                  $("#myModal_1099").css("display", "block");
                  $("#divCaptha_1099").css("display", "none");
-                 
+
              }
              else {
                  alert('Invalid Captcha!');

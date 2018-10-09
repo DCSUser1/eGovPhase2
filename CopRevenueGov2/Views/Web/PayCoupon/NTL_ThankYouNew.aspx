@@ -17,7 +17,7 @@
             sEmailMsg += '<p>Company: '
             sEmailMsg += parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS TRADE_NAME', '', 0) + '</p>'
             sEmailMsg += '<p>E-mail address: '
-            sEmailMsg += parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS EMAIL', '', 0) + '</p><br>'
+            sEmailMsg += parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS EMAIL', '', 0) + '</p><br>';
             sEmailMsg += '<p><strong>Message: </strong></p>'
             sEmailMsg += '<p>' + txaComments.value + '</p>'
 
@@ -25,11 +25,15 @@
             sEmailMsg = sEmailMsg.replace('<', '&LT&');
 
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlEmail, sEmailMsg, 'DATA', '', 0);
-            parent.$x.ispXmlSetFieldVal(parent.$g.xmlEmail, parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS EMAIL', '', 0), 'ADDRESS', '', 0);
+            parent.$x.ispXmlSetFieldVal(parent.$g.xmlEmail, "egovservices@phila.gov", 'ADDRESS', '', 0);
             ispCallXMLForm(parent.$g.xmlEmail, parent.$g.xmlEmail, 'MailPIN', '');
         }		//if
-      
-        parent.setFrameUrl('Login/MainAsp');
+        if (parent.document.getElementById("ancLogin").style.display == "block") {
+            parent.setFrameUrl('Acct/ApplyMain');
+
+        }
+        else
+            parent.setFrameUrl('Login/MainAsp');
     }
     //DoThankYou
     </script>

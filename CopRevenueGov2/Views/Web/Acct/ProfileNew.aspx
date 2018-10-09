@@ -23,7 +23,7 @@
 
 <script language="javascript" type="text/javascript">
 
-   
+
     $(document).ready(function () {
         //$("#profile").addClass("active");
         $("#profile").find("a").addClass("active");
@@ -183,7 +183,7 @@
         $('#divAcctTaxes').css('display', 'none');
 
         if (parent.sNew == true) {
-           // debugger;
+            // debugger;
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, '60', 'NAME_ADDRESS ADDRESS_TYPE', '', 0); 		//Initiallize first row as primary address
             $('#ddOrgType').focus();
             $('#rowMailingAdd').css('display', '');
@@ -204,7 +204,11 @@
                 // $('#txtEmail').attr('class', 'inpError form-control input-sm');
 
             } else {
-                if ((txtEmail.value.indexOf("@") == -1) || (txtEmail.value.indexOf(".") == -1)) {
+                //var mailformat = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                //var mailformat = /\S+@\S+\.\S+/;
+                if ((txtEmail.value.indexOf("@") == -1) || (txtEmail.value.indexOf(".") == -1) || (txtEmail.value.indexOf("@.") != -1)) {
+                    //if (!testEmailAddress(txtEmail.value))
+                    // {
                     $('#txtEmail').focus();
                     $(AppError).text('Email Address invalid format');
                 } else {
@@ -233,6 +237,21 @@
         initProfile = true;
 
     }		//DisplayProfile
+
+    function testEmailAddress(emailToTest) {
+        // check for @
+        var atSymbol = emailToTest.indexOf("@");
+        if (atSymbol < 1) return false;
+
+        var dot = emailToTest.indexOf(".");
+        if (dot <= atSymbol + 2) return false;
+
+        // check that the dot is not at the end
+        if (dot === emailToTest.length - 1) return false;
+
+        return true;
+
+    }
 
 
     function toTitleJscript(str) {
@@ -291,7 +310,7 @@
         var txtBusStartDate = document.getElementById('txtBusStartDate');
 
         //alert($('#ddOrgType option:selected').text());
-        debugger;
+        //debugger;
         arrProfile[i++] = [ddOrgType, '$(\'#ddOrgType option:selected\').text()=="Select"',
            'Select organization type'];
 
@@ -357,24 +376,24 @@
         arrProfile[i++] = [txtFaxPhone2, '($(\'#txtFaxPhone2\').val() != "" && isNaN($(\'#txtFaxPhone2\').val()))', 'Fax not numeric'];
 
         arrProfile[i++] = [txtEmail, '$(\'#txtEmail\').val() == ""', 'Email Address required'];
-        arrProfile[i++] = [txtEmail,
-                '$(\'#txtEmail\').val() !="" && ($(\'#txtEmail\').val().indexOf("@") == -1 || ' +
-                '$(\'#txtEmail\').val().indexOf(".") == -1 || $(\'#txtEmail\').val().indexOf("@.") != -1 || ' +
-                '$(\'#txtEmail\').val().indexOf("@") == 0)',
-                'Email Address invalid format'];
+        //arrProfile[i++] = [txtEmail,
+        //        '$(\'#txtEmail\').val() !="" && ($(\'#txtEmail\').val().indexOf("@") == -1 || ' +
+        //        '$(\'#txtEmail\').val().indexOf(".") == -1 || $(\'#txtEmail\').val().indexOf("@.") != -1 || ' +
+        //        '$(\'#txtEmail\').val().indexOf("@") == 0)',
+        //        'Email Address invalid format'];
 
-        arrProfile[i++] = [txtEmail,
-                '$(\'#txtEmail\').val() !="" && ($(\'#txtEmail\').val().toUpperCase().indexOf(".BIZ") == -1 && $(\'#txtEmail\').val().toUpperCase().indexOf(".COM") == -1) && ' +
-                '($(\'#txtEmail\').val().indexOf(".INFO") == -1 && $(\'#txtEmail\').val().indexOf(".NAME") == -1) && ' +
-                '($(\'#txtEmail\').val().indexOf(".NET") == -1  && $(\'#txtEmail\').val().indexOf(".ORG") == -1) && ' +
-                '($(\'#txtEmail\').val().indexOf(".PRO") == -1  && $(\'#txtEmail\').val().indexOf(".AERO") == -1) && ' +
-                '($(\'#txtEmail\').val().indexOf(".CAT") == -1  && $(\'#txtEmail\').val().indexOf(".EDU") == -1) && ' +
-                '($(\'#txtEmail\').val().indexOf(".GOV") == -1  && $(\'#txtEmail\').val().indexOf(".INT") == -1) && ' +
-                '($(\'#txtEmail\').val().indexOf(".JOBS") == -1 && $(\'#txtEmail\').val().indexOf(".MIL") == -1) && ' +
-                '($(\'#txtEmail\').val().indexOf(".MOBI") == -1 && $(\'#txtEmail\').val().indexOf(".MUSEUM") == -1) && ' +
-                '($(\'#txtEmail\').val().indexOf(".TEL") == -1  && $(\'#txtEmail\').val().indexOf(".TRAVEL") == -1) && ' +
-                '($(\'#txtEmail\').val().indexOf(".US") == -1   && $(\'#txtEmail\').val().indexOf(".ASIA") == -1)',
-                'Email Address invalid domain'];
+        //arrProfile[i++] = [txtEmail,
+        //        '$(\'#txtEmail\').val() !="" && ($(\'#txtEmail\').val().toUpperCase().indexOf(".BIZ") == -1 && $(\'#txtEmail\').val().toUpperCase().indexOf(".COM") == -1) && ' +
+        //        '($(\'#txtEmail\').val().indexOf(".INFO") == -1 && $(\'#txtEmail\').val().indexOf(".NAME") == -1) && ' +
+        //        '($(\'#txtEmail\').val().indexOf(".NET") == -1  && $(\'#txtEmail\').val().indexOf(".ORG") == -1) && ' +
+        //        '($(\'#txtEmail\').val().indexOf(".PRO") == -1  && $(\'#txtEmail\').val().indexOf(".AERO") == -1) && ' +
+        //        '($(\'#txtEmail\').val().indexOf(".CAT") == -1  && $(\'#txtEmail\').val().indexOf(".EDU") == -1) && ' +
+        //        '($(\'#txtEmail\').val().indexOf(".GOV") == -1  && $(\'#txtEmail\').val().indexOf(".INT") == -1) && ' +
+        //        '($(\'#txtEmail\').val().indexOf(".JOBS") == -1 && $(\'#txtEmail\').val().indexOf(".MIL") == -1) && ' +
+        //        '($(\'#txtEmail\').val().indexOf(".MOBI") == -1 && $(\'#txtEmail\').val().indexOf(".MUSEUM") == -1) && ' +
+        //        '($(\'#txtEmail\').val().indexOf(".TEL") == -1  && $(\'#txtEmail\').val().indexOf(".TRAVEL") == -1) && ' +
+        //        '($(\'#txtEmail\').val().indexOf(".US") == -1   && $(\'#txtEmail\').val().indexOf(".ASIA") == -1) && $(\'#txtEmail\').val().indexOf(".CO.IN") == -1)',
+        //        'Email Address invalid domain'];
 
 
 
@@ -536,7 +555,7 @@
         var temp, addrIdx;
 
         addrIdx = LocatePrimaryAddr('60');
-       // debugger;
+        // debugger;
 
         var ddNAIC1 = document.getElementById('ddNAIC1');
         var ddNAIC2 = document.getElementById('ddNAIC2');
@@ -599,12 +618,19 @@
             $('#txtIdNumber').attr('disabled', 'true');
 
             if (parent.sNew == true) {
+                debugger;
                 if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO TYPE', '', addrIdx) == '1') {
                     LoadGenericDD(parent.$g.xmlOrgType, ddOrgType, "DDOWN", false, '1');
+                    //if (ddOrgType.options[ddOrgType.selectedIndex].text() == "LLC Individual") {
+                    ddOrgType.remove(7);
+                    //}
                     pos = 4;
                 }
                 else {
                     LoadGenericDD(parent.$g.xmlOrgType, ddOrgType, "DDOWN", false, '2');
+                    //if (ddOrgType.options[ddOrgType.selectedIndex].text() == "Estate") {
+                    ddOrgType.remove(1);
+                    //}
                     pos = 5;
                 }		//if
                 SetDDList(ddBusState, '', 'PA', null);
@@ -730,7 +756,7 @@
                 SetDDList(ddGender, '', parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'GENDER', '', addrIdx), null);
 
                 var ReqXML = parent.$g.xmlAccount; //changes
-
+                //debugger;
 
                 // calling ajax to  write log 
                 //$.ajax({
@@ -775,7 +801,7 @@
         var txtBusAddress2 = document.getElementById('txtBusAddress2');
         var txtBusCity = document.getElementById('txtBusCity');
         var txtBusZipExt = document.getElementById('txtBusZipExt');
-        
+
         var txtBusZip = document.getElementById('txtBusZip');
         var txtBusAreaCode = document.getElementById('txtBusAreaCode');
         var txtBusPhoneExt = document.getElementById('txtBusPhoneExt');
@@ -792,7 +818,7 @@
         var txtBusPhone1 = document.getElementById('txtBusPhone1');
         var txtBusPhone2 = document.getElementById('txtBusPhone2');
 
-         
+
         txtBusAreaCodeProfile = document.getElementById('txtBusAreaCode'); //changes
         txtBusPhone1Profile = document.getElementById('txtBusPhone1');
         txtBusPhone2Profile = document.getElementById('txtBusPhone2');
@@ -812,7 +838,7 @@
                 }		//if
             }		//if
         }		//if
-        debugger;
+        //debugger;
         // ValidateProf();
         if (errProfile != '') {
             return false;
@@ -820,7 +846,8 @@
         //alert((parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS ADDRESS_TYPE', '', idx)));
         //if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME_ADDRESS ADDRESS_TYPE', '', idx) == '' ) { //changes
 
-            //alert('UpdateProfileXml::Reached');
+        //alert('UpdateProfileXml::Reached');
+        if (primaryaddresschanged != true) {
             var idx = LocatePrimaryAddr('60', true); 		//Primary Address
 
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, txtBusStartDate.value, 'ENTITY_INFO START_DATE', '', 0);
@@ -847,7 +874,7 @@
                     'ENTITY_INFO NAIC_CODE', '', 0);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $("#ddNAIC3 option:selected").attr('SIC'),
                     'ENTITY_INFO SIC_CODE', '', 0);
-
+            // debugger;
             if (parent.sNew == true) {
                 // parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $($('#ddTaxIDType').options[$('#ddTaxIDType').selectedIndex]).attr('CODE'),
                 // 'ENTITY_INFO TYPE', '', idx);
@@ -857,6 +884,10 @@
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, txtIdNumber.value.replace(/-/g, ''),
                         'ENTITY_INFO ENTITY_ID', '', 0);
             }		//if
+            else {
+                parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, "U",
+                        'ENTITY_INFO FUNCTION_CODE', '', 0);
+            }
             //	}		//if
 
             //	var idx = LocatePrimaryAddr('60')		//Primary Address
@@ -872,7 +903,7 @@
 
 
             //----------
-
+            //debugger;
             if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO TYPE', '', 0) == '2' &&			//2=SSN
                     (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO ORGTYPE', '', 0) == '60' ||		//60=Individual
                     parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO ORGTYPE', '', 0) == '161')) {	//161=LLC Individual
@@ -906,8 +937,9 @@
             //	}		//if
             lbProfileChanged = false;
             //alert('UpdateProfileXML=>ProfileNew::' + parent.$g.xmlAccount);
-            return true;
-       // }
+        }
+        return true;
+        // }
     }		//UpdateProfileXml
 
     function splitField(value, start, end) {
@@ -1011,7 +1043,7 @@
         //EHD - 2008.11.21 - Added for the Code1 Addition
         SetAddressChange();
         LoadProfError();
-        debugger;
+        //debugger;
         errProfile = ispSetInputErr(arrProfile);
         // errProfile = ispSetInputErrProfile(arrProfile);
 
@@ -1065,7 +1097,7 @@
                     parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, lAction, 'NAME_ADDRESS FUNCTION_CODE', '', 0)
                 } else {
                     var idx = LocatePrimaryAddr('60')
-                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, lAction, 'NAME_ADDRESS FUNCTION_CODE', '', idx)
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, "A", 'NAME_ADDRESS FUNCTION_CODE', '', idx)
                 }		//if
             }		//if
         }		//if
@@ -1203,7 +1235,7 @@
         //----------Manoranjan------------------------------
         var iframe = window.parent.document.getElementById('ifrmDocwin');
         var container = $('#tab1').css("height");
-        iframe.style.height = container;
+        iframe.style.height = '950px';
         //----------------------------------------
         //try {
         //    var iFrameID = parent.window.frames['ifrmDocwin'];
@@ -1292,6 +1324,7 @@
         var lsOrgTypeCode = ' 140 11 163 162 '; 	//Corp, Partnership, LLC Corp, LLC Partnership
         if (lsOrgTypeCode.search(' ' + $("#ddOrgType option:selected").attr('CODE') + ' ') != '-1' &&
                 parent.sNew == true) {
+            debugger;
             //EGOVWEB-24 - Added 1 Line
             bOfficersRequired = true;
 
@@ -1421,6 +1454,11 @@
         }		//if
         //EGOVWEB-22		changeMailingAdd()
         //}		//if
+
+        $("#radMailingAdd2_1").removeClass("form-control input-sm");
+        $("#radMailingAdd2_2").removeClass("form-control input-sm");
+        $("#radMailingAdd_1").removeClass("form-control input-sm");
+        $("#radMailingAdd_2").removeClass("form-control input-sm");
     }		//DisplayMailingRad
 
     function changeMailingAdd() {
@@ -1496,6 +1534,10 @@
                 //EGOVWEB-22			bAddrRequired = false
             }		//if
         }		//if
+        $("#radMailingAdd2_1").removeClass("form-control input-sm");
+        $("#radMailingAdd2_2").removeClass("form-control input-sm");
+        $("#radMailingAdd_1").removeClass("form-control input-sm");
+        $("#radMailingAdd_2").removeClass("form-control input-sm");
     }		//changeMailingAdd
 
     function ProfileDisplayDropdowns(lYesNo) {
@@ -1760,7 +1802,7 @@
 
 <div class="container-fluid no-padding">
     <div class="block3">
-        <div class="container-fluid">
+        <div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12" id="tab1">
                     <div class="surround_padding profile-page-width">
@@ -1796,13 +1838,13 @@
                                                   <div id="AppError" class="errormsg no-padding" style="display:block;">
                                                    </div>
                                                      </div>
-                                              <div class="col-lg-12 col-xs-12 col-sm-12">
+                                              <%--<div class="col-lg-12 col-xs-12 col-sm-12">
                                                   <form class="form-horizontal addressee_form">
                                                   <div class="" style="display:none">
                                                   
-                                                   <h4><%--<a href="#" onclick="parent.InstructionLinks();">Click here</a> for more information on completing this screen. Please review this instructions before completing this Application. </h4>--%>
+                                                   <h4><a href="#" onclick="parent.InstructionLinks();">Click here</a> for more information on completing this screen. Please review this instructions before completing this Application. </h4>
                                                   </div></form>
-                                                  </div>
+                                                  </div>--%>
                                                  
                                              </div>
                                             
@@ -1865,7 +1907,7 @@
                                                                     <input class="form-control input-sm input-sm" id="txtFirstName" maxlength="19" size="23" onchange="">
                                                                 </div>
                                                                 <div class="col-sm-2 ">
-                                                                    <input class="form-control input-sm input-sm" id="txtMIName" maxlength="19" size="19" onchange="">
+                                                                    <input class="form-control input-sm input-sm" id="txtMIName" maxlength="1" size="19" onchange="">
                                                                 </div>
                                                                 <div class="col-sm-2">
                                                                     <input class="form-control input-sm input-sm" id="txtLastName" maxlength="20" size="24" onchange="">
@@ -2006,7 +2048,7 @@
                                                                 <label class="col-sm-2 address-form-title">Email Address<span style="color:red">*</span> : </label>
 
                                                                 <div class="col-sm-5">
-                                                                    <input id="txtEmail" maxlength="55" size="48" name="txtEmail" onchange="" class="form-control input-sm input-sm" style="text-transform: none">
+                                                                    <input id="txtEmail" maxlength="40" size="48" name="txtEmail" onchange="" class="form-control input-sm input-sm" style="text-transform: none">
                                                                 </div>
 
                                                             </div>

@@ -21,7 +21,7 @@
 
     function isLoaded() {
         if (parent.document.readyState != 'complete') {
-           // setTimeout('isLoaded()', 0);
+            // setTimeout('isLoaded()', 0);
         }		//if
     }
     //isLoaded
@@ -46,7 +46,7 @@
         //setTimeout('isLoaded()', 0);
 
         if (currenturl.indexOf("?status=true") !== -1 || currenturl.indexOf("?status=false") !== -1) {
-           
+
             ShowForm('PaySuccess');
             var dobj = parent.$g.getXmlDocObj();
             parent.$g.loadXmls();
@@ -61,9 +61,9 @@
             if (parent.$x.ispXmlGetFieldVal(dobj, 'ERROR_INFO MESSAGE', "", 0) == "") {
 
                 parent.$g.xmlAccount.loadXML(dobj.xml);
-               
+
                 if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO ACCOUNT_ID', '', 0) != "") {
-                   
+
 
                     var uName = parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'NAME', '', 0);
                     debugger;
@@ -81,7 +81,7 @@
                     TotalAccounts = 0;
                     var taxcount = 0;
 
-                   
+
                     taxcount = GetSingleNodeCount(parent.$g.xmlAccount, 'TAX_ACCT', '');
                     var acc = '';
                     for (i = 0; i < taxcount; i++) {
@@ -142,33 +142,51 @@
 
 
 
-      
-        if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, "ENTITY_INFO ENTITY_ID", '', 0) == '') {
+
+        if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, "ENTITY_INFO ENTITY_ID", '', 0) == '' && parent.bW2 == false && parent.b1099 == false) {
             ShowForm('LogLogin');
+
         } else
             if (parent.bChangePin == true) {
+                debugger;
+                if (parent.document.getElementById("ancLogin").style.display != "none") {
+                    ShowForm('LogChangePin');
+                    parent.bChangePin = false;
+                    $('#mnuLogLogout').css("display", "block");
+                    $('#mnuLogPinChange').css("display", "block");
+                    $('#mnuLogPayCoupon').css("display", "block");
+                    $('#divPayments').css("display", "block");
+                }
+                else {
+                    parent.bChangePin = false;
 
-            ShowForm('LogChangePin');
-            parent.bChangePin = false;
-            $('#mnuLogLogout').css("display", "block");
-            $('#mnuLogPinChange').css("display", "block");
-            $('#mnuLogPayCoupon').css("display", "block");
-            $('#divPayments').css("display", "block");
-            
-        }
-        else if (parent.bLCF == true) {
-            parent.setFrameUrl('Acct/ApplyMain');
-            parent.bLCF = false;
-        }
-        else if (parent.Cancelform == true) {
-            ShowForm('LogLogin');
-            parent.Cancelform=false;
-        }
-        else if (parent.logout == true) {
-            ShowForm('LogLogin');
-            parent.logout = false;
-        }
-        
+                    ShowForm('LogLogin');
+
+                }
+            }
+            else if (parent.bLCF == true) {
+                parent.setFrameUrl('Acct/ApplyMain');
+                parent.bLCF = false;
+            }
+            else if (parent.Cancelform == true) {
+                ShowForm('LogLogin');
+                parent.Cancelform = false;
+            }
+            else if (parent.logout == true) {
+                ShowForm('LogLogin');
+                parent.logout = false;
+            }
+            else if (parent.bW2 == true) {
+                ShowForm('LogLogin');
+                displayw2();
+                parent.bW2 = false;
+            }
+            else if (parent.b1099 == true) {
+                ShowForm('LogLogin');
+                display1099();
+                parent.b1099 = false;
+            }
+
         //if
 
         //if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, "ENTITY_INFO ENTITY_ID", '', 0) != '') {
@@ -179,18 +197,22 @@
             debugger;
 			<% Session["Redirect"] = ""; %>
             parent.bLoadCoupon = false;
-            ShowForm('LogCoupon');          
+            ShowForm('LogCoupon');
 
         }		//if
         if (parent.gbElectronicCoupon == true) {
             debugger;
             DisplayCoupLogin('EPayment', 'TRUE');
             parent.gbElectronicCoupon = false;
+
         }
         if (parent.NTL == true) {
+
             DisplayCoupLogin('NTL', 'TRUE');
             HidePayCoupon();
-            parent.NTL = false;
+            parent.NTL = false
+
+
         }
         //ShowForm('LogLogin');
         parent.document.title = parent.window.gTitle;
@@ -201,11 +223,19 @@
         $('#LogPinApply').css('display', 'none');
         $('#divPinApply').css('display', 'none');
         $('#divApplyFirst').css('display', 'none');
+        $('#divForgotPinNew').css('display', 'none');
+        $('#LogOBLogin').css('display', 'none');
+        $('#divOBLogin').css('display', 'none');
     }
+
+
     function HideForm() {
         $('#divLogin').css('display', 'none');
         $('#LogPinApply').css('display', 'none');
         $('#divPinApply').css('display', 'none');
+        $('#divForgotPinNew').css('display', 'none');
+        $('#LogOBLogin').css('display', 'none');
+        $('#divOBLogin').css('display', 'none');
     }
 
     function HideOtherForm() {
@@ -213,17 +243,40 @@
         $('#LogLogin').css('display', 'none');
         $('#divLogin').css('display', 'none');
         $('#divApplyFirst').css('display', 'none');
-        $('#divPayCoupon').css('display', 'none');    
+        $('#divPayCoupon').css('display', 'none');
+        $('#divForgotPinNew').css('display', 'none');
+        $('#LogOBLogin').css('display', 'none');
+        $('#divOBLogin').css('display', 'none');
     }
     function HideForApplyFirst() {
         $('#LogCoupon').css('display', 'none');
         $('#LogLogin').css('display', 'none');
-        $('#divLogin').css('display', 'none');        
+        $('#divLogin').css('display', 'none');
         $('#divPayCoupon').css('display', 'none');
+        $('#divForgotPinNew').css('display', 'none');
+        $('#LogOBLogin').css('display', 'none');
+        $('#divOBLogin').css('display', 'none');
     }
-    
+    function ShowOB() {
+        $('#LogCoupon').css('display', 'none');
+        $('#LogLogin').css('display', 'none');
+        $('#divLogin').css('display', 'none');
+        $('#divApplyFirst').css('display', 'none');
+        $('#divPayCoupon').css('display', 'none');
+        $('#LogPinApply').css('display', 'none');
+        $('#divPinApply').css('display', 'none');
+        $('#divForgotPinNew').css('display', 'none');
+    }
+
     function displayw2() {
+
         DisplayModal();
+    }
+
+
+    function DisplayOB() {
+
+        DisplayOBLogin();
     }
 
     function display1099() {
@@ -231,22 +284,23 @@
     }
 
     function ShowForm(id) {
-        
-       
+
+
         $('#LogMain').css('display', 'none');
         $('#LogPinApply').css('display', 'none');
         $('#LogLogin').css('display', 'none');
         $('#LogChangePin').css('display', 'none');
         $('#LogApplyFirst').css('display', 'none');
-       
-        $('#divForgotPinNew').css('display', 'none');        
+        $('#LogOBLogin').css('display', 'none');
+        $('#divOBLogin').css('display', 'none');
+        $('#divForgotPinNew').css('display', 'none');
         $('#ApplyPinThankYou').css('display', 'none');
         $('#LogCoupon').css('display', 'none');
         $('#divPinApply').css('display', 'none');
         $('#divLogin').css('display', 'none');
         $('#divApplyFirst').css('display', 'none');
         $('#divPayCoupon').css('display', 'none');
-        
+
         debugger;
         try {
             if (id == 'LogMain') {
@@ -261,7 +315,7 @@
                 DisplayLogin();
             }
             else if (id == 'LogChangePin') {
-              
+
                 DisplayChangePin();
             }
             else if (id == 'LogApplyFirst') {
@@ -277,7 +331,9 @@
             else if (id == 'LogCoupon') {
                 DisplayCoupLogin();
             }
-
+            else if (id == 'OutStandingBalance') {
+                DisplayOBLogin();
+            }
 
                 ///'''Sudipta'''''
             else if (id == 'PaySuccess') {
@@ -290,14 +346,14 @@
         catch (exp) {
 
             alert('ShowForm : ' + exp);
-        }       
+        }
         resolvedIframeheight();//manoranjan
-    }   
+    }
     function resolvedIframeheight() {
         //iframe height issue resolved
         var iframe = window.parent.document.getElementById('ifrmDocwin');
         var container = $('#tab1').css("height");
-        iframe.style.height = container;
+        //iframe.style.height = container;
     }
 
 </script>
@@ -305,7 +361,7 @@
 
 
 
-<div id="tab1">
+<div id="tab1" style="height:1050px">
     <%
         
         Html.RenderAction("Main", "Login");
@@ -316,7 +372,8 @@
         Html.RenderAction("ChangePin", "Login");
         Html.RenderAction("ForgotPin", "Login");
         Html.RenderAction("ThankYou", "Login");
-        Html.RenderAction("Email", "Login"); 
+        Html.RenderAction("Email", "Login");
+        Html.RenderAction("OutStandingBalance", "Login"); 
       
         
         

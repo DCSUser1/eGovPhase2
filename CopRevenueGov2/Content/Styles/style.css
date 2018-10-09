@@ -139,7 +139,7 @@ footer{
 }
 /************************* TREE MENU CSS ********************/
 
-#treeMenu {width:280px; font:normal 13px/21px Verdana; height:482px; overflow-x:hidden; overflow-y:auto; background:#6b89ab;}
+#treeMenu {/*width:280px;*/ font:normal 13px/21px Verdana; height:482px; overflow-x:hidden; overflow-y:auto; background:#6b89ab;}
 #treeMenu ul { list-style:none; margin:0; padding:0;}
 #treeMenu ul li {overflow:hidden; background:#6b89ab url(../images/treeTabBg.gif) repeat-x 0 0; border:none; margin:0; }   /* Edited by Partha */
 #treeMenu ul li span {     /*background: rgba(0, 0, 0, 0) url("../images/treeSplit.png") no-repeat scroll 245px 2px;*/
@@ -202,11 +202,11 @@ footer{
 	}
      #treeMenu ul li span.closed.opened a {
             color:#ffffff;
-            background:#1d406e  url("../images/treeSplit.png") no-repeat scroll 242px -57px;
+            background:#1d406e  url("../images/treeSplit.png") no-repeat scroll 279px -57px;
         }
         #treeMenu ul li li span.closed.opened a {
             color:#ffffff;
-            background:#1b3556 url("../images/treeSplit.png") no-repeat scroll 214px -57px;
+            background:#1b3556 url("../images/treeSplit.png") no-repeat scroll 255px -57px;
         }
 #treeMenu ul li ul li{
 	padding:0 0 0 0;
@@ -861,11 +861,11 @@ color:#003b74;
 }
 
 .submenu {
-    background: rgba(0, 0, 0, 0) url("../images/treeSplit.png") no-repeat scroll 245px 2px;
+    background: rgba(0, 0, 0, 0) url("../images/treeSplit.png") no-repeat scroll 280px 2px;
 }
 
 .submenu:hover {
-    background: url("../images/treeSplit.png") no-repeat scroll 245px 2px #1D406E;
+    background: url("../images/treeSplit.png") no-repeat scroll 280px 2px #1D406E;
 }
 .for_spacing1 {
             background-position: 223px -126px !important;
@@ -1440,4 +1440,16 @@ background-position: right center !important;
 
 .iframe {
     margin-bottom:60px !important;
+}
+
+/****08-02-18*****/
+
+.menu-header-class {
+    background: #003b74 none repeat scroll 0 0;
+    color: #ffffff;
+    font-size: 17px;
+    height: 43px;
+    margin: 0;
+    padding: 9px 0 0 19px;
+    font-family: Verdana;
 }

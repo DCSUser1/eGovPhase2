@@ -36,7 +36,7 @@
              if (string1 == string2) {
                  $("#myModal_W2").css("display", "block");
                  $("#divCaptha_W2").css("display", "none");
-                 
+
              }
              else {
                  alert('Invalid Captcha!');

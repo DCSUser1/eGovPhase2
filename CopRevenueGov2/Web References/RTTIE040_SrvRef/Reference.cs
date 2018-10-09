@@ -26,17 +26,17 @@ namespace CopRevenueGov2.RTTIE040_SrvRef {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="TIPSACCDSOAP11Binding", Namespace="http://namespace.softwareag.com/entirex/xml/mapping")]
-    public partial class RT01E040 : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    [System.Web.Services.WebServiceBindingAttribute(Name="TIPSACCTSOAP11Binding", Namespace="http://namespace.softwareag.com/entirex/xml/mapping")]
+    public partial class TT040E00 : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback CallRT01E040OperationCompleted;
+        private System.Threading.SendOrPostCallback CallTT040E00OperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public RT01E040() {
-            this.Url = "http://istest.city.phila.local:10010/wsstack/services/RT01E040.TIPSACCDSOAP11Port" +
-                "/";
+        public TT040E00() {
+            this.Url = "http://192.168.204.70:10010/wsstack/services/TT040E00.TIPSACCTSOAP11Port/";
+                
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -71,44 +71,44 @@ namespace CopRevenueGov2.RTTIE040_SrvRef {
         }
         
         /// <remarks/>
-        public event CallRT01E040CompletedEventHandler CallRT01E040Completed;
+        public event CallTT040E00CompletedEventHandler CallTT040E00Completed;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("RT01E040", RequestElementName="RT01E040", RequestNamespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E040", ResponseElementName="RT01E040Response", ResponseNamespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E040", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("TT040E00", RequestElementName="TT040E00", RequestNamespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT040E00", ResponseElementName="TT040E00Response", ResponseNamespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT040E00", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("_SMA", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public RT01E040Response_SMA CallRT01E040([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT01E040_SMA _SMA, [System.Xml.Serialization.XmlElementAttribute("_E-NPT", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT01E040_ENPT _ENPT, [System.Xml.Serialization.XmlElementAttribute("_E-AMTS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT01E040_EAMTS _EAMTS, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] RT01E040_SERR _SERR, [System.Xml.Serialization.XmlElementAttribute("_E-NPT", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT01E040Response_ENPT _ENPT1, [System.Xml.Serialization.XmlElementAttribute("_E-AMTS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT01E040Response_EAMTS _EAMTS1, [System.Xml.Serialization.XmlElementAttribute("_SERR", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out RT01E040Response_SERR _SERR1) {
-            object[] results = this.Invoke("CallRT01E040", new object[] {
+        public TT040E00Response_SMA CallTT040E00([System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT040E00_SMA _SMA, [System.Xml.Serialization.XmlElementAttribute("_E-NPT", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT040E00_ENPT _ENPT, [System.Xml.Serialization.XmlElementAttribute("_E-AMTS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT040E00_EAMTS _EAMTS, [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] TT040E00_SERR _SERR, [System.Xml.Serialization.XmlElementAttribute("_E-NPT", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT040E00Response_ENPT _ENPT1, [System.Xml.Serialization.XmlElementAttribute("_E-AMTS", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT040E00Response_EAMTS _EAMTS1, [System.Xml.Serialization.XmlElementAttribute("_SERR", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)] out TT040E00Response_SERR _SERR1) {
+            object[] results = this.Invoke("CallTT040E00", new object[] {
                         _SMA,
                         _ENPT,
                         _EAMTS,
                         _SERR});
-            _ENPT1 = ((RT01E040Response_ENPT)(results[1]));
-            _EAMTS1 = ((RT01E040Response_EAMTS)(results[2]));
-            _SERR1 = ((RT01E040Response_SERR)(results[3]));
-            return ((RT01E040Response_SMA)(results[0]));
+            _ENPT1 = ((TT040E00Response_ENPT)(results[1]));
+            _EAMTS1 = ((TT040E00Response_EAMTS)(results[2]));
+            _SERR1 = ((TT040E00Response_SERR)(results[3]));
+            return ((TT040E00Response_SMA)(results[0]));
         }
         
         /// <remarks/>
-        public void CallRT01E040Async(RT01E040_SMA _SMA, RT01E040_ENPT _ENPT, RT01E040_EAMTS _EAMTS, RT01E040_SERR _SERR) {
-            this.CallRT01E040Async(_SMA, _ENPT, _EAMTS, _SERR, null);
+        public void CallTT040E00Async(TT040E00_SMA _SMA, TT040E00_ENPT _ENPT, TT040E00_EAMTS _EAMTS, TT040E00_SERR _SERR) {
+            this.CallTT040E00Async(_SMA, _ENPT, _EAMTS, _SERR, null);
         }
         
         /// <remarks/>
-        public void CallRT01E040Async(RT01E040_SMA _SMA, RT01E040_ENPT _ENPT, RT01E040_EAMTS _EAMTS, RT01E040_SERR _SERR, object userState) {
-            if ((this.CallRT01E040OperationCompleted == null)) {
-                this.CallRT01E040OperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallRT01E040OperationCompleted);
+        public void CallTT040E00Async(TT040E00_SMA _SMA, TT040E00_ENPT _ENPT, TT040E00_EAMTS _EAMTS, TT040E00_SERR _SERR, object userState) {
+            if ((this.CallTT040E00OperationCompleted == null)) {
+                this.CallTT040E00OperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallTT040E00OperationCompleted);
             }
-            this.InvokeAsync("CallRT01E040", new object[] {
+            this.InvokeAsync("CallTT040E00", new object[] {
                         _SMA,
                         _ENPT,
                         _EAMTS,
-                        _SERR}, this.CallRT01E040OperationCompleted, userState);
+                        _SERR}, this.CallTT040E00OperationCompleted, userState);
         }
         
-        private void OnCallRT01E040OperationCompleted(object arg) {
-            if ((this.CallRT01E040Completed != null)) {
+        private void OnCallTT040E00OperationCompleted(object arg) {
+            if ((this.CallTT040E00Completed != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.CallRT01E040Completed(this, new CallRT01E040CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.CallTT040E00Completed(this, new CallTT040E00CompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -136,8 +136,8 @@ namespace CopRevenueGov2.RTTIE040_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E040")]
-    public partial class RT01E040_SMA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT040E00")]
+    public partial class TT040E00_SMA {
         
         private string _PROGRAMField;
         
@@ -223,8 +223,8 @@ namespace CopRevenueGov2.RTTIE040_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E040")]
-    public partial class RT01E040_ENPT {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT040E00")]
+    public partial class TT040E00_ENPT {
         
         private string aCCOUNTIDField;
         
@@ -518,8 +518,8 @@ namespace CopRevenueGov2.RTTIE040_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E040")]
-    public partial class RT01E040_EAMTS {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT040E00")]
+    public partial class TT040E00_EAMTS {
         
         private string cORPPARTNERPERCENTXField;
         
@@ -839,8 +839,8 @@ namespace CopRevenueGov2.RTTIE040_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E040")]
-    public partial class RT01E040_SERR {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT040E00")]
+    public partial class TT040E00_SERR {
         
         private string _SERRPROGRAMField;
         
@@ -939,8 +939,8 @@ namespace CopRevenueGov2.RTTIE040_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E040")]
-    public partial class RT01E040Response_SMA {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT040E00")]
+    public partial class TT040E00Response_SMA {
         
         private string _PROGRAMField;
         
@@ -1026,8 +1026,8 @@ namespace CopRevenueGov2.RTTIE040_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E040")]
-    public partial class RT01E040Response_ENPT {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT040E00")]
+    public partial class TT040E00Response_ENPT {
         
         private string aCCOUNTIDField;
         
@@ -1321,8 +1321,8 @@ namespace CopRevenueGov2.RTTIE040_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E040")]
-    public partial class RT01E040Response_EAMTS {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT040E00")]
+    public partial class TT040E00Response_EAMTS {
         
         private string cORPPARTNERPERCENTXField;
         
@@ -1642,8 +1642,8 @@ namespace CopRevenueGov2.RTTIE040_SrvRef {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCD-RT01E040")]
-    public partial class RT01E040Response_SERR {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="urn:com-softwareag-entirex-rpc:TIPSACCT-TT040E00")]
+    public partial class TT040E00Response_SERR {
         
         private string _SERRPROGRAMField;
         
@@ -1739,50 +1739,50 @@ namespace CopRevenueGov2.RTTIE040_SrvRef {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    public delegate void CallRT01E040CompletedEventHandler(object sender, CallRT01E040CompletedEventArgs e);
+    public delegate void CallTT040E00CompletedEventHandler(object sender, CallTT040E00CompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class CallRT01E040CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class CallTT040E00CompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal CallRT01E040CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal CallTT040E00CompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public RT01E040Response_SMA Result {
+        public TT040E00Response_SMA Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT01E040Response_SMA)(this.results[0]));
+                return ((TT040E00Response_SMA)(this.results[0]));
             }
         }
         
         /// <remarks/>
-        public RT01E040Response_ENPT _ENPT1 {
+        public TT040E00Response_ENPT _ENPT1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT01E040Response_ENPT)(this.results[1]));
+                return ((TT040E00Response_ENPT)(this.results[1]));
             }
         }
         
         /// <remarks/>
-        public RT01E040Response_EAMTS _EAMTS1 {
+        public TT040E00Response_EAMTS _EAMTS1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT01E040Response_EAMTS)(this.results[2]));
+                return ((TT040E00Response_EAMTS)(this.results[2]));
             }
         }
         
         /// <remarks/>
-        public RT01E040Response_SERR _SERR1 {
+        public TT040E00Response_SERR _SERR1 {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((RT01E040Response_SERR)(this.results[3]));
+                return ((TT040E00Response_SERR)(this.results[3]));
             }
         }
     }

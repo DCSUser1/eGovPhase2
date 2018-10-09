@@ -11,10 +11,10 @@ using System.Xml;
 namespace CopRevenueGov2.Helpers
 {
     public class RTTIE030_2015 : CopRestServiceBase, ICopSoapService
-    {      
+    {
         public static void Init()
         {
-          
+
         }
 
         public static string CallService(string Request)
@@ -80,7 +80,7 @@ namespace CopRevenueGov2.Helpers
                     e.BPT_INFO.RETURN_STATUS = "INQ";
                     e = __RTTIE030_F_I(e);
                     break;
-                
+
             }
 
             return e;
@@ -89,37 +89,38 @@ namespace CopRevenueGov2.Helpers
         private static COPXmlFactory.RTTIE030_2015.BPTlfReturn __RTTIE030_F_I(COPXmlFactory.RTTIE030_2015.BPTlfReturn e)
         {
 
-            RTTIE030_SrvRef.RT02E030_ELFBPT _ELFBPT = new RTTIE030_SrvRef.RT02E030_ELFBPT();
-            RTTIE030_SrvRef.RT02E030 rttie030 = new RTTIE030_SrvRef.RT02E030();
+            RTTIE030_SrvRef.TT030E00_ELFBPT _ELFBPT = new RTTIE030_SrvRef.TT030E00_ELFBPT();
+            RTTIE030_SrvRef.TT030E00 rttie030 = new RTTIE030_SrvRef.TT030E00();
+
             //
-            RTTIE030_SrvRef.RT02E030Response_SMA _SMAResponse = new RTTIE030_SrvRef.RT02E030Response_SMA();
-            RTTIE030_SrvRef.RT02E030Response_ELFBPT _ELFBPTResponse = new RTTIE030_SrvRef.RT02E030Response_ELFBPT();
-            RTTIE030_SrvRef.RT02E030Response_ELFPG1 _ELFPG1Response = new RTTIE030_SrvRef.RT02E030Response_ELFPG1();
-            RTTIE030_SrvRef.RT02E030Response_ELFSCHA _ELFSCHAResponse = new RTTIE030_SrvRef.RT02E030Response_ELFSCHA();
-            RTTIE030_SrvRef.RT02E030Response_ELFSCHB _ELFSCHBResponse = new RTTIE030_SrvRef.RT02E030Response_ELFSCHB();
-            RTTIE030_SrvRef.RT02E030Response_ELFSCHC1 _ELFSCHC1Response = new RTTIE030_SrvRef.RT02E030Response_ELFSCHC1();
-            RTTIE030_SrvRef.RT02E030Response_ELFSCHD _ELFSCHDResponse = new RTTIE030_SrvRef.RT02E030Response_ELFSCHD();
-            RTTIE030_SrvRef.RT02E030Response_ELFSCHE _ELFSCHEResponse = new RTTIE030_SrvRef.RT02E030Response_ELFSCHE();
-            RTTIE030_SrvRef.RT02E030Response_NEW2014FIELDS _NEW2014FIELDSResponse = new RTTIE030_SrvRef.RT02E030Response_NEW2014FIELDS();
-            RTTIE030_SrvRef.RT02E030Response_NEW2015FIELDS _NEW2015FIELDSResponse = new RTTIE030_SrvRef.RT02E030Response_NEW2015FIELDS();
-            RTTIE030_SrvRef.RT02E030Response_SERR _SERRResponse = new RTTIE030_SrvRef.RT02E030Response_SERR();
+            RTTIE030_SrvRef.TT030E00Response_SMA _SMAResponse = new RTTIE030_SrvRef.TT030E00Response_SMA();
+            RTTIE030_SrvRef.TT030E00Response_ELFBPT _ELFBPTResponse = new RTTIE030_SrvRef.TT030E00Response_ELFBPT();
+            RTTIE030_SrvRef.TT030E00Response_ELFPG1 _ELFPG1Response = new RTTIE030_SrvRef.TT030E00Response_ELFPG1();
+            RTTIE030_SrvRef.TT030E00Response_ELFSCHA _ELFSCHAResponse = new RTTIE030_SrvRef.TT030E00Response_ELFSCHA();
+            RTTIE030_SrvRef.TT030E00Response_ELFSCHB _ELFSCHBResponse = new RTTIE030_SrvRef.TT030E00Response_ELFSCHB();
+            RTTIE030_SrvRef.TT030E00Response_ELFSCHC1 _ELFSCHC1Response = new RTTIE030_SrvRef.TT030E00Response_ELFSCHC1();
+            RTTIE030_SrvRef.TT030E00Response_ELFSCHD _ELFSCHDResponse = new RTTIE030_SrvRef.TT030E00Response_ELFSCHD();
+            RTTIE030_SrvRef.TT030E00Response_ELFSCHE _ELFSCHEResponse = new RTTIE030_SrvRef.TT030E00Response_ELFSCHE();
+            RTTIE030_SrvRef.TT030E00Response_NEW2014FIELDS _NEW2014FIELDSResponse = new RTTIE030_SrvRef.TT030E00Response_NEW2014FIELDS();
+            RTTIE030_SrvRef.TT030E00Response_NEW2015FIELDS _NEW2015FIELDSResponse = new RTTIE030_SrvRef.TT030E00Response_NEW2015FIELDS();
+            RTTIE030_SrvRef.TT030E00Response_SERR _SERRResponse = new RTTIE030_SrvRef.TT030E00Response_SERR();
             //
             _ELFBPT.ACCOUNTID = e.BPT_INFO.ACCOUNT_ID;
             _ELFBPT.PERIODX = CopMvcUtil.ConvDateDecimalString(e.BPT_INFO.PERIOD);
             _ELFBPT.RETURNSTATUS = e.BPT_INFO.RETURN_STATUS;
             //
-            _SMAResponse = rttie030.CallRT02E030
-                (new RTTIE030_SrvRef.RT02E030_SMA(),
+            _SMAResponse = rttie030.CallTT030E00
+                (new RTTIE030_SrvRef.TT030E00_SMA(),
                 _ELFBPT,
-                new RTTIE030_SrvRef.RT02E030_ELFPG1(),
-                new RTTIE030_SrvRef.RT02E030_ELFSCHA(),
-                new RTTIE030_SrvRef.RT02E030_ELFSCHB(),
-                new RTTIE030_SrvRef.RT02E030_ELFSCHC1(),
-                new RTTIE030_SrvRef.RT02E030_ELFSCHD(),
-                new RTTIE030_SrvRef.RT02E030_ELFSCHE(),
-                new RTTIE030_SrvRef.RT02E030_NEW2014FIELDS(),
-                new RTTIE030_SrvRef.RT02E030_NEW2015FIELDS(),
-                new RTTIE030_SrvRef.RT02E030_SERR(),
+                new RTTIE030_SrvRef.TT030E00_ELFPG1(),
+                new RTTIE030_SrvRef.TT030E00_ELFSCHA(),
+                new RTTIE030_SrvRef.TT030E00_ELFSCHB(),
+                new RTTIE030_SrvRef.TT030E00_ELFSCHC1(),
+                new RTTIE030_SrvRef.TT030E00_ELFSCHD(),
+                new RTTIE030_SrvRef.TT030E00_ELFSCHE(),
+                new RTTIE030_SrvRef.TT030E00_NEW2014FIELDS(),
+                new RTTIE030_SrvRef.TT030E00_NEW2015FIELDS(),
+                new RTTIE030_SrvRef.TT030E00_SERR(),
                 //  out _SMAResponse,
                 out _ELFBPTResponse,
                 out _ELFPG1Response,
@@ -138,11 +139,11 @@ namespace CopRevenueGov2.Helpers
             return e;
         }
 
-        private static COPXmlFactory.RTTIE030_2015.BPTlfReturn __Fill(RTTIE030_SrvRef.RT02E030Response_SMA _SMA, RTTIE030_SrvRef.RT02E030Response_ELFBPT _ELFBPT,
-          RTTIE030_SrvRef.RT02E030Response_ELFPG1 _ELFPG1, RTTIE030_SrvRef.RT02E030Response_ELFSCHA _ELFSCHA, RTTIE030_SrvRef.RT02E030Response_ELFSCHB _ELFSCHB,
-          RTTIE030_SrvRef.RT02E030Response_ELFSCHC1 _ELFSCHC1, RTTIE030_SrvRef.RT02E030Response_ELFSCHD _ELFSCHD, RTTIE030_SrvRef.RT02E030Response_ELFSCHE _ELFSCHE,
-          RTTIE030_SrvRef.RT02E030Response_NEW2014FIELDS _NEW2014FIELDS, RTTIE030_SrvRef.RT02E030Response_NEW2015FIELDS _NEW2015FIELDS,
-          RTTIE030_SrvRef.RT02E030Response_SERR _SERR)
+        private static COPXmlFactory.RTTIE030_2015.BPTlfReturn __Fill(RTTIE030_SrvRef.TT030E00Response_SMA _SMA, RTTIE030_SrvRef.TT030E00Response_ELFBPT _ELFBPT,
+          RTTIE030_SrvRef.TT030E00Response_ELFPG1 _ELFPG1, RTTIE030_SrvRef.TT030E00Response_ELFSCHA _ELFSCHA, RTTIE030_SrvRef.TT030E00Response_ELFSCHB _ELFSCHB,
+          RTTIE030_SrvRef.TT030E00Response_ELFSCHC1 _ELFSCHC1, RTTIE030_SrvRef.TT030E00Response_ELFSCHD _ELFSCHD, RTTIE030_SrvRef.TT030E00Response_ELFSCHE _ELFSCHE,
+          RTTIE030_SrvRef.TT030E00Response_NEW2014FIELDS _NEW2014FIELDS, RTTIE030_SrvRef.TT030E00Response_NEW2015FIELDS _NEW2015FIELDS,
+          RTTIE030_SrvRef.TT030E00Response_SERR _SERR)
         {
             COPXmlFactory.RTTIE030_2015.BPTlfReturn fobj = RevenueGovXMLFactory.GetBPTlf_2015Return();
 
@@ -159,7 +160,7 @@ namespace CopRevenueGov2.Helpers
             //LOAD BPT_INFO 
             fobj.BPT_INFO = new BPT_INFO();
             fobj.BPT_INFO.ACCOUNT_ID = _ELFBPT.ACCOUNTID;
-            fobj.BPT_INFO.VERSION =_ELFBPT.VERSIONX;
+            fobj.BPT_INFO.VERSION = _ELFBPT.VERSIONX;
             fobj.BPT_INFO.RETURN_STATUS = _ELFBPT.RETURNSTATUS;
             fobj.BPT_INFO.PERIOD = CopMvcUtil.ConvDate(_ELFBPT.PERIODX);
             fobj.BPT_INFO.LAST_UPD_DATE = CopMvcUtil.ConvDate(_ELFBPT.LASTUPDATEDATEX);
@@ -423,7 +424,7 @@ namespace CopRevenueGov2.Helpers
                 fobj.BPT_SCH_E.TOTAL_TAX_DUE = CopMvcUtil.ConvDigitToCurrency("");
             }
             //BPT_TBL_C1
-            string returnS = CopMvcUtil.GetXMlFromObject(fobj); 
+            string returnS = CopMvcUtil.GetXMlFromObject(fobj);
 
             return fobj;
 
@@ -432,30 +433,31 @@ namespace CopRevenueGov2.Helpers
         private static COPXmlFactory.RTTIE030_2015.BPTlfReturn __RTTIE030_F_U(COPXmlFactory.RTTIE030_2015.BPTlfReturn e)
         {
 
-            RTTIE030_SrvRef.RT02E030_SMA _SMA = new RTTIE030_SrvRef.RT02E030_SMA();
-            RTTIE030_SrvRef.RT02E030_ELFBPT _ELFBPT = new RTTIE030_SrvRef.RT02E030_ELFBPT();
-            RTTIE030_SrvRef.RT02E030_ELFPG1 _ELFPG1 = new RTTIE030_SrvRef.RT02E030_ELFPG1();
-            RTTIE030_SrvRef.RT02E030_ELFSCHA _ELFSCHA = new RTTIE030_SrvRef.RT02E030_ELFSCHA();
-            RTTIE030_SrvRef.RT02E030_ELFSCHB _ELFSCHB = new RTTIE030_SrvRef.RT02E030_ELFSCHB();
-            RTTIE030_SrvRef.RT02E030_ELFSCHC1 _ELFSCHC1 = new RTTIE030_SrvRef.RT02E030_ELFSCHC1();
-            RTTIE030_SrvRef.RT02E030_ELFSCHD _ELFSCHD = new RTTIE030_SrvRef.RT02E030_ELFSCHD();
-            RTTIE030_SrvRef.RT02E030_ELFSCHE _ELFSCHE = new RTTIE030_SrvRef.RT02E030_ELFSCHE();
-            RTTIE030_SrvRef.RT02E030_NEW2014FIELDS _NEW2014FIELDS = new RTTIE030_SrvRef.RT02E030_NEW2014FIELDS();
-            RTTIE030_SrvRef.RT02E030_NEW2015FIELDS _NEW2015FIELDS = new RTTIE030_SrvRef.RT02E030_NEW2015FIELDS();
+            RTTIE030_SrvRef.TT030E00_SMA _SMA = new RTTIE030_SrvRef.TT030E00_SMA();
+            RTTIE030_SrvRef.TT030E00_ELFBPT _ELFBPT = new RTTIE030_SrvRef.TT030E00_ELFBPT();
+            RTTIE030_SrvRef.TT030E00_ELFPG1 _ELFPG1 = new RTTIE030_SrvRef.TT030E00_ELFPG1();
+            RTTIE030_SrvRef.TT030E00_ELFSCHA _ELFSCHA = new RTTIE030_SrvRef.TT030E00_ELFSCHA();
+            RTTIE030_SrvRef.TT030E00_ELFSCHB _ELFSCHB = new RTTIE030_SrvRef.TT030E00_ELFSCHB();
+            RTTIE030_SrvRef.TT030E00_ELFSCHC1 _ELFSCHC1 = new RTTIE030_SrvRef.TT030E00_ELFSCHC1();
+            RTTIE030_SrvRef.TT030E00_ELFSCHD _ELFSCHD = new RTTIE030_SrvRef.TT030E00_ELFSCHD();
+            RTTIE030_SrvRef.TT030E00_ELFSCHE _ELFSCHE = new RTTIE030_SrvRef.TT030E00_ELFSCHE();
+            RTTIE030_SrvRef.TT030E00_NEW2014FIELDS _NEW2014FIELDS = new RTTIE030_SrvRef.TT030E00_NEW2014FIELDS();
+            RTTIE030_SrvRef.TT030E00_NEW2015FIELDS _NEW2015FIELDS = new RTTIE030_SrvRef.TT030E00_NEW2015FIELDS();
             //
-            RTTIE030_SrvRef.RT02E030 rttie030 = new RTTIE030_SrvRef.RT02E030();
+            RTTIE030_SrvRef.TT030E00 rttie030 = new RTTIE030_SrvRef.TT030E00();
+            rttie030.Timeout = 120000;
             //
-            RTTIE030_SrvRef.RT02E030Response_SMA _SMAResponse = new RTTIE030_SrvRef.RT02E030Response_SMA();
-            RTTIE030_SrvRef.RT02E030Response_ELFBPT _ELFBPTResponse = new RTTIE030_SrvRef.RT02E030Response_ELFBPT();
-            RTTIE030_SrvRef.RT02E030Response_ELFPG1 _ELFPG1Response = new RTTIE030_SrvRef.RT02E030Response_ELFPG1();
-            RTTIE030_SrvRef.RT02E030Response_ELFSCHA _ELFSCHAResponse = new RTTIE030_SrvRef.RT02E030Response_ELFSCHA();
-            RTTIE030_SrvRef.RT02E030Response_ELFSCHB _ELFSCHBResponse = new RTTIE030_SrvRef.RT02E030Response_ELFSCHB();
-            RTTIE030_SrvRef.RT02E030Response_ELFSCHC1 _ELFSCHC1Response = new RTTIE030_SrvRef.RT02E030Response_ELFSCHC1();
-            RTTIE030_SrvRef.RT02E030Response_ELFSCHD _ELFSCHDResponse = new RTTIE030_SrvRef.RT02E030Response_ELFSCHD();
-            RTTIE030_SrvRef.RT02E030Response_ELFSCHE _ELFSCHEResponse = new RTTIE030_SrvRef.RT02E030Response_ELFSCHE();
-            RTTIE030_SrvRef.RT02E030Response_NEW2014FIELDS _NEW2014FIELDSResponse = new RTTIE030_SrvRef.RT02E030Response_NEW2014FIELDS();
-            RTTIE030_SrvRef.RT02E030Response_NEW2015FIELDS _NEW2015FIELDSResponse = new RTTIE030_SrvRef.RT02E030Response_NEW2015FIELDS();
-            RTTIE030_SrvRef.RT02E030Response_SERR _SERRResponse = new RTTIE030_SrvRef.RT02E030Response_SERR(); 
+            RTTIE030_SrvRef.TT030E00Response_SMA _SMAResponse = new RTTIE030_SrvRef.TT030E00Response_SMA();
+            RTTIE030_SrvRef.TT030E00Response_ELFBPT _ELFBPTResponse = new RTTIE030_SrvRef.TT030E00Response_ELFBPT();
+            RTTIE030_SrvRef.TT030E00Response_ELFPG1 _ELFPG1Response = new RTTIE030_SrvRef.TT030E00Response_ELFPG1();
+            RTTIE030_SrvRef.TT030E00Response_ELFSCHA _ELFSCHAResponse = new RTTIE030_SrvRef.TT030E00Response_ELFSCHA();
+            RTTIE030_SrvRef.TT030E00Response_ELFSCHB _ELFSCHBResponse = new RTTIE030_SrvRef.TT030E00Response_ELFSCHB();
+            RTTIE030_SrvRef.TT030E00Response_ELFSCHC1 _ELFSCHC1Response = new RTTIE030_SrvRef.TT030E00Response_ELFSCHC1();
+            RTTIE030_SrvRef.TT030E00Response_ELFSCHD _ELFSCHDResponse = new RTTIE030_SrvRef.TT030E00Response_ELFSCHD();
+            RTTIE030_SrvRef.TT030E00Response_ELFSCHE _ELFSCHEResponse = new RTTIE030_SrvRef.TT030E00Response_ELFSCHE();
+            RTTIE030_SrvRef.TT030E00Response_NEW2014FIELDS _NEW2014FIELDSResponse = new RTTIE030_SrvRef.TT030E00Response_NEW2014FIELDS();
+            RTTIE030_SrvRef.TT030E00Response_NEW2015FIELDS _NEW2015FIELDSResponse = new RTTIE030_SrvRef.TT030E00Response_NEW2015FIELDS();
+            RTTIE030_SrvRef.TT030E00Response_SERR _SERRResponse = new RTTIE030_SrvRef.TT030E00Response_SERR();
             //
             _ELFBPT.ACCOUNTID = e.BPT_INFO.ACCOUNT_ID;
             _ELFBPT.VERSIONX = e.BPT_INFO.VERSION;
@@ -480,37 +482,37 @@ namespace CopRevenueGov2.Helpers
             _ELFBPT.PREPAREREMAILADDRESS = e.BPT_INFO.PREPARER_EMAIL_ADDRESS;
             _ELFBPT.PREPARERTYPE = e.BPT_INFO.PREPARER_WHO;
             _ELFBPT.PREPARERPHONESpecified = true;
-            
+
             //_ELFPG1
-           _ELFPG1.TAXONNETX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.NET_INCOME);
-           _ELFPG1.TAXONGROSSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.GROSS_RECEIPTS);
-           _ELFPG1.ACTUALTAXX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.TAX_DUE);
-           _ELFPG1.ESTIMATEDTAXX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.ESTIMATED_TAX);
-           _ELFPG1.TOTALTAXX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.TOTAL_TAX);
-           _ELFPG1.NPTTAXCREDITX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.NPT_TAX_CREDIT);
-           _ELFPG1.BPTTAXCREDITX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.BPT_TAX_CREDIT);
-           _ELFPG1.TOTALPAYMNTSCREDITSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.TOTAL_PAY_CREDITS);
-           _ELFPG1.TAXDUEAMTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.NET_TAX);
-           _ELFPG1.INTERESTANDPENALTYAMTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.INTEREST_PENALTY);
-           _ELFPG1.AMTOWED2X = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.AMOUNT_OWED);
-           _ELFPG1.REFUNDAMTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.REFUND);
-           _ELFPG1.NPTOVERPAYMENTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.NPT_OVERPAY);
-           _ELFPG1.BPTOVERPAYMENTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.BPT_OVERPAY);
-           //_ELFSCHA
-           _ELFSCHA.NETINCOMELOSSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.NI_LOSS);
-           _ELFSCHA.NETINCOMEPORTACTIVITIESX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.NI_PORT_ACTIVITIES);
-           _ELFSCHA.NETINCOMEPUCICCX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.NI_PUC_ICC);
-           _ELFSCHA.NETINCOMEPUBLICLAWX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.NI_PUBLIC_LAW);
-           _ELFSCHA.INCOMEAPPORTIONEDX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.I_APPORTIONED);
-           _ELFSCHA.APPORTIONPERCENTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.I_APPORTIONED_PERCENT);
-           _ELFSCHA.INCOMEAPPORTIONEDPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.I_APPORTIONED_PHILA);
-           _ELFSCHA.INCOMENONBUSPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.I_NONBUS_PHILA);
-           _ELFSCHA.INCOMECURRENTYEARX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.I_CURRENT_YEAR);
-           _ELFSCHA.LOSSCARRYFORWARDX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.LOSS_CARRY_FORWARD);
-           _ELFSCHA.TAXABLEINCOMEX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.I_TAXABLE);
-           _ELFSCHA.TAXDUEX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.TAX_DUE);
-            
-           //_ELFSCHB
+            _ELFPG1.TAXONNETX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.NET_INCOME);
+            _ELFPG1.TAXONGROSSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.GROSS_RECEIPTS);
+            _ELFPG1.ACTUALTAXX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.TAX_DUE);
+            _ELFPG1.ESTIMATEDTAXX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.ESTIMATED_TAX);
+            _ELFPG1.TOTALTAXX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.TOTAL_TAX);
+            _ELFPG1.NPTTAXCREDITX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.NPT_TAX_CREDIT);
+            _ELFPG1.BPTTAXCREDITX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.BPT_TAX_CREDIT);
+            _ELFPG1.TOTALPAYMNTSCREDITSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.TOTAL_PAY_CREDITS);
+            _ELFPG1.TAXDUEAMTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.NET_TAX);
+            _ELFPG1.INTERESTANDPENALTYAMTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.INTEREST_PENALTY);
+            _ELFPG1.AMTOWED2X = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.AMOUNT_OWED);
+            _ELFPG1.REFUNDAMTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.REFUND);
+            _ELFPG1.NPTOVERPAYMENTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.NPT_OVERPAY);
+            _ELFPG1.BPTOVERPAYMENTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG1.BPT_OVERPAY);
+            //_ELFSCHA
+            _ELFSCHA.NETINCOMELOSSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.NI_LOSS);
+            _ELFSCHA.NETINCOMEPORTACTIVITIESX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.NI_PORT_ACTIVITIES);
+            _ELFSCHA.NETINCOMEPUCICCX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.NI_PUC_ICC);
+            _ELFSCHA.NETINCOMEPUBLICLAWX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.NI_PUBLIC_LAW);
+            _ELFSCHA.INCOMEAPPORTIONEDX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.I_APPORTIONED);
+            _ELFSCHA.APPORTIONPERCENTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.I_APPORTIONED_PERCENT);
+            _ELFSCHA.INCOMEAPPORTIONEDPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.I_APPORTIONED_PHILA);
+            _ELFSCHA.INCOMENONBUSPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.I_NONBUS_PHILA);
+            _ELFSCHA.INCOMECURRENTYEARX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.I_CURRENT_YEAR);
+            _ELFSCHA.LOSSCARRYFORWARDX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.LOSS_CARRY_FORWARD);
+            _ELFSCHA.TAXABLEINCOMEX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.I_TAXABLE);
+            _ELFSCHA.TAXDUEX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_A.TAX_DUE);
+
+            //_ELFSCHB
             _ELFSCHB._NETINCOMEX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.NI_LOSS);
             _ELFSCHB._ADJNETINCOMEINTERESTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.ADJ_NI_INTEREST);
             _ELFSCHB._ADJNETINCPORTACTIVITIESX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.ADJ_NI_PORT_ACTIVITIES);
@@ -520,14 +522,14 @@ namespace CopRevenueGov2.Helpers
             _ELFSCHB._ADJUSTEDINCOMEX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.ADJ_INCOME);
             _ELFSCHB._ADJRECEIPTSOTHERX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.ADJ_RECEIPTS_OTHER);
             _ELFSCHB._ADJGROSSRECEIPTSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.ADJ_GROSS_RECEIPTS);
-          
+
             _ELFSCHB._GROSSPERCENTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.ADJ_GROSS_PERCENT);
             _ELFSCHB._TOTALADJUSTMENTSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.ADJ_TOTAL);  // 2j B
             _ELFSCHB._NETINCOMEADJUSTEDX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.NI_ADJUSTED);
             _ELFSCHB._NONBUSINCOMEX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.I_NONBUS);
             _ELFSCHB._INCOMEAPPORTIONEDX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.I_APPORTIONED);
-          
-            _ELFSCHB.APPORTIONPERCENTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.I_APPORTIONED_PERCENT); 
+
+            _ELFSCHB.APPORTIONPERCENTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.I_APPORTIONED_PERCENT);
             _ELFSCHB._INCOMEAPPORTIONEDPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.I_APPORTIONED_PHILA);
             _ELFSCHB._INCOMENONBUSPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.I_NONBUS_PHILA);
             _ELFSCHB._INCOMECURRENTYEARX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.I_CURRENT_YEAR); //9 B
@@ -536,34 +538,34 @@ namespace CopRevenueGov2.Helpers
             _ELFSCHB._INCOMETAXABLEX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.I_TAXABLE);
             _ELFSCHB._TAXDUEX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_B.TAX_DUE);
             //_ELFSCHC1
-           _ELFSCHC1._PROPERTYPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.TOTAL_AVG_PHILA);
-           _ELFSCHC1._PROPERTYALLX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.TOTAL_AVG_ALL);
-           _ELFSCHC1._PROPERTYFACTORX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.PROPERTY_FACTOR_PHILA);
-           _ELFSCHC1._PAYROLLPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.PAYROLL_PHILA);
-           _ELFSCHC1._PAYROLLALLX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.PAYROLL_ALL);
-           _ELFSCHC1._PAYROLLFACTORX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.PAYROLL_FACTOR_PHILA);
-           _ELFSCHC1._RECEIPTSPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.RECEIPTS_PHILA);
-           _ELFSCHC1._RECEIPTSALLX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.RECEIPTS_ALL);
-           _ELFSCHC1._RECEIPTSFACTORX = CopMvcUtil.ConvFactorToDigit(Convert.ToDouble(e.BPT_SCH_C1.RECEIPTS_FACTOR_PHILA));
-           _ELFSCHC1._TOTALFACTORSX = CopMvcUtil.ConvFactorToDigit(0.0);
-           _ELFSCHC1._AVERAGEFACTORSX = CopMvcUtil.ConvFactorToDigit(0.0);
-           //_ELFSCHD
-           _ELFSCHD._GROSSSALESX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.GR_SALES);
-           _ELFSCHD._GROSSSERVICESX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.GR_SERVICES);
-           _ELFSCHD._GROSSRENTALSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.GR_RENTALS); //3 D
-           _ELFSCHD._TOTALRECEIPTSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.GR_TOTALS);
-           _ELFSCHD._LESALESOUTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.LE_SALES_OUT);
-           _ELFSCHD._LESERVICESOUTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.LE_SERVICES_OUT);//5b D
-           _ELFSCHD._LERENTALSOUTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.LE_RENTALS_OUT);
-           _ELFSCHD._LEOTHERAMTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.LE_OTHER);//5d D
-           _ELFSCHD._NETTAXABLERECEIPTSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.NET_TAXABLE_RECEIPTS_BEFORE);//6 D
-           _ELFSCHD._LEMETHODRECEIPTSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.RECEIPTS_ALTERNATIVE_METHOD);//9 D
-           _ELFSCHD._REGULARRECEIPTSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.NET_TAXABLE_RECEIPTS_AFTER);//8 D
-            
-           _ELFSCHD._TAXDUEREGULARX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.TAX_DUE);// 11 D
-           _ELFSCHD._TAXDUEALTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.TAX_DUE_ALT);
-           _ELFSCHD._TOTALTAXDUEX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.TOTAL_TAX_DUE);
-           //_ELFSCHE
+            _ELFSCHC1._PROPERTYPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.TOTAL_AVG_PHILA);
+            _ELFSCHC1._PROPERTYALLX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.TOTAL_AVG_ALL);
+            _ELFSCHC1._PROPERTYFACTORX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.PROPERTY_FACTOR_PHILA);
+            _ELFSCHC1._PAYROLLPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.PAYROLL_PHILA);
+            _ELFSCHC1._PAYROLLALLX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.PAYROLL_ALL);
+            _ELFSCHC1._PAYROLLFACTORX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.PAYROLL_FACTOR_PHILA);
+            _ELFSCHC1._RECEIPTSPHILAX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.RECEIPTS_PHILA);
+            _ELFSCHC1._RECEIPTSALLX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_C1.RECEIPTS_ALL);
+            _ELFSCHC1._RECEIPTSFACTORX = CopMvcUtil.ConvFactorToDigit(Convert.ToDouble(e.BPT_SCH_C1.RECEIPTS_FACTOR_PHILA));
+            _ELFSCHC1._TOTALFACTORSX = CopMvcUtil.ConvFactorToDigit(0.0);
+            _ELFSCHC1._AVERAGEFACTORSX = CopMvcUtil.ConvFactorToDigit(0.0);
+            //_ELFSCHD
+            _ELFSCHD._GROSSSALESX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.GR_SALES);
+            _ELFSCHD._GROSSSERVICESX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.GR_SERVICES);
+            _ELFSCHD._GROSSRENTALSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.GR_RENTALS); //3 D
+            _ELFSCHD._TOTALRECEIPTSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.GR_TOTALS);
+            _ELFSCHD._LESALESOUTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.LE_SALES_OUT);
+            _ELFSCHD._LESERVICESOUTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.LE_SERVICES_OUT);//5b D
+            _ELFSCHD._LERENTALSOUTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.LE_RENTALS_OUT);
+            _ELFSCHD._LEOTHERAMTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.LE_OTHER);//5d D
+            _ELFSCHD._NETTAXABLERECEIPTSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.NET_TAXABLE_RECEIPTS_BEFORE);//6 D
+            _ELFSCHD._LEMETHODRECEIPTSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.RECEIPTS_ALTERNATIVE_METHOD);//9 D
+            _ELFSCHD._REGULARRECEIPTSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.NET_TAXABLE_RECEIPTS_AFTER);//8 D
+
+            _ELFSCHD._TAXDUEREGULARX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.TAX_DUE);// 11 D
+            _ELFSCHD._TAXDUEALTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.TAX_DUE_ALT);
+            _ELFSCHD._TOTALTAXDUEX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_D.TOTAL_TAX_DUE);
+            //_ELFSCHE
             _ELFSCHE._MALTRECEIPTSX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_E.M_ALT_RECEIPTS);
             _ELFSCHE._MGOODSCOSTX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_E.M_GOODS_COST);
             _ELFSCHE._MTAXBASEX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_SCH_E.M_TAX_BASE);
@@ -600,17 +602,17 @@ namespace CopRevenueGov2.Helpers
             string NEW2014FIELDS = CopMvcUtil.GetXMlFromObject(_NEW2014FIELDS);
             string NEW2015FIELDS = CopMvcUtil.GetXMlFromObject(_NEW2015FIELDS);
 
-           
+
             //
-            _SMAResponse = rttie030.CallRT02E030(new RTTIE030_SrvRef.RT02E030_SMA(), _ELFBPT, _ELFPG1, _ELFSCHA, _ELFSCHB, _ELFSCHC1, _ELFSCHD,
-                _ELFSCHE, _NEW2014FIELDS, _NEW2015FIELDS, new RTTIE030_SrvRef.RT02E030_SERR(),
+            _SMAResponse = rttie030.CallTT030E00(new RTTIE030_SrvRef.TT030E00_SMA(), _ELFBPT, _ELFPG1, _ELFSCHA, _ELFSCHB, _ELFSCHC1, _ELFSCHD,
+                _ELFSCHE, _NEW2014FIELDS, _NEW2015FIELDS, new RTTIE030_SrvRef.TT030E00_SERR(),
                 out _ELFBPTResponse, out _ELFPG1Response, out _ELFSCHAResponse, out _ELFSCHBResponse, out _ELFSCHC1Response, out _ELFSCHDResponse,
                 out _ELFSCHEResponse, out _NEW2014FIELDSResponse, out _NEW2015FIELDSResponse, out _SERRResponse);
 
             e = __Fill(_SMAResponse, _ELFBPTResponse, _ELFPG1Response, _ELFSCHAResponse, _ELFSCHBResponse, _ELFSCHC1Response,
                        _ELFSCHDResponse, _ELFSCHEResponse, _NEW2014FIELDSResponse, _NEW2015FIELDSResponse, _SERRResponse
                 );
-           
+
             return e;
 
         }

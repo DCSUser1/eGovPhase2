@@ -11,11 +11,11 @@ using System.Xml;
 namespace CopRevenueGov2.Helpers
 {
     public class RTTIE037_2014 : CopRestServiceBase, ICopSoapService
-    {      
+    {
 
         public static void Init()
         {
-            
+
         }
 
         public static string CallService(string Request)
@@ -75,7 +75,7 @@ namespace CopRevenueGov2.Helpers
             switch (e.BPT_INFO.RETURN_STATUS)
             {
                 case "INQ":
-                    e = __RTTIE037_F_I(e);                   
+                    e = __RTTIE037_F_I(e);
 
                     break;
                 case null: // submit
@@ -86,37 +86,37 @@ namespace CopRevenueGov2.Helpers
                 default:
                     {
                         e.BPT_INFO.RETURN_STATUS = "INQ";
-                          e = __RTTIE037_F_I(e);                       
+                        e = __RTTIE037_F_I(e);
                         break;
                     }
             }
-           
+
 
 
             return e;
         }
         private static COPXmlFactory.RTTIE037_2014.BPTezReturn __RTTIE037_F_I(COPXmlFactory.RTTIE037_2014.BPTezReturn e)
         {
-            BPTLFEZ_RT01E037_SrvRef.RT01E037_EBPT _EBPT = new BPTLFEZ_RT01E037_SrvRef.RT01E037_EBPT();
-            BPTLFEZ_RT01E037_SrvRef.RT01E037 serv_req = new BPTLFEZ_RT01E037_SrvRef.RT01E037();
-            BPTLFEZ_RT01E037_SrvRef.RT01E037Response_SMA _SMAResponse = new BPTLFEZ_RT01E037_SrvRef.RT01E037Response_SMA();
-            BPTLFEZ_RT01E037_SrvRef.RT01E037Response_EBPT _EBPTResponse = new BPTLFEZ_RT01E037_SrvRef.RT01E037Response_EBPT();
-            BPTLFEZ_RT01E037_SrvRef.RT01E037Response_EPG1 _EPG1Response = new BPTLFEZ_RT01E037_SrvRef.RT01E037Response_EPG1();
-            BPTLFEZ_RT01E037_SrvRef.RT01E037Response_EEZPG2 _EEZPG2Response = new BPTLFEZ_RT01E037_SrvRef.RT01E037Response_EEZPG2();
-            BPTLFEZ_RT01E037_SrvRef.RT01E037Response_NEW2014FIELDS _NEW2014FIELDSResponse = new BPTLFEZ_RT01E037_SrvRef.RT01E037Response_NEW2014FIELDS();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00_EBPT _EBPT = new BPTLFEZ_RT01E037_SrvRef.TT037E00_EBPT();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00 serv_req = new BPTLFEZ_RT01E037_SrvRef.TT037E00();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00Response_SMA _SMAResponse = new BPTLFEZ_RT01E037_SrvRef.TT037E00Response_SMA();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00Response_EBPT _EBPTResponse = new BPTLFEZ_RT01E037_SrvRef.TT037E00Response_EBPT();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00Response_EPG1 _EPG1Response = new BPTLFEZ_RT01E037_SrvRef.TT037E00Response_EPG1();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00Response_EEZPG2 _EEZPG2Response = new BPTLFEZ_RT01E037_SrvRef.TT037E00Response_EEZPG2();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00Response_NEW2014FIELDS _NEW2014FIELDSResponse = new BPTLFEZ_RT01E037_SrvRef.TT037E00Response_NEW2014FIELDS();
 
 
             _EBPT.ACCOUNTID = e.BPT_INFO.ACCOUNT_ID;
             _EBPT.PERIODX = CopMvcUtil.ConvDateDecimalString(e.BPT_INFO.PERIOD);
             _EBPT.RETURNSTATUS = e.BPT_INFO.RETURN_STATUS;
-            
 
 
-            _SMAResponse = serv_req.CallRT01E037
-                                            (new BPTLFEZ_RT01E037_SrvRef.RT01E037_SMA(), _EBPT,
-                                              new BPTLFEZ_RT01E037_SrvRef.RT01E037_EPG1(),
-                                              new BPTLFEZ_RT01E037_SrvRef.RT01E037_EEZPG2(),
-                                             new BPTLFEZ_RT01E037_SrvRef.RT01E037_NEW2014FIELDS(),
+
+            _SMAResponse = serv_req.CallTT037E00
+                                            (new BPTLFEZ_RT01E037_SrvRef.TT037E00_SMA(), _EBPT,
+                                              new BPTLFEZ_RT01E037_SrvRef.TT037E00_EPG1(),
+                                              new BPTLFEZ_RT01E037_SrvRef.TT037E00_EEZPG2(),
+                                             new BPTLFEZ_RT01E037_SrvRef.TT037E00_NEW2014FIELDS(),
                                               out _EBPTResponse,
                                               out _EPG1Response,
                                               out _EEZPG2Response,
@@ -130,9 +130,9 @@ namespace CopRevenueGov2.Helpers
             e = __Fill(_SMAResponse, _EBPTResponse, _EPG1Response, _EEZPG2Response, _NEW2014FIELDSResponse);
             return e;
 
-        }        
+        }
 
-        private static COPXmlFactory.RTTIE037_2014.BPTezReturn __Fill(BPTLFEZ_RT01E037_SrvRef.RT01E037Response_SMA _SMA, BPTLFEZ_RT01E037_SrvRef.RT01E037Response_EBPT _EBPT, BPTLFEZ_RT01E037_SrvRef.RT01E037Response_EPG1 _EPG1, BPTLFEZ_RT01E037_SrvRef.RT01E037Response_EEZPG2 _EEZPG2, BPTLFEZ_RT01E037_SrvRef.RT01E037Response_NEW2014FIELDS _NEW2014FIELDS)
+        private static COPXmlFactory.RTTIE037_2014.BPTezReturn __Fill(BPTLFEZ_RT01E037_SrvRef.TT037E00Response_SMA _SMA, BPTLFEZ_RT01E037_SrvRef.TT037E00Response_EBPT _EBPT, BPTLFEZ_RT01E037_SrvRef.TT037E00Response_EPG1 _EPG1, BPTLFEZ_RT01E037_SrvRef.TT037E00Response_EEZPG2 _EEZPG2, BPTLFEZ_RT01E037_SrvRef.TT037E00Response_NEW2014FIELDS _NEW2014FIELDS)
         {
             COPXmlFactory.RTTIE037_2014.BPTezReturn fobj = new BPTezReturn();
 
@@ -246,19 +246,20 @@ namespace CopRevenueGov2.Helpers
 
         }
         private static COPXmlFactory.RTTIE037_2014.BPTezReturn __RTTIE037_F_U(COPXmlFactory.RTTIE037_2014.BPTezReturn e)
-        {            
-            BPTLFEZ_RT01E037_SrvRef.RT01E037 serv_req = new BPTLFEZ_RT01E037_SrvRef.RT01E037();
-            BPTLFEZ_RT01E037_SrvRef.RT01E037_SMA _SMA = new BPTLFEZ_RT01E037_SrvRef.RT01E037_SMA();
-            BPTLFEZ_RT01E037_SrvRef.RT01E037_EBPT _EBPT = new BPTLFEZ_RT01E037_SrvRef.RT01E037_EBPT();
-            BPTLFEZ_RT01E037_SrvRef.RT01E037_EPG1 _EPG1 = new BPTLFEZ_RT01E037_SrvRef.RT01E037_EPG1();
-            BPTLFEZ_RT01E037_SrvRef.RT01E037_EEZPG2 _EEZPG2 = new BPTLFEZ_RT01E037_SrvRef.RT01E037_EEZPG2();
-            BPTLFEZ_RT01E037_SrvRef.RT01E037_NEW2014FIELDS _NEW2014FIELDS = new BPTLFEZ_RT01E037_SrvRef.RT01E037_NEW2014FIELDS();
+        {
+            BPTLFEZ_RT01E037_SrvRef.TT037E00 serv_req = new BPTLFEZ_RT01E037_SrvRef.TT037E00();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00_SMA _SMA = new BPTLFEZ_RT01E037_SrvRef.TT037E00_SMA();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00_EBPT _EBPT = new BPTLFEZ_RT01E037_SrvRef.TT037E00_EBPT();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00_EPG1 _EPG1 = new BPTLFEZ_RT01E037_SrvRef.TT037E00_EPG1();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00_EEZPG2 _EEZPG2 = new BPTLFEZ_RT01E037_SrvRef.TT037E00_EEZPG2();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00_NEW2014FIELDS _NEW2014FIELDS = new BPTLFEZ_RT01E037_SrvRef.TT037E00_NEW2014FIELDS();
 
-            BPTLFEZ_RT01E037_SrvRef.RT01E037Response_SMA _SMAResponse = new BPTLFEZ_RT01E037_SrvRef.RT01E037Response_SMA();
-            BPTLFEZ_RT01E037_SrvRef.RT01E037Response_EBPT _EBPTResponse = new BPTLFEZ_RT01E037_SrvRef.RT01E037Response_EBPT();
-            BPTLFEZ_RT01E037_SrvRef.RT01E037Response_EPG1 _EPG1Response = new BPTLFEZ_RT01E037_SrvRef.RT01E037Response_EPG1();
-            BPTLFEZ_RT01E037_SrvRef.RT01E037Response_EEZPG2 _EEZPG2Response = new BPTLFEZ_RT01E037_SrvRef.RT01E037Response_EEZPG2();
-            BPTLFEZ_RT01E037_SrvRef.RT01E037Response_NEW2014FIELDS _NEW2014FIELDSResponse = new BPTLFEZ_RT01E037_SrvRef.RT01E037Response_NEW2014FIELDS();
+            serv_req.Timeout = 120000;
+            BPTLFEZ_RT01E037_SrvRef.TT037E00Response_SMA _SMAResponse = new BPTLFEZ_RT01E037_SrvRef.TT037E00Response_SMA();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00Response_EBPT _EBPTResponse = new BPTLFEZ_RT01E037_SrvRef.TT037E00Response_EBPT();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00Response_EPG1 _EPG1Response = new BPTLFEZ_RT01E037_SrvRef.TT037E00Response_EPG1();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00Response_EEZPG2 _EEZPG2Response = new BPTLFEZ_RT01E037_SrvRef.TT037E00Response_EEZPG2();
+            BPTLFEZ_RT01E037_SrvRef.TT037E00Response_NEW2014FIELDS _NEW2014FIELDSResponse = new BPTLFEZ_RT01E037_SrvRef.TT037E00Response_NEW2014FIELDS();
 
             _EBPT.ACCOUNTID = e.BPT_INFO.ACCOUNT_ID;
             _EBPT.VERSIONX = e.BPT_INFO.VERSION;
@@ -318,7 +319,7 @@ namespace CopRevenueGov2.Helpers
             _NEW2014FIELDS.STATNETDEDUCTION1X = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG2.STAT_NET_DEDUCTION_1_X);
             _NEW2014FIELDS.TAXABLESUBTOTALEZX = CopMvcUtil.ConvCurrencyToDigit(e.BPT_PG2.TAXABLE_SUBTOTAL_EZ_X);
 
-            _SMAResponse = serv_req.CallRT01E037
+            _SMAResponse = serv_req.CallTT037E00
                                  (_SMA, _EBPT, _EPG1, _EEZPG2, _NEW2014FIELDS, out _EBPTResponse,
                                   out _EPG1Response,
                                   out _EEZPG2Response,

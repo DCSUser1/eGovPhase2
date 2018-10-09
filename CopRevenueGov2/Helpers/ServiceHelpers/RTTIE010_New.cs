@@ -69,7 +69,7 @@ namespace CopRevenueGov2.Helpers
         }
 
 
-        private static COPXmlFactory.RTTIE010.ACCTTEMPLATE __Fill(RTTIE010_SrvRef.RTTIE010Response_SMA _SMA, RTTIE010_SrvRef.RTTIE010Response_EMI _EMI, RTTIE010_SrvRef.RTTIE010Response_ENA1 _ENA1, RTTIE010_SrvRef.RTTIE010Response_ENA2 _ENA2, RTTIE010_SrvRef.RTTIE010Response_ETA _ETA, RTTIE010_SrvRef.RTTIE010Response_ECHK _ECHK)
+        private static COPXmlFactory.RTTIE010.ACCTTEMPLATE __Fill(RTTIE010_SrvRef.TT010E00Response_SMA _SMA, RTTIE010_SrvRef.TT010E00Response_EMI _EMI, RTTIE010_SrvRef.TT010E00Response_ENA1 _ENA1, RTTIE010_SrvRef.TT010E00Response_ENA2 _ENA2, RTTIE010_SrvRef.TT010E00Response_ETA _ETA, RTTIE010_SrvRef.TT010E00Response_ECHK _ECHK)
         {
 
 
@@ -129,37 +129,43 @@ namespace CopRevenueGov2.Helpers
 
 
 
-                    if (_ENA2._NAMADDR2s != null)
-                    {
-                        //ENA2 section
-                        if (_ENA2._NAMADDR2s[i].ATTENTION != null)
-                            fobj.NAME_ADDRESS[i].ATTENTION = _ENA2._NAMADDR2s[i].ATTENTION;
-                        if (_ENA2._NAMADDR2s[i].ADDRESSLINE1 != null)
-                            fobj.NAME_ADDRESS[i].ADDRESS1 = CopMvcUtil.GetString(_ENA2._NAMADDR2s[i].ADDRESSLINE1);
-                        if (_ENA2._NAMADDR2s[i].ADDRESSLINE2 != null)
-                            fobj.NAME_ADDRESS[i].ADDRESS2 = _ENA2._NAMADDR2s[i].ADDRESSLINE2;
-                        if (_ENA2._NAMADDR2s[i].CITY != null)
-                            fobj.NAME_ADDRESS[i].CITY = _ENA2._NAMADDR2s[i].CITY;
-                        if (_ENA2._NAMADDR2s[i].STATE != null)
-                            fobj.NAME_ADDRESS[i].STATE = _ENA2._NAMADDR2s[i].STATE;
-                        if (_ENA2._NAMADDR2s[i].ZIPCODE != null)
-                            fobj.NAME_ADDRESS[i].ZIP = _ENA2._NAMADDR2s[i].ZIPCODE;
-                        if (_ENA2._NAMADDR2s[i].BUSINESSPHONENUMBER != null)
-                            fobj.NAME_ADDRESS[i].WORK_PHONE = CopMvcUtil.GetString(_ENA2._NAMADDR2s[i].BUSINESSPHONENUMBER);
-                        if (_ENA2._NAMADDR2s[i].BUSINESSPHONEEXTENSION != null)
-                            fobj.NAME_ADDRESS[i].WORK_PHONE_EXT = _ENA2._NAMADDR2s[i].BUSINESSPHONEEXTENSION;
-                        if (_ENA2._NAMADDR2s[i].BUSINESSFAX != null)
-                            fobj.NAME_ADDRESS[i].WORK_FAX = CopMvcUtil.GetString(_ENA2._NAMADDR2s[i].BUSINESSFAX);
-                        if (_ENA2._NAMADDR2s[i].OTHERPHONENUMBER != null)
-                            fobj.NAME_ADDRESS[i].OTHER_PHONE = CopMvcUtil.GetString(_ENA2._NAMADDR2s[i].OTHERPHONENUMBER);
-                        if (_ENA2._NAMADDR2s[i].EMAILADDR != null)
-                            fobj.NAME_ADDRESS[i].EMAIL = _ENA2._NAMADDR2s[i].EMAILADDR;
-                        if (_ENA2._NAMADDR2s[i].TIADRSEQUENCENUMBER != null)
-                            fobj.NAME_ADDRESS[i].TRACE_NUMBER = CopMvcUtil.GetString(_ENA2._NAMADDR2s[i].TIADRSEQUENCENUMBER);
-                    }
+                    
 
                 }
 
+            }
+
+
+            if (_ENA2._NAMADDR2s != null)
+            {
+                //ENA2 section
+                for (int i = 0; i < _ENA2._NAMADDR2s.Length; i++)
+                {
+                    if (_ENA2._NAMADDR2s[i].ATTENTION != null)
+                        fobj.NAME_ADDRESS[i].ATTENTION = _ENA2._NAMADDR2s[i].ATTENTION;
+                    if (_ENA2._NAMADDR2s[i].ADDRESSLINE1 != null)
+                        fobj.NAME_ADDRESS[i].ADDRESS1 = CopMvcUtil.GetString(_ENA2._NAMADDR2s[i].ADDRESSLINE1);
+                    if (_ENA2._NAMADDR2s[i].ADDRESSLINE2 != null)
+                        fobj.NAME_ADDRESS[i].ADDRESS2 = _ENA2._NAMADDR2s[i].ADDRESSLINE2;
+                    if (_ENA2._NAMADDR2s[i].CITY != null)
+                        fobj.NAME_ADDRESS[i].CITY = _ENA2._NAMADDR2s[i].CITY;
+                    if (_ENA2._NAMADDR2s[i].STATE != null)
+                        fobj.NAME_ADDRESS[i].STATE = _ENA2._NAMADDR2s[i].STATE;
+                    if (_ENA2._NAMADDR2s[i].ZIPCODE != null)
+                        fobj.NAME_ADDRESS[i].ZIP = _ENA2._NAMADDR2s[i].ZIPCODE;
+                    if (_ENA2._NAMADDR2s[i].BUSINESSPHONENUMBER != null)
+                        fobj.NAME_ADDRESS[i].WORK_PHONE = CopMvcUtil.GetString(_ENA2._NAMADDR2s[i].BUSINESSPHONENUMBER);
+                    if (_ENA2._NAMADDR2s[i].BUSINESSPHONEEXTENSION != null)
+                        fobj.NAME_ADDRESS[i].WORK_PHONE_EXT = _ENA2._NAMADDR2s[i].BUSINESSPHONEEXTENSION;
+                    if (_ENA2._NAMADDR2s[i].BUSINESSFAX != null)
+                        fobj.NAME_ADDRESS[i].WORK_FAX = CopMvcUtil.GetString(_ENA2._NAMADDR2s[i].BUSINESSFAX);
+                    if (_ENA2._NAMADDR2s[i].OTHERPHONENUMBER != null)
+                        fobj.NAME_ADDRESS[i].OTHER_PHONE = CopMvcUtil.GetString(_ENA2._NAMADDR2s[i].OTHERPHONENUMBER);
+                    if (_ENA2._NAMADDR2s[i].EMAILADDR != null)
+                        fobj.NAME_ADDRESS[i].EMAIL = _ENA2._NAMADDR2s[i].EMAILADDR;
+                    if (_ENA2._NAMADDR2s[i].TIADRSEQUENCENUMBER != null)
+                        fobj.NAME_ADDRESS[i].TRACE_NUMBER = CopMvcUtil.GetString(_ENA2._NAMADDR2s[i].TIADRSEQUENCENUMBER);
+                }
             }
 
             //LOAD TAX ACCT s
@@ -172,18 +178,18 @@ namespace CopRevenueGov2.Helpers
                 {
 
                     fobj.TAX_ACCT.Add(COPXmlFactory.RevenueGovXMLFactory.GetAcctTemplate_TaxAcct());
-                    if(_ETA._ENTITYTAXACCOUNTSs[i].FUNCTIONCODE!=null)
-                    fobj.TAX_ACCT[i].FUNCTION_CODE = _ETA._ENTITYTAXACCOUNTSs[i].FUNCTIONCODE;
-                    if(_ETA._ENTITYTAXACCOUNTSs[i].ACCOUNT!=null)
-                    fobj.TAX_ACCT[i].ACCOUNT = CopMvcUtil.GetString(_ETA._ENTITYTAXACCOUNTSs[i].ACCOUNT);
-                    if(_ETA._ENTITYTAXACCOUNTSs[i].STARTDATE!=null)
-                    fobj.TAX_ACCT[i].START_DATE = CopMvcUtil.ConvDate(_ETA._ENTITYTAXACCOUNTSs[i].STARTDATE);
-                    if(_ETA._ENTITYTAXACCOUNTSs[i].WAGMONTHLYGROSS!=null)
-                    fobj.TAX_ACCT[i].WAGE_MONTHLY_GROSS = _ETA._ENTITYTAXACCOUNTSs[i].WAGMONTHLYGROSS;
-                    if(_ETA._ENTITYTAXACCOUNTSs[i].BPTNEWAPPLICATION!=null)
+                    if (_ETA._ENTITYTAXACCOUNTSs[i].FUNCTIONCODE != null)
+                        fobj.TAX_ACCT[i].FUNCTION_CODE = _ETA._ENTITYTAXACCOUNTSs[i].FUNCTIONCODE;
+                    if (_ETA._ENTITYTAXACCOUNTSs[i].ACCOUNT != null)
+                        fobj.TAX_ACCT[i].ACCOUNT = CopMvcUtil.GetString(_ETA._ENTITYTAXACCOUNTSs[i].ACCOUNT);
+                    if (_ETA._ENTITYTAXACCOUNTSs[i].STARTDATE != null)
+                        fobj.TAX_ACCT[i].START_DATE = CopMvcUtil.ConvDate(_ETA._ENTITYTAXACCOUNTSs[i].STARTDATE);
+                    if (_ETA._ENTITYTAXACCOUNTSs[i].WAGMONTHLYGROSS != null)
+                        fobj.TAX_ACCT[i].WAGE_MONTHLY_GROSS = _ETA._ENTITYTAXACCOUNTSs[i].WAGMONTHLYGROSS;
+                    if (_ETA._ENTITYTAXACCOUNTSs[i].BPTNEWAPPLICATION != null)
                         if (_ETA._ENTITYTAXACCOUNTSs[i].BPTNEWAPPLICATION.BPTNAAPPLYFOREXEMPTION == "Y")
                         {
-                            Value =_ETA._ENTITYTAXACCOUNTSs[i].BPTNEWAPPLICATION.BPTNAAPPLYFOREXEMPTION;
+                            Value = _ETA._ENTITYTAXACCOUNTSs[i].BPTNEWAPPLICATION.BPTNAAPPLYFOREXEMPTION;
                             Value = Value + _ETA._ENTITYTAXACCOUNTSs[i].BPTNEWAPPLICATION.BPTNAREACTIVATING;
                             Value = Value + _ETA._ENTITYTAXACCOUNTSs[i].BPTNEWAPPLICATION.BPTNAAFFILIATED;
                             Value = Value + _ETA._ENTITYTAXACCOUNTSs[i].BPTNEWAPPLICATION.BPTNANEWOWNER;
@@ -193,11 +199,11 @@ namespace CopRevenueGov2.Helpers
                             Value = Value + _ETA._ENTITYTAXACCOUNTSs[i].BPTNEWAPPLICATION.BPTNAACCEPTED;
                             fobj.TAX_ACCT[i].UOL_BRT = Value;
 
-                        }                        
-                        else    
-                    fobj.TAX_ACCT[i].UOL_BRT = _ETA._ENTITYTAXACCOUNTSs[i].BPTNEWAPPLICATION.BPTNASTATUS;
-                    if(_ETA._ENTITYTAXACCOUNTSs[i].PRKID!=null)
-                    fobj.TAX_ACCT[i].PRK_ID = _ETA._ENTITYTAXACCOUNTSs[i].PRKID;
+                        }
+                        else
+                            fobj.TAX_ACCT[i].UOL_BRT = _ETA._ENTITYTAXACCOUNTSs[i].BPTNEWAPPLICATION.BPTNASTATUS;
+                    if (_ETA._ENTITYTAXACCOUNTSs[i].PRKID != null)
+                        fobj.TAX_ACCT[i].PRK_ID = _ETA._ENTITYTAXACCOUNTSs[i].PRKID;
 
 
                 }
@@ -249,26 +255,26 @@ namespace CopRevenueGov2.Helpers
         //Commented on 20 Nov2015 for testing the design pages in bootstrap
         private static COPXmlFactory.RTTIE010.ACCTTEMPLATE __RTTIE010_F_1(COPXmlFactory.RTTIE010.ACCTTEMPLATE e)
         {
-            RTTIE010_SrvRef.RTTIE010_EMI _EMI = new RTTIE010_SrvRef.RTTIE010_EMI();
-            RTTIE010_SrvRef.RTTIE010 rttie010 = new RTTIE010_SrvRef.RTTIE010();
-            RTTIE010_SrvRef.RTTIE010Response_SMA _SMAResponse = new RTTIE010_SrvRef.RTTIE010Response_SMA();
-            RTTIE010_SrvRef.RTTIE010Response_EMI _EMIResponse = new RTTIE010_SrvRef.RTTIE010Response_EMI();
-            RTTIE010_SrvRef.RTTIE010Response_ETA _ETAResponse = new RTTIE010_SrvRef.RTTIE010Response_ETA();
-            RTTIE010_SrvRef.RTTIE010Response_ECHK _ECHKResponse = new RTTIE010_SrvRef.RTTIE010Response_ECHK();
-            RTTIE010_SrvRef.RTTIE010Response_ENA1 _ENA1Response = new RTTIE010_SrvRef.RTTIE010Response_ENA1();
-            RTTIE010_SrvRef.RTTIE010Response_ENA2 _ENA2Response = new RTTIE010_SrvRef.RTTIE010Response_ENA2();
+            RTTIE010_SrvRef.TT010E00_EMI _EMI = new RTTIE010_SrvRef.TT010E00_EMI();
+            RTTIE010_SrvRef.TT010E00 rttie010 = new RTTIE010_SrvRef.TT010E00();
+            RTTIE010_SrvRef.TT010E00Response_SMA _SMAResponse = new RTTIE010_SrvRef.TT010E00Response_SMA();
+            RTTIE010_SrvRef.TT010E00Response_EMI _EMIResponse = new RTTIE010_SrvRef.TT010E00Response_EMI();
+            RTTIE010_SrvRef.TT010E00Response_ETA _ETAResponse = new RTTIE010_SrvRef.TT010E00Response_ETA();
+            RTTIE010_SrvRef.TT010E00Response_ECHK _ECHKResponse = new RTTIE010_SrvRef.TT010E00Response_ECHK();
+            RTTIE010_SrvRef.TT010E00Response_ENA1 _ENA1Response = new RTTIE010_SrvRef.TT010E00Response_ENA1();
+            RTTIE010_SrvRef.TT010E00Response_ENA2 _ENA2Response = new RTTIE010_SrvRef.TT010E00Response_ENA2();
 
-            _EMI._ENTITYMASTERINFO = new RTTIE010_SrvRef.RTTIE010_EMI_ENTITYMASTERINFO();
+            _EMI._ENTITYMASTERINFO = new RTTIE010_SrvRef.TT010E00_EMI_ENTITYMASTERINFO();
             _EMI._ENTITYMASTERINFO.ENTITYID = e.ENTITY_INFO.ENTITY_ID;
             _EMI._ENTITYMASTERINFO.ENTITYTYPE = CopMvcUtil.ConvToDecimal(e.ENTITY_INFO.TYPE);
             _EMI._ENTITYMASTERINFO.FUNCTIONCODE = e.ENTITY_INFO.FUNCTION_CODE;
             _EMI._ENTITYMASTERINFO.ORGANIZATIONTYPESpecified = true;
-            
-            _SMAResponse = rttie010.CallRTTIE010 // calling the  service for Account aply...
-                                            (_EMI, new RTTIE010_SrvRef.RTTIE010_ETA(),
-                                              new RTTIE010_SrvRef.RTTIE010_ECHK(),
-                                              new RTTIE010_SrvRef.RTTIE010_ENA1(),
-                                              new RTTIE010_SrvRef.RTTIE010_ENA2(),
+
+            _SMAResponse = rttie010.CallTT010E00 // calling the  service for Account aply...
+                                            (_EMI, new RTTIE010_SrvRef.TT010E00_ETA(),
+                                              new RTTIE010_SrvRef.TT010E00_ECHK(),
+                                              new RTTIE010_SrvRef.TT010E00_ENA1(),
+                                              new RTTIE010_SrvRef.TT010E00_ENA2(),
                                               out _EMIResponse,
                                               out _ETAResponse,
                                               out _ECHKResponse,
@@ -290,16 +296,16 @@ namespace CopRevenueGov2.Helpers
 
 
 
-            RTTIE010_SrvRef.RTTIE010_EMI _EMI = new RTTIE010_SrvRef.RTTIE010_EMI();
-            RTTIE010_SrvRef.RTTIE010 rttie010 = new RTTIE010_SrvRef.RTTIE010();
-            RTTIE010_SrvRef.RTTIE010Response_SMA _SMAResponse = new RTTIE010_SrvRef.RTTIE010Response_SMA();
-            RTTIE010_SrvRef.RTTIE010Response_EMI _EMIResponse = new RTTIE010_SrvRef.RTTIE010Response_EMI();
-            RTTIE010_SrvRef.RTTIE010Response_ETA _ETAResponse = new RTTIE010_SrvRef.RTTIE010Response_ETA();
-            RTTIE010_SrvRef.RTTIE010Response_ECHK _ECHKResponse = new RTTIE010_SrvRef.RTTIE010Response_ECHK();
-            RTTIE010_SrvRef.RTTIE010Response_ENA1 _ENA1Response = new RTTIE010_SrvRef.RTTIE010Response_ENA1();
-            RTTIE010_SrvRef.RTTIE010Response_ENA2 _ENA2Response = new RTTIE010_SrvRef.RTTIE010Response_ENA2();
+            RTTIE010_SrvRef.TT010E00_EMI _EMI = new RTTIE010_SrvRef.TT010E00_EMI();
+            RTTIE010_SrvRef.TT010E00 rttie010 = new RTTIE010_SrvRef.TT010E00();
+            RTTIE010_SrvRef.TT010E00Response_SMA _SMAResponse = new RTTIE010_SrvRef.TT010E00Response_SMA();
+            RTTIE010_SrvRef.TT010E00Response_EMI _EMIResponse = new RTTIE010_SrvRef.TT010E00Response_EMI();
+            RTTIE010_SrvRef.TT010E00Response_ETA _ETAResponse = new RTTIE010_SrvRef.TT010E00Response_ETA();
+            RTTIE010_SrvRef.TT010E00Response_ECHK _ECHKResponse = new RTTIE010_SrvRef.TT010E00Response_ECHK();
+            RTTIE010_SrvRef.TT010E00Response_ENA1 _ENA1Response = new RTTIE010_SrvRef.TT010E00Response_ENA1();
+            RTTIE010_SrvRef.TT010E00Response_ENA2 _ENA2Response = new RTTIE010_SrvRef.TT010E00Response_ENA2();
 
-            _EMI._ENTITYMASTERINFO = new RTTIE010_SrvRef.RTTIE010_EMI_ENTITYMASTERINFO();
+            _EMI._ENTITYMASTERINFO = new RTTIE010_SrvRef.TT010E00_EMI_ENTITYMASTERINFO();
             _EMI._ENTITYMASTERINFO.ENTITYID = e.ENTITY_INFO.ENTITY_ID;
             _EMI._ENTITYMASTERINFO.FUNCTIONCODE = e.ENTITY_INFO.FUNCTION_CODE;
             _EMI._ENTITYMASTERINFO.PINNUMBER = CopMvcUtil.GetDecimal(e.ENTITY_INFO.PIN);
@@ -309,11 +315,11 @@ namespace CopRevenueGov2.Helpers
             string emi = CopMvcUtil.GetXMlFromObject(_EMI);
 
 
-            _SMAResponse = rttie010.CallRTTIE010 // calling the  service for Login...
-                                 (_EMI, new RTTIE010_SrvRef.RTTIE010_ETA(),
-                                   new RTTIE010_SrvRef.RTTIE010_ECHK(),
-                                   new RTTIE010_SrvRef.RTTIE010_ENA1(),
-                                   new RTTIE010_SrvRef.RTTIE010_ENA2(),
+            _SMAResponse = rttie010.CallTT010E00 // calling the  service for Login...
+                                 (_EMI, new RTTIE010_SrvRef.TT010E00_ETA(),
+                                   new RTTIE010_SrvRef.TT010E00_ECHK(),
+                                   new RTTIE010_SrvRef.TT010E00_ENA1(),
+                                   new RTTIE010_SrvRef.TT010E00_ENA2(),
                                    out _EMIResponse,
                                    out _ETAResponse,
                                    out _ECHKResponse,
@@ -353,21 +359,21 @@ namespace CopRevenueGov2.Helpers
 
 
 
-            RTTIE010_SrvRef.RTTIE010_EMI _EMI = new RTTIE010_SrvRef.RTTIE010_EMI();
-            RTTIE010_SrvRef.RTTIE010_ENA1 _ENA1 = new RTTIE010_SrvRef.RTTIE010_ENA1();
-            RTTIE010_SrvRef.RTTIE010_ENA2 _ENA2 = new RTTIE010_SrvRef.RTTIE010_ENA2();
-            RTTIE010_SrvRef.RTTIE010_ETA _ETA = new RTTIE010_SrvRef.RTTIE010_ETA();
-            RTTIE010_SrvRef.RTTIE010_ECHK _ECHK = new RTTIE010_SrvRef.RTTIE010_ECHK();
-            RTTIE010_SrvRef.RTTIE010 rttie010 = new RTTIE010_SrvRef.RTTIE010();
+            RTTIE010_SrvRef.TT010E00_EMI _EMI = new RTTIE010_SrvRef.TT010E00_EMI();
+            RTTIE010_SrvRef.TT010E00_ENA1 _ENA1 = new RTTIE010_SrvRef.TT010E00_ENA1();
+            RTTIE010_SrvRef.TT010E00_ENA2 _ENA2 = new RTTIE010_SrvRef.TT010E00_ENA2();
+            RTTIE010_SrvRef.TT010E00_ETA _ETA = new RTTIE010_SrvRef.TT010E00_ETA();
+            RTTIE010_SrvRef.TT010E00_ECHK _ECHK = new RTTIE010_SrvRef.TT010E00_ECHK();
+            RTTIE010_SrvRef.TT010E00 rttie010 = new RTTIE010_SrvRef.TT010E00();
 
-            RTTIE010_SrvRef.RTTIE010Response_SMA _SMAResponse = new RTTIE010_SrvRef.RTTIE010Response_SMA();
-            RTTIE010_SrvRef.RTTIE010Response_EMI _EMIResponse = new RTTIE010_SrvRef.RTTIE010Response_EMI();
-            RTTIE010_SrvRef.RTTIE010Response_ETA _ETAResponse = new RTTIE010_SrvRef.RTTIE010Response_ETA();
-            RTTIE010_SrvRef.RTTIE010Response_ECHK _ECHKResponse = new RTTIE010_SrvRef.RTTIE010Response_ECHK();
-            RTTIE010_SrvRef.RTTIE010Response_ENA1 _ENA1Response = new RTTIE010_SrvRef.RTTIE010Response_ENA1();
-            RTTIE010_SrvRef.RTTIE010Response_ENA2 _ENA2Response = new RTTIE010_SrvRef.RTTIE010Response_ENA2();
+            RTTIE010_SrvRef.TT010E00Response_SMA _SMAResponse = new RTTIE010_SrvRef.TT010E00Response_SMA();
+            RTTIE010_SrvRef.TT010E00Response_EMI _EMIResponse = new RTTIE010_SrvRef.TT010E00Response_EMI();
+            RTTIE010_SrvRef.TT010E00Response_ETA _ETAResponse = new RTTIE010_SrvRef.TT010E00Response_ETA();
+            RTTIE010_SrvRef.TT010E00Response_ECHK _ECHKResponse = new RTTIE010_SrvRef.TT010E00Response_ECHK();
+            RTTIE010_SrvRef.TT010E00Response_ENA1 _ENA1Response = new RTTIE010_SrvRef.TT010E00Response_ENA1();
+            RTTIE010_SrvRef.TT010E00Response_ENA2 _ENA2Response = new RTTIE010_SrvRef.TT010E00Response_ENA2();
 
-            _EMI._ENTITYMASTERINFO = new RTTIE010_SrvRef.RTTIE010_EMI_ENTITYMASTERINFO();
+            _EMI._ENTITYMASTERINFO = new RTTIE010_SrvRef.TT010E00_EMI_ENTITYMASTERINFO();
             _EMI._ENTITYMASTERINFO.ENTITYID = e.ENTITY_INFO.ENTITY_ID;
             _EMI._ENTITYMASTERINFO.FUNCTIONCODE = e.ENTITY_INFO.FUNCTION_CODE;
             _EMI._ENTITYMASTERINFO.ACCOUNTID = e.ENTITY_INFO.ACCOUNT_ID;
@@ -387,16 +393,17 @@ namespace CopRevenueGov2.Helpers
             _EMI._ENTITYMASTERINFO.BUSINESSOTHER = CopMvcUtil.GetString(e.ENTITY_INFO.OTHER);
             _EMI._ENTITYMASTERINFO.PINSWITCH = CopMvcUtil.GetString(e.ENTITY_INFO.FORCEPINCHG);
 
-            _EMI._ENTITYMASTERINFO.PINNUMBERSpecified = true;          
-            
+            _EMI._ENTITYMASTERINFO.PINNUMBERSpecified = true;
+
             _EMI._ENTITYMASTERINFO.NAICFEDERALCODESpecified = true;
             _EMI._ENTITYMASTERINFO.SICFEDERALCODESpecified = true;
             _EMI._ENTITYMASTERINFO.BUSINESSSTARTDATESpecified = true;
             _EMI._ENTITYMASTERINFO.ORGANIZATIONTYPESpecified = true;
             _EMI._ENTITYMASTERINFO.BUSINESSORIGINSpecified = true;
             _EMI._ENTITYMASTERINFO.ENTITYTYPESpecified = true;
-            
-            
+
+
+
             if (e.NAME_ADDRESS.Count > 0)
             {
                 //e.NAME_ADDRESS.Count
@@ -413,8 +420,8 @@ namespace CopRevenueGov2.Helpers
                 if (r > 0)
                 {
 
-                    _ENA1._NAMADDR1s = new RTTIE010_SrvRef.RTTIE010_ENA1_NAMADDR1[r];
-                    _ENA2._NAMADDR2s = new RTTIE010_SrvRef.RTTIE010_ENA2_NAMADDR2[r];
+                    _ENA1._NAMADDR1s = new RTTIE010_SrvRef.TT010E00_ENA1_NAMADDR1[r];
+                    _ENA2._NAMADDR2s = new RTTIE010_SrvRef.TT010E00_ENA2_NAMADDR2[r];
                 }
 
                 r = 0;
@@ -425,7 +432,7 @@ namespace CopRevenueGov2.Helpers
                         // ENA 1
 
 
-                        _ENA1._NAMADDR1s[r] = new RTTIE010_SrvRef.RTTIE010_ENA1_NAMADDR1();
+                        _ENA1._NAMADDR1s[r] = new RTTIE010_SrvRef.TT010E00_ENA1_NAMADDR1();
                         _ENA1._NAMADDR1s[r].FUNCTIONCODE = CopMvcUtil.GetString(e.NAME_ADDRESS[i].FUNCTION_CODE);
                         _ENA1._NAMADDR1s[r].ENTITYTYPE = CopMvcUtil.GetDecimal(e.NAME_ADDRESS[i].TYPE);
                         _ENA1._NAMADDR1s[r].ENTITYID = CopMvcUtil.GetString(e.NAME_ADDRESS[i].ID);
@@ -436,11 +443,11 @@ namespace CopRevenueGov2.Helpers
                         _ENA1._NAMADDR1s[r].ADDRESSTYPESpecified = true;
                         _ENA1._NAMADDR1s[r].ENTITYTYPESpecified = true;
                         _ENA1._NAMADDR1s[r].RELATIONSHIPCODESpecified = true;
-                        
+
 
                         // ENA 2
 
-                        _ENA2._NAMADDR2s[r] = new RTTIE010_SrvRef.RTTIE010_ENA2_NAMADDR2();
+                        _ENA2._NAMADDR2s[r] = new RTTIE010_SrvRef.TT010E00_ENA2_NAMADDR2();
                         _ENA2._NAMADDR2s[r].ATTENTION = CopMvcUtil.GetString(e.NAME_ADDRESS[i].ATTENTION);
                         _ENA2._NAMADDR2s[r].ADDRESSLINE1 = CopMvcUtil.GetString(e.NAME_ADDRESS[i].ADDRESS1);
                         _ENA2._NAMADDR2s[r].ADDRESSLINE2 = CopMvcUtil.GetString(e.NAME_ADDRESS[i].ADDRESS2);
@@ -459,12 +466,12 @@ namespace CopRevenueGov2.Helpers
 
                         _ENA2._NAMADDR2s[r].EMAILADDR = CopMvcUtil.GetString(e.NAME_ADDRESS[i].EMAIL);
 
-                        _ENA2._NAMADDR2s[r].TIADRSEQUENCENUMBER = CopMvcUtil.GetDecimal(e.NAME_ADDRESS[i].TRACE_NUMBER);                       
-                       
+                        _ENA2._NAMADDR2s[r].TIADRSEQUENCENUMBER = CopMvcUtil.GetDecimal(e.NAME_ADDRESS[i].TRACE_NUMBER);
+
                         _ENA2._NAMADDR2s[r].BUSINESSPHONENUMBERSpecified = true;
                         _ENA2._NAMADDR2s[r].OTHERPHONENUMBERSpecified = true;
-                       
-
+                        _ENA2._NAMADDR2s[r].BUSINESSFAXSpecified = true;
+                        _ENA2._NAMADDR2s[r].TIADRSEQUENCENUMBERSpecified = true;
 
                         r++;
                     }
@@ -475,11 +482,11 @@ namespace CopRevenueGov2.Helpers
             if (e.TAX_ACCT.Count > 0)
             {
 
-                _ETA._ENTITYTAXACCOUNTSs = new RTTIE010_SrvRef.RTTIE010_ETA_ENTITYTAXACCOUNTS[e.TAX_ACCT.Count];
+                _ETA._ENTITYTAXACCOUNTSs = new RTTIE010_SrvRef.TT010E00_ETA_ENTITYTAXACCOUNTS[e.TAX_ACCT.Count];
 
                 for (int i = 0; i < e.TAX_ACCT.Count; i++)
                 {
-                    _ETA._ENTITYTAXACCOUNTSs[i] = new RTTIE010_SrvRef.RTTIE010_ETA_ENTITYTAXACCOUNTS();
+                    _ETA._ENTITYTAXACCOUNTSs[i] = new RTTIE010_SrvRef.TT010E00_ETA_ENTITYTAXACCOUNTS();
 
                     _ETA._ENTITYTAXACCOUNTSs[i].FUNCTIONCODE = CopMvcUtil.GetString(e.TAX_ACCT[i].FUNCTION_CODE);
 
@@ -490,10 +497,10 @@ namespace CopRevenueGov2.Helpers
 
                     _ETA._ENTITYTAXACCOUNTSs[i].WAGMONTHLYGROSS = CopMvcUtil.GetString(e.TAX_ACCT[i].WAGE_MONTHLY_GROSS);
 
-                    _ETA._ENTITYTAXACCOUNTSs[i].BPTNEWAPPLICATION = new RTTIE010_SrvRef.RTTIE010_ETA_ENTITYTAXACCOUNTSBPTNEWAPPLICATION();
+                    _ETA._ENTITYTAXACCOUNTSs[i].BPTNEWAPPLICATION = new RTTIE010_SrvRef.TT010E00_ETA_ENTITYTAXACCOUNTSBPTNEWAPPLICATION();
 
 
-                    if (e.TAX_ACCT[i].UOL_BRT != null )
+                    if (e.TAX_ACCT[i].UOL_BRT != null)
                     {
                         if (e.TAX_ACCT[i].UOL_BRT.Value != null)
                         {
@@ -516,17 +523,17 @@ namespace CopRevenueGov2.Helpers
                     else
                         _ETA._ENTITYTAXACCOUNTSs[i].BPTNEWAPPLICATION.BPTNASTATUS = CopMvcUtil.GetString(e.TAX_ACCT[i].UOL_BRT);
 
-                        _ETA._ENTITYTAXACCOUNTSs[i].PRKID = CopMvcUtil.GetString(e.TAX_ACCT[i].PRK_ID);
-                    
+                    _ETA._ENTITYTAXACCOUNTSs[i].PRKID = CopMvcUtil.GetString(e.TAX_ACCT[i].PRK_ID);
+
 
                     _ETA._ENTITYTAXACCOUNTSs[i].ACCOUNTSpecified = true;
                     _ETA._ENTITYTAXACCOUNTSs[i].STARTDATESpecified = true;
-                    
+
                 }
             }
 
 
-            _ECHK._ECHECK = new RTTIE010_SrvRef.RTTIE010_ECHK_ECHECK();
+            _ECHK._ECHECK = new RTTIE010_SrvRef.TT010E00_ECHK_ECHECK();
 
             _ECHK._ECHECK.FUNCTIONCODE = CopMvcUtil.GetString(e.ECHECK.FUNCTION_CODE);
             _ECHK._ECHECK.TRANSITROUTINGNUMBER = CopMvcUtil.GetString(e.ECHECK.ROUTING_NUMBER);
@@ -540,7 +547,7 @@ namespace CopRevenueGov2.Helpers
             string ena2 = CopMvcUtil.GetXMlFromObject(_ENA2);
 
 
-            _SMAResponse = rttie010.CallRTTIE010 // calling the  service for Update/Registration...
+            _SMAResponse = rttie010.CallTT010E00 // calling the  service for Update/Registration...
                                   (_EMI, _ETA, _ECHK, _ENA1, _ENA2, out _EMIResponse, out _ETAResponse,
                                     out _ECHKResponse,
                                     out _ENA1Response,

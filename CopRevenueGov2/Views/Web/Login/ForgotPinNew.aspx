@@ -32,12 +32,12 @@
     function DisplayForgotPin() {
         // $(AppError_Fp).text('');
         parent.sNew = false;
-        
+
         $('#divForgotPinNew').css("display", "block");
         $('#divForgotPin').css("display", "block");
         $('#AppHeaderForgotPin').html(txtHeader + '<span> | Forgot PIN</span>');
         $('#divPayCoupon').css("display", "none");
-        
+
         ClearForgotPinScreen();
         LoadForgotPinError();
         $('#txtFpAcctID').focus();
@@ -54,14 +54,14 @@
         //    } 	//if
         //} 	//for
         //sanghamitra
-       //manoranjan
+        //manoranjan
         $('#txtFpAcctID').val('');
         $('#txtFpTaxID').val('');
-      
+
         //$('#txtFpTaxID').attr('class', 'inpNormal');
 
     } 	//ClearForgotPinScreen
-   
+
 
     function LoadForgotPinError() {
         var i = 0;
@@ -93,7 +93,7 @@
             }
         });
     });
-   
+
     function ValidateForgotPin() {
         $(AppError_Fp).text('');
         var errforgot = ispSetInputErr(arrForgotPinErr);
@@ -141,8 +141,8 @@
         });
 
     });
-    function SubmitForgotPin() {      
-     
+    function SubmitForgotPin() {
+
         //if (txtFpTaxID.value == '') {
         //    txtFpTaxID.value = txtFpAcctID.value;
         //} 	//if
@@ -156,8 +156,34 @@
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtFpAcctID').val(), "ENTITY_INFO ENTITY_ID", '', 0);
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtFpTaxID').val(), "ENTITY_INFO ACCOUNT_ID", '', 0);
 
-            ispCallXMLForm(parent.$g.xmlAccount, parent.$g.xmlAccount, "AccountInfo", "");
+            var ReqXML = parent.$g.xmlAccount;
 
+            $.ajax({
+                type: 'POST',
+                url: '../Returns/Log',
+                data: '{ "OriginationFom" : "ForgotPin","ServiceName" : "TT010E00","RequestXML" : "' + btoa(ReqXML.toString()) + '"}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (msg) {
+
+                }
+            });
+
+            ispCallXMLForm(parent.$g.xmlAccount, dobj, "AccountInfo", "");
+            parent.$g.xmlAccount.loadXML(dobj.xml);
+
+            var ResXML = parent.$g.xmlAccount;
+
+            $.ajax({
+                type: 'POST',
+                url: '../Returns/Log',
+                data: '{ "OriginationFom" : "ForgotPin","ServiceName" : "TT010E00","ResponseXML" : "' + btoa(ResXML.toString()) + '"}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (msg) {
+
+                }
+            });
 
             if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ERROR_INFO MESSAGE', "", 0) == "") {
                 if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO PIN', "", 0) == "0") {
@@ -204,9 +230,9 @@
 <body>
 <div class="container-fluid no-padding">
     <div id="divForgotPinNew" class="block3" style="display: none;">
-        <div class="container-fluid">
+        <div class="smaller-container">
             <div class="row">
-                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3" name="divForgotPin" style="display: none;" id="divForgotPin">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2" name="divForgotPin" style="display: none;" id="divForgotPin">
                     <div class="blue_base_box">
                         <h2 id="AppHeaderForgotPin"></h2>
 

@@ -21,11 +21,11 @@
 
     function DisplayThankYou(sLayer) {
 
-       
+
         $('#ForgotPinThankYou').css('display', 'none');
         $('#ForgotPinThankYou').css('display', 'none');
         if (sLayer == 'APPLYPIN') {
-            
+
             $('#divThankYou').css('display', 'block');
             $('#ApplyPinThankYou').css('display', 'block');
         } else {
@@ -35,16 +35,25 @@
         this.focus()
         $('#AppHeaderThankyou').html(txtHeader + '<Span class=hdrMedium>|thank you</Spant>');
         $('#AppHeaderThankyouForgotPin').html(txtHeader + '<Span class=hdrMedium>|thank you</Span>');
+        //ResolveIframeLoadHeight();
     }		//DisplayApplyPin
 
 
     function DoThankYou() {
         $('#ApplyPinThankYou').css('display', 'none')
-       
+
         $('#ForgotPinThankYou').css('display', 'none')
-        
+
         $(parent.document).find('#mnuLogLogout').first().trigger('click');
     }		//if
+
+    function ResolveIframeLoadHeight() {
+        //----------Manoranjan------------------------------
+        var iframe = window.parent.document.getElementById('ifrmDocwin');
+        var container = $('#divThankYou').css("height");
+        // iframe.style.height = container;
+        //----------------------------------------
+    }
 
 </script>
 
@@ -107,7 +116,7 @@
                             <div class="contentsection">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <h4 id="hdrThankYou" name="hdrThankYou">Your PIN is now being retrieved. Shortly, you will receive via
+                                        <h4 id="h1" name="hdrThankYou">Your PIN is now being retrieved. Shortly, you will receive via
 				e-mail the Philadelphia Revenue Personal Identification Number (PIN) for this tax entity.</h4>
                                     </div>
                                 </div>

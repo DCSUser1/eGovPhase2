@@ -10,7 +10,7 @@
         parent.sNew = false;
         $('#divPinApply').css("display", "block");
         $('#LogPinApply').css("display", "block");
-       
+
         AppHeaderPinApply.innerHTML = txtHeader + '<Span class=hdrMedium> | PIN apply</Span>';
         //added by ajoy
         loadXmlFiles();
@@ -24,7 +24,7 @@
 
 
     function loadXmlFiles() {
-       
+
         parent.$g.loadXmlSync('XML/email', parent.load_oEmail);
     }
 
@@ -36,7 +36,7 @@
 
     function ClearPinApplyScreen() {
 
-       
+
     }		//ClearPinApplyScreen
     $(function () {
         $('#txtPaAcctID').keypress(function (evt) {
@@ -53,7 +53,7 @@
             }
         });
     });//by manoranjan  
-  
+
     function LoadPinApplyError() {
         // modified by manoranjan: 02-Mar-2016
         var i = 0;
@@ -67,11 +67,11 @@
                 '($(\'#txtPaAcctID\').val().length != 12)', 'Invalid SSN/EIN number']
 
         //Tax ID
-        
+
         arrPinApplyErr[i++] = [txtPaTaxID, '$(\'#txtPaTaxID\').val()== ""', 'Enter Tax Account number']
         arrPinApplyErr[i++] = [txtPaTaxID, 'isNaN($(\'#txtPaTaxID\').val())', 'Tax Account number not numeric'];
         arrPinApplyErr[i++] = [txtPaTaxID, '$(\'#txtPaTaxID\').val().length > 0 && ' +
-                '$(\'#txtPaTaxID\').val().length < 7', 'Invalid Tax Account number'];      
+                '$(\'#txtPaTaxID\').val().length < 7', 'Invalid Tax Account number'];
 
         //Email
         arrPinApplyErr[i++] = [txtPaEmail, '$(\'#txtPaEmail\').val() == ""', 'Email Address required'];
@@ -79,7 +79,7 @@
                 '($(\'#txtPaEmail\').val().indexOf("@") == -1 || $(\'#txtPaEmail\').val().indexOf(".") == -1)',
                 'Email Address invalid format'];
 
-        
+
     }		//LoadPinApplyError
 
     var dobj = parent.$g.getXmlDocObj();
@@ -98,7 +98,7 @@
                 $("#btnFpApply").click();
             }
 
-        }); 
+        });
         $("#txtPaTaxID").keyup(function (e) {
             if ((e.which == 13) || (e.keyCode == 13)) {
                 SubmitPinApply();
@@ -124,7 +124,7 @@
     });
 
     function SubmitPinApply() {
-
+        debugger;
         ValidatePinApply();
         var app = $(AppError_Pa).text();
 
@@ -139,8 +139,34 @@
             }		//if
             parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $('#txtPaEmail').val(), "NAME_ADDRESS EMAIL", '', 0)
 
+            var ReqXML = parent.$g.xmlAccount;
+
+            $.ajax({
+                type: 'POST',
+                url: '../Returns/Log',
+                data: '{ "OriginationFom" : "PinApply","ServiceName" : "TT010E00","RequestXML" : "' + btoa(ReqXML.toString()) + '"}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (msg) {
+
+                }
+            });
+
             ispCallXMLForm(parent.$g.xmlAccount, dobj, "AccountInfo", "", true);
             parent.$g.xmlAccount.loadXML(dobj.xml);
+
+            var ResXML = parent.$g.xmlAccount;
+
+            $.ajax({
+                type: 'POST',
+                url: '../Returns/Log',
+                data: '{ "OriginationFom" : "PinApply","ServiceName" : "TT010E00","ResponseXML" : "' + btoa(ResXML.toString()) + '"}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (msg) {
+
+                }
+            });
 
             if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ERROR_INFO MESSAGE', "", 0) == "") {
                 sTemp = CreateEmail();
@@ -171,9 +197,9 @@
 
 <div class="container-fluid no-padding">
     <div id="divPinApply" class="" style="display: none;">
-        <div class="container-fluid">
+        <div class="smaller-container">
             <div class="row row-no-margin">
-                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3" name="LogPinApply" style="display: none;" id="LogPinApply">
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2" name="LogPinApply" style="display: none;" id="LogPinApply">
                     <div class="blue_base_box">
                         <h2 id="AppHeaderPinApply"></h2>
 

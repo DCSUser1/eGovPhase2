@@ -12,7 +12,7 @@
 
 <script id="clientEventHandlersJS" language="javascript" type="text/javascript">
     var arrAcc = new Array();
-    var arrControls = new Array('chkBPT', 'chkNPT', 'chkWage', 'chkTobacco','chkSchool', 'chkEarn', 'chkLiquor', 'chkUO',
+    var arrControls = new Array('chkBPT', 'chkNPT', 'chkWage', 'chkTobacco', 'chkSchool', 'chkEarn', 'chkLiquor', 'chkUO',
              'chkParking', 'chkHotel', 'chkAmusement', 'chkCoin', 'chkRental');
     var errTaxes = '', initTaxes = false;
 
@@ -32,16 +32,17 @@
         }		//for
     }		//ClearTaxes
 
-    function DisplayTaxes() {       
-       
+
+    function DisplayTaxes() {
+        parent.ScrollTop(1);
         var ddOrgType = document.getElementById('ddOrgType');
         var ddNAIC1 = document.getElementById('ddNAIC1');
         var chkNPT = document.getElementById('chkNPT');
         var txtNPT = document.getElementById('txtNPT');
-        var txtBusStartDate = document.getElementById('txtBusStartDate');      
+        var txtBusStartDate = document.getElementById('txtBusStartDate');
         $(AppError_tax).text('');
-        $('#divAcctTaxes').css('display', 'block');       
-       
+        $('#divAcctTaxes').css('display', 'block');
+
         //Turn off Individual Taxes for all but below
         //60-Individual, 70-Estate, 161-LLC Individual
         $('#divBusinessTaxes').css('display', 'none');
@@ -53,7 +54,7 @@
         $('#divBPTQuestion').css('display', 'none');
         $('#divBPTForm').css('display', 'none');
         $('#chkNPT').removeAttr('disabled');
-        $('#txtNPT').removeAttr('disabled');      
+        $('#txtNPT').removeAttr('disabled');
 
         if ($("#ddOrgType option:selected").attr('CODE') == '999') {		//No org type selected
             $('#divWarningMsgs').css('display', 'block');
@@ -77,33 +78,42 @@
                 }
                 else {		//Not Non-Business
                     $('#divBusinessTaxes').css('display', 'block');
-                   
+
                     $('#divBusinessMsgs').css('display', 'block');
-                    
+
                     $('#divIndividualTaxes').css('display', 'block');
-                   
+
                     $('#divIndividualMsgs').css('display', 'none');
                     if (parent.sNew == true) {		//New Registration
-                        if ($("#ddOrgType option:selected").attr('CODE') == '60' ||
-                                $("#ddOrgType option:selected").attr('CODE') == '161') {		//60-Individual, 161-LLC Individual
+                        //------------Old Logic--------------
+                        //if ($("#ddOrgType option:selected").attr('CODE') == '60' ||
+                        //        $("#ddOrgType option:selected").attr('CODE') == '161') {		//60-Individual, 161-LLC Individual
+                        //    chkNPT.checked = true;
+                        //    $('#chkNPT').attr('disabled', 'true');
+                        //    $('#txtNPT').css('visibility', 'visible');
+                        //    $('#txtNPT').val($('#txtBusStartDate').val());
+                        //    // txtNPT.focus()
+                        //}		//if
+                        //------------End----------------------
+                        if ($("#ddOrgType option:selected").attr('CODE') == '60') {		//60-Individual
                             chkNPT.checked = true;
                             $('#chkNPT').attr('disabled', 'true');
                             $('#txtNPT').css('visibility', 'visible');
                             $('#txtNPT').val($('#txtBusStartDate').val());
                             // txtNPT.focus()
-                        }		//if
+                        }
                     }		//if
                 }		//if
             }		//if
         }
         else {		//EIN
-            
+
             $('#divBusinessTaxes').css('display', 'block');
-           
+
             $('#divBusinessMsgs').css('display', 'block');
-            
+
             $('#divIndividualTaxes').css('display', 'none');
-           
+
             $('#divIndividualMsgs').css('display', 'none');
             //EGOVWEB-113 - disable NPT for Corporations (New and Existing) Moved code out new section below
             $('#chkNPT').removeAttr('disabled');
@@ -114,16 +124,66 @@
             //    txtNPT.value = '';
             //    $('#txtNPT').css('visibility', 'hidden');
             //}	//if
+            debugger;
+            var count = GetSingleNodeCount(parent.$g.xmlAccount, 'TAX_ACCT', '');
+            var ac = '';
+            for (i = 0; i < count; i++) {
+
+                ac = $(parent.$g.xmlAccount.xml).find('ACCOUNT').eq(i).text();
+                if (ac != '0') {
+
+                    if (ac == '3') {
+                        chkNPT.checked = true;
+                        $('#chkNPT').attr('disabled', 'true');
+                        $('#txtNPT').css('visibility', 'visible');
+                        $('#txtNPT').val($('#txtBusStartDate').val());
+                        $('#txtNPT').attr('disabled', 'true');
+                    }
+                }
+            }
+
             if (parent.sNew == true) {		//New Registration
-                if ($("#ddOrgType option:selected").attr('CODE') == '161') {		//161-LLC Individual
+
+                //--------------Old Logic------------
+                //if ($("#ddOrgType option:selected").attr('CODE') == '161') {		//161-LLC Individual
+                //    if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlNAIC, 'L1', 'DESC', ddNAIC1.selectedIndex) != 'NonBusiness') {		//Not Non-Business
+                //        chkNPT.checked = true;
+                //        $('#chkNPT').attr('disabled', 'true');
+                //        $('#txtNPT').css('visibility', 'visible');
+                //        $('#txtNPT').val($('#txtBusStartDate').val());
+
+                //    }		//if
+                //}		//if
+                //---------------end----------------
+
+                if ($("#ddOrgType option:selected").attr('CODE') == '70') {		//70-Estate
                     if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlNAIC, 'L1', 'DESC', ddNAIC1.selectedIndex) != 'NonBusiness') {		//Not Non-Business
                         chkNPT.checked = true;
                         $('#chkNPT').attr('disabled', 'true');
                         $('#txtNPT').css('visibility', 'visible');
                         $('#txtNPT').val($('#txtBusStartDate').val());
-                        
+
                     }		//if
                 }		//if
+
+                else if ($("#ddOrgType option:selected").attr('CODE') == '162') {		//162 LLC Partnership
+                    if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlNAIC, 'L1', 'DESC', ddNAIC1.selectedIndex) != 'NonBusiness') {		//Not Non-Business
+                        chkNPT.checked = true;
+                        $('#txtNPT').css('visibility', 'visible');
+                        $('#txtNPT').val($('#txtBusStartDate').val());
+
+                    }		//if
+                }
+
+                else if ($("#ddOrgType option:selected").attr('CODE') == '5') {		//5 Joint Venture
+                    if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlNAIC, 'L1', 'DESC', ddNAIC1.selectedIndex) != 'NonBusiness') {		//Not Non-Business
+                        chkNPT.checked = true;
+                        $('#txtNPT').css('visibility', 'visible');
+                        $('#txtNPT').val($('#txtBusStartDate').val());
+
+                    }		//if
+                }
+                ValidateAcc();
             }		//if
         }		//if
 
@@ -134,9 +194,9 @@
 
         }		//if
 
-       
+
         parent.gsInstructionItem = '#TaxType';
-       
+
 
         CurrentLayer = 'AcctTaxes';
         if (errTaxes != '') {
@@ -154,7 +214,7 @@
         }		//if
 
 
-       
+
 
         if ($('#txtBusStartDate').val() == '') {
             $('#divAcctTaxes').css('display', 'none');
@@ -164,7 +224,7 @@
 
         //Temporary Delete
         $('#divBusinessMsgs').css('display', 'none');
-       
+
         $('#divGeneralMsgs').css('display', 'none');
     }		//DisplayTaxes
 
@@ -182,50 +242,110 @@
                 $("#ddOrgType option:selected").attr('CODE') == '163') {			//140-Corp or 163-LLC Corporation
             return
         }		//if
+        //-------------------Old Logic-----------------
+        //if ($("#ddOrgType option:selected").attr('CODE') == '11' ||
+        //       $("#ddOrgType option:selected").attr('CODE') == '60' ||
+        //       $("#ddOrgType option:selected").attr('CODE') == '161' ||
+        //        $("#ddOrgType option:selected").attr('CODE') == '162') {		//11-Partnership, 60-Individual, 161-LLC Individual or 162-LLC Partnership
+        //    if (chkBPT.checked) {		//BPT Checked
+        //        chkNPT.checked = true;
+        //        $('#chkNPT').attr('disabled', 'true');
+        //        if (txtNPT.value == '') {
+        //            txtNPT.value = txtBPT.value;
+        //        }		//if
+        //        $('#txtNPT').attr('disabled', 'true');
+        //        $('#txtNPT').css('visibility', 'visible');
 
+        //    } else if (!chkBPT.checked) {
+        //        if ($("#ddOrgType option:selected").attr('CODE') == '60' ||
+        //              $("#ddOrgType option:selected").attr('CODE') == '161') {		//60-Individual, 161-LLC Individual
+        //            $('#txtNPT').removeAttr('disabled');
+        //            if ($('#txtNPT').val() == '') {
+        //                $('#txtNPT').val($('#txtBusStartDate').val());
+        //            }	//if
+        //        } else {
+        //            chkNPT.checked = false;
+        //            $('#chkNPT').removeAttr('disabled');
+        //            $('#txtNPT').removeAttr('disabled');;
+        //            txtNPT.value = '';
+        //            $('#txtNPT').css('visibility', 'hidden');
+        //            ValidateAcc();
+        //        }		//if
+        //    }//if
+        //} //if
+        //------------------end--------------------
+
+        debugger;
         if ($("#ddOrgType option:selected").attr('CODE') == '11' ||
                $("#ddOrgType option:selected").attr('CODE') == '60' ||
                $("#ddOrgType option:selected").attr('CODE') == '161' ||
                 $("#ddOrgType option:selected").attr('CODE') == '162') {		//11-Partnership, 60-Individual, 161-LLC Individual or 162-LLC Partnership
-            if (chkBPT.checked) {		//BPT Checked
-                chkNPT.checked = true;
-                $('#chkNPT').attr('disabled', 'true');
-                if (txtNPT.value == '') {
-                    txtNPT.value = txtBPT.value;
-                }		//if
-                $('#txtNPT').attr('disabled', 'true');
-                $('#txtNPT').css('visibility', 'visible');
-               
-            } else if (!chkBPT.checked) {
-                if ($("#ddOrgType option:selected").attr('CODE') == '60' ||
-                      $("#ddOrgType option:selected").attr('CODE') == '161') {		//60-Individual, 161-LLC Individual
+
+            if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO TYPE', '', 0) == '2' && $("#ddOrgType option:selected").attr('CODE') == '161') {
+                if (chkBPT.checked) {		//BPT Checked
+                    chkNPT.checked = true;
+                    $('#chkNPT').attr('disabled', 'true');
+                    if (txtNPT.value == '') {
+                        txtNPT.value = txtBPT.value;
+                    }		//if
+                    $('#txtNPT').attr('disabled', 'true');
+                    $('#txtNPT').css('visibility', 'visible');
+
+                }
+                else if (!chkBPT.checked) {
                     $('#txtNPT').removeAttr('disabled');
-                    if ($('#txtNPT').val() == '') {
-                        $('#txtNPT').val($('#txtBusStartDate').val());
-                    }	//if
-                } else {
+                    $('#txtNPT').val('');
                     chkNPT.checked = false;
-                    $('#chkNPT').removeAttr('disabled');
-                    $('#txtNPT').removeAttr('disabled');;
-                    txtNPT.value = '';
-                    $('#txtNPT').css('visibility', 'hidden');
-                    ValidateAcc();
-                }		//if
-            }//if
+                    //if
+                    //if
+                }//i
+            }
+            else if (parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ENTITY_INFO TYPE', '', 0) == '1' && $("#ddOrgType option:selected").attr('CODE') == '11') {
+                if (chkBPT.checked) {		//BPT Checked
+                    chkNPT.checked = true;
+                    $('#chkNPT').attr('disabled', 'true');
+                    if (txtNPT.value == '') {
+                        txtNPT.value = txtBPT.value;
+                    }		//if
+                    $('#txtNPT').attr('disabled', 'true');
+                    $('#txtNPT').css('visibility', 'visible');
+
+                }
+                else if (!chkBPT.checked) {
+                    $('#txtNPT').removeAttr('disabled');
+                    $('#txtNPT').val('');
+                    chkNPT.checked = false;
+                    //if
+                    //if
+                }//
+            }
+
+            ValidateAcc();
+
+
         } //if
+
     }//BPTClick
 
     function BPTChange() {
         var ddOrgType = document.getElementById('ddOrgType');
 
         BPTExemptDisplay();
-        if ($("#ddOrgType option:selected").attr('CODE') == '11' ||
-                $("#ddOrgType option:selected").attr('CODE') == '60' ||
-                $("#ddOrgType option:selected").attr('CODE') == '161' ||
-               $("#ddOrgType option:selected").attr('CODE') == '162') {//11-Partnership, 60-Individual, 161-LLC Individual or 162-LLC Partnership
+        //--------Old Logic---------------
+        //if ($("#ddOrgType option:selected").attr('CODE') == '11' ||
+        //        $("#ddOrgType option:selected").attr('CODE') == '60' ||
+        //        $("#ddOrgType option:selected").attr('CODE') == '161' ||
+        //       $("#ddOrgType option:selected").attr('CODE') == '162') {//11-Partnership, 60-Individual, 161-LLC Individual or 162-LLC Partnership
+        //    $('#txtNPT').val($('#txtBPT').val());
+        //    $('#txtNPT').attr('disabled', 'true');
+
+        //}		//if
+        //-----------end--------------------
+
+        if ($("#ddOrgType option:selected").attr('CODE') == '161') {//11-Partnership, 60-Individual, 161-LLC Individual or 162-LLC Partnership
             $('#txtNPT').val($('#txtBPT').val());
             $('#txtNPT').attr('disabled', 'true');
-           
+
         }		//if
     }		//BPTChange
 
@@ -262,7 +382,7 @@
 
         txt1 = "Tax start date can not be less than the business start date";
         txt2 = "Tax start date can not be greater than 1 month from today's date";
-      
+
         arrAcc[i++] = [txtBPT, 'chkBPT.checked==true &&  $(\'#txtBPT\').val()==""', 'BPT start date required']
         arrAcc[i++] = [txtBPT, 'chkBPT.checked==true && ' +
                 'new Date( $(\'#txtBPT\').val()) < new Date($(\'#txtBusStartDate\').val())', txt1]
@@ -270,7 +390,7 @@
                 '(new Date($(\'#txtBPT\').val()).valueOf()) > ' +
                 '(new Date((new Date().getMonth() + 2).toString() + "/" + new Date().getDate().toString() ' +
                 ' + "/" + (new Date().getFullYear()).toString()).valueOf()) ', txt2]
-     
+
         arrAcc[i++] = [txtNPT, 'chkNPT.checked==true && $(\'#txtNPT\').val()==""', 'NPT start date required']
         arrAcc[i++] = [txtNPT, 'chkNPT.checked==true && ' +
                 'new Date($(\'#txtNPT\').val()) < new Date($(\'#txtBusStartDate\').val())', txt1]
@@ -278,7 +398,7 @@
                 '(new Date($(\'#txtNPT\').val()).valueOf()) > ' +
                 '(new Date((new Date().getMonth() + 2).toString() + "/" + new Date().getDate().toString() ' +
                 ' + "/" + (new Date().getFullYear()).toString()).valueOf()) ', txt2]
-       
+
         arrAcc[i++] = [txtWage, 'chkWage.checked==true && $(\'#txtWage\').val()==""', 'Wage start date required']
         arrAcc[i++] = [txtWage, 'chkWage.checked==true && ' +
                 'new Date($(\'#txtWage\').val()) < new Date($(\'#txtBusStartDate\').val())', txt1]
@@ -286,9 +406,9 @@
                 '(new Date($(\'#txtWage\').val()).valueOf()) > ' +
                 '(new Date((new Date().getMonth() + 2).toString() + "/" + new Date().getDate().toString() ' +
                 ' + "/" + (new Date().getFullYear()).toString()).valueOf()) ', txt2]
-        
-        arrAcc[i++] = [atrWage, 'chkWage.checked==true && $(\'#atrWage\').val()==""', 'Monthly gross required']       
-        arrAcc[i++] = [atrWage, 'chkWage.checked==true && RemoveCurrency($(\'#atrWage\').val())==true', 'Monthly gross not numeric or > parent.$999,999']       
+
+        arrAcc[i++] = [atrWage, 'chkWage.checked==true && $(\'#atrWage\').val()==""', 'Monthly gross required']
+        arrAcc[i++] = [atrWage, 'chkWage.checked==true && RemoveCurrency($(\'#atrWage\').val())==true', 'Monthly gross not numeric or > parent.$999,999']
         arrAcc[i++] = [txtLiquor, 'chkLiquor.checked==true && $(\'#txtLiquor\').val()==""', 'Liquor start date required']
         arrAcc[i++] = [txtLiquor, 'chkLiquor.checked==true && ' +
                 'new Date($(\'#txtLiquor\').val()) < new Date($(\'#txtBusStartDate\').val())', txt1]
@@ -296,7 +416,7 @@
                 '(new Date($(\'#txtLiquor\').val()).valueOf()) > ' +
                 '(new Date((new Date().getMonth() + 2).toString() + "/" + new Date().getDate().toString() ' +
                 ' + "/" + (new Date().getFullYear()).toString()).valueOf()) ', txt2]
-       
+
         arrAcc[i++] = [txtHotel, 'chkHotel.checked==true && $(\'#txtHotel\').val()==""', 'Hotel start date required']
         arrAcc[i++] = [txtHotel, 'chkHotel.checked==true && ' +
                 'new Date($(\'#txtHotel\').val()) < new Date($(\'#txtBusStartDate\').val())', txt1]
@@ -304,7 +424,7 @@
                 '(new Date($(\'#txtHotel\').val()).valueOf()) > ' +
                 '(new Date((new Date().getMonth() + 2).toString() + "/" + new Date().getDate().toString() ' +
                 ' + "/" + (new Date().getFullYear()).toString()).valueOf()) ', txt2]
-       
+
         arrAcc[i++] = [txtAmusement, 'chkAmusement.checked==true && $(\'#txtAmusement\').val()==""', 'Amusement start date required']
         arrAcc[i++] = [txtAmusement, 'chkAmusement.checked==true && ' +
                 'new Date($(\'#txtAmusement\').val()) < new Date($(\'#txtBusStartDate\').val())', txt1]
@@ -312,7 +432,7 @@
                 '(new Date($(\'#txtAmusement\').val()).valueOf()) > ' +
                 '(new Date((new Date().getMonth() + 2).toString() + "/" + new Date().getDate().toString() ' +
                 ' + "/" + (new Date().getFullYear()).toString()).valueOf()) ', txt2]
-      
+
         arrAcc[i++] = [txtRental, 'chkRental.checked==true && $(\'#txtRental\').val()==""', 'Vehicle Rental start date required']
         arrAcc[i++] = [txtRental, 'chkRental.checked==true && ' +
                 'new Date($(\'#txtRental\').val()) < new Date($(\'#txtBusStartDate\').val())', txt1]
@@ -320,7 +440,7 @@
                 '(new Date($(\'#txtRental\').val()).valueOf()) > ' +
                 '(new Date((new Date().getMonth() + 2).toString() + "/" + new Date().getDate().toString() ' +
                 ' + "/" + (new Date().getFullYear()).toString()).valueOf()) ', txt2]
-      
+
         arrAcc[i++] = [txtTobacco, 'chkTobacco.checked==true && $(\'#txtTobacco\').val()==""', 'Tobacco start date required']
         arrAcc[i++] = [txtTobacco, 'chkTobacco.checked==true && ' +
                 'new Date($(\'#txtTobacco\').val()) < new Date($(\'#txtBusStartDate\').val())', txt1]
@@ -328,7 +448,7 @@
                 '(new Date($(\'#txtTobacco\').val()).valueOf()) > ' +
                 '(new Date((new Date().getMonth() + 2).toString() + "/" + new Date().getDate().toString() ' +
                 ' + "/" + (new Date().getFullYear()).toString()).valueOf()) ', txt2]
-       
+
         arrAcc[i++] = [txtUO, 'chkUO.checked==true && $(\'#txtUO\').val()==""', 'Use/Occupancy start date required']
         arrAcc[i++] = [txtUO, 'chkUO.checked==true && ' +
                 'new Date($(\'#txtUO\').val()) < new Date($(\'#txtBusStartDate\').val())', txt1]
@@ -336,10 +456,10 @@
                 '(new Date($(\'#txtUO\').val()).valueOf()) > ' +
                 '(new Date((new Date().getMonth() + 2).toString() + "/" + new Date().getDate().toString() ' +
                 ' + "/" + (new Date().getFullYear()).toString()).valueOf()) ', txt2]
-        
+
         arrAcc[i++] = [atrUO, 'chkUO.checked==true && $(\'#atrUO\').val()==""', 'BRT number required']
         arrAcc[i++] = [atrUO, 'chkUO.checked==true && isNaN(parseInt($(\'#atrUO\').val()))', 'BRT number not numeric']
-       
+
         arrAcc[i++] = [txtEarn, 'chkEarn.checked==true && $(\'#txtEarn\').val()==""', 'Earnings start date required']
         arrAcc[i++] = [txtEarn, 'chkEarn.checked==true && ' +
                 'new Date($(\'#txtEarn\').val()) < new Date($(\'#txtBusStartDate\').val())', txt1]
@@ -347,7 +467,7 @@
                 '(new Date($(\'#txtEarn\').val()).valueOf()) > ' +
                 '(new Date((new Date().getMonth() + 2).toString() + "/" + new Date().getDate().toString() ' +
                 ' + "/" + (new Date().getFullYear()).toString()).valueOf()) ', txt2]
-       
+
         arrAcc[i++] = [txtSchool, 'chkSchool.checked==true && $(\'#txtSchool\').val()==""', 'School start date required']
         arrAcc[i++] = [txtSchool, 'chkSchool.checked==true && ' +
                 'new Date($(\'#txtSchool\').val()) < new Date($(\'#txtBusStartDate\').val())', txt1]
@@ -356,7 +476,7 @@
                 '(new Date((new Date().getMonth() + 2).toString() + "/" + new Date().getDate().toString() ' +
                 ' + "/" + (new Date().getFullYear()).toString()).valueOf()) ', txt2]
 
-     
+
         //BPT Exempt Forms
         var sCheckThis = 'chkBPT.checked == true && new Date($(\'#txtBPT\').val()) >= new Date("1/1/2012") && new Date($(\'#txtBPT\').val()) <= new Date("12/31/2012")'
         arrAcc[i++] = [radBptQ1Yes, sCheckThis + ' && radBptQ1Yes.checked==false && radBptQ1No.checked==false', 'Applying for BPT exemption question 1 must be answered']
@@ -377,9 +497,9 @@
     }		//LoadAccError
 
 
-    function RemoveCurrency(lValue) {       
+    function RemoveCurrency(lValue) {
         var lTemp = lValue
-     
+
         lTemp = lTemp.replace('$', '')
         lTemp = lTemp.replace(',', '')
         lTemp = lTemp.replace(')', '')
@@ -401,19 +521,19 @@
 
 
     function PopulateAccounts() {
-       
+
         var chkLiquor = document.getElementById('chkLiquor');
         var lblLiquor = document.getElementById('lblLiquor');
         var atrWage = document.getElementById('atrWage');
         var atrUO = document.getElementById('atrUO');
-        var atrParking = document.getElementById('atrParking');        
+        var atrParking = document.getElementById('atrParking');
 
         var txtObj, chkObj, chkName, EntityStartDate;
-        
+
         TotalAccounts = 0
         debugger;
         iCount = parent.$x.ispXmlGetRecCount(parent.$g.xmlAccount, 'TAX_ACCT', '')
-        
+
         for (i = 0; i < iCount; i++) {
             sCode = parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'ACCOUNT', '', i)
             if (sCode != '0') {
@@ -439,7 +559,7 @@
                                 break
                             case '24': 	//BPT
                                 BPTExemptPopulateForm(parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'UOL_BRT', '', 0));
-                               
+
                                 break;
                             case '84':
                                 atrUO.value = parent.$x.ispXmlGetFieldVal(parent.$g.xmlAccount, 'UOL_BRT', '', i);
@@ -459,6 +579,14 @@
             $('#chkUO').attr('disabled', 'true');// = true;
 
         }	//if
+
+        if ($("#chkUO").prop('checked') == true) {
+
+            $('#chkUO').attr('disabled', 'true');// = true;
+            $("#chkUO").removeClass("form-control input-sm");
+
+        }	//if
+
         if (chkLiquor.checked == false) {
             $('#chkLiquor').attr('disabled', 'true');// = true;
             lblLiquor.value = 'To add this tax type, you must contact the Law Department.';
@@ -481,9 +609,9 @@
     }
     function ClearAccounts() {
 
-        
+
         //suman ------
-        
+
         var xmlTemp = parent.$g.getXmlDocObj();
         xmlTemp.xml = parent.$x.ispXmlGetRecordXml(parent.$g.xmlTemplate, "TAX_ACCT", 0);
         //-----------
@@ -492,12 +620,12 @@
         //for (j = 0; j < nodecount; j++) {
         //    parent.$x.ispXmlReplaceNode(parent.$g.xmlAccount, "TAX_ACCT", j, xmlTemp, "TAX_ACCT", 0)
         //}
-        
+
         //for
         TotalAccounts = 0;
         var taxcount = 0;
-        
-       
+
+
         taxcount = GetSingleNodeCount(parent.$g.xmlAccount, 'TAX_ACCT', '');
         var acc = '';
         for (i = 0; i < taxcount; i++) {
@@ -564,7 +692,8 @@
         var atrUO = document.getElementById('atrUO');
         var atrParking = document.getElementById('atrParking');
 
-       
+        var Count = parent.$x.ispXmlGetRecCount(parent.$g.xmlAccount, 'TAX_ACCT', '');
+
         var xmlTemp = parent.$g.getXmlDocObj();
 
         ClearAccounts();
@@ -588,16 +717,16 @@
         debugger;
         for (j = 0; j < arrControls.length; j++) {
             chkObj = document.getElementById(arrControls[j]);
-            txtObj = document.getElementById('txt' + chkObj.id.slice(3)); 
-             
-            if (chkObj.checked == true) {		
+            txtObj = document.getElementById('txt' + chkObj.id.slice(3));
+
+            if (chkObj.checked == true) {
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, 'A', 'TAX_ACCT FUNCTION_CODE', '', TotalAccounts);
 
-               
+
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $(chkObj).attr('CODE'), 'TAX_ACCT ACCOUNT', '', TotalAccounts);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, txtObj.value, 'TAX_ACCT START_DATE', '', TotalAccounts);
                 parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, '12/31/' + new Date().getFullYear(), 'TAX_ACCT PRK_ID', '', TotalAccounts);
-              
+
                 if (txtObj.id == "txtWage") {
                     parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, atrWage.value, 'TAX_ACCT WAGE_MONTHLY_GROSS', '', TotalAccounts);
                 } else if (txtObj.id == "txtBPT") {
@@ -608,8 +737,8 @@
                 else if (txtObj.id == "txtParking") {
                     parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, atrParking.value, 'TAX_ACCT PRK_ID', '', TotalAccounts);
                 }		//if
-               
-               // alert(parent.$g.xmlAccount);
+
+                // alert(parent.$g.xmlAccount);
                 //parent.$x.ispXmlReplaceNode(parent.$g.xmlAccount, "TAX_ACCT", TotalAccounts, xmlTemp, "TAX_ACCT", 0);
                 //-------END---------------
                 TotalAccounts = TotalAccounts + 1;
@@ -623,16 +752,16 @@
             chkObj = document.getElementById(arrControls[j]);
             txtObj = document.getElementById('txt' + chkObj.id.slice(3));
 
-            if (chkObj.checked == true) {                
+            if (chkObj.checked == true) {
 
                 if (txtObj.id == "txtTobacco") {
-                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, 'A', 'TAX_ACCT FUNCTION_CODE', '', TotalAccounts-1);
-                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $(chkObj).attr('CODE'), 'TAX_ACCT ACCOUNT', '', TotalAccounts-1);
-                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, txtObj.value, 'TAX_ACCT START_DATE', '', TotalAccounts-1);
-                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, '12/31/' + new Date().getFullYear(), 'TAX_ACCT PRK_ID', '', TotalAccounts-1);
-                } 
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, 'A', 'TAX_ACCT FUNCTION_CODE', '', TotalAccounts - 1);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, $(chkObj).attr('CODE'), 'TAX_ACCT ACCOUNT', '', TotalAccounts - 1);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, txtObj.value, 'TAX_ACCT START_DATE', '', TotalAccounts - 1);
+                    parent.$x.ispXmlSetFieldVal(parent.$g.xmlAccount, '12/31/' + new Date().getFullYear(), 'TAX_ACCT PRK_ID', '', TotalAccounts - 1);
+                }
                 //-------END---------------
-                
+
             }		//if
         }
 
@@ -739,15 +868,15 @@
         var acc = parent.$g.xmlAccount;
         //alert(acc);
         lbAcctChanged = true;
-       
-        
+
+
         return true;
     }		//UpdateAccounts
 
 
 
     function ValidateDate() {
-      
+
         var evt = window.event || arguments.callee.caller.arguments[0];
         var source = parent.getEventSource(evt);
         var value = ispValidateDate(source.value);
@@ -767,28 +896,28 @@
         id = source.id;
         name = id.slice(3);
         debugger;
-       
 
 
-        if (source.checked == true) {            
+
+        if (source.checked == true) {
             errTaxes = '';
-          
+
             $(AppError_tax).text(errTaxes);
             if (errTaxes != '') {
                 parent.ScrollTop(errTaxes);
             }
             lbAcctChanged = true;
-          
+
             $(document.getElementById('txt' + name)).css('visibility', 'visible');
-           
+
             $(document.getElementById('txt' + name)).val($('#txtBusStartDate').val());
 
             if (initTaxes == true) {
-               
+
                 $(document.getElementById('txt' + name)).removeAttr('disabled');
                 document.getElementById('txt' + name).focus();
             }		//if
-           
+
             ShowAttr2(name, true);
         } else {
             if (name == 'BPT') {
@@ -807,33 +936,33 @@
 
     }		//ShowAttr
 
-    function ShowAttr2(name, state) {       
+    function ShowAttr2(name, state) {
         if (name == 'Wage' || name == 'UO' || name == 'Parking') {
             if (state == true) {
-                
+
                 $(document.getElementById('att' + name)).css('visibility', 'visible');
-                
+
                 $(document.getElementById('atr' + name)).attr('class', 'inpNormal');
-               
+
                 $(document.getElementById('atr' + name)).removeAttr('disabled');
                 if ($(AppError_tax).text() != '') {
                 }		//if
             }
             else {
-               
+
                 $(document.getElementById('att' + name)).css('visibility', 'hidden');
-               
+
                 $(document.getElementById('atr' + name)).attr('class', 'inpNormal');
-               
+
                 $(document.getElementById('atr' + name)).removeAttr('disabled');
             }		//if
         }		//if
-        
+
     }		//ShowAttr2
 
 
     function ValidateAcc() {
-        
+        debugger;
         var chkAmusement = document.getElementById('chkAmusement');
         var chkBPT = document.getElementById('chkBPT');
         var chkCoin = document.getElementById('chkCoin');
@@ -847,7 +976,7 @@
         var chkUO = document.getElementById('chkUO');
         var chkWage = document.getElementById('chkWage');
         var chkTobacco = document.getElementById('chkTobacco');
-     
+
         var a = '';
         errTaxes = '';
         if (parent.sNew == false && initTaxes == false) {
@@ -890,8 +1019,9 @@
             errTaxes = 'At least 1 account must be selected';
         }
 
-        if ($('#divAcctTaxes').css('display', 'block')) {
-          
+
+        if ($('#divAcctTaxes').css('display') == 'block') {
+
             $(AppError_tax).text(errTaxes);
             if (errTaxes != '') {
                 parent.ScrollTop(errTaxes);
@@ -903,9 +1033,9 @@
         } else {
             lbAcctChanged = true;
         }		//if
-       
+
         ResolveIframeLoadHeight();
-        
+
     }		//ValidateAcc
 
 
@@ -913,7 +1043,7 @@
         window.open(sLink)
     }
 
-    function BPTExemptDisplay() {       
+    function BPTExemptDisplay() {
         var txtBPT = document.getElementById('txtBPT');
         var chkBPT = document.getElementById('chkBPT');
         var radBptQ1Yes = document.getElementById('radBptQ1Yes');
@@ -950,7 +1080,7 @@
         var conYES = 0;
         var conNO = 1;
 
-       
+
         var evt = window.event || arguments.callee.caller.arguments[0];
         var src = parent.getEventSource(evt);
         //-------------
@@ -959,7 +1089,7 @@
         if (src.name == radBptQ1No.name && document.getElementsByName(src.name).item(conYES).checked == true) {
             $('#divBPTForm').css('display', 'block');
 
-            
+
         } else {
             $('#divBPTForm').css('display', 'none');
             BPTExemptClear();
@@ -968,15 +1098,15 @@
 
         }
         ResolveIframeLoadHeight();//Manoranjan
-        
+
     } 	//BPTClick
     function ResolveIframeLoadHeight() {
         //----------Manoranjan------------------------------
         var iframe = window.parent.document.getElementById('ifrmDocwin');
         var container = $('#tab1').css("height");
-        iframe.style.height = container;
+        //iframe.style.height = container;
         //----------------------------------------
-    }   
+    }
 
     function BPTExemptClear() {
         var radBptQ1Yes = document.getElementById('radBptQ1Yes');
@@ -1027,7 +1157,7 @@
         var radBptQ7No = document.getElementById('radBptQ7No');
 
         var lsReturnVal = '';
-       
+
         if (radBptQ1Yes.checked == true) {
             lsReturnVal = lsReturnVal + 'Y';
             //EGOVWEB-93 Questions for Section A
@@ -1113,68 +1243,68 @@
     } 	//BPTExemptPopulateForm
 
     function BPTExemptLockDisplay(bLock) {
-       
+
 
         if (bLock == true) {
             $('#radBptQ1No').attr('disabled', bLock);
-           
+
             $('#radBptQ1Yes').attr('disabled', bLock);
-            
+
             $('#radBptQ2No').attr('disabled', bLock);
-            
+
             $('#radBptQ2Yes').attr('disabled', bLock);
-          
+
             $('#radBptQ3No').attr('disabled', bLock);
-            
+
             $('#radBptQ3Yes').attr('disabled', bLock);
-            
+
             $('#radBptQ4No').attr('disabled', bLock);
-            
+
             $('#radBptQ4Yes').attr('disabled', bLock);
-            
+
             $('#radBptQ5No').attr('disabled', bLock);
-           
+
             $('#radBptQ5Yes').attr('disabled', bLock);
-            
+
             $('#radBptQ6No').attr('disabled', bLock);
-           
+
             $('#radBptQ6Yes').attr('disabled', bLock);
-           
+
             $('#radBptQ7No').attr('disabled', bLock);
-           
+
             $('#radBptQ7Yes').attr('disabled', bLock);
-            
+
             $('#chkBptAcknowledge').attr('disabled', bLock);
         }
         else {
             $('#radBptQ1No').removeAttr('disabled');
-           
+
             $('#radBptQ1Yes').removeAttr('disabled');
-           
+
             $('#radBptQ2No').removeAttr('disabled');
-           
+
             $('#radBptQ2Yes').removeAttr('disabled');
-            
+
             $('#radBptQ3No').removeAttr('disabled');
-            
+
             $('#radBptQ3Yes').removeAttr('disabled');
-           
+
             $('#radBptQ4No').removeAttr('disabled');
-           
+
             $('#radBptQ4Yes').removeAttr('disabled');
-           
+
             $('#radBptQ5No').removeAttr('disabled');
-           
+
             $('#radBptQ5Yes').removeAttr('disabled');
-           
+
             $('#radBptQ6No').removeAttr('disabled');
-            
+
             $('#radBptQ6Yes').removeAttr('disabled');
-           
+
             $('#radBptQ7No').removeAttr('disabled');
-           
+
             $('#radBptQ7Yes').removeAttr('disabled');
-           
+
             $('#chkBptAcknowledge').removeAttr('disabled');
         }
     }		//BPTExemptLockDisplay
@@ -1182,24 +1312,24 @@
     function Taxes_Print(bPrint) {
         if (bPrint == true) {
 
-           
+
             $('#divAcctTaxes').css('display', 'block');
-           
+
             $('#PrintTaxesHdr').css('display', 'block');
-            
+
             $('#divBusinessTaxes').css('display', 'block');
-            
+
             $('#divIndividualTaxes').css('display', 'block');
-           
+
             $('#divWarningMsgs').css('display', 'none');
-           
+
             $('#divGeneralMsgs').css('display', 'none');
             PopulateAccounts();
         } else {
-                     
-           
+
+
             $('#PrintTaxesHdr').css('display', 'none');
-          
+
         }		//if
     }		//Taxes_Print
 
@@ -1483,7 +1613,7 @@
                                                 <div class="col-sm-offset-0 col-sm-11 checkbox_here">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input id="chkTobacco" type="checkbox" class="fordisablecheckbox" code="27" name="chkTobacco" onclick="ShowAttr()" />
+                                                            <input id="chkTobacco" type="checkbox" style="height:12px; width:15px;" class="fordisablecheckbox" code="27" name="chkTobacco" onclick="ShowAttr()" />
                                                             <span><a style="cursor: hand" onclick="ClickHelp('https://beta.phila.gov/services/payments-assistance-taxes/business-taxes/tobacco-and-tobacco-related-products-tax/')">Tobacco</a></span>
                                                         </label>
                                                     </div>
@@ -1520,7 +1650,7 @@
                                             </div>
                                         </td>
                                         <td align="center">
-                                            <div class="form-group top_10margin no-margin-bottom">
+                                            <div class="form-group">
 
                                                 <div class="col-sm-12">
                                                     <input class="form-control" id="txtUO" name="txtUO" maxlength="10" size="12"
@@ -1530,7 +1660,7 @@
                                             </div>
 
                                         </td>
-                                        <td>
+                                        <%--<td>
                                             <div class="form-group">
                                                 <label for="inputEmail3" class="col-sm-6 control-label top_10margin">
                                                     <p id="attUO" name="attUO" align=left style="VISIBILITY: hidden">&nbsp;
@@ -1541,7 +1671,25 @@
                                                 </label>
                                             </div>
 
+                                        </td>--%>
+
+                                         <td align="center">
+
+                                            <div class="form-group" id="attUO" name="attUO" style="VISIBILITY: hidden">
+                                               
+                                                <label for="inputEmail3" class="col-sm-3 control-label top_10margin">
+                                                    <a style="cursor: hand"
+                                                        onclick="ClickHelp('../Help/HelpBRT.htm')">BRT#</a></label>
+                                                <div class="col-sm-6">
+                                                    <input  class="form-control" id="atrUO" name="atrUO" maxlength="11" size="12" style="text-align: right"
+                                                        onchange="ValidateAcc()"/>
+                                                </div>
+                                                 
+                                            </div>
+
                                         </td>
+
+
                                     </tr>
 
 

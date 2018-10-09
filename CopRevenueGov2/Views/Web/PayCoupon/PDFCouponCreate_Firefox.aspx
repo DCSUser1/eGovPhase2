@@ -94,14 +94,14 @@ void OpenPayCouponTemplate()
     {
 		if (strAddresses[1].Trim() == "" )	//'2rd Address Blank - City State Zip in 2nd Address
         {
-			sPayCouponTemplate = sPayCouponTemplate.Replace( "{ADDR2}", strAddresses[3] + ", " + strAddresses[4] + " " + strAddresses[5]); 
+			sPayCouponTemplate = sPayCouponTemplate.Replace( "{ADDR2}", strAddresses[3] + " " + strAddresses[4] + " " + strAddresses[5]); 
 			sPayCouponTemplate = sPayCouponTemplate.Replace( "{ADDR3}",strAddresses[1]);
 			sPayCouponTemplate = sPayCouponTemplate.Replace( "{ADDR4}", strAddresses[2]); 
     }
 		else	//'2rd Address Filled - City State Zip in 3nd Address
         {
 			sPayCouponTemplate = sPayCouponTemplate.Replace( "{ADDR2}", strAddresses[1]);
-			sPayCouponTemplate = sPayCouponTemplate.Replace( "{ADDR3}", strAddresses[3] + ", " + strAddresses[4] + " " + strAddresses[5]);
+			sPayCouponTemplate = sPayCouponTemplate.Replace( "{ADDR3}", strAddresses[3] + " " + strAddresses[4] + " " + strAddresses[5]);
 			sPayCouponTemplate = sPayCouponTemplate.Replace( "{ADDR3}", strAddresses[2]);
     }
         }
@@ -109,7 +109,7 @@ void OpenPayCouponTemplate()
         {
             sPayCouponTemplate = sPayCouponTemplate.Replace( "{ADDR2}", strAddresses[1]);
             sPayCouponTemplate = sPayCouponTemplate.Replace( "{ADDR3}", strAddresses[2]);
-            sPayCouponTemplate = sPayCouponTemplate.Replace( "{ADDR4}",strAddresses[3] + ", " + strAddresses[4] + " " + strAddresses[5]);
+            sPayCouponTemplate = sPayCouponTemplate.Replace( "{ADDR4}",strAddresses[3] + " " + strAddresses[4] + " " + strAddresses[5]);
         			
         }
 	sPayCouponTemplate = sPayCouponTemplate.Replace( "{AcctNum}", strAcctID);
@@ -127,79 +127,79 @@ void OpenPayCouponTemplate()
 	
 	switch(strAcctType)
     {
-		case "01":		//'"WAG"
-			PopulateAccountInfo("8040", "Wage", "686-6600","204");
+        case "01":		//'"WAG"
+            PopulateAccountInfo("8040", "Wage", "686-6600", "204", "19101");
             break;
-		case "02":		//'"ERN"
-			PopulateAccountInfo("1648", "Earnings", "686-6600","201");
+        case "02":		//'"ERN"
+            PopulateAccountInfo("1648", "Earnings", "686-6600", "201", "19135");
             break;
-		case "03":		//'"NPT"
-			PopulateAccountInfo("1393", "Net Profits", "686-6600","203");
+        case "03":		//'"NPT"
+            PopulateAccountInfo("1393", "Net Profits", "686-6600", "203", "19067");
             break;
-		case "06":		//'"AMU"
-			PopulateAccountInfo("124", "Amusement", "686-6600","205");
+        case "06":		//'"AMU"
+            PopulateAccountInfo("124", "Amusement", "686-6600", "205", "");
             break;
-		case "08":		//'"PRK"
-			PopulateAccountInfo("124", "Parking", "686-6600","206");
+        case "08":		//'"PRK"
+            PopulateAccountInfo("124", "Parking", "686-6600", "206", "");
             break;
-		case "09":		//'"COI"
-			PopulateAccountInfo("124", "Coin Operated", "686-6600","2099");
+        case "09":		//'"COI"
+            PopulateAccountInfo("124", "Coin Operated", "686-6600", "2099", "");
             break;
-		case "11":		//'"POL"
-			PopulateAccountInfo("60", "Police", "686-6600","2099");
+        case "11":		//'"POL"
+            PopulateAccountInfo("60", "Police", "686-6600", "2099", "");
             break;
-		case "14":		//'"VRT"
-			PopulateAccountInfo("124", "Vehicle Rental", "686-6600","208");
+        case "14":		//'"VRT"
+            PopulateAccountInfo("124", "Vehicle Rental", "686-6600", "208", "");
             break;
-		case "18":		//'"RTT"
-			PopulateAccountInfo("124", "Realty Transfer", "686-6600","2099");
+        case "18":		//'"RTT"
+            PopulateAccountInfo("124", "Realty Transfer", "686-6600", "2099", "");
             break;
-		case "23":		//'"HOT"
-			PopulateAccountInfo("53180", "Hotel", "686-6600","211");
+        case "23":		//'"HOT"
+            PopulateAccountInfo("53180", "Hotel", "686-6600", "211", "15219");
             break;
-		case "24":		//'"BPT"
-			PopulateAccountInfo("1393", "Business Income and Receipts", "686-6600","202");
+        case "24":		//'"BPT"
+            PopulateAccountInfo("1393", "Business Income and Receipts", "686-6600", "202", "19105");
             break;
-		case "27":		//'"TOB"
-			PopulateAccountInfo("53250", "Tobacco", "686-6600","2099");
+        case "27":		//'"TOB"
+            PopulateAccountInfo("53250", "Tobacco", "686-6600", "2099", "19105");
             break;
-		case "28":		//'"LIQ"
-			PopulateAccountInfo("1018", "Liquor", "686-6600","212");
+        case "28":		//'"LIQ"
+            PopulateAccountInfo("1018", "Liquor", "686-6600", "212", "19108");
             break;
-		case "29":		//'"SIT"
-			PopulateAccountInfo("389", "School Income Tax", "686-6600","210");
+        case "29":		//'"SIT"
+            PopulateAccountInfo("389", "School Income Tax", "686-6600", "210", "19140");
             break;
-		case "58":		//'"VPT"
-			PopulateAccountInfo("124", "Valet Parking", "686-6600","207");
+        case "58":		//'"VPT"
+            PopulateAccountInfo("124", "Valet Parking", "686-6600", "207", "");
             break;
-		case "60":		//'"REA"
-			PopulateAccountInfo("8409", "Real Estate", "686-6442","213");
+        case "60":		//'"REA"
+            PopulateAccountInfo("8409", "Real Estate", "686-6442", "213", "19101");
             break;
-		case "76":		//'"OAT"
-			PopulateAccountInfo("124", "Outdoor Advertizing", "686-6600","209");
+        case "76":		//'"OAT"
+            PopulateAccountInfo("124", "Outdoor Advertizing", "686-6600", "209", "");
             break;
-		case "84":		//'"UOL"
-			PopulateAccountInfo("1049", "U&O - Landlord", "686-6600","2099");
+        case "84":		//'"UOL"
+            PopulateAccountInfo("1049", "U&O - Landlord", "686-6600", "2099", "19178");
             break;
-		case "85":		//'"UOL"
-			PopulateAccountInfo("1049", "U&O - Tenant", "686-6600","2099");
+        case "85":		//'"UOL"
+            PopulateAccountInfo("1049", "U&O - Tenant", "686-6600", "2099", "19178");
             break;
-		case "90":		//'"ASM"
-			PopulateAccountInfo("1600", "Assessment Screen", "686-6600","2099");
+        case "90":		//'"ASM"
+            PopulateAccountInfo("1600", "Assessment Screen", "686-6600", "2099", "19103");
             break;
-		case "91":		//'"GNP"
-			PopulateAccountInfo("60", "Police BRI", "686-3055","2099");
+        case "91":		//'"GNP"
+            PopulateAccountInfo("60", "Police BRI", "686-3055", "2099", "");
             break;
-		case "97":		//'"GEN"
-			PopulateAccountInfo("1600", "Entity Level Charges", "686-6600","2099");
+        case "97":		//'"GEN"
+            PopulateAccountInfo("1600", "Entity Level Charges", "686-6600", "2099", "19103");
             break;
-		case "98":		//'"GN2"
-			PopulateAccountInfo("1600", "General", "686-6600","2099");
+        case "98":		//'"GN2"
+            PopulateAccountInfo("1600", "General", "686-6600", "2099", "19103");
             break;
-		case "99":		//'"GN3"
-			PopulateAccountInfo("1600", "Entity Level Charges", "686-6600","2099");
+        case "99":		//'"GN3"
+            PopulateAccountInfo("1600", "Entity Level Charges", "686-6600", "2099", "19103");
             break;
-            
+
         default:
             break;
 	}
@@ -253,12 +253,13 @@ void OpenPayCouponTemplate()
 	Response.Write(VB.mid(sPayCouponDisplay,4));
 }
 
-void PopulateAccountInfo(string sPOBox, string SAccountName, string sPhone, string sFormId)
+void PopulateAccountInfo(string sPOBox, string SAccountName, string sPhone, string sFormId,string ZipCode)
 {
 	sPayCouponTemplate = sPayCouponTemplate.Replace("{BOX}", sPOBox);              
 	sPayCouponTemplate = sPayCouponTemplate.Replace("{AcctID}",SAccountName);      
 	sPayCouponTemplate = sPayCouponTemplate.Replace("{PHONE}", " (215) " + sPhone);
-    sPayCouponTemplate = sPayCouponTemplate.Replace("{FormID}", sFormId); 
+    sPayCouponTemplate = sPayCouponTemplate.Replace("{FormID}", sFormId);
+    sPayCouponTemplate = sPayCouponTemplate.Replace("{ZipCode}", ZipCode);
 }
 
 string ispProperCase(string val)
